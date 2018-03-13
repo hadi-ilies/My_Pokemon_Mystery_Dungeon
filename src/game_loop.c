@@ -8,20 +8,8 @@
 #include <stdlib.h>
 #include "prototype.h"
 
-bool ee(float n1, int n2)
+bool entity_dir(entity_t *entity)
 {
-	float n3 = (float)n2 - n1;
-
-	n3 < 0 ? n3 = -n3 : 0;
-	if (n3 < 0.1)
-		return (true);
-	return (false);
-}
-
-char entity_move(entity_t *entity)
-{
-	float move_speed = 0.1;
-
 	if (entity->new_pos.x == entity->pos.x && entity->new_pos.y == entity->pos.y) {
 		sfVector2i dir = {0, 0};
 
@@ -33,88 +21,84 @@ char entity_move(entity_t *entity)
 		entity->new_pos.y = entity->pos.y + dir.y;
 		entity->move_pos.x = entity->pos.x;
 		entity->move_pos.y = entity->pos.y;
+		if (dir.x || dir.y)
+			return (true);
 	}
-	if (entity->new_pos.x != entity->pos.x || entity->new_pos.y != entity->pos.y) {
-		entity->move_pos.x += move_speed * (entity->new_pos.x - entity->pos.x);
-		entity->move_pos.y += move_speed * (entity->new_pos.y - entity->pos.y);
-	}
-	if (ee(entity->move_pos.x, entity->new_pos.x) && ee(entity->move_pos.y, entity->new_pos.y)) {
-		entity->pos.x = entity->new_pos.x;
-		entity->pos.y = entity->new_pos.y;
-		entity->move_pos.x = entity->new_pos.x;
-		entity->move_pos.y = entity->new_pos.y;
-		return (2);
-	}
-	return (entity->new_pos.x != entity->pos.x || entity->new_pos.y != entity->pos.y ? 1 : 0);
+	return (false);
 }
 
-char entity_move2(entity_t *entity)
+bool entity_dir2(entity_t *entity)
 {
-	float move_speed = 0.1;
-
 	if (entity->new_pos.x == entity->pos.x && entity->new_pos.y == entity->pos.y) {
 		sfVector2i dir = {0, 0};
 
-		dir.x = rand() % 3 - 1;
-		dir.y = rand() % 3 - 1;
+		do {
+			dir.x = rand() % 3 - 1;
+			dir.y = rand() % 3 - 1;
+		} while (!dir.x && !dir.y);
 		entity->new_pos.x = entity->pos.x + dir.x;
 		entity->new_pos.y = entity->pos.y + dir.y;
 		entity->move_pos.x = entity->pos.x;
 		entity->move_pos.y = entity->pos.y;
+		if (dir.x || dir.y)
+			return (true);
 	}
-	if (entity->new_pos.x != entity->pos.x || entity->new_pos.y != entity->pos.y) {
-		entity->move_pos.x += move_speed * (entity->new_pos.x - entity->pos.x);
-		entity->move_pos.y += move_speed * (entity->new_pos.y - entity->pos.y);
+	return (false);
+}
+
+void for_fun(entity_t *entity, size_t nb_entity)
+{
+	#include <stdio.h>
+	#include <unistd.h>
+	static int s = -1;
+	int x = entity[0].pos.x;
+	int y = entity[0].pos.y;
+	static int prev_x = -1;
+	static int prev_y = -1;
+
+	for (size_t i = 1; i < nb_entity; i++)
+		if (entity[i].pos.x == x && entity[i].pos.y == y) {
+			printf("Score : %d\n", s);
+			usleep(1000000 / 4);
+			exit(0);
+		}
+	if (x != prev_x || y != prev_y) {
+		s++;
+		prev_x = x;
+		prev_y = y;
 	}
-	if (ee(entity->move_pos.x, entity->new_pos.x) && ee(entity->move_pos.y, entity->new_pos.y)) {
-		entity->pos.x = entity->new_pos.x;
-		entity->pos.y = entity->new_pos.y;
-		entity->move_pos.x = entity->new_pos.x;
-		entity->move_pos.y = entity->new_pos.y;
-		return (2);
-	}
-	return (entity->new_pos.x != entity->pos.x || entity->new_pos.y != entity->pos.y ? 1 : 0);
 }
 
 int game_loop(sfRenderWindow *window, game_t *game)
 {
 	sfEvent event;
-	entity_t entity;
-	size_t nb_entity2 = 100;
-	entity_t *entity2 = malloc(sizeof(entity_t) * nb_entity2);
-	int tmp = 0;
+	size_t nb_entity = 500;
+	entity_t *entity = malloc(sizeof(entity_t) * nb_entity);
 
-	entity.pos.x = 25;
-	entity.pos.y = 25;
-	entity.move_pos.x = entity.pos.x;
-	entity.move_pos.y = entity.pos.y;
-	entity.new_pos.x = entity.pos.x;
-	entity.new_pos.y = entity.pos.y;
-	for (size_t i = 0; i < nb_entity2; i++) {
-		entity2[i].pos.x = 23 + rand() % 5;
-		entity2[i].pos.y = 23 + rand() % 5;
-		entity2[i].move_pos.x = entity2[i].pos.x;
-		entity2[i].move_pos.y = entity2[i].pos.y;
-		entity2[i].new_pos.x = entity2[i].pos.x;
-		entity2[i].new_pos.y = entity2[i].pos.y;
+	for (size_t i = 0; i < nb_entity; i++) {
+		entity[i].pos.x = rand() % game->map.nb_case_x;
+		entity[i].pos.y = rand() % game->map.nb_case_y;
+		entity[i].move_pos.x = entity[i].pos.x;
+		entity[i].move_pos.y = entity[i].pos.y;
+		entity[i].new_pos.x = entity[i].pos.x;
+		entity[i].new_pos.y = entity[i].pos.y;
 	}
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
 		}
-		if (tmp == 0 && entity_move(&entity))
-			tmp = 1;
-		if (tmp == 1)
-			for (size_t i = 0; i < nb_entity2; i++)
-				if (entity_move2(&entity2[i]))
-					tmp = 0;
+		if (entity_dir(&entity[0]))
+			for (size_t i = 1; i < nb_entity; i++)
+				entity_dir2(&entity[i]);
+		for (size_t i = 0; i < nb_entity; i++)
+			entity_move(&entity[i]);
 		sfRenderWindow_clear(window, sfBlack);
-		map_aff(window, &game->map, &entity.move_pos);
-		entity_aff(window, &entity, &game->map, &entity.move_pos);
-		for (size_t i = 0; i < nb_entity2; i++)
-			entity_aff(window, &entity2[i], &game->map, &entity.move_pos);
+		map_aff(window, &game->map, &entity[0].move_pos);
+		for (size_t i = 0; i < nb_entity; i++)
+			entity_aff(window, &entity[i], &game->map, &entity[0].move_pos);
 		sfRenderWindow_display(window);
+		for_fun(entity, nb_entity);
 	}
-	free(entity2);
+	free(entity);
 	return (0);
 }

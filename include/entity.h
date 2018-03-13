@@ -18,6 +18,7 @@ typedef struct {
 	sfVector2i new_pos;
 } entity_t;
 
+void entity_move(entity_t *entity);
 void entity_aff(sfRenderWindow *window, entity_t *entity,
 		map_t *map, sfVector2f *pos);
 

@@ -18,6 +18,7 @@ SRC	=	$(SRCDIR)main.c \
 		$(MAPDIR)map_create.c \
 		$(MAPDIR)map_destroy.c \
 		$(MAPDIR)map_aff.c \
+		$(ENTDIR)entity_move.c \
 		$(ENTDIR)entity_aff.c \
 
 OBJ	=	$(SRC:.c=.o)
