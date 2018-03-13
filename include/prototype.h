@@ -9,6 +9,7 @@
 #define PROTOTYPE_H_
 
 #include <SFML/Graphics.h>
+#include "game.h"
 
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
@@ -16,7 +17,7 @@
 #define WINDOW_PARAMS sfFullscreen
 
 int menu(void);
-int game(sfRenderWindow *window);
+int game_loop(sfRenderWindow *window, game_t *game);
 void evt_close(sfEvent *event, sfRenderWindow *window);
 
 #endif

@@ -8,11 +8,17 @@
 NAME	=	my_rpg
 
 SRCDIR	=	src/
+MAPDIR	=	$(SRCDIR)map/
+ENTDIR	=	$(SRCDIR)entity/
 
 SRC	=	$(SRCDIR)main.c \
 		$(SRCDIR)menu.c \
-		$(SRCDIR)game.c \
+		$(SRCDIR)game_loop.c \
 		$(SRCDIR)evt_close.c \
+		$(MAPDIR)map_create.c \
+		$(MAPDIR)map_destroy.c \
+		$(MAPDIR)map_aff.c \
+		$(ENTDIR)entity_aff.c \
 
 OBJ	=	$(SRC:.c=.o)
 
