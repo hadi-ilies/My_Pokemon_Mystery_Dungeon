@@ -13,7 +13,9 @@
 #include "map.h"
 
 typedef struct {
-	sfVector2f pos;
+	sfVector2i pos;
+	sfVector2f move_pos;
+	sfVector2i new_pos;
 } entity_t;
 
 void entity_aff(sfRenderWindow *window, entity_t *entity,
