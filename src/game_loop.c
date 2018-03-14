@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include "prototype.h"
 
 bool entity_dir(entity_t *entity)
@@ -76,6 +77,7 @@ int game_loop(sfRenderWindow *window, game_t *game)
 	entity_t *entity = malloc(sizeof(entity_t) * nb_entity);
 
 	for (size_t i = 0; i < nb_entity; i++) {
+		entity[i] = entity_create();
 		entity[i].pos.x = rand() % game->map.nb_case_x;
 		entity[i].pos.y = rand() % game->map.nb_case_y;
 		entity[i].move_pos.x = entity[i].pos.x;

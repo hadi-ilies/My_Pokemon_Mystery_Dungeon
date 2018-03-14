@@ -10,7 +10,6 @@
 
 #include <SFML/Graphics.h>
 #include <stddef.h>
-#include <stdbool.h>
 
 typedef struct {
 	int type;

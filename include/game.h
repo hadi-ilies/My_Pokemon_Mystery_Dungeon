@@ -9,8 +9,6 @@
 #define GAME_H_
 
 #include <SFML/Graphics.h>
-#include <stddef.h>
-#include <stdbool.h>
 #include "map.h"
 #include "entity.h"
 
