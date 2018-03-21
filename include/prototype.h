@@ -15,6 +15,7 @@
 #define WINDOW_HEIGHT 1080
 #define WINDOW_BITS_PER_PIXEL 32
 #define WINDOW_PARAMS sfFullscreen
+#define FRAMERATE_LIMIT 30
 
 int menu(void);
 int game_loop(sfRenderWindow *window, game_t *game);

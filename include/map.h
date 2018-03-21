@@ -10,17 +10,14 @@
 
 #include <SFML/Graphics.h>
 #include <stddef.h>
-
-typedef struct {
-	int type;
-	//int var;
-} tab_t;
+#include "tile_map.h"
 
 typedef struct {
 	size_t nb_case_x;
 	size_t nb_case_y;
-	tab_t **tab;
+	tva_t **tab;
 	sfVector2f size;
+	tile_map_t tile_map;
 } map_t;
 
 map_t map_create(int nb_case_x, int nb_case_y);

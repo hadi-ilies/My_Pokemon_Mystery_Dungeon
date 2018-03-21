@@ -16,11 +16,14 @@ int menu(void)
 	window = sfRenderWindow_create(mode, "my_rpg", WINDOW_PARAMS, NULL);
 	if (!window)
 		return (84);
-	game.map = map_create(50, 50);
-	sfRenderWindow_setFramerateLimit(window, 30);
+	game.map = map_create(100, 100);
+	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
 	for (size_t i = 0; i < game.map.nb_case_x; i++)
-		for (size_t j = 0; j < game.map.nb_case_y; j++)
-			game.map.tab[i][j].type = 0;
+		for (size_t j = 0; j < game.map.nb_case_y; j++) {
+			game.map.tab[i][j].type = 1;
+			game.map.tab[i][j].var = 4;
+			game.map.tab[i][j].alt = (rand() % 10 ? 0 : (rand() % 3 ? 1 : 2));
+		}
 	game.map.size.x = 200;
 	game.map.size.y = game.map.size.x;
 	game_loop(window, &game);

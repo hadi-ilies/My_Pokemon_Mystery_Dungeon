@@ -8,6 +8,7 @@
 NAME	=	my_rpg
 
 SRCDIR	=	src/
+LIBDIR	=	lib/
 MAPDIR	=	$(SRCDIR)map/
 ENTDIR	=	$(SRCDIR)entity/
 
@@ -20,6 +21,7 @@ SRC	=	$(SRCDIR)main.c \
 		$(MAPDIR)map_aff.c \
 		$(ENTDIR)entity_create.c \
 		$(ENTDIR)entity_destroy.c \
+		$(ENTDIR)entity_set_pos.c \
 		$(ENTDIR)entity_move.c \
 		$(ENTDIR)entity_aff.c \
 
@@ -27,12 +29,14 @@ OBJ	=	$(SRC:.c=.o)
 
 CFLAGS	+=	-I./include
 CFLAGS	+=	-W -Wall -Wextra
-CFLAGS	+=	-l c_graph_prog
+
+LDFLAGS	+=	-l c_graph_prog
+LDFLAGS	+=	-L $(LIBDIR) -l tile_map
 
 all	:	$(NAME)
 
 $(NAME)	:	$(OBJ)
-		cc -o $(NAME) $(OBJ) $(CFLAGS)
+		cc -o $(NAME) $(OBJ) $(LDFLAGS)
 
 clean	:
 		rm -f $(OBJ)

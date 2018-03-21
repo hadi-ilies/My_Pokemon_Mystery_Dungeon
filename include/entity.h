@@ -19,6 +19,7 @@ typedef struct {
 
 entity_t entity_create(void);
 void entity_destroy(entity_t *entity);
+void entity_set_pos(entity_t *entity, sfVector2i pos);
 void entity_move(entity_t *entity);
 void entity_aff(sfRenderWindow *window, entity_t *entity,
 		map_t *map, sfVector2f *pos);
