@@ -74,7 +74,7 @@ void for_fun(entity_t *entity, size_t nb_entity)
 int game_loop(sfRenderWindow *window, game_t *game)
 {
 	sfEvent event;
-	size_t nb_entity = 1;
+	size_t nb_entity = 10;
 	entity_t *entity = malloc(sizeof(entity_t) * nb_entity);
 
 	for (size_t i = 0; i < nb_entity; i++) {

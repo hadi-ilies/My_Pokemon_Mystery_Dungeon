@@ -15,6 +15,7 @@ ENTDIR	=	$(SRCDIR)entity/
 SRC	=	$(SRCDIR)main.c \
 		$(SRCDIR)menu.c \
 		$(SRCDIR)game_loop.c \
+		$(SRCDIR)editor_loop.c \
 		$(SRCDIR)evt_close.c \
 		$(MAPDIR)map_create.c \
 		$(MAPDIR)map_destroy.c \

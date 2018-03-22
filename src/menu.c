@@ -26,7 +26,10 @@ int menu(void)
 		}
 	game.map.size.x = 200;
 	game.map.size.y = game.map.size.x;
-	game_loop(window, &game);
+	if (sfMouse_getPositionRenderWindow(window).y == 0)
+		editor_loop(window, &game);
+	else
+		game_loop(window, &game);
 	map_destroy(&game.map);
 	sfRenderWindow_destroy(window);
 	return (0);
