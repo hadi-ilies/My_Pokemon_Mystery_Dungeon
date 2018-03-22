@@ -13,12 +13,15 @@ MAPDIR	=	$(SRCDIR)map/
 ENTDIR	=	$(SRCDIR)entity/
 
 SRC	=	$(SRCDIR)main.c \
-		$(SRCDIR)menu.c \
+		$(SRCDIR)game_menu.c \
+		$(SRCDIR)map_editor_menu.c \
+		$(SRCDIR)anime_editor_menu.c \
 		$(SRCDIR)game_loop.c \
 		$(SRCDIR)map_editor_loop.c \
 		$(SRCDIR)anime_editor_loop.c \
 		$(SRCDIR)evt_close.c \
 		$(MAPDIR)map_create.c \
+		$(MAPDIR)map_resize.c \
 		$(MAPDIR)map_destroy.c \
 		$(MAPDIR)map_aff.c \
 		$(ENTDIR)entity_create.c \
@@ -29,11 +32,12 @@ SRC	=	$(SRCDIR)main.c \
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	+=	-I./include
+CFLAGS	+=	-I./include -g
 CFLAGS	+=	-W -Wall -Wextra
 
 LDFLAGS	+=	-l c_graph_prog
 LDFLAGS	+=	-L $(LIBDIR) -l tile_map
+LDFLAGS	+=	-L $(LIBDIR) -l anime_tab
 
 all	:	$(NAME)
 

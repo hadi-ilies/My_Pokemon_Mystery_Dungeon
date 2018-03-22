@@ -11,7 +11,7 @@
 
 int map_editor_loop(sfRenderWindow *window, map_t *map)
 {
-	sfVector2f pos = {50, 50};
+	sfVector2f pos = {10, 10};
 	sfEvent event;
 
 	while (sfRenderWindow_isOpen(window)) {

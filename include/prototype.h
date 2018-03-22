@@ -17,7 +17,9 @@
 #define WINDOW_PARAMS sfFullscreen
 #define FRAMERATE_LIMIT 30
 
-int menu(void);
+int game_menu(void);
+int map_editor_menu(void);
+int anime_editor_menu(void);
 int game_loop(sfRenderWindow *window, game_t *game);
 int map_editor_loop(sfRenderWindow *window, map_t *map);
 int anime_editor_loop(sfRenderWindow *window, game_t *game);
