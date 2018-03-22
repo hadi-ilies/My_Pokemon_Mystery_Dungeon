@@ -18,7 +18,7 @@ int game_menu(void)
 	if (!window)
 		return (84);
 	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
-	game.map = map_create(100, 100, "resources/texture/grassy_config");
+	game.map = map_create(100, 100, "resources/texture/tile_map/grassy_config");
 	for (size_t i = 0; i < game.map.nb_case_x; i++)
 		for (size_t j = 0; j < game.map.nb_case_y; j++) {
 			game.map.tab[i][j].type = 1;

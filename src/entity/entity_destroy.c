@@ -9,5 +9,5 @@
 
 void entity_destroy(entity_t *entity)
 {
-	(void)entity;
+	anime_tab_destroy(&entity->anime_tab);
 }
