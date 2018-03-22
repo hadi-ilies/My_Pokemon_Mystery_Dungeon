@@ -19,7 +19,8 @@
 
 int menu(void);
 int game_loop(sfRenderWindow *window, game_t *game);
-int editor_loop(sfRenderWindow *window, game_t *game);
+int map_editor_loop(sfRenderWindow *window, map_t *map);
+int anime_editor_loop(sfRenderWindow *window, game_t *game);
 void evt_close(sfEvent *event, sfRenderWindow *window);
 
 #endif

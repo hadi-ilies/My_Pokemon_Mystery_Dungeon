@@ -2,14 +2,14 @@
 ** EPITECH PROJECT, 2017
 ** my_rpg_2017
 ** File description:
-** game_loop.c
+** anime_game_loop.c
 */
 
 #include <stdlib.h>
 #include <stdbool.h>
 #include "prototype.h"
 
-int editor_loop(sfRenderWindow *window, game_t *game)
+int anime_editor_loop(sfRenderWindow *window, game_t *game)
 {
 	sfVector2f pos = {50, 50};
 	sfEvent event;
