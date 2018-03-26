@@ -7,10 +7,6 @@
 
 #include "entity.h"
 
-/*
-
-*/
-
 void entity_aff2(sfRenderWindow *window, entity_t *entity,
 		 map_t *map, sfVector2f *pos)
 {
@@ -34,12 +30,11 @@ void entity_aff(sfRenderWindow *window, entity_t *entity,
 {
 	entity_aff2(window, entity, map, pos);
 	sfVector2u win_size = sfRenderWindow_getSize(window);
-	sfVector2f origin = {map->size.x / 2, map->size.y / 2};
 	sfFloatRect rect = {map->size.x, map->size.y, map->size.x, map->size.y};
 
 	rect.left *= entity->move_pos.x - pos->x;
 	rect.top *= entity->move_pos.y - pos->y;
-	rect.left += win_size.x / 2 - origin.x;
-	rect.top += win_size.y / 2 - origin.y;
+	rect.left += win_size.x / 2;
+	rect.top += win_size.y / 2;
 	anime_tab_aff(window, &entity->anime_tab, rect);
 }

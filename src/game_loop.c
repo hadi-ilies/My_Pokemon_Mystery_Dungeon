@@ -71,7 +71,7 @@ bool entity_dir2(entity_t *entity)
 int game_loop(sfRenderWindow *window, game_t *game)
 {
 	sfEvent event;
-	size_t nb_entity = 100;
+	size_t nb_entity = 2;
 	entity_t *entity = malloc(sizeof(entity_t) * nb_entity);
 
 	for (size_t i = 0; i < nb_entity; i++) {
@@ -80,13 +80,17 @@ int game_loop(sfRenderWindow *window, game_t *game)
 		entity[i] = entity_create("resources/texture/anime_tab/gobou_config");
 		entity_set_pos(&entity[i], pos);
 	}
+	game->map.tab[50][50].type = 0;
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
 		}
-		if (entity_dir(&entity[0]))
+		if (entity_dir(&entity[0])) {
+			if (game->map.tab[entity[0].pos.x][entity[0].pos.y].alt == 0)
+				game->map.tab[entity[0].pos.x][entity[0].pos.y].alt = (rand() % 3 ? 2 : 1);
 			for (size_t i = 1; i < nb_entity; i++)
 				entity_dir2(&entity[i]);
+		}
 		for (size_t i = 0; i < nb_entity; i++)
 			entity_move(&entity[i]);
 		sfRenderWindow_clear(window, sfBlack);

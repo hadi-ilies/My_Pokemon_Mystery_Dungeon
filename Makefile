@@ -36,8 +36,8 @@ CFLAGS	+=	-I./include -g
 CFLAGS	+=	-W -Wall -Wextra
 
 LDFLAGS	+=	-l c_graph_prog
-LDFLAGS	+=	-L $(LIBDIR) -l tile_map
-LDFLAGS	+=	-L $(LIBDIR) -l anime_tab
+LDFLAGS	+=	-L $(LIBDIR) -l Tile_map
+LDFLAGS	+=	-L $(LIBDIR) -l Anime_tab
 
 all	:	$(NAME)
 
