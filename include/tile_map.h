@@ -10,17 +10,18 @@
 
 #include <SFML/Graphics.h>
 #include <stddef.h>
+#include "rectex.h"
 
 #define TVA(type, var, alt) (tva_t) {type, var, alt}
 
 enum tile_map_error {
-	OK,
-	SPRITE_CREATE,
-	SFTEXTURE_CREATE,
-	OPEN,
-	READ,
-	MALLOC,
-	INVALID_NUMBER
+	TILE_MAP_OK,
+	TILE_MAP_SPRITE_CREATE,
+	TILE_MAP_TEXTURE_CREATE,
+	TILE_MAP_OPEN,
+	TILE_MAP_READ,
+	TILE_MAP_MALLOC,
+	TILE_MAP_INVALID_NUMBER
 };
 
 typedef struct {
@@ -28,11 +29,6 @@ typedef struct {
 	size_t var;
 	size_t alt;
 } tva_t;
-
-typedef struct {
-	size_t texture_num;
-	sfIntRect rect;
-} rectex_t;
 
 typedef struct {
 	size_t nb_texture;
