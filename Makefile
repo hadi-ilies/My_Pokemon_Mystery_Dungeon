@@ -9,17 +9,20 @@ NAME	=	my_rpg
 
 SRCDIR	=	src/
 LIBDIR	=	lib/
+GAMEDIR	=	$(SRCDIR)game/
+MAPCDIR	=	$(SRCDIR)map_editor/
+ANICDIR	=	$(SRCDIR)anime_editor/
 MAPDIR	=	$(SRCDIR)map/
 ENTDIR	=	$(SRCDIR)entity/
 
 SRC	=	$(SRCDIR)main.c \
-		$(SRCDIR)game_menu.c \
-		$(SRCDIR)map_editor_menu.c \
-		$(SRCDIR)anime_editor_menu.c \
-		$(SRCDIR)game_loop.c \
-		$(SRCDIR)map_editor_loop.c \
-		$(SRCDIR)anime_editor_loop.c \
 		$(SRCDIR)evt_close.c \
+		$(GAMEDIR)game_menu.c \
+		$(GAMEDIR)game_loop.c \
+		$(MAPCDIR)map_editor_menu.c \
+		$(MAPCDIR)map_editor_loop.c \
+		$(ANICDIR)anime_editor_menu.c \
+		$(ANICDIR)anime_editor_loop.c \
 		$(MAPDIR)map_create.c \
 		$(MAPDIR)map_resize.c \
 		$(MAPDIR)map_destroy.c \
