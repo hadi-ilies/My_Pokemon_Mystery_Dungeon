@@ -1,0 +1,121 @@
+/*
+** EPITECH PROJECT, 2017
+** main
+** File description:
+** main
+*/
+
+#include <stddef.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <SFML/Graphics.h>
+#include "my.h"
+
+void drawPartBuffer(partBuffer_t *this, sfRenderWindow *window)
+{
+	for (int i = 0; i < this->size; i++) {
+		sfRenderWindow_drawPrimitives(window, &this->vertex[i * 4], 4, sfQuads, NULL);
+	}
+}
+
+sfColor rand_color(sfColor col)
+{
+	sfColor color = col;
+	size_t npa = rand() % 3;
+
+	if (npa == 0)
+		color.r = rand() % 255;
+	if (npa == 1)
+		color.g = rand() % 255;
+	if (npa == 2)
+		color.b = rand() % 255;
+	return (color);
+}
+
+void setPart(partBuffer_t *this, sfVector2f pos, size_t id, sfColor color)
+{
+	this->vertex[(id * 4) + 0].position = (sfVector2f) {pos.x - 50, pos.y - 50};
+	this->vertex[(id * 4) + 1].position = (sfVector2f) {pos.x + 50, pos.y - 50};
+	this->vertex[(id * 4) + 2].position = (sfVector2f) {pos.x + 50, pos.y + 50};
+	this->vertex[(id * 4) + 3].position = (sfVector2f) {pos.x - 50, pos.y + 50};
+	this->vertex[(id * 4) + 0].color = rand_color(color);
+	this->vertex[(id * 4) + 1].color = rand_color(color);
+	this->vertex[(id * 4) + 2].color = rand_color(color);
+	this->vertex[(id * 4) + 3].color = rand_color(color);
+}
+
+partBuffer_t new_part_buffer(int size)
+{
+	partBuffer_t this;
+
+	this.size = size;
+	this.vertex = malloc(sizeof (sfVertex) * size * 4);
+	return (this);
+}
+
+sfRenderWindow *init(partBuffer_t *buffer)
+{
+	sfVideoMode mode = {1920, 1080, 32};
+	sfRenderWindow *window;
+
+	window = sfRenderWindow_create(mode, "Particules", sfClose, NULL);
+	if (!window)
+		return (NULL);
+	sfRenderWindow_setFramerateLimit(window, 30);
+	return (window);
+}
+
+void update(sfRenderWindow *window, partBuffer_t *buffer)
+{
+	sfRenderWindow_clear(window, sfBlack);
+	drawPartBuffer(buffer, window);
+	sfRenderWindow_display(window);
+}
+
+void move_particules(partBuffer_t *buffer)
+{
+	for (int i = 0; i < buffer->size; i++) {
+		int r = 50;
+		int x = rand() % (r + 1) - r / 2;
+		int y = rand() % (r + 1) - r / 2;
+
+		buffer->vertex[(i * 4) + 0].position.x += x;
+		buffer->vertex[(i * 4) + 1].position.x += x;
+		buffer->vertex[(i * 4) + 2].position.x += x;
+		buffer->vertex[(i * 4) + 3].position.x += x;
+		buffer->vertex[(i * 4) + 0].position.y += y;
+		buffer->vertex[(i * 4) + 1].position.y += y;
+		buffer->vertex[(i * 4) + 2].position.y += y;
+		buffer->vertex[(i * 4) + 3].position.y += y;
+		if (buffer->vertex[(i * 4) + 0].color.a > 0) {
+			buffer->vertex[(i * 4) + 0].color.a -= 1;
+			buffer->vertex[(i * 4) + 1].color.a -= 1;
+			buffer->vertex[(i * 4) + 2].color.a -= 1;
+			buffer->vertex[(i * 4) + 3].color.a -= 1;
+		}
+	}
+}
+
+int main (int argc, char **argv)
+{
+	int nb_square = 9;
+	partBuffer_t buffer = new_part_buffer(nb_square);
+	sfRenderWindow *window = init(&buffer);
+	sfEvent event;
+
+	printf("caca\n");
+	printf("ici\n");
+	for (int i = 0; i < buffer.size; i++)
+		setPart(&buffer, (sfVector2f) {1920 / 2, 1080 / 2}, i, (sfColor) {rand() % 255, rand() % 255, rand() % 255, 250});
+	while(sfRenderWindow_isOpen(window)) {
+		move_particules(&buffer);
+		while(sfRenderWindow_pollEvent(window, &event)) {
+			if(event.type==sfEvtClosed) {
+				sfRenderWindow_close(window);
+				return(0);
+			}
+		}
+		update(window, &buffer);
+	}
+	return(0);
+}
