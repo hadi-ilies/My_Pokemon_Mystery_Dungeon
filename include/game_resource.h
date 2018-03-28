@@ -15,6 +15,8 @@
 typedef struct {
 	size_t nb_tile_map;
 	tile_map_t *tile_map;
+	size_t nb_anime_tab;
+	anime_tab_t *anime_tab;
 	map_t map;
 } garou_t;
 

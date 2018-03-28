@@ -13,5 +13,7 @@ garou_t game_create(void)
 
 	garou.nb_tile_map = 0;
 	garou.tile_map = NULL;
+	garou.nb_anime_tab = 0;
+	garou.anime_tab = NULL;
 	return (garou);
 }
