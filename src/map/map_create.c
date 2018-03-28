@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "map.h"
 
-map_t map_create(size_t nb_case_x, size_t nb_case_y, char *tile_map_config)
+map_t map_create(size_t nb_case_x, size_t nb_case_y)
 {
 	map_t map = {.nb_case_x = nb_case_x, .nb_case_y = nb_case_y};
 
@@ -24,6 +24,6 @@ map_t map_create(size_t nb_case_x, size_t nb_case_y, char *tile_map_config)
 			return (map);
 		}
 	}
-	map.tile_map = tile_map_create_from_file(tile_map_config);
+	map.tile_map = NULL;
 	return (map);
 }

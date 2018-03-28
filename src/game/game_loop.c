@@ -9,6 +9,19 @@
 #include <stdbool.h>
 #include "prototype.h"
 
+static bool ee(entity_t *entity, sfVector2i dir)
+{
+	dir.x == 0 && dir.y == 1 ? entity->anime_tab.num = 0 : 0;
+	dir.x == 0 && dir.y == -1 ? entity->anime_tab.num = 1 : 0;
+	dir.x == -1 && dir.y == 0 ? entity->anime_tab.num = 2 : 0;
+	dir.x == 1 && dir.y == 0 ? entity->anime_tab.num = 3 : 0;
+	dir.x == -1 && dir.y == 1 ? entity->anime_tab.num = 4 : 0;
+	dir.x == 1 && dir.y == 1 ? entity->anime_tab.num = 5 : 0;
+	dir.x == -1 && dir.y == -1 ? entity->anime_tab.num = 6 : 0;
+	dir.x == 1 && dir.y == -1 ? entity->anime_tab.num = 7 : 0;
+	return (true);
+}
+
 bool entity_dir(entity_t *entity)
 {
 	if (entity->new_pos.x == entity->pos.x && entity->new_pos.y == entity->pos.y) {
@@ -22,17 +35,8 @@ bool entity_dir(entity_t *entity)
 		entity->new_pos.y = entity->pos.y + dir.y;
 		entity->move_pos.x = entity->pos.x;
 		entity->move_pos.y = entity->pos.y;
-		if (dir.x || dir.y) {
-			dir.x == 0 && dir.y == 1 ? entity->anime_tab.num = 0 : 0;
-			dir.x == 0 && dir.y == -1 ? entity->anime_tab.num = 1 : 0;
-			dir.x == -1 && dir.y == 0 ? entity->anime_tab.num = 2 : 0;
-			dir.x == 1 && dir.y == 0 ? entity->anime_tab.num = 3 : 0;
-			dir.x == -1 && dir.y == 1 ? entity->anime_tab.num = 4 : 0;
-			dir.x == 1 && dir.y == 1 ? entity->anime_tab.num = 5 : 0;
-			dir.x == -1 && dir.y == -1 ? entity->anime_tab.num = 6 : 0;
-			dir.x == 1 && dir.y == -1 ? entity->anime_tab.num = 7 : 0;
+		if ((dir.x || dir.y) && ee(entity, dir))
 			return (true);
-		}
 	}
 	return (false);
 }
@@ -53,17 +57,8 @@ bool entity_dir2(entity_t *entity)
 		entity->new_pos.y = entity->pos.y + dir.y;
 		entity->move_pos.x = entity->pos.x;
 		entity->move_pos.y = entity->pos.y;
-		if (dir.x || dir.y) {
-			dir.x == 0 && dir.y == 1 ? entity->anime_tab.num = 0 : 0;
-			dir.x == 0 && dir.y == -1 ? entity->anime_tab.num = 1 : 0;
-			dir.x == -1 && dir.y == 0 ? entity->anime_tab.num = 2 : 0;
-			dir.x == 1 && dir.y == 0 ? entity->anime_tab.num = 3 : 0;
-			dir.x == -1 && dir.y == 1 ? entity->anime_tab.num = 4 : 0;
-			dir.x == 1 && dir.y == 1 ? entity->anime_tab.num = 5 : 0;
-			dir.x == -1 && dir.y == -1 ? entity->anime_tab.num = 6 : 0;
-			dir.x == 1 && dir.y == -1 ? entity->anime_tab.num = 7 : 0;
+		if ((dir.x || dir.y) && ee(entity, dir))
 			return (true);
-		}
 	}
 	return (false);
 }

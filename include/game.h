@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** for_norme
+** my_rpg_2017
 ** File description:
 ** game.h
 */
