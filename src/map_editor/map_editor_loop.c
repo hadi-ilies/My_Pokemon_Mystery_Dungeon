@@ -41,7 +41,7 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 		}
 		sfRenderWindow_clear(window, sfBlack);
 		map_aff(window, map, pos);
-		tile_map_aff(window, &map->tile_map, TVA(1, 4, 1), rect);
+		tile_map_aff(window, map->tile_map, TVA(1, 4, 1), rect);
 		move_map(&pos);
 		sfRenderWindow_display(window);
 	}
