@@ -36,7 +36,7 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 			zoom_map(&event, map);
 		}
 		sfRenderWindow_clear(window, sfBlack);
-		map_aff(window, map, &pos);
+		map_aff(window, map, pos);
 		move_map(&pos);
 		sfRenderWindow_display(window);
 	}

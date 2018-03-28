@@ -93,9 +93,9 @@ int game_loop(sfRenderWindow *window, game_t *game)
 		for (size_t i = 0; i < nb_entity; i++)
 			entity_move(&entity[i]);
 		sfRenderWindow_clear(window, sfBlack);
-		map_aff(window, &game->map, &entity[0].move_pos);
+		map_aff(window, &game->map, entity[0].move_pos);
 		for (size_t i = 0; i < nb_entity; i++)
-			entity_aff(window, &entity[i], &game->map, &entity[0].move_pos);
+			entity_aff(window, &entity[i], &game->map, entity[0].move_pos);
 		sfRenderWindow_display(window);
 	}
 	for (size_t i = 0; i < nb_entity; i++)

@@ -19,7 +19,7 @@ int anime_editor_loop(sfRenderWindow *window, game_t *game)
 			evt_close(&event, window);
 		}
 		sfRenderWindow_clear(window, sfBlack);
-		map_aff(window, &game->map, &pos);
+		map_aff(window, &game->map, pos);
 		sfRenderWindow_display(window);
 	}
 	return (0);
