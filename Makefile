@@ -37,6 +37,7 @@ OBJ	=	$(SRC:.c=.o)
 
 CFLAGS	+=	-I./include -g
 CFLAGS	+=	-W -Wall -Wextra
+CFLAGS	+=	-fdiagnostics-color
 
 LDFLAGS	+=	-l c_graph_prog
 LDFLAGS	+=	-L $(LIBDIR) -l Tile_map
