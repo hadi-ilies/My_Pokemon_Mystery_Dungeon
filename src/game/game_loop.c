@@ -63,7 +63,7 @@ bool entity_dir2(entity_t *entity)
 	return (false);
 }
 
-int game_loop(sfRenderWindow *window, game_t *game)
+int game_loop(sfRenderWindow *window, garou_t *garou)
 {
 	sfEvent event;
 	size_t nb_entity = 2;
@@ -80,17 +80,17 @@ int game_loop(sfRenderWindow *window, game_t *game)
 			evt_close(&event, window);
 		}
 		if (entity_dir(&entity[0])) {
-			if (game->map.tab[entity[0].pos.x][entity[0].pos.y].type == 1 && game->map.tab[entity[0].pos.x][entity[0].pos.y].var == 4 && game->map.tab[entity[0].pos.x][entity[0].pos.y].alt == 0)
-				game->map.tab[entity[0].pos.x][entity[0].pos.y].alt = (rand() % 3 ? 2 : 1);
+			if (garou->map.tab[entity[0].pos.x][entity[0].pos.y].type == 1 && garou->map.tab[entity[0].pos.x][entity[0].pos.y].var == 4 && garou->map.tab[entity[0].pos.x][entity[0].pos.y].alt == 0)
+				garou->map.tab[entity[0].pos.x][entity[0].pos.y].alt = (rand() % 3 ? 2 : 1);
 			for (size_t i = 1; i < nb_entity; i++)
 				entity_dir2(&entity[i]);
 		}
 		for (size_t i = 0; i < nb_entity; i++)
 			entity_move(&entity[i]);
 		sfRenderWindow_clear(window, sfBlack);
-		map_aff(window, &game->map, entity[0].move_pos);
+		map_aff(window, &garou->map, entity[0].move_pos);
 		for (size_t i = 0; i < nb_entity; i++)
-			entity_aff(window, &entity[i], &game->map, entity[0].move_pos);
+			entity_aff(window, &entity[i], &garou->map, entity[0].move_pos);
 		sfRenderWindow_display(window);
 	}
 	for (size_t i = 0; i < nb_entity; i++)
