@@ -9,5 +9,6 @@
 #define MACRO_H_
 
 #define MOUSE_POS sfMouse_getPositionRenderWindow(window)
+#define RECT_MOUSE (sfFloatRect) {MOUSE_POS.x + 20, MOUSE_POS.y + 20, 40, 40}
 
 #endif
