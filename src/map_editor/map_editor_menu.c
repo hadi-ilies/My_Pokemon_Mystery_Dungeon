@@ -20,7 +20,7 @@ int map_editor_menu(void)
 		return (84);
 	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
 	//map = map_load("map_test");
-	map = map_create(100, 100);
+	map = map_create(50, 50);
 	for (size_t i = 0; i < map.nb_case_x; i++)
 		for (size_t j = 0; j < map.nb_case_y; j++) {
 			map.tab[i][j].type = 0;
