@@ -24,6 +24,8 @@ map_t map_create(size_t nb_case_x, size_t nb_case_y)
 			return (map);
 		}
 	}
+	map.size = (sfVector2f){0, 0};
+	map.pos = (sfVector2f){0, 0};
 	map.tile_map = NULL;
 	return (map);
 }

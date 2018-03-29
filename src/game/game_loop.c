@@ -88,7 +88,8 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 		for (size_t i = 0; i < nb_entity; i++)
 			entity_move(&entity[i]);
 		sfRenderWindow_clear(window, sfBlack);
-		map_aff(window, &garou->map, entity[0].move_pos);
+		garou->map.pos = entity[0].move_pos;
+		map_aff(window, &garou->map);
 		for (size_t i = 0; i < nb_entity; i++)
 			entity_aff(window, &entity[i], &garou->map, entity[0].move_pos);
 		sfRenderWindow_display(window);
