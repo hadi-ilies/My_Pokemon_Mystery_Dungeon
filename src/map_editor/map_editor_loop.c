@@ -89,9 +89,9 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 			zoom_map(&event, map);
 		}
 		move_map(&map->pos);
+		insert_to_map(window, map, mouse_tva);
 		map_smooth(map);
 		sfRenderWindow_clear(window, sfBlack);
-		insert_to_map(window, map, mouse_tva);
 		map_aff(window, map);
 		display_tools(window, map, &mouse_tva);
 		tile_map_aff(window, map->tile_map, mouse_tva, RECT_MOUSE);
