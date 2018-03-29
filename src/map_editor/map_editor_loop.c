@@ -89,6 +89,7 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 			zoom_map(&event, map);
 		}
 		move_map(&map->pos);
+		map_smooth(map);
 		sfRenderWindow_clear(window, sfBlack);
 		insert_to_map(window, map, mouse_tva);
 		map_aff(window, map);
