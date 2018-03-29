@@ -31,8 +31,10 @@ int map_editor_menu(void)
 			}*/
 	map.size.x = 100;
 	map.size.y = map.size.x;
+	map.pos.x = map.nb_case_x / 2;
+	map.pos.y = map.nb_case_y / 2;
 	map_editor_loop(window, &map);
-	//map_save(&map, "map_test");
+	map_save(&map, "map_test");
 	map_destroy(&map);
 	tile_map_destroy(&tile_map);
 	sfRenderWindow_destroy(window);
