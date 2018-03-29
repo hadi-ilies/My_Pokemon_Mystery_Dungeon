@@ -19,10 +19,11 @@ int game_menu(void)
 	if (!window)
 		return (84);
 	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
-	garou.map = map_create(100, 100);
+	garou.map = map_load("map_test");
+	//garou.map = map_create(100, 100);
 	tile_map = tile_map_create_from_file("resources/texture/tile_map/grassy_config");
 	garou.map.tile_map = &tile_map;
-	for (size_t i = 0; i < garou.map.nb_case_x; i++)
+	/*for (size_t i = 0; i < garou.map.nb_case_x; i++)
 		for (size_t j = 0; j < garou.map.nb_case_y; j++) {
 			garou.map.tab[i][j].type = 0;
 			garou.map.tab[i][j].var = 4;
@@ -67,10 +68,10 @@ int game_menu(void)
 	garou.map.tab[garou.map.nb_case_x - 20][garou.map.nb_case_y - 34].var = 32;
 	garou.map.tab[garou.map.nb_case_x - 20][garou.map.nb_case_y - 34].alt = 0;
 	garou.map.tab[garou.map.nb_case_x - 21][garou.map.nb_case_y - 35].var = 8;
-	garou.map.tab[garou.map.nb_case_x - 21][garou.map.nb_case_y - 35].alt = 0;
+	garou.map.tab[garou.map.nb_case_x - 21][garou.map.nb_case_y - 35].alt = 0;*/
 	garou.map.size.x = 200;
 	garou.map.size.y = garou.map.size.x;
-	garou.nb_entity = 200;
+	garou.nb_entity = 1;
 	garou.entity = malloc(sizeof(entity_t) * garou.nb_entity);
 	for (size_t i = 0; i < garou.nb_entity; i++) {
 		sfVector2i pos = {garou.map.nb_case_x / 2, garou.map.nb_case_y / 2};
