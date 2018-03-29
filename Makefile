@@ -22,6 +22,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(GAMEDIR)game_loop.c \
 			$(MAPCDIR)map_editor_menu.c \
 			$(MAPCDIR)map_editor_loop.c \
+			$(MAPCDIR)hit_functions.c \
 			$(ANICDIR)anime_editor_menu.c \
 			$(ANICDIR)anime_editor_loop.c \
 			$(MAPDIR)map_create.c \
