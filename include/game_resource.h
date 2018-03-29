@@ -18,9 +18,13 @@ typedef struct {
 	size_t nb_anime_tab;
 	anime_tab_t *anime_tab;
 	map_t map;
+	size_t nb_entity;
+	entity_t *entity;
 } garou_t;
 
-garou_t game_create(void);
-void game_destroy(garou_t *garou);
+garou_t garou_create(void);
+void garou_destroy(garou_t *garou);
+void garou_add_tile_map(garou_t *garou, tile_map_t *tile_map);
+void garou_add_anime_tab(garou_t *garou, anime_tab_t *anime_tab);
 
 #endif

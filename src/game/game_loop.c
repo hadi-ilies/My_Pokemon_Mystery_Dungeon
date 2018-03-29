@@ -47,11 +47,8 @@ bool entity_dir2(entity_t *entity)
 		sfVector2i dir = {0, 0};
 
 		do {
-			dir = (sfVector2i){0, 0}; // tmp
-			if (rand() & 2)
-				dir.x = rand() % 3 - 1;
-			else
-				dir.y = rand() % 3 - 1;
+			dir.x = rand() % 3 - 1;
+			dir.y = rand() % 3 - 1;
 		} while (!dir.x && !dir.y);
 		entity->new_pos.x = entity->pos.x + dir.x;
 		entity->new_pos.y = entity->pos.y + dir.y;
@@ -66,36 +63,25 @@ bool entity_dir2(entity_t *entity)
 int game_loop(sfRenderWindow *window, garou_t *garou)
 {
 	sfEvent event;
-	size_t nb_entity = 2;
-	entity_t *entity = malloc(sizeof(entity_t) * nb_entity);
 
-	for (size_t i = 0; i < nb_entity; i++) {
-		sfVector2i pos = {50, 50};
-
-		entity[i] = entity_create("resources/texture/anime_tab/gobou_config");
-		entity_set_pos(&entity[i], pos);
-	}
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
 		}
-		if (entity_dir(&entity[0])) {
-			if (garou->map.tab[entity[0].pos.x][entity[0].pos.y].type == 1 && garou->map.tab[entity[0].pos.x][entity[0].pos.y].var == 4 && garou->map.tab[entity[0].pos.x][entity[0].pos.y].alt == 0)
-				garou->map.tab[entity[0].pos.x][entity[0].pos.y].alt = (rand() % 3 ? 2 : 1);
-			for (size_t i = 1; i < nb_entity; i++)
-				entity_dir2(&entity[i]);
+		if (entity_dir(&garou->entity[0])) {
+			if (garou->map.tab[garou->entity[0].pos.x][garou->entity[0].pos.y].type == 1 && garou->map.tab[garou->entity[0].pos.x][garou->entity[0].pos.y].var == 4 && garou->map.tab[garou->entity[0].pos.x][garou->entity[0].pos.y].alt == 0)
+				garou->map.tab[garou->entity[0].pos.x][garou->entity[0].pos.y].alt = (rand() % 3 ? 2 : 1);
+			for (size_t i = 1; i < garou->nb_entity; i++)
+				entity_dir2(&garou->entity[i]);
 		}
-		for (size_t i = 0; i < nb_entity; i++)
-			entity_move(&entity[i]);
+		for (size_t i = 0; i < garou->nb_entity; i++)
+			entity_move(&garou->entity[i]);
 		sfRenderWindow_clear(window, sfBlack);
-		garou->map.pos = entity[0].move_pos;
+		garou->map.pos = garou->entity[0].move_pos;
 		map_aff(window, &garou->map);
-		for (size_t i = 0; i < nb_entity; i++)
-			entity_aff(window, &entity[i], &garou->map, entity[0].move_pos);
+		for (size_t i = 0; i < garou->nb_entity; i++)
+			entity_aff(window, &garou->entity[i], &garou->map, garou->entity[0].move_pos);
 		sfRenderWindow_display(window);
 	}
-	for (size_t i = 0; i < nb_entity; i++)
-		entity_destroy(&entity[i]);
-	free(entity);
 	return (0);
 }

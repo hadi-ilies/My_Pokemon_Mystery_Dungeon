@@ -30,6 +30,8 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPDIR)map_resize.c \
 			$(MAPDIR)map_destroy.c \
 			$(MAPDIR)map_aff.c \
+			$(MAPDIR)map_save.c \
+			$(MAPDIR)map_load.c \
 			$(ENTDIR)entity_create.c \
 			$(ENTDIR)entity_destroy.c \
 			$(ENTDIR)entity_set_pos.c \

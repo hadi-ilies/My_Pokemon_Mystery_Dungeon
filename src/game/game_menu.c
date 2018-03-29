@@ -70,6 +70,14 @@ int game_menu(void)
 	garou.map.tab[garou.map.nb_case_x - 21][garou.map.nb_case_y - 35].alt = 0;
 	garou.map.size.x = 200;
 	garou.map.size.y = garou.map.size.x;
+	garou.nb_entity = 200;
+	garou.entity = malloc(sizeof(entity_t) * garou.nb_entity);
+	for (size_t i = 0; i < garou.nb_entity; i++) {
+		sfVector2i pos = {garou.map.nb_case_x / 2, garou.map.nb_case_y / 2};
+
+		garou.entity[i] = entity_create("resources/texture/anime_tab/gobou_config");
+		entity_set_pos(&garou.entity[i], pos);
+	}
 	game_loop(window, &garou);
 	map_destroy(&garou.map);
 	tile_map_destroy(&tile_map);
