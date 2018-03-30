@@ -9,22 +9,6 @@
 #include "map.h"
 #include "tile_name.h"
 
-static size_t min(size_t a, size_t b)
-{
-	if (a < b)
-		return (a);
-	else
-		return (b);
-}
-
-static size_t max(size_t a, size_t b)
-{
-	if (a > b)
-		return (a);
-	else
-		return (b);
-}
-
 void map_smooth3(map_t *map, size_t x, size_t y)
 {
 	size_t type = map->tab[x][y].type;
@@ -163,13 +147,17 @@ void map_smooth2(map_t *map, size_t x, size_t y)
 
 void map_smooth(map_t *map, size_t x, size_t y)
 {
-	size_t min_x = max(x - 1, 1);
-	size_t max_x = min(x + 1, map->nb_case_x - 1);
-	size_t min_y = max(y - 1, 1);
-	size_t max_y = min(y + 1, map->nb_case_y - 1);
+	size_t i_min = x - 1;
+	size_t i_max = x + 1;
+	size_t j_min = y - 1;
+	size_t j_max = y + 1;
 
-	for (size_t i = min_x - 1; i <= max_x + 1; i++)
-		for (size_t j = min_y - 1; j <= max_y + 1; j++)
+	i_min <= 0 ? i_min = 1 : 0;
+	i_max >= map->nb_case_x - 1 ? i_max = map->nb_case_x - 2 : 0;
+	j_min <= 0 ? j_min = 1 : 0;
+	j_max >= map->nb_case_y - 1 ? j_max = map->nb_case_y - 2 : 0;
+	for (size_t i = i_min; i <= i_max; i++)
+		for (size_t j = j_min; j <= j_max; j++)
 			map_smooth2(map, i, j);
 }
 
