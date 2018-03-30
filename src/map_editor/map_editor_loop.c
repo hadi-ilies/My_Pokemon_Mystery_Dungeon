@@ -82,7 +82,15 @@ void insert_to_map(sfRenderWindow *window, map_t *map, tva_t mouse_tva)
 		if (x >= map->nb_case_x || y >= map->nb_case_y)
 			return;
 		insert_to_map2(mouse_tva, &map->tab[x][y], map->tile_map);
+		map_smooth(map, x, y);
 	}
+}
+
+void refresh_map(sfEvent *event, map_t *map)
+{
+	if (event->type == sfEvtKeyPressed)
+		if (sfKeyboard_isKeyPressed(sfKeyF5))
+			map_smooth_all(map);
 }
 
 int map_editor_loop(sfRenderWindow *window, map_t *map)
@@ -94,10 +102,10 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
 			zoom_map(&event, map);
+			refresh_map(&event, map);
 		}
 		move_map(&map->pos);
 		insert_to_map(window, map, mouse_tva);
-		map_smooth(map);
 		sfRenderWindow_clear(window, sfBlack);
 		map_aff(window, map);
 		display_tools(window, map, &mouse_tva);
