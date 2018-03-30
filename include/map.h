@@ -12,6 +12,15 @@
 #include <stddef.h>
 #include "tile_map.h"
 
+enum map_error {
+	MAP_OK,
+	MAP_OPEN,
+	MAP_READ,
+	MAP_WRITE,
+	MAP_MALLOC,
+	MAP_INVALID_NUMBER
+};
+
 typedef struct {
 	size_t nb_case_x;
 	size_t nb_case_y;

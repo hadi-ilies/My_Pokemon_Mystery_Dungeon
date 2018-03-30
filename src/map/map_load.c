@@ -17,24 +17,24 @@ map_t map_load(char *file_name)
 	size_t nb_case_y;
 
 	if (fd == -1) {
-		map.error = 1;
+		map.error = MAP_OPEN;
 		return (map);
 	}
 	if (read(fd, &nb_case_x, sizeof(size_t)) != sizeof(size_t)) {
-		map.error = 1;
+		map.error = MAP_READ;
 		return (map);
 	}
 	if (read(fd, &nb_case_y, sizeof(size_t)) != sizeof(size_t)) {
-		map.error = 1;
+		map.error = MAP_READ;
 		return (map);
 	}
 	map = map_create(nb_case_x, nb_case_y);
-	if (map.error != 0)
+	if (map.error != MAP_OK)
 		return (map);
 	for (size_t i = 0; i < map.nb_case_x; i++)
 		for (size_t j = 0; j < map.nb_case_y; j++) {
 			if (read(fd, &map.tab[i][j], sizeof(tva_t)) != sizeof(tva_t)) {
-				map.error = 1;
+				map.error = MAP_READ;
 				return (map);
 			}
 		}
