@@ -86,8 +86,29 @@ void insert_to_map(sfRenderWindow *window, map_t *map, tva_t mouse_tva)
 	}
 }
 
-void refresh_map(sfEvent *event, map_t *map)
+void take_from_map(map_t *map, sfRenderWindow *window, tva_t *mouse_tva, sfEvent *event)
 {
+	sfVector2u win_size = sfRenderWindow_getSize(window);
+	sfVector2i coord_mouse = sfMouse_getPositionRenderWindow(window);
+	int x2 = map->size.x * (-map->pos.x) + win_size.x / 2;
+	int y2 = map->size.y * (-map->pos.y) + win_size.y / 2;
+
+	coord_mouse.x -= x2 - map->size.y / 2;
+	coord_mouse.y -= y2 - map->size.y / 2;
+	if (event->type == sfEvtMouseButtonPressed
+	&& sfMouse_isButtonPressed(sfMouseRight) == true) {
+		size_t x = coord_mouse.x / map->size.x;
+		size_t y = coord_mouse.y / map->size.y;
+
+		if (x >= map->nb_case_x || y >= map->nb_case_y)
+			return;
+		*mouse_tva = map->tab[x][y];
+	}
+}
+
+void refresh_map(sfEvent *event, map_t *map, sfRenderWindow *window, tva_t *mouse_tva)
+{
+	take_from_map(map, window, mouse_tva, event);
 	if (event->type == sfEvtKeyPressed)
 		if (sfKeyboard_isKeyPressed(sfKeyF5))
 			map_smooth_all(map);
@@ -102,7 +123,7 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
 			zoom_map(&event, map);
-			refresh_map(&event, map);
+			refresh_map(&event, map, window, &mouse_tva);
 		}
 		move_map(&map->pos);
 		insert_to_map(window, map, mouse_tva);
