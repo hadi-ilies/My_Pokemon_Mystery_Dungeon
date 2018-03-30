@@ -9,58 +9,57 @@
 #include <stdbool.h>
 #include "prototype.h"
 #include "tile_name.h"
+#include "anime_name.h"
 
-static void ee(entity_t *entity, sfVector2i dir)
+static void set_anime_num(entity_t *entity)
 {
-	dir.x == 0 && dir.y == 1 ? entity->anime_tab.num = 0 : 0;
-	dir.x == 0 && dir.y == -1 ? entity->anime_tab.num = 1 : 0;
-	dir.x == -1 && dir.y == 0 ? entity->anime_tab.num = 2 : 0;
-	dir.x == 1 && dir.y == 0 ? entity->anime_tab.num = 3 : 0;
-	dir.x == -1 && dir.y == 1 ? entity->anime_tab.num = 4 : 0;
-	dir.x == 1 && dir.y == 1 ? entity->anime_tab.num = 5 : 0;
-	dir.x == -1 && dir.y == -1 ? entity->anime_tab.num = 6 : 0;
-	dir.x == 1 && dir.y == -1 ? entity->anime_tab.num = 7 : 0;
+	entity->dir.x == 0 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_MOVE_S : 0;
+	entity->dir.x == 0 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_MOVE_N : 0;
+	entity->dir.x == -1 && entity->dir.y == 0 ? entity->anime_tab.num = ANIME_MOVE_W : 0;
+	entity->dir.x == 1 && entity->dir.y == 0 ? entity->anime_tab.num = ANIME_MOVE_E : 0;
+	entity->dir.x == -1 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_MOVE_SW : 0;
+	entity->dir.x == 1 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_MOVE_SE : 0;
+	entity->dir.x == -1 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_MOVE_NW : 0;
+	entity->dir.x == 1 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_MOVE_NE : 0;
 }
 
-bool entity_dir(entity_t *entity, map_t *map)
+bool entity_set_dir(entity_t *entity, map_t *map)
 {
 	if (entity->new_pos.x == entity->pos.x && entity->new_pos.y == entity->pos.y) {
-		sfVector2i dir = {0, 0};
-
-		sfKeyboard_isKeyPressed(sfKeyLeft) ? dir.x = -1 : 0;
-		sfKeyboard_isKeyPressed(sfKeyRight) ? dir.x = 1 : 0;
-		sfKeyboard_isKeyPressed(sfKeyUp) ? dir.y = -1 : 0;
-		sfKeyboard_isKeyPressed(sfKeyDown)? dir.y = 1 : 0;
-		ee(entity, dir);
-		if (map->tab[entity->pos.x + dir.x][entity->pos.y + dir.y].type != GROUND)
+		entity->dir = (sfVector2i){0, 0};
+		sfKeyboard_isKeyPressed(sfKeyLeft) ? entity->dir.x = -1 : 0;
+		sfKeyboard_isKeyPressed(sfKeyRight) ? entity->dir.x = 1 : 0;
+		sfKeyboard_isKeyPressed(sfKeyUp) ? entity->dir.y = -1 : 0;
+		sfKeyboard_isKeyPressed(sfKeyDown)? entity->dir.y = 1 : 0;
+		set_anime_num(entity);
+		if (map->tab[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y].type != GROUND)
 			return (false);
-		entity->new_pos.x = entity->pos.x + dir.x;
-		entity->new_pos.y = entity->pos.y + dir.y;
+		entity->new_pos.x = entity->pos.x + entity->dir.x;
+		entity->new_pos.y = entity->pos.y + entity->dir.y;
 		entity->move_pos.x = entity->pos.x;
 		entity->move_pos.y = entity->pos.y;
-		if ((dir.x || dir.y))
+		if (entity->dir.x || entity->dir.y)
 			return (true);
 	}
 	return (false);
 }
 
-bool entity_dir2(entity_t *entity, map_t *map)
+bool entity_set_dir2(entity_t *entity, map_t *map)
 {
 	if (entity->new_pos.x == entity->pos.x && entity->new_pos.y == entity->pos.y) {
-		sfVector2i dir = {0, 0};
-
+		entity->dir = (sfVector2i){0, 0};
 		do {
-			dir.x = rand() % 3 - 1;
-			dir.y = rand() % 3 - 1;
-		} while (!dir.x && !dir.y);
-		ee(entity, dir);
-		if (map->tab[entity->pos.x + dir.x][entity->pos.y + dir.y].type != GROUND)
+			entity->dir.x = rand() % 3 - 1;
+			entity->dir.y = rand() % 3 - 1;
+		} while (!entity->dir.x && !entity->dir.y);
+		set_anime_num(entity);
+		if (map->tab[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y].type != GROUND)
 			return (false);
-		entity->new_pos.x = entity->pos.x + dir.x;
-		entity->new_pos.y = entity->pos.y + dir.y;
+		entity->new_pos.x = entity->pos.x + entity->dir.x;
+		entity->new_pos.y = entity->pos.y + entity->dir.y;
 		entity->move_pos.x = entity->pos.x;
 		entity->move_pos.y = entity->pos.y;
-		if ((dir.x || dir.y))
+		if (entity->dir.x || entity->dir.y)
 			return (true);
 	}
 	return (false);
@@ -74,9 +73,9 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
 		}
-		if (entity_dir(&garou->entity[0], &garou->map))
+		if (entity_set_dir(&garou->entity[0], &garou->map))
 			for (size_t i = 1; i < garou->nb_entity; i++)
-				entity_dir2(&garou->entity[i], &garou->map);
+				entity_set_dir2(&garou->entity[i], &garou->map);
 		for (size_t i = 0; i < garou->nb_entity; i++)
 			entity_move(&garou->entity[i]);
 		sfRenderWindow_clear(window, sfBlack);

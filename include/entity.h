@@ -13,6 +13,7 @@
 #include "anime_tab.h"
 
 typedef struct {
+	sfVector2i dir;
 	sfVector2i pos;
 	sfVector2f move_pos;
 	sfVector2i new_pos;

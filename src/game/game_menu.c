@@ -24,7 +24,7 @@ int game_menu(void)
 	garou.map.tile_map = &tile_map;
 	garou.map.size.x = 200;
 	garou.map.size.y = garou.map.size.x;
-	garou.nb_entity = 1;
+	garou.nb_entity = 2;
 	garou.entity = malloc(sizeof(entity_t) * garou.nb_entity);
 	for (size_t i = 0; i < garou.nb_entity; i++) {
 		sfVector2i pos = {garou.map.nb_case_x / 2, garou.map.nb_case_y / 2};

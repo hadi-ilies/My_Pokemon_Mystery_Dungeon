@@ -32,6 +32,8 @@ void entity_move(entity_t *entity)
 		entity->pos.y = entity->new_pos.y;
 		entity->move_pos.x = entity->new_pos.x;
 		entity->move_pos.y = entity->new_pos.y;
+		entity->dir.x = 0;
+		entity->dir.y = 0;
 	}
 }
 
