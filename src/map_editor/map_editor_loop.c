@@ -114,10 +114,21 @@ void refresh_map(sfEvent *event, map_t *map, sfRenderWindow *window, tva_t *mous
 			map_smooth_all(map);
 }
 
+back_and_music_t optional_create(void)
+{
+	back_and_music_t optional;
+
+	optional.sprite = sfSprite_create();
+	optional.texture = sfTexture_createFromFile(BACK_MAP, NULL);
+	sfSprite_setTexture(optional.sprite, optional.texture, sfTrue);
+	return (optional);
+}
+
 int map_editor_loop(sfRenderWindow *window, map_t *map)
 {
 	tva_t mouse_tva = {map->tile_map->nb_type, 0, 0};
 	sfEvent event;
+	back_and_music_t optional = optional_create();
 
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
@@ -128,6 +139,7 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 		move_map(&map->pos);
 		insert_to_map(window, map, mouse_tva);
 		sfRenderWindow_clear(window, sfBlack);
+		sfRenderWindow_drawSprite(window, optional.sprite, NULL);
 		map_aff(window, map);
 		display_tools(window, map, &mouse_tva);
 		tile_map_aff(window, map->tile_map, mouse_tva, RECT_MOUSE);
