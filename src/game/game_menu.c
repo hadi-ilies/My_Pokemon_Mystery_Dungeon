@@ -19,7 +19,7 @@ int game_menu(void)
 	if (!window)
 		return (84);
 	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
-	garou.map = map_load("my_map");
+	garou.map = map_load("map_test");
 	tile_map = tile_map_create_from_file("resources/texture/tile_map/grassy_config");
 	garou.map.tile_map = &tile_map;
 	garou.map.size.x = 200;
