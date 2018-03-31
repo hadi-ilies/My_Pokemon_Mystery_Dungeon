@@ -9,6 +9,7 @@
 #define PROTOTYPE_H_
 
 #include <SFML/Graphics.h>
+#include <SFML/Audio.h>
 #include "game_resource.h"
 
 #define WINDOW_WIDTH 1920
