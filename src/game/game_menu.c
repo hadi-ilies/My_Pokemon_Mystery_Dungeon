@@ -22,6 +22,8 @@ int game_menu(void)
 	garou.map = map_load("map_test");
 	tile_map = tile_map_create_from_file("resources/texture/tile_map/grassy_config");
 	garou.map.tile_map = &tile_map;
+	if (garou.map.tile_map->error != TILE_MAP_OK)
+		return (84);
 	garou.map.size.x = 200;
 	garou.map.size.y = garou.map.size.x;
 	garou.nb_entity = 2;
@@ -30,6 +32,8 @@ int game_menu(void)
 		sfVector2i pos = {garou.map.nb_case_x / 2, garou.map.nb_case_y / 2};
 
 		garou.entity[i] = entity_create("resources/texture/anime_tab/gobou_config");
+		if (garou.entity[i].anime_tab.error != ANIME_TAB_OK)
+			return (84);
 		entity_set_pos(&garou.entity[i], pos);
 	}
 	game_loop(window, &garou);

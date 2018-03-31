@@ -10,7 +10,6 @@
 
 #include <SFML/Graphics.h>
 #include <stddef.h>
-#include "rectex.h"
 
 #define TVA(type, var, alt) (tva_t) {type, var, alt}
 
@@ -23,6 +22,16 @@ enum tile_map_error {
 	TILE_MAP_MALLOC,
 	TILE_MAP_INVALID_NUMBER
 };
+
+#ifndef RECTEX_T_
+#define RECTEX_T_
+
+typedef struct {
+	size_t texture_num;
+	sfIntRect rect;
+} rectex_t;
+
+#endif
 
 typedef struct {
 	size_t type;

@@ -111,7 +111,7 @@ int anime_editor_loop(sfRenderWindow *window, anime_tab_t *anime_tab)
 
 	sfRectangleShape_setFillColor(rect, sfTransparent);
 	sfRectangleShape_setOutlineColor(rect, sfRed);
-	sfSprite_setTexture(sprite, anime_tab->texture[rectex->texture_num], sfTrue);
+	sfSprite_setTexture(sprite, anime_tab->texname[rectex->texture_num].texture, sfTrue);
 	while (sfRenderWindow_isOpen(window)) {
 		if (sfMouse_isButtonPressed(sfMouseLeft)) {
 			rectex->rect.width = (MOUSE_POS.x - sprite_rect.left) / sprite_rect.width - rectex->rect.left;
