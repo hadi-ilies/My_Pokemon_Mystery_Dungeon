@@ -8,8 +8,12 @@
 #ifndef MACRO_H_
 #define MACRO_H_
 
+#define TOOL_SIZE 100
+#define TOOL_DIST 200
 #define BACK_MAP "resources/texture/map_editor/background_map_editor.jpg"
 #define MUSIC_EDITOR "resources/texture/map_editor/OstMapEditor.ogg"
+#define PIX rect.left - rect.width / 2 - 10
+#define PIY  rect.top - rect.height / 2 - 10
 #define WINDOW_SIZE sfRenderWindow_getSize(window)
 #define MOUSE_POS sfMouse_getPositionRenderWindow(window)
 #define RECT_MOUSE (sfFloatRect) {MOUSE_POS.x + 20, MOUSE_POS.y + 20, 40, 40}

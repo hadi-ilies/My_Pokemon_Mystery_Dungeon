@@ -24,24 +24,21 @@ void pick_tile(sfRenderWindow *window, sfFloatRect rect, tva_t tva, tva_t *mouse
 
 void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva)
 {
-	const size_t tool_size = 100;
-	const size_t tool_dist = 200;
 	sfVector2u win_size = sfRenderWindow_getSize(window);
 	sfVector2f origin;
 	sfRectangleShape *reck = sfRectangleShape_create();
-	sfColor color = {150, 150, 150, 100};
 
-	origin.x = win_size.x / 2 - map->tile_map->nb_type / 2 * tool_dist;
-	origin.y = win_size.y - tool_size / 2;
-	sfRectangleShape_setSize(reck, (sfVector2f){tool_size + 20, tool_size + 20});
-	sfRectangleShape_setFillColor(reck, color);
+	origin.x = win_size.x / 2 - map->tile_map->nb_type / 2 * TOOL_DIST;
+	origin.y = win_size.y - TOOL_SIZE / 2;
+	sfRectangleShape_setSize(reck, (sfVector2f){TOOL_SIZE + 20, TOOL_SIZE + 20});
+	sfRectangleShape_setFillColor(reck, (sfColor) {150, 150, 150, 100});
 	for (size_t i = 0; i < map->tile_map->nb_type; i++) {
-		sfFloatRect rect = {.width = tool_size, .height = tool_size};
+		sfFloatRect rect = {.width = TOOL_SIZE, .height = TOOL_SIZE};
 		tva_t tva = {i, V111_1X1_111, 0};
 
-		rect.left = origin.x + i * tool_dist;
+		rect.left = origin.x + i * TOOL_DIST;
 		rect.top = origin.y;
-		sfRectangleShape_setPosition(reck, (sfVector2f){rect.left - rect.width / 2 - 10, rect.top - rect.height / 2 - 10});
+		sfRectangleShape_setPosition(reck, (sfVector2f){PIX, PIY});
 		sfRenderWindow_drawRectangleShape(window, reck, NULL);
 		tile_map_aff(window, map->tile_map, tva, rect);
 		pick_tile(window, rect, tva, mouse_tva);
@@ -113,6 +110,8 @@ back_and_music_t optional_create(void)
 	optional.texture = sfTexture_createFromFile(BACK_MAP, NULL);
 	sfSprite_setTexture(optional.sprite, optional.texture, sfTrue);
 	optional.music = sfMusic_createFromFile(MUSIC_EDITOR);
+	sfMusic_play(optional.music);
+	sfMusic_setLoop(optional.music, true);
 	return (optional);
 }
 
@@ -122,8 +121,6 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 	sfEvent event;
 	back_and_music_t optional = optional_create();
 
-	sfMusic_play(optional.music);
-	sfMusic_setLoop(optional.music, true);
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
