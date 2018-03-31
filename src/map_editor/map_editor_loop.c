@@ -49,21 +49,7 @@ void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva)
 	sfRectangleShape_destroy(reck);
 }
 
-void swap_alt(tile_map_t *tile_map, tva_t *tva)
-{
-	size_t type = tva->type;
-	size_t var = tva->var;
-
-	if (tva->alt != 0 || tile_map->nb_alt[type][var] == 1)
-		return;
-	for (size_t i = 1; i < tile_map->nb_alt[type][var]; i++)
-		if (rand() % 3) {
-			tva->alt = i;
-			return;
-		}
-}
-
-void insert_to_map(tile_map_t *tile_map, tva_t *tva, tva_t mouse_tva)
+void insert_to_map2(tva_t mouse_tva, tva_t *tva, tile_map_t *tile_map)
 {
 	if (mouse_tva.alt == 0) {
 		size_t type = mouse_tva.type;
@@ -78,28 +64,51 @@ void insert_to_map(tile_map_t *tile_map, tva_t *tva, tva_t mouse_tva)
 		*tva = mouse_tva;
 }
 
-void manage_map(sfEvent *event, sfRenderWindow *window, map_t *map, tva_t *mouse_tva)
+void insert_to_map(sfRenderWindow *window, map_t *map, tva_t mouse_tva)
 {
-	size_t x = GET_MAP_X;
-	size_t y = GET_MAP_Y;
-	bool cond = event->type == sfEvtMouseButtonPressed;
+	sfVector2u win_size = sfRenderWindow_getSize(window);
+	sfVector2i coord_mouse = sfMouse_getPositionRenderWindow(window);
+	int x2 = map->size.x * (-map->pos.x) + win_size.x / 2;
+	int y2 = map->size.y * (-map->pos.y) + win_size.y / 2;
 
-	if (x >= map->nb_case_x || y >= map->nb_case_y)
-		return;
-	if (cond && sfMouse_isButtonPressed(sfMouseMiddle) == true)
-		mouse_tva->type = map->tab[x][y].type;
-	if (sfMouse_isButtonPressed(sfMouseRight) == true)
-		swap_alt(map->tile_map, &map->tab[x][y]);
-	if (mouse_tva->type >= map->tile_map->nb_type)
+	coord_mouse.x -= x2 - map->size.y / 2;
+	coord_mouse.y -= y2 - map->size.y / 2;
+	if (mouse_tva.type >= map->tile_map->nb_type)
 		return;
 	if (sfMouse_isButtonPressed(sfMouseLeft) == true) {
-		insert_to_map(map->tile_map, &map->tab[x][y], *mouse_tva);
+		size_t x = coord_mouse.x / map->size.x;
+		size_t y = coord_mouse.y / map->size.y;
+
+		if (x >= map->nb_case_x || y >= map->nb_case_y)
+			return;
+		insert_to_map2(mouse_tva, &map->tab[x][y], map->tile_map);
 		map_smooth(map, x, y);
 	}
 }
 
-void refresh_map(sfEvent *event, map_t *map)
+void take_from_map(map_t *map, sfRenderWindow *window, tva_t *mouse_tva, sfEvent *event)
 {
+	sfVector2u win_size = sfRenderWindow_getSize(window);
+	sfVector2i coord_mouse = sfMouse_getPositionRenderWindow(window);
+	int x2 = map->size.x * (-map->pos.x) + win_size.x / 2;
+	int y2 = map->size.y * (-map->pos.y) + win_size.y / 2;
+
+	coord_mouse.x -= x2 - map->size.y / 2;
+	coord_mouse.y -= y2 - map->size.y / 2;
+	if (event->type == sfEvtMouseButtonPressed
+	&& sfMouse_isButtonPressed(sfMouseRight) == true) {
+		size_t x = coord_mouse.x / map->size.x;
+		size_t y = coord_mouse.y / map->size.y;
+
+		if (x >= map->nb_case_x || y >= map->nb_case_y)
+			return;
+		*mouse_tva = map->tab[x][y];
+	}
+}
+
+void refresh_map(sfEvent *event, map_t *map, sfRenderWindow *window, tva_t *mouse_tva)
+{
+	take_from_map(map, window, mouse_tva, event);
 	if (event->type == sfEvtKeyPressed)
 		if (sfKeyboard_isKeyPressed(sfKeyF5))
 			map_smooth_all(map);
@@ -111,24 +120,27 @@ back_and_music_t optional_create(void)
 
 	optional.sprite = sfSprite_create();
 	optional.texture = sfTexture_createFromFile(BACK_MAP, NULL);
+	optional.music = sfMusic_createFromFile(MUSIC_EDITOR);
 	sfSprite_setTexture(optional.sprite, optional.texture, sfTrue);
 	return (optional);
 }
 
 int map_editor_loop(sfRenderWindow *window, map_t *map)
 {
-	tva_t mouse_tva = {map->tile_map->nb_type, V111_1X1_111, 0};
+	tva_t mouse_tva = {map->tile_map->nb_type, 0, 0};
 	sfEvent event;
 	back_and_music_t optional = optional_create();
 
+	sfMusic_play(optional.music);
+	sfMusic_setLoop(optional.music, true);
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
 			zoom_map(&event, map);
-			refresh_map(&event, map);
-			manage_map(&event, window, map, &mouse_tva);
+			refresh_map(&event, map, window, &mouse_tva);
 		}
 		move_map(&map->pos);
+		insert_to_map(window, map, mouse_tva);
 		sfRenderWindow_clear(window, sfBlack);
 		sfRenderWindow_drawSprite(window, optional.sprite, NULL);
 		map_aff(window, map);
