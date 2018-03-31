@@ -49,6 +49,20 @@ void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva)
 	sfRectangleShape_destroy(reck);
 }
 
+void swap_alt(tile_map_t *tile_map, tva_t *tva)
+{
+	size_t type = tva->type;
+	size_t var = tva->var;
+
+	if (tva->alt != 0 || tile_map->nb_alt[type][var] == 1)
+		return;
+	for (size_t i = 1; i < tile_map->nb_alt[type][var]; i++)
+		if (rand() % 3) {
+			tva->alt = i;
+			return;
+		}
+}
+
 void insert_to_map(tile_map_t *tile_map, tva_t *tva, tva_t mouse_tva)
 {
 	if (mouse_tva.alt == 0) {
@@ -74,6 +88,8 @@ void manage_map(sfEvent *event, sfRenderWindow *window, map_t *map, tva_t *mouse
 		return;
 	if (cond && sfMouse_isButtonPressed(sfMouseMiddle) == true)
 		mouse_tva->type = map->tab[x][y].type;
+	if (sfMouse_isButtonPressed(sfMouseRight) == true)
+		swap_alt(map->tile_map, &map->tab[x][y]);
 	if (mouse_tva->type >= map->tile_map->nb_type)
 		return;
 	if (sfMouse_isButtonPressed(sfMouseLeft) == true) {

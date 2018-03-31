@@ -5,9 +5,24 @@
 ** map_smooth.c
 */
 
+#include <stdlib.h>
 #include <stdbool.h>
 #include "map.h"
 #include "tile_name.h"
+
+void map_smooth4(map_t *map, size_t x, size_t y)
+{
+	size_t type = map->tab[x][y].type;
+	size_t var = map->tab[x][y].var;
+
+	if (map->tab[x][y].alt != 0 || map->tile_map->nb_alt[type][var] == 1)
+		return;
+	for (size_t i = 1; i < map->tile_map->nb_alt[type][var]; i++)
+		if (rand() % 3) {
+			map->tab[x][y].alt = i;
+			return;
+		}
+}
 
 void map_smooth3(map_t *map, size_t x, size_t y)
 {
@@ -166,12 +181,19 @@ void map_smooth_all(map_t *map)
 	for (size_t i = 0; i < map->nb_case_x; i++) {
 		map->tab[i][0] = TVA(WALL, V111_1X1_111, 0);
 		map->tab[i][map->nb_case_y - 1] = TVA(WALL, V111_1X1_111, 0);
+		map->tab[i][1].type = WALL;
+		map->tab[i][map->nb_case_y - 2].type = WALL;
 	}
 	for (size_t i = 0; i < map->nb_case_y; i++) {
 		map->tab[0][i] = TVA(WALL, V111_1X1_111, 0);
 		map->tab[map->nb_case_x - 1][i] = TVA(WALL, V111_1X1_111, 0);
+		map->tab[1][i].type = WALL;
+		map->tab[map->nb_case_x - 2][i].type = WALL;
 	}
 	for (size_t i = 1; i < map->nb_case_x - 1; i++)
-		for (size_t j = 1; j < map->nb_case_y - 1; j++)
+		for (size_t j = 1; j < map->nb_case_y - 1; j++) {
 			map_smooth2(map, i, j);
+			map->tab[i][j].alt = 0;
+			rand() % 10 == 0 ? map_smooth4(map, i, j) : 0;
+		}
 }
