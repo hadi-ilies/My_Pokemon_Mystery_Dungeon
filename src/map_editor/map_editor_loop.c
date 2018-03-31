@@ -30,7 +30,7 @@ void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva)
 
 	origin.x = win_size.x / 2 - map->tile_map->nb_type / 2 * TOOL_DIST;
 	origin.y = win_size.y - TOOL_SIZE / 2;
-	sfRectangleShape_setSize(reck, (sfVector2f){TOOL_SIZE + 20, TOOL_SIZE + 20});
+	sfRectangleShape_setSize(reck, POS_SIZE_SHAPE);
 	sfRectangleShape_setFillColor(reck, (sfColor) {150, 150, 150, 100});
 	for (size_t i = 0; i < map->tile_map->nb_type; i++) {
 		sfFloatRect rect = {.width = TOOL_SIZE, .height = TOOL_SIZE};

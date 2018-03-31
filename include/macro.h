@@ -10,6 +10,7 @@
 
 #define TOOL_SIZE 100
 #define TOOL_DIST 200
+#define POS_SIZE_SHAPE (sfVector2f){TOOL_SIZE + 20, TOOL_SIZE + 20}
 #define BACK_MAP "resources/texture/map_editor/background_map_editor.jpg"
 #define MUSIC_EDITOR "resources/texture/map_editor/OstMapEditor.ogg"
 #define PIX rect.left - rect.width / 2 - 10
