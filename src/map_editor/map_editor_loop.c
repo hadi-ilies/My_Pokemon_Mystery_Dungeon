@@ -46,6 +46,27 @@ void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva)
 	sfRectangleShape_destroy(reck);
 }
 
+bool isit_on_inventory(map_t *map, sfRenderWindow *window)
+{
+	sfVector2u win_size = sfRenderWindow_getSize(window);
+	sfVector2f origin;
+
+	origin.x = win_size.x / 2 - map->tile_map->nb_type / 2 * TOOL_DIST;
+	origin.y = win_size.y - TOOL_SIZE / 2;
+	for (size_t i = 0; i < map->tile_map->nb_type; i++) {
+		sfFloatRect rect = {.width = TOOL_SIZE, .height = TOOL_SIZE};
+
+		rect.left = origin.x + i * TOOL_DIST;
+		rect.top = origin.y;
+		sfVector2i coord_mouse = sfMouse_getPositionRenderWindow(window);
+		bool tmp = sfMouse_isButtonPressed(sfMouseLeft);
+
+		if (tmp && hit_point_rect(&coord_mouse, &rect))
+			return (true);
+	}
+	return (false);
+}
+
 void swap_alt(tile_map_t *tile_map, tva_t *tva)
 {
 	size_t type = tva->type;
@@ -89,7 +110,8 @@ void manage_map(sfEvent *event, sfRenderWindow *window, map_t *map, tva_t *mouse
 		swap_alt(map->tile_map, &map->tab[x][y]);
 	if (mouse_tva->type >= map->tile_map->nb_type)
 		return;
-	if (sfMouse_isButtonPressed(sfMouseLeft) == true) {
+	if (sfMouse_isButtonPressed(sfMouseLeft) == true
+	&& isit_on_inventory(map, window) != true) {
 		insert_to_map(map->tile_map, &map->tab[x][y], *mouse_tva);
 		map_smooth(map, x, y);
 	}
