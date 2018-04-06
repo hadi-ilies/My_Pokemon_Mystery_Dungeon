@@ -18,6 +18,7 @@ GAROUDIR	=	$(SRCDIR)game_resource/
 
 SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)evt_close.c \
+			$(SRCDIR)main_menu.c \
 			$(GAMEDIR)game_menu.c \
 			$(GAMEDIR)game_loop.c \
 			$(MAPCDIR)map_editor_menu.c \
@@ -35,8 +36,8 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPDIR)map_load.c \
 			$(ENTDIR)entity_create.c \
 			$(ENTDIR)entity_destroy.c \
-			$(ENTDIR)entity_set_pos.c \
 			$(ENTDIR)entity_move.c \
+			$(ENTDIR)entity_get_move_pos.c \
 			$(ENTDIR)entity_aff.c \
 			$(GAROUDIR)garou_create.c \
 			$(GAROUDIR)garou_destroy.c \
