@@ -10,6 +10,7 @@
 
 #include "prototype.h"
 #define LOAD "resources/texture/chargement.jpg"
+#define PRESS_KEY "resources/texture/press_key.png"
 typedef struct {
 	sfSprite *sprite;
 	sfTexture *texture;

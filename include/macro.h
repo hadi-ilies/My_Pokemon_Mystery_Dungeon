@@ -18,6 +18,11 @@
 #define SOUND_START "resources/music/Sound_intro.ogg"
 #define BACK_MAP "resources/texture/map_editor/background_map_editor.jpg"
 #define MUSIC_EDITOR "resources/texture/map_editor/OstMapEditor.ogg"
+#define COND_AFF sfRenderWindow_drawRectangleShape(window, rect, NULL)
+#define COND_TRANS sfRectangleShape_setFillColor(rect, (sfColor) {255, 255, \
+		255, trans < 20 ? trans = 255 : (trans--)})
+#define COND_WIDTH sfRectangleShape_setSize(rect, (sfVector2f) {size_w == 800 \
+				? size_w = 400 : (size_w++), size_h})
 #define PIX rect.left - rect.width / 2 - 10
 #define PIY  rect.top - rect.height / 2 - 10
 #define WINDOW_SIZE sfRenderWindow_getSize(window)

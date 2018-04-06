@@ -18,9 +18,9 @@ GAROUDIR	=	$(SRCDIR)game_resource/
 INTRODIR	=	$(SRCDIR)intro/
 
 SRC		=	$(SRCDIR)main.c \
-			$(SRCDIR)main_intro.c \
 			$(SRCDIR)evt_close.c \
 			$(SRCDIR)main_menu.c \
+			$(INTRODIR)main_intro.c \
 			$(INTRODIR)create_files.c \
 			$(INTRODIR)music_intro.c \
 			$(INTRODIR)destroy_intro.c \
