@@ -9,5 +9,6 @@
 
 void entity_destroy(entity_t *entity)
 {
+	sfClock_destroy(entity->clock);
 	anime_tab_destroy(&entity->anime_tab);
 }

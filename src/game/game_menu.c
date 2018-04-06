@@ -26,15 +26,28 @@ int game_menu(void)
 		return (84);
 	garou.map.size.x = 200;
 	garou.map.size.y = garou.map.size.x;
-	garou.nb_entity = 2;
+	garou.nb_entity = 5;
 	garou.entity = malloc(sizeof(entity_t) * garou.nb_entity);
 	for (size_t i = 0; i < garou.nb_entity; i++) {
-		sfVector2i pos = {garou.map.nb_case_x / 2, garou.map.nb_case_y / 2};
+		sfVector2i pos = {garou.map.nb_case_x / 2 + rand() % 5 - 2, garou.map.nb_case_y / 2 + rand() % 5 - 2};
 
-		garou.entity[i] = entity_create("resources/texture/anime_tab/gobou_config");
-		if (garou.entity[i].anime_tab.error != ANIME_TAB_OK)
+		garou.entity[i] = entity_create();
+		garou.entity[i].level = 10;
+		garou.entity[i].type = TYPE_WATER;
+		garou.entity[i].type2 = TYPE_NULL;
+		garou.entity[i].ability = 0; // !!!
+		garou.entity[i].nature = 0; // !!!
+		garou.entity[i].base_stat = (stats_t){210, 145, 105, 105, 105, 85};
+		garou.entity[i].iv = (stats_t){rand() % 32, rand() % 32, rand() % 32, rand() % 32, rand() % 32, rand() % 32};
+		garou.entity[i].item = 0; // !!!
+		garou.entity[i].life = (garou.entity[i].base_stat.life + garou.entity[i].ev.life + garou.entity[i].iv.life) * (float)garou.entity[i].level / 100.0;
+		garou.entity[i].anime_tab = anime_tab_create_from_file("resources/texture/anime_tab/gobou_config");
+		if (garou.entity[i].anime_tab.error != ANIME_TAB_OK) {
+			printf("error : %ld\n", garou.entity[i].anime_tab.error);
 			return (84);
-		entity_set_pos(&garou.entity[i], pos);
+		}
+		garou.entity[i].anime_tab.num = rand() % 8;
+		garou.entity[i].pos = pos;
 	}
 	game_loop(window, &garou);
 	garou_destroy(&garou);
