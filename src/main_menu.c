@@ -24,6 +24,9 @@ int main_menu(void)
 	sfRenderWindow *window = window_create();
 	sfEvent event;
 
+	sfRenderWindow_display(window);
+	main_intro(window, &event);
+	exit(0);
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);

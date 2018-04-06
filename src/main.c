@@ -16,12 +16,13 @@ int my_strcmp(const char *a, const char *b)
 int main(int nb_arg, char **arg_tab)
 {
 	srand((long long)arg_tab);
-	if (nb_arg == 1)
+	return (main_menu());
+	/*if (nb_arg == 1)
 		return (game_menu());
 	else {
 		if (my_strcmp(arg_tab[1], "-m") == 0)
 			return (map_editor_menu());
 		else if (my_strcmp(arg_tab[1], "-a") == 0)
 			return (anime_editor_menu());
-	}
+			}*/
 }

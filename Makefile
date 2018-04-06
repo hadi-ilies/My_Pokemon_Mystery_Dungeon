@@ -15,10 +15,16 @@ ANICDIR		=	$(SRCDIR)anime_editor/
 MAPDIR		=	$(SRCDIR)map/
 ENTDIR		=	$(SRCDIR)entity/
 GAROUDIR	=	$(SRCDIR)game_resource/
+INTRODIR	=	$(SRCDIR)intro/
 
 SRC		=	$(SRCDIR)main.c \
+			$(SRCDIR)main_intro.c \
 			$(SRCDIR)evt_close.c \
 			$(SRCDIR)main_menu.c \
+			$(INTRODIR)create_files.c \
+			$(INTRODIR)music_intro.c \
+			$(INTRODIR)destroy_intro.c \
+			$(INTRODIR)factories.c \
 			$(GAMEDIR)game_menu.c \
 			$(GAMEDIR)game_loop.c \
 			$(MAPCDIR)map_editor_menu.c \
@@ -51,6 +57,8 @@ CFLAGS		+=	-fdiagnostics-color
 LDFLAGS		+=	-l c_graph_prog
 LDFLAGS		+=	-L $(LIBDIR) -l Tile_map
 LDFLAGS		+=	-L $(LIBDIR) -l Anime_tab
+LDFLAGS		+=	-L $(LIBDIR) -l Video
+
 
 all		:	$(NAME)
 
