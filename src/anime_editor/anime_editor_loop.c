@@ -52,7 +52,16 @@ void sprite_move(sfEvent *event, sfRenderWindow *window, sfIntRect *sprite_rect)
 
 void add_rectex(anime_t *anime)
 {
-	//anime->rectex[anime->nb_rectex] = (rextex_t){0, {0, 0, 0, 0}};
+	rectex_t *rectex = malloc(sizeof(rectex_t) * (anime->nb_rectex + 1));
+
+	if (rectex == NULL)
+		return;
+	for (size_t i = 0; i < anime->nb_rectex; i++)
+		rectex[i] = anime->rectex[i];
+	rectex[anime->nb_rectex] = (rectex_t){0, {0, 0, 0, 0}};
+	free(anime->rectex);
+	anime->rectex = rectex;
+	anime->nb_rectex++;
 }
 
 void manage_nums(anime_tab_t *anime_tab, size_t *anime_num, size_t *rectex_num)
@@ -61,7 +70,7 @@ void manage_nums(anime_tab_t *anime_tab, size_t *anime_num, size_t *rectex_num)
 		if (*rectex_num > 0)
 			*rectex_num -= 1;
 	if (sfKeyboard_isKeyPressed(sfKeyN)) {
-		if (*rectex_num >= anime_tab->anime[*anime_num].nb_rectex)
+		if (*rectex_num >= anime_tab->anime[*anime_num].nb_rectex - 1)
 			add_rectex(&anime_tab->anime[*anime_num]);
 		*rectex_num += 1;
 	}
