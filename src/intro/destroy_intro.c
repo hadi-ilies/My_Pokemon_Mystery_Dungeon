@@ -17,7 +17,6 @@ void destroy_factories(anime_tab_t *animation, sfMusic *music[3],
 	anime_tab_destroy(animation);
 	video_destroy(video);
 	destroy_music(music);
-	sfRenderWindow_destroy(window);
 }
 
 int destroy_and_check_error_anime(video_t *video, loading_t *load)
