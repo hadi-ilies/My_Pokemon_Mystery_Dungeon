@@ -89,10 +89,10 @@ int anime_editor_menu(void)
 	window = sfRenderWindow_create(mode, "Anime editor", WINDOW_PARAMS, NULL);
 	if (!window)
 		return (84);
-	anime_tab = anime_tab_create();
+	/*anime_tab = anime_tab_create();
 	if (anime_tab.error != ANIME_TAB_OK)
 		return (84);
-	anime_tab_add_texture(&anime_tab, "resources/texture/anime_tab/Laggron.png");
+	anime_tab_add_texture(&anime_tab, "resources/texture/anime_tab/Insolourdo.png");
 	anime_tab.nb_anime = ANIME_NB;
 	anime_tab.anime = malloc(sizeof(anime_t) * anime_tab.nb_anime);
 	if (anime_tab.anime == NULL)
@@ -102,16 +102,15 @@ int anime_editor_menu(void)
 		anime_tab.anime[i].rectex = malloc(sizeof(anime_t) * anime_tab.anime[i].nb_rectex);
 		for (size_t j = 0; j < anime_tab.anime[i].nb_rectex; j++)
 			anime_tab.anime[i].rectex[j] = (rectex_t){0, {0, 0, 0, 0}};
-		anime_tab.anime[i].time = 1000000;
+		anime_tab.anime[i].time = 500000;
 		anime_tab.anime[i].num = 0;
-	}
-	if (anime_tab.error != ANIME_TAB_OK) {
-		printf("error : %ld\n", anime_tab.error);
+		}*/
+	anime_tab = anime_tab_create_from_file("resources/texture/anime_tab/insolourdo_config");
+	if (anime_tab.error != ANIME_TAB_OK)
 		return (84);
-	}
 	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
 	anime_editor_loop(window, &anime_tab);
-	save(&anime_tab, "resources/texture/anime_tab/gobou_config");
+	save(&anime_tab, "resources/texture/anime_tab/insolourdo_config");
 	anime_tab_destroy(&anime_tab);
 	sfRenderWindow_destroy(window);
 	return (0);

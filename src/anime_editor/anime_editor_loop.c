@@ -67,19 +67,27 @@ void add_rectex(anime_t *anime)
 void manage_nums(anime_tab_t *anime_tab, size_t *anime_num, size_t *rectex_num)
 {
 	if (sfKeyboard_isKeyPressed(sfKeyP))
-		if (*rectex_num > 0)
+		if (*rectex_num > 0) {
+			if (anime_tab->anime[*anime_num].rectex[*rectex_num].rect.width == 0)
+				anime_tab->anime[*anime_num].nb_rectex--;
 			*rectex_num -= 1;
+		}
 	if (sfKeyboard_isKeyPressed(sfKeyN)) {
 		if (*rectex_num >= anime_tab->anime[*anime_num].nb_rectex - 1)
 			add_rectex(&anime_tab->anime[*anime_num]);
 		*rectex_num += 1;
 	}
 	if (sfKeyboard_isKeyPressed(sfKeyBack))
-		if (*anime_num > 0)
+		if (*anime_num > 0) {
+			if (anime_tab->anime[*anime_num].rectex[0].rect.width == 0)
+				anime_tab->nb_anime--;
 			*anime_num -= 1;
+		}
 	if (sfKeyboard_isKeyPressed(sfKeyReturn))
 		if (*anime_num < anime_tab->nb_anime - 1)
 			*anime_num += 1;
+	if (*rectex_num >= anime_tab->anime[*anime_num].nb_rectex)
+		*rectex_num = 0;
 }
 
 void manage_rectex(rectex_t *rectex)
@@ -157,7 +165,7 @@ int anime_editor_loop(sfRenderWindow *window, anime_tab_t *anime_tab)
 		sfRectangleShape_setSize(rect, (sfVector2f){rectex->rect.width * sprite_rect.width, rectex->rect.height * sprite_rect.height});
 		sfSprite_setPosition(sprite, (sfVector2f){sprite_rect.left, sprite_rect.top});
 		sfSprite_setScale(sprite, (sfVector2f){sprite_rect.width, sprite_rect.height});
-		sfRenderWindow_clear(window, sfBlack);
+		sfRenderWindow_clear(window, (sfColor){50, 50, 50, 255});
 		sfRenderWindow_drawSprite(window, sprite, NULL);
 		sfRenderWindow_drawRectangleShape(window, rect, NULL);
 		anime_tab_aff(window, anime_tab, (sfFloatRect){1500, 400, 500, 500});

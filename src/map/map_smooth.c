@@ -15,7 +15,7 @@ void map_smooth4(map_t *map, size_t x, size_t y)
 	size_t type = map->tab[x][y].type;
 	size_t var = map->tab[x][y].var;
 
-	if (map->tab[x][y].alt != 0 || map->tile_map->nb_alt[type][var] == 1)
+	if (map->tab[x][y].alt != 0 || map->tile_map == NULL || map->tile_map->nb_alt[type][var] == 1)
 		return;
 	for (size_t i = 1; i < map->tile_map->nb_alt[type][var]; i++)
 		if (rand() % 3) {
@@ -29,7 +29,7 @@ void map_smooth3(map_t *map, size_t x, size_t y)
 	size_t type = map->tab[x][y].type;
 	size_t var = map->tab[x][y].var;
 
-	if (map->tab[x][y].alt >= map->tile_map->nb_alt[type][var])
+	if (map->tile_map == NULL || map->tab[x][y].alt >= map->tile_map->nb_alt[type][var])
 		map->tab[x][y].alt = 0;
 }
 

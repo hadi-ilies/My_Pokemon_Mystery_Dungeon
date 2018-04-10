@@ -13,7 +13,7 @@
 #include "map.h"
 #include "anime_tab.h"
 
-#define TIME_MOVE (1000000 / 3)
+#define TIME_MOVE 300000
 
 enum type {
 	TYPE_NULL,
