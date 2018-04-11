@@ -34,22 +34,18 @@ menu_t menu_create(sfRenderWindow *window)
 {
 	menu_t menu;
 
-	menu.rect[0] = sfRectangleShape_create();
-	menu.rect[1] = sfRectangleShape_create();
-	menu.rect[2] = sfRectangleShape_create();
-	menu.texture = sfTexture_createFromFile(TEXTURE_RECT, NULL);
+	for (int i = 0; i < 3; i++) {
+		menu.rect[i] = sfRectangleShape_create();
+		sfRectangleShape_setFillColor(menu.rect[i], (sfColor) {0, 0, 0, 150});
+		sfRectangleShape_setOutlineThickness(menu.rect[i], 10);
+		sfRectangleShape_setOutlineColor(menu.rect[i], sfRed);
+	}
 	sfRectangleShape_setSize(menu.rect[0], (sfVector2f) {400, 800});
-	sfRectangleShape_setPosition(menu.rect[0], (sfVector2f) {0, 0});
-	sfRectangleShape_setTexture(menu.rect[0], menu.texture, sfTrue);
-	sfRectangleShape_setFillColor(menu.rect[0], (sfColor) {255, 255, 255, 150});
+	sfRectangleShape_setPosition(menu.rect[0], (sfVector2f) {10, 0});
 	sfRectangleShape_setSize(menu.rect[1], (sfVector2f) {400, 400});
 	sfRectangleShape_setPosition(menu.rect[1], (sfVector2f) {1920 - 400, 0});/*must use winsize*/
-	sfRectangleShape_setTexture(menu.rect[1], menu.texture, sfTrue);
-	sfRectangleShape_setFillColor(menu.rect[1], (sfColor) {255, 255, 255, 150});
 	sfRectangleShape_setSize(menu.rect[2], (sfVector2f) {1100, 300});
 	sfRectangleShape_setPosition(menu.rect[2], (sfVector2f) {400, 850});
-	sfRectangleShape_setTexture(menu.rect[2], menu.texture, sfTrue);
-	sfRectangleShape_setFillColor(menu.rect[2], (sfColor) {255, 255, 255, 150});
 	return (menu);
 }
 

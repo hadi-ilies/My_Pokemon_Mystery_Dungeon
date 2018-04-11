@@ -7,8 +7,7 @@
 
 #include "prototype.h"
 
-#define TEXTURE_RECT "resources/texture/menu/texture.jpg"
-#define BACK "resources/texture/menu/menu_back.jpg"
+#define BACK "resources/texture/menu/back/1.png"
 
 typedef struct
 {

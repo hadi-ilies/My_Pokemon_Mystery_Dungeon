@@ -37,6 +37,23 @@ void loop_event(video_t video, bool *exit, sfRenderWindow *window, sfEvent *even
 	}
 }
 
+bool transition(sfRenderWindow *window)
+{
+	sfRectangleShape *rect = sfRectangleShape_create();
+	sfVector2f size = {WINDOW_SIZE.x, WINDOW_SIZE.y};
+	static int trans = 0;
+
+	sfRectangleShape_setFillColor(rect, (sfColor) {0, 0, 0, 10});
+	sfRectangleShape_setSize(rect, size);
+	sfRenderWindow_drawRectangleShape(window, rect, NULL);
+	sfRectangleShape_destroy(rect);
+	trans += 10;
+	if (trans < 500)
+		return (false);
+	trans = 0;
+	return (true);
+}
+
 int main_intro(sfRenderWindow *window, sfEvent *event)
 {
 	sfMusic *music[3];
@@ -48,11 +65,13 @@ int main_intro(sfRenderWindow *window, sfEvent *event)
 	if (destroy_and_check_error_anime(&video, &load) == 84)
 		return (84);
 	music_create(music);
-	while(sfRenderWindow_isOpen(window) && exit == false) {
+	while(sfRenderWindow_isOpen(window)) {
 		loop_event(video, &exit, window, event);
-		sfRenderWindow_clear(window, sfBlack);
-		video_aff(window, &video, WIN_REC);
-		get_start(&animation, music, window, &video);
+		exit == false ? sfRenderWindow_clear(window, sfBlack) : 0;
+		exit == false ? video_aff(window, &video, WIN_REC) : 0;
+		exit == false ? get_start(&animation, music, window, &video) : 0;
+		if (exit == true && transition(window) == true)
+			break;
 		sfRenderWindow_display(window);
 	}
 	destroy_factories(&animation, music, window, &video);

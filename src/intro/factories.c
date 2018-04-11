@@ -18,7 +18,8 @@
 #include "video.h"
 #include "macro.h"
 
-void press_key_cond(sfMusic *music[3], sfRectangleShape *rect, sfTexture *texture, bool *cond)
+void press_key_cond(sfMusic *music[3], sfRectangleShape *rect,
+		sfTexture *texture, bool *cond)
 {
 	sfRectangleShape_setSize(rect, (sfVector2f) {800, 150});
 	sfRectangleShape_setOrigin(rect, (sfVector2f) {400, 75});
