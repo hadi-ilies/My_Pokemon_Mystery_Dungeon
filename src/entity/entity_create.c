@@ -22,6 +22,7 @@ entity_t entity_create(void)
 	entity.iv = (stats_t){0, 0, 0, 0, 0, 0};
 	entity.boost = (stats_t){0, 0, 0, 0, 0, 0};
 	entity.item = 0; // !!!
+	entity.ia = 0; // !!!
 	entity.dir = (sfVector2i){0, 0};
 	entity.pos = (sfVector2i){0, 0};
 	entity.clock = sfClock_create();

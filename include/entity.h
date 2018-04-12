@@ -59,6 +59,8 @@ typedef struct {
 	stats_t boost;
 	size_t item;
 
+	size_t ia;
+
 	sfVector2i dir;
 	sfVector2i pos;
 	sfClock *clock;
