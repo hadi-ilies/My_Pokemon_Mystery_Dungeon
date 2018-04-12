@@ -21,6 +21,8 @@ void map_aff(sfRenderWindow *window, map_t *map)
 			rect.top = map->size.y * (j - map->pos.y) + center.y;
 			rect.width = map->size.x;
 			rect.height = map->size.y;
+			rect.left = (int)rect.left;
+			rect.top = (int)rect.top;
 			tile_map_aff(window, tile_map, map->tab[i][j], rect);
 		}
 }
