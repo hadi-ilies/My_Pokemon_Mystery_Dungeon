@@ -7,7 +7,7 @@
 
 NAME		=	my_rpg
 
-CC		=	cc
+CC		=	gcc
 
 SRCDIR		=	src/
 LIBDIR		=	lib/
