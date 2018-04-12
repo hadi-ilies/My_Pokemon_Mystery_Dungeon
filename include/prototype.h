@@ -28,9 +28,9 @@ void get_start(anime_tab_t *animation, sfMusic *music[3],
 	sfRenderWindow *window, video_t *video);
 loading_t loading_create(sfRenderWindow *window);
 void destroy_music(sfMusic *music[3]);
-int game_menu(void);
-int map_editor_menu(void);
-int anime_editor_menu(void);
+int game_menu(sfRenderWindow *window);
+int map_editor_menu(sfRenderWindow *window);
+int anime_editor_menu(sfRenderWindow *window);
 int game_loop(sfRenderWindow *window, garou_t *garou);
 int map_editor_loop(sfRenderWindow *window, map_t *map);
 int anime_editor_loop(sfRenderWindow *window, anime_tab_t *anime_tab);

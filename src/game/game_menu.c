@@ -8,17 +8,11 @@
 #include <stdlib.h> //tmp
 #include "prototype.h"
 
-int game_menu(void)
+int game_menu(sfRenderWindow *window)
 {
-	sfVideoMode mode = {WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_BITS_PER_PIXEL};
-	sfRenderWindow *window;
 	garou_t garou = garou_create();
 	tile_map_t tile_map;
 
-	window = sfRenderWindow_create(mode, "my_rpg", WINDOW_PARAMS, NULL);
-	if (!window)
-		return (84);
-	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
 	garou.map = map_load("map_test"); //
 	//garou.map = map_create(rand() % 50 + 50, rand() % 50 + 50);
 	if (garou.map.error != MAP_OK)
@@ -63,6 +57,5 @@ int game_menu(void)
 	game_loop(window, &garou);
 	garou_destroy(&garou);
 	tile_map_destroy(&tile_map);
-	sfRenderWindow_destroy(window);
 	return (0);
 }

@@ -81,15 +81,10 @@ void anime_tab_add_texture(anime_tab_t *anime_tab, char *file_name)
 	anime_tab->nb_texture++;
 }
 
-int anime_editor_menu(void)
+int anime_editor_menu(sfRenderWindow *window)
 {
-	sfVideoMode mode = {WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_BITS_PER_PIXEL};
-	sfRenderWindow *window;
 	anime_tab_t anime_tab;
 
-	window = sfRenderWindow_create(mode, "Anime editor", WINDOW_PARAMS, NULL);
-	if (!window)
-		return (84);
 	/*anime_tab = anime_tab_create();
 	if (anime_tab.error != ANIME_TAB_OK)
 		return (84);
@@ -109,10 +104,8 @@ int anime_editor_menu(void)
 	anime_tab = anime_tab_create_from_file("resources/texture/anime_tab/insolourdo_config");
 	if (anime_tab.error != ANIME_TAB_OK)
 		return (84);
-	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
 	anime_editor_loop(window, &anime_tab);
 	save(&anime_tab, "resources/texture/anime_tab/insolourdo_config");
 	anime_tab_destroy(&anime_tab);
-	sfRenderWindow_destroy(window);
 	return (0);
 }
