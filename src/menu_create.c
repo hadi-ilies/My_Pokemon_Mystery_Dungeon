@@ -8,7 +8,7 @@
 #include "prototype.h"
 #include "menu.h"
 
-void pages(sfRenderWindow *window, menu_t *menu)
+void pages(menu_t *menu)
 {
 	for (int i = 0; i < 3; i++) {
 		menu->rect[i] = sfRectangleShape_create();
@@ -29,19 +29,19 @@ void pages(sfRenderWindow *window, menu_t *menu)
 	sfRectangleShape_setOutlineColor(menu->rect[3], sfYellow);
 }
 
-void text(sfRenderWindow *window, menu_t *menu)
+void text(menu_t *menu)
 {
 	menu->font = sfFont_createFromFile(FONT);
 	for (int i = 0; i < NB_BUTTON; i++)//tmp
 		menu->text[i] =  sfText_create();
 }
 
-menu_t menu_create(sfRenderWindow *window)
+menu_t menu_create(void)
 {
 	menu_t menu;
 
-	pages(window, &menu);
-	text(window, &menu);
+	pages(&menu);
+	text(&menu);
 	menu.button = 0;
 	return (menu);
 }

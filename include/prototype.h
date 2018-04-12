@@ -21,7 +21,7 @@
 
 int main_menu(void);
 void destroy_factories(anime_tab_t *animation, sfMusic *music[3],
-		sfRenderWindow *window, video_t *video);
+		video_t *video);
 int destroy_and_check_error_anime(video_t *video, loading_t *load);
 void music_create(sfMusic *music[3]);
 void get_start(anime_tab_t *animation, sfMusic *music[3],
@@ -35,5 +35,6 @@ int game_loop(sfRenderWindow *window, garou_t *garou);
 int map_editor_loop(sfRenderWindow *window, map_t *map);
 int anime_editor_loop(sfRenderWindow *window, anime_tab_t *anime_tab);
 void evt_close(sfEvent *event, sfRenderWindow *window);
-
+int main_intro(sfRenderWindow *window, sfEvent *event);
+int error_anime(video_t video);
 #endif

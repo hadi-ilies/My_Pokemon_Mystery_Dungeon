@@ -4,13 +4,10 @@
 ** File description:
 ** main_intro
 */
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>
+
 #include <stdlib.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <unistd.h>
 #include "anime_tab.h"
 #include "prototype.h"
 #include "loading.h"
@@ -19,10 +16,8 @@
 
 int error_anime(video_t video)
 {
-	if (video.error != VIDEO_OK) {
-		printf("err : %d\n", video.error);
+	if (video.error != VIDEO_OK)
 		return (84);
-	}
 	return (0);
 }
 
@@ -74,6 +69,6 @@ int main_intro(sfRenderWindow *window, sfEvent *event)
 			break;
 		sfRenderWindow_display(window);
 	}
-	destroy_factories(&animation, music, window, &video);
+	destroy_factories(&animation, music, &video);
 	return (0);
 }

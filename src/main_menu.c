@@ -5,6 +5,7 @@
 ** main_menu.c
 */
 #include <stdbool.h>
+#include <stdio.h>
 #include "prototype.h"
 #include "menu.h"
 
@@ -20,7 +21,7 @@ sfRenderWindow *window_create(void)
 	return (window);
 }
 
-loading_t back_create(sfRenderWindow *window)
+loading_t back_create(void)
 {
 	loading_t optional;
 
@@ -51,11 +52,10 @@ bool enter(sfRenderWindow *window, menu_t *menu)
 int main_menu(void)
 {
 	sfRenderWindow *window = window_create();
-	loading_t back = back_create(window);
-	menu_t menu = menu_create(window);
+	loading_t back = back_create();
+	menu_t menu = menu_create();
 	sfEvent event;
 
-	//change nb text
 	sfRenderWindow_display(window);
 	main_intro(window, &event);
 	for (int i = 0; i < NB_BUTTON; i++)
@@ -63,11 +63,11 @@ int main_menu(void)
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
-			menu.button = move_curseur(window, &menu, &event);
+			menu.button = move_curseur(&menu, &event);
 			if (enter(window, &menu) == false)
 				sfRenderWindow_close(window);
 		}
-		move_curseur(window, &menu, NULL);
+		move_curseur(&menu, NULL);
 		sfRenderWindow_clear(window, sfBlack);
 		sfRenderWindow_drawSprite(window, back.sprite, NULL);
 		display_menu(window, &menu);

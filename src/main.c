@@ -5,12 +5,9 @@
 ** main.c
 */
 
-#include <stdlib.h>
 #include "prototype.h"
 
-int main(int nb_arg, char **arg_tab)
+int main(void)
 {
-	srand((long long)arg_tab);
 	return (main_menu());
-
 }

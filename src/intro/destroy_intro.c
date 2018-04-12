@@ -12,7 +12,7 @@
 #include "macro.h"
 
 void destroy_factories(anime_tab_t *animation, sfMusic *music[3],
-		sfRenderWindow *window, video_t *video)
+		video_t *video)
 {
 	anime_tab_destroy(animation);
 	video_destroy(video);
@@ -25,4 +25,5 @@ int destroy_and_check_error_anime(video_t *video, loading_t *load)
 		return (84);
 	sfSprite_destroy(load->sprite);
 	sfTexture_destroy(load->texture);
+	return (0);
 }

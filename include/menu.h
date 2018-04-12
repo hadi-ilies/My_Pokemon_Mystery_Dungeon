@@ -20,4 +20,6 @@ typedef struct
 	size_t button;
 } menu_t;
 
-menu_t menu_create(sfRenderWindow *window);
+menu_t menu_create(void);
+size_t move_curseur(menu_t *menu, sfEvent *event);
+void display_menu(sfRenderWindow *window, menu_t *menu);

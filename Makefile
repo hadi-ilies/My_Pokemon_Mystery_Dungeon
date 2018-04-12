@@ -26,7 +26,6 @@ SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)display_menu.c \
 			$(SRCDIR)cursor_menu.c \
 			$(INTRODIR)main_intro.c \
-			$(INTRODIR)create_files.c \
 			$(INTRODIR)music_intro.c \
 			$(INTRODIR)destroy_intro.c \
 			$(INTRODIR)factories.c \

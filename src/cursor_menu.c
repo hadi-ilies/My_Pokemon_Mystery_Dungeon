@@ -9,7 +9,7 @@
 #include "prototype.h"
 #include "menu.h"
 
-size_t move_curseur(sfRenderWindow *window, menu_t *menu, sfEvent *event)
+size_t move_curseur(menu_t *menu, sfEvent *event)
 {
 	static size_t y = 0;
 	static ssize_t r = 0;
