@@ -7,6 +7,8 @@
 
 NAME		=	my_rpg
 
+CC		=	cc
+
 SRCDIR		=	src/
 LIBDIR		=	lib/
 GAMEDIR		=	$(SRCDIR)game/
@@ -64,12 +66,12 @@ LDFLAGS		+=	-L $(LIBDIR) -l Video
 all		:	$(NAME)
 
 $(NAME)		:	$(OBJ)
-			cc -o $(NAME) $(OBJ) $(LDFLAGS)
+			@$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 clean		:
-			rm -f $(OBJ)
+			@rm -f $(OBJ)
 
 fclean		:	clean
-			rm -f $(NAME)
+			@rm -f $(NAME)
 
 re		:	fclean all

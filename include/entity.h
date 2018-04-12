@@ -10,10 +10,17 @@
 
 #include <SFML/Graphics.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "map.h"
 #include "anime_tab.h"
 
+// game_macros
 #define TIME_MOVE 300000
+
+// code_macros
+#define NEW_X entity->pos.x + entity->dir.x
+#define NEW_Y entity->pos.y + entity->dir.y
+#define INFO info[NEW_X][NEW_Y]
 
 enum type {
 	TYPE_NULL,
@@ -69,7 +76,8 @@ typedef struct {
 
 entity_t entity_create(void);
 void entity_destroy(entity_t *entity);
-void entity_move(entity_t *entity);
+bool entity_move(entity_t *entity, map_t *map,
+		 entity_t *info[map->nb_case_x][map->nb_case_y]);
 sfVector2f entity_get_move_pos(entity_t *entity);
 void entity_aff(sfRenderWindow *window, entity_t *entity,
 		map_t *map, sfVector2f pos);

@@ -24,53 +24,72 @@ enum input {
 
 static void set_anime_idle(entity_t *entity)
 {
-	entity->dir.x == 0 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_IDLE_S : 0;
-	entity->dir.x == 0 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_IDLE_N : 0;
-	entity->dir.x == -1 && entity->dir.y == 0 ? entity->anime_tab.num = ANIME_IDLE_W : 0;
-	entity->dir.x == 1 && entity->dir.y == 0 ? entity->anime_tab.num = ANIME_IDLE_E : 0;
-	entity->dir.x == -1 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_IDLE_SW : 0;
-	entity->dir.x == 1 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_IDLE_SE : 0;
-	entity->dir.x == -1 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_IDLE_NW : 0;
-	entity->dir.x == 1 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_IDLE_NE : 0;
-}
-
-static void set_anime_move(entity_t *entity)
-{
-	entity->dir.x == 0 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_MOVE_S : 0;
-	entity->dir.x == 0 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_MOVE_N : 0;
-	entity->dir.x == -1 && entity->dir.y == 0 ? entity->anime_tab.num = ANIME_MOVE_W : 0;
-	entity->dir.x == 1 && entity->dir.y == 0 ? entity->anime_tab.num = ANIME_MOVE_E : 0;
-	entity->dir.x == -1 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_MOVE_SW : 0;
-	entity->dir.x == 1 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_MOVE_SE : 0;
-	entity->dir.x == -1 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_MOVE_NW : 0;
-	entity->dir.x == 1 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_MOVE_NE : 0;
+	if (entity->dir.x == 0 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_IDLE_S;
+	if (entity->dir.x == 0 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_IDLE_N;
+	if (entity->dir.x == -1 && entity->dir.y == 0)
+		entity->anime_tab.num = ANIME_IDLE_W;
+	if (entity->dir.x == 1 && entity->dir.y == 0)
+		entity->anime_tab.num = ANIME_IDLE_E;
+	if (entity->dir.x == -1 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_IDLE_SW;
+	if (entity->dir.x == 1 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_IDLE_SE;
+	if (entity->dir.x == -1 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_IDLE_NW;
+	if (entity->dir.x == 1 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_IDLE_NE;
 }
 
 static void set_anime_atk(entity_t *entity)
 {
-	entity->dir.x == 0 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_ATK_S : 0;
-	entity->dir.x == 0 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_ATK_N : 0;
-	entity->dir.x == -1 && entity->dir.y == 0 ? entity->anime_tab.num = ANIME_ATK_W : 0;
-	entity->dir.x == 1 && entity->dir.y == 0 ? entity->anime_tab.num = ANIME_ATK_E : 0;
-	entity->dir.x == -1 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_ATK_SW : 0;
-	entity->dir.x == 1 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_ATK_SE : 0;
-	entity->dir.x == -1 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_ATK_NW : 0;
-	entity->dir.x == 1 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_ATK_NE : 0;
+	if (entity->dir.x == 0 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_ATK_S;
+	if (entity->dir.x == 0 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_ATK_N;
+	if (entity->dir.x == -1 && entity->dir.y == 0)
+		entity->anime_tab.num = ANIME_ATK_W;
+	if (entity->dir.x == 1 && entity->dir.y == 0)
+		entity->anime_tab.num = ANIME_ATK_E;
+	if (entity->dir.x == -1 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_ATK_SW;
+	if (entity->dir.x == 1 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_ATK_SE;
+	if (entity->dir.x == -1 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_ATK_NW;
+	if (entity->dir.x == 1 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_ATK_NE;
 }
 
 static void set_anime_hurt(entity_t *entity)
 {
-	entity->dir.x == 0 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_HURT_S : 0;
-	entity->dir.x == 0 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_HURT_N : 0;
-	entity->dir.x == -1 && entity->dir.y == 0 ? entity->anime_tab.num = ANIME_HURT_W : 0;
-	entity->dir.x == 1 && entity->dir.y == 0 ? entity->anime_tab.num = ANIME_HURT_E : 0;
-	entity->dir.x == -1 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_HURT_SW : 0;
-	entity->dir.x == 1 && entity->dir.y == 1 ? entity->anime_tab.num = ANIME_HURT_SE : 0;
-	entity->dir.x == -1 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_HURT_NW : 0;
-	entity->dir.x == 1 && entity->dir.y == -1 ? entity->anime_tab.num = ANIME_HURT_NE : 0;
+	if (entity->dir.x == 0 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_HURT_S;
+	if (entity->dir.x == 0 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_HURT_N;
+	if (entity->dir.x == -1 && entity->dir.y == 0)
+		entity->anime_tab.num = ANIME_HURT_W;
+	if (entity->dir.x == 1 && entity->dir.y == 0)
+		entity->anime_tab.num = ANIME_HURT_E;
+	if (entity->dir.x == -1 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_HURT_SW;
+	if (entity->dir.x == 1 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_HURT_SE;
+	if (entity->dir.x == -1 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_HURT_NW;
+	if (entity->dir.x == 1 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_HURT_NE;
 }
 
-bool ee(entity_t *entity, map_t *map, entity_t *info[map->nb_case_x][map->nb_case_y], size_t input)
+bool attack(entity_t *entity, map_t *map,
+		  entity_t *info[map->nb_case_x][map->nb_case_y])
+{
+	//
+}
+
+bool manage_input(entity_t *entity, map_t *map,
+		  entity_t *info[map->nb_case_x][map->nb_case_y], size_t input)
 {
 	if (sfClock_getElapsedTime(entity->clock).microseconds <= TIME_MOVE)
 		return (false);
@@ -83,20 +102,15 @@ bool ee(entity_t *entity, map_t *map, entity_t *info[map->nb_case_x][map->nb_cas
 		input & 0b0001 ? entity->dir.y = 1 : 0;
 	}
 	if (input & MOVE && input & (LEFT | RIGHT | UP | DOWN))
-		if (!info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y] && (map->tab[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y].type == GROUND || (map->tab[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y].type == WATER && (entity->type == TYPE_WATER || entity->type == TYPE_FLYING || entity->type2 == TYPE_WATER || entity->type2 == TYPE_FLYING)))) {
-			entity->pos.x += entity->dir.x;
-			entity->pos.y += entity->dir.y;
-			sfClock_restart(entity->clock);
-			set_anime_move(entity);
+		if (entity_move(entity, map, info))
 			return (true);
-		}
 	if (input & ATTACK) {
-		if (info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y]) {
-			size_t level = info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y]->level;
-			stats_t stat = info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y]->base_stat;
-			stats_t ev = info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y]->ev;
-			stats_t iv = info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y]->iv;
-			stats_t boost = info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y]->boost;
+		if (INFO) {
+			size_t level = INFO->level;
+			stats_t stat = INFO->base_stat;
+			stats_t ev = INFO->ev;
+			stats_t iv = INFO->iv;
+			stats_t boost = INFO->boost;
 			size_t atk = entity->base_stat.atk + entity->ev.atk + entity->iv.atk;
 			size_t pui = 40;
 			size_t def = stat.def + ev.def + iv.def;
@@ -107,14 +121,14 @@ bool ee(entity_t *entity, map_t *map, entity_t *info[map->nb_case_x][map->nb_cas
 			atk += atk * entity->boost.atk;
 			def += def * boost.def;
 			damage = (((level * 0.4 + 2) * atk * pui) / (def * 50) + 2) * (rand() % (100 - 85 + 1) + 85) / 100.0;
-			printf("life : %ld\n", info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y]->life);
+			printf("life : %ld\n", INFO->life);
 			printf("damage : %ld\n", damage);
-			if ((ssize_t)info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y]->life - (ssize_t)damage > 0)
-				info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y]->life -= damage;
+			if ((ssize_t)INFO->life - (ssize_t)damage > 0)
+				INFO->life -= damage;
 			else
-				info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y]->life = 0;
+				INFO->life = 0;
 			set_anime_atk(entity);
-			set_anime_hurt(info[entity->pos.x + entity->dir.x][entity->pos.y + entity->dir.y]);
+			set_anime_hurt(INFO);
 		}
 		return (true);
 	}
@@ -123,7 +137,8 @@ bool ee(entity_t *entity, map_t *map, entity_t *info[map->nb_case_x][map->nb_cas
 	return (false);
 }
 
-bool entity_set_dir(entity_t *entity, map_t *map, entity_t *info[map->nb_case_x][map->nb_case_y])
+bool entity_set_dir(entity_t *entity, map_t *map,
+		    entity_t *info[map->nb_case_x][map->nb_case_y])
 {
 	size_t input = 0;
 
@@ -144,7 +159,7 @@ bool entity_set_dir(entity_t *entity, map_t *map, entity_t *info[map->nb_case_x]
 		input <<= rand() % 4;
 		input |= MOVE | WAIT;
 	}
-	return (ee(entity, map, info, input));
+	return (manage_input(entity, map, info, input));
 }
 
 void game_aff(sfRenderWindow *window, garou_t *garou)

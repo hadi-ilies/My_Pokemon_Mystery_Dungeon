@@ -6,8 +6,43 @@
 */
 
 #include "entity.h"
+#include "tile_name.h"
+#include "anime_name.h"
 
-void entity_move(entity_t *entity)
+static void set_anime_move(entity_t *entity)
 {
-	(void)entity;
+	if (entity->dir.x == 0 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_MOVE_S;
+	if (entity->dir.x == 0 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_MOVE_N;
+	if (entity->dir.x == -1 && entity->dir.y == 0)
+		entity->anime_tab.num = ANIME_MOVE_W;
+	if (entity->dir.x == 1 && entity->dir.y == 0)
+		entity->anime_tab.num = ANIME_MOVE_E;
+	if (entity->dir.x == -1 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_MOVE_SW;
+	if (entity->dir.x == 1 && entity->dir.y == 1)
+		entity->anime_tab.num = ANIME_MOVE_SE;
+	if (entity->dir.x == -1 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_MOVE_NW;
+	if (entity->dir.x == 1 && entity->dir.y == -1)
+		entity->anime_tab.num = ANIME_MOVE_NE;
+}
+
+bool entity_move(entity_t *entity, map_t *map,
+		 entity_t *info[map->nb_case_x][map->nb_case_y])
+{
+	bool cond_type = map->tab[NEW_X][NEW_Y].type == GROUND;
+	bool type = entity->type == TYPE_WATER || entity->type == TYPE_FLYING;
+
+	type |= entity->type2 == TYPE_WATER || entity->type2 == TYPE_FLYING;
+	cond_type |= (map->tab[NEW_X][NEW_Y].type == WATER && type);
+	if (!INFO && cond_type) {
+		entity->pos.x += entity->dir.x;
+		entity->pos.y += entity->dir.y;
+		sfClock_restart(entity->clock);
+		set_anime_move(entity);
+		return (true);
+	}
+	return (false);
 }

@@ -7,6 +7,7 @@
 
 #include <stdlib.h> //tmp
 #include <unistd.h> //tmp
+#include <string.h> //tmp
 #include <fcntl.h> //tmp
 #include "prototype.h"
 #include "anime_tab.h"

@@ -19,14 +19,15 @@ int game_menu(void)
 	if (!window)
 		return (84);
 	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
-	garou.map = map_create(rand() % 50 + 50, rand() % 50 + 50);
+	garou.map = map_load("map_test"); //
+	//garou.map = map_create(rand() % 50 + 50, rand() % 50 + 50);
 	if (garou.map.error != MAP_OK)
 		return (84);
 	tile_map = tile_map_create_from_file("resources/texture/tile_map/grassy_config");
 	garou.map.tile_map = &tile_map;
 	if (garou.map.tile_map->error != TILE_MAP_OK)
 		return (84);
-	map_random(&garou.map);
+	//map_random(&garou.map);
 	garou.map.size.x = 200;
 	garou.map.size.y = garou.map.size.x;
 	garou.nb_entity = 5;
@@ -38,7 +39,7 @@ int game_menu(void)
 			pos = (sfVector2i){garou.map.nb_case_x / 2, garou.map.nb_case_y / 2};
 		garou.entity[i] = entity_create();
 		garou.entity[i].level = 10;
-		garou.entity[i].type = TYPE_WATER;
+		garou.entity[i].type = TYPE_NORMAL;
 		garou.entity[i].type2 = TYPE_NULL;
 		garou.entity[i].ability = 0; // !!!
 		garou.entity[i].nature = 0; // !!!
@@ -54,10 +55,8 @@ int game_menu(void)
 			garou.entity[i].anime_tab = anime_tab_create_from_file("resources/texture/anime_tab/insolourdo_config");
 			else
 		garou.entity[i].anime_tab = anime_tab_create_from_file("resources/texture/anime_tab/gobou_config");
-		if (garou.entity[i].anime_tab.error != ANIME_TAB_OK) {
-			printf("error : %ld\n", garou.entity[i].anime_tab.error);
+		if (garou.entity[i].anime_tab.error != ANIME_TAB_OK)
 			return (84);
-		}
 		garou.entity[i].anime_tab.num = rand() % 8;
 		garou.entity[i].pos = pos;
 	}

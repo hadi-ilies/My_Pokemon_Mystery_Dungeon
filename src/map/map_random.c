@@ -17,5 +17,4 @@ void map_random(map_t *map)
 	for (size_t i = 0; i < 50 * 50; i++)
 		map->tab[rand() % map->nb_case_x][rand() % map->nb_case_y].type = GROUND;
 	map_smooth_all(map);
-	return (map);
 }
