@@ -16,7 +16,7 @@
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
 #define WINDOW_BITS_PER_PIXEL 32
-#define WINDOW_PARAMS sfFullscreen
+#define WINDOW_PARAMS sfClose
 #define FRAMERATE_LIMIT 30
 
 int main_menu(void);
@@ -37,4 +37,5 @@ int anime_editor_loop(sfRenderWindow *window, anime_tab_t *anime_tab);
 void evt_close(sfEvent *event, sfRenderWindow *window);
 int main_intro(sfRenderWindow *window, sfEvent *event);
 int error_anime(video_t video);
+char *concat_n(char *s1, char *s2, int n);
 #endif

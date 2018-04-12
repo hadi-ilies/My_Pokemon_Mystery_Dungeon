@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "prototype.h"
+#include "macro.h"
 #include "menu.h"
 
 sfRenderWindow *window_create(void)

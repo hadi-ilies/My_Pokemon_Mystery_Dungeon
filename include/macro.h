@@ -8,6 +8,7 @@
 #ifndef MACRO_H_
 #define MACRO_H_
 
+#define ICON "icon.png"
 #define TOOL_SIZE 100
 #define TOOL_DIST 200
 #define POS_SIZE_SHAPE (sfVector2f){TOOL_SIZE + 20, TOOL_SIZE + 20}
