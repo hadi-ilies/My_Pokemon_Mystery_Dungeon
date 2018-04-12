@@ -4,7 +4,7 @@
 ** File description:
 ** main_menu.c
 */
-
+#include <stdbool.h>
 #include "prototype.h"
 #include "menu.h"
 
@@ -30,30 +30,22 @@ loading_t back_create(sfRenderWindow *window)
 	return (optional);
 }
 
-menu_t menu_create(sfRenderWindow *window)
+bool enter(sfRenderWindow *window, menu_t *menu)
 {
-	menu_t menu;
-
-	for (int i = 0; i < 3; i++) {
-		menu.rect[i] = sfRectangleShape_create();
-		sfRectangleShape_setFillColor(menu.rect[i], (sfColor) {0, 0, 0, 150});
-		sfRectangleShape_setOutlineThickness(menu.rect[i], 10);
-		sfRectangleShape_setOutlineColor(menu.rect[i], sfRed);
+	if (menu->button == 0 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
+		game_menu(window);
+	} if (menu->button == 1 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
+		map_editor_menu(window);
+	} if (menu->button == 2 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
+		anime_editor_menu(window);
+	} if (menu->button == 3 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
+		printf("options\n");
+	} if (menu->button == 4 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
+		printf("Credit\n");
+	} if (menu->button == 5 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
+		return (false);
 	}
-	sfRectangleShape_setSize(menu.rect[0], (sfVector2f) {400, 800});
-	sfRectangleShape_setPosition(menu.rect[0], (sfVector2f) {10, 0});
-	sfRectangleShape_setSize(menu.rect[1], (sfVector2f) {400, 400});
-	sfRectangleShape_setPosition(menu.rect[1], (sfVector2f) {1920 - 400, 0});/*must use winsize*/
-	sfRectangleShape_setSize(menu.rect[2], (sfVector2f) {1100, 300});
-	sfRectangleShape_setPosition(menu.rect[2], (sfVector2f) {400, 850});
-	return (menu);
-}
-
-void display_menu(sfRenderWindow *window, menu_t *menu)
-{
-	sfRenderWindow_drawRectangleShape(window, menu->rect[0], NULL);
-	sfRenderWindow_drawRectangleShape(window, menu->rect[1], NULL);
-	sfRenderWindow_drawRectangleShape(window, menu->rect[2], NULL);
+	return (true);
 }
 
 int main_menu(void)
@@ -63,13 +55,19 @@ int main_menu(void)
 	menu_t menu = menu_create(window);
 	sfEvent event;
 
+	//change nb text
 	sfRenderWindow_display(window);
 	main_intro(window, &event);
-	//exit(0);
+	for (int i = 0; i < NB_BUTTON; i++)
+		sfText_setFont(menu.text[i], menu.font);
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
+			menu.button = move_curseur(window, &menu, &event);
+			if (enter(window, &menu) == false)
+				sfRenderWindow_close(window);
 		}
+		move_curseur(window, &menu, NULL);
 		sfRenderWindow_clear(window, sfBlack);
 		sfRenderWindow_drawSprite(window, back.sprite, NULL);
 		display_menu(window, &menu);

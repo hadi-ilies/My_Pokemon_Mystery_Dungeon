@@ -22,6 +22,9 @@ INTRODIR	=	$(SRCDIR)intro/
 SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)evt_close.c \
 			$(SRCDIR)main_menu.c \
+			$(SRCDIR)menu_create.c \
+			$(SRCDIR)display_menu.c \
+			$(SRCDIR)cursor_menu.c \
 			$(INTRODIR)main_intro.c \
 			$(INTRODIR)create_files.c \
 			$(INTRODIR)music_intro.c \

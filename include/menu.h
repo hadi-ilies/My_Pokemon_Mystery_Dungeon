@@ -8,13 +8,16 @@
 #include "prototype.h"
 
 #define BACK "resources/texture/menu/back/1.png"
-
+#define FONT "pokemon_char.ttf"
+#define NB_BUTTON 6
 typedef struct
 {
-	sfRectangleShape *rect[3];
+	sfRectangleShape *rect[4];
 	sfTexture *texture;
 	sfColor color[3];
-	sfText *text;
+	sfText *text[NB_BUTTON];
 	sfFont *font;
-
+	size_t button;
 } menu_t;
+
+menu_t menu_create(sfRenderWindow *window);
