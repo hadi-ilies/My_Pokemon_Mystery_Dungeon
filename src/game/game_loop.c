@@ -87,7 +87,6 @@ bool attack(entity_t *entity, map_t *map,
 {
 	set_anime_atk(entity);
 	if (INFO) {
-		size_t level = INFO->level;
 		stats_t stat = INFO->base_stat;
 		stats_t ev = INFO->ev;
 		stats_t iv = INFO->iv;
@@ -96,12 +95,13 @@ bool attack(entity_t *entity, map_t *map,
 		size_t pui = 40;
 		size_t def = stat.def + ev.def + iv.def;
 		size_t damage;
+		double npa = (rand() % (100 - 85 + 1) + 85) / 100.0;
 
-		atk *= (float)level / 100.0;
-		def *= (float)level / 100.0;
+		atk *= (float)entity->level / 100.0;
+		def *= (float)INFO->level / 100.0;
 		atk += atk * entity->boost.atk;
 		def += def * boost.def;
-		damage = (((level * 0.4 + 2) * atk * pui) / (def * 50) + 2) * (rand() % (100 - 85 + 1) + 85) / 100.0;
+		damage = (((entity->level * 0.4 + 2) * atk * pui) / (def * 50) + 2) * npa;
 		printf("life : %ld\n", INFO->life);
 		printf("damage : %ld\n", damage);
 		if ((ssize_t)INFO->life - (ssize_t)damage > 0)

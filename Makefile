@@ -7,7 +7,7 @@
 
 NAME		=	my_rpg
 
-CC		=	gcc
+CC		=	cc
 
 SRCDIR		=	src/
 LIBDIR		=	lib/
@@ -70,12 +70,15 @@ LDFLAGS		+=	-L $(LIBDIR) -l my
 all		:	$(NAME)
 
 $(NAME)		:	$(OBJ)
+			@make re -C $(LIBDIR)/my --no-print-directory
 			@$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 clean		:
+			@make clean -C $(LIBDIR)/my --no-print-directory
 			@rm -f $(OBJ)
 
 fclean		:	clean
+			@make fclean -C $(LIBDIR)/my --no-print-directory
 			@rm -f $(NAME)
 
 re		:	fclean all
