@@ -65,7 +65,7 @@ LDFLAGS		+=	-l c_graph_prog
 LDFLAGS		+=	-L $(LIBDIR) -l Tile_map
 LDFLAGS		+=	-L $(LIBDIR) -l Anime_tab
 LDFLAGS		+=	-L $(LIBDIR) -l Video
-
+LDFLAGS		+=	-L $(LIBDIR) -l my
 
 all		:	$(NAME)
 
