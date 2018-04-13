@@ -18,6 +18,7 @@ typedef struct {
 
 menu_t menu_create(void);
 size_t move_curseur(menu_t *menu, sfEvent *event);
+void set_icon(sfRenderWindow *window, char *file_name);
 void display_menu(sfRenderWindow *window, menu_t *menu);
 void display_texte_button(sfRenderWindow *window, menu_t *menu);
 void destroy_all(loading_t *back, sfRenderWindow *window, menu_t *menu);

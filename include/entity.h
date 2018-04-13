@@ -22,28 +22,6 @@
 #define NEW_Y entity->pos.y + entity->dir.y
 #define INFO info[NEW_X][NEW_Y]
 
-enum type {
-	TYPE_NULL,
-	TYPE_BUG,
-	TYPE_DARK,
-	TYPE_DRAGON,
-	TYPE_ELECTRIC,
-	TYPE_DAIRY,
-	TYPE_FIGHTING,
-	TYPE_FIRE,
-	TYPE_FLYING,
-	TYPE_GHOST,
-	TYPE_GRASS,
-	TYPE_GROUND,
-	TYPE_ICE,
-	TYPE_NORMAL,
-	TYPE_POISON,
-	TYPE_PSYCHIC,
-	TYPE_ROCK,
-	TYPE_STEEL,
-	TYPE_WATER,
-};
-
 typedef struct {
 	ssize_t life;
 	ssize_t atk;
@@ -58,6 +36,7 @@ typedef struct {
 	size_t life;
 	size_t type;
 	size_t type2;
+	size_t capacity[4];
 	size_t ability;
 	size_t nature;
 	stats_t base_stat;

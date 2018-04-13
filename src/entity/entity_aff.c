@@ -7,7 +7,7 @@
 
 #include "entity.h"
 
-void entity_aff2(sfRenderWindow *window, entity_t *entity,
+/*void entity_aff2(sfRenderWindow *window, entity_t *entity,
 		 map_t *map, sfVector2f pos)
 {
 	sfVector2u win_size = sfRenderWindow_getSize(window);
@@ -23,12 +23,12 @@ void entity_aff2(sfRenderWindow *window, entity_t *entity,
 	sfRectangleShape_setFillColor(rect, (sfColor){255, 255, 255, 100});
 	sfRenderWindow_drawRectangleShape(window, rect, NULL);
 	sfRectangleShape_destroy(rect);
-}
+	}*/
 
 void entity_aff(sfRenderWindow *window, entity_t *entity,
 		map_t *map, sfVector2f pos)
 {
-	entity_aff2(window, entity, map, pos);
+	//entity_aff2(window, entity, map, pos);
 	sfVector2u win_size = sfRenderWindow_getSize(window);
 	sfFloatRect rect = {map->size.x, map->size.y, map->size.x, map->size.y};
 

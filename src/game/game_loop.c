@@ -13,13 +13,17 @@
 #include "anime_name.h"
 
 enum input {
-	DOWN = 0b0000001,
-	UP = 0b0000010,
-	RIGHT = 0b0000100,
-	LEFT = 0b0001000,
-	MOVE = 0b0010000,
-	ATTACK = 0b0100000,
-	WAIT = 0b1000000,
+	     DOWN = 0b00000000001,
+	       UP = 0b00000000010,
+	    RIGHT = 0b00000000100,
+	     LEFT = 0b00000001000,
+	     MOVE = 0b00000010000,
+	CAPACITY1 = 0b00000100000,
+	CAPACITY2 = 0b00001000000,
+	CAPACITY3 = 0b00010000000,
+	CAPACITY4 = 0b00100000000,
+	   ATTACK = 0b01000000000,
+	     WAIT = 0b10000000000,
 };
 
 static void set_anime_idle(entity_t *entity)
@@ -104,7 +108,7 @@ bool attack(entity_t *entity, map_t *map,
 		damage = (((entity->level * 0.4 + 2) * atk * pui) / (def * 50) + 2) * npa;
 		printf("life : %ld\n", INFO->life);
 		printf("damage : %ld\n", damage);
-		if ((ssize_t)INFO->life - (ssize_t)damage > 0)
+		if (INFO->life > damage)
 			INFO->life -= damage;
 		else
 			INFO->life = 0;

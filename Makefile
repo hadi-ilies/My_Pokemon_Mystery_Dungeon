@@ -11,6 +11,7 @@ CC		=	cc
 
 SRCDIR		=	src/
 LIBDIR		=	lib/
+MENUDIR		=	$(SRCDIR)main_menu/
 GAMEDIR		=	$(SRCDIR)game/
 MAPCDIR		=	$(SRCDIR)map_editor/
 ANICDIR		=	$(SRCDIR)anime_editor/
@@ -18,7 +19,6 @@ MAPDIR		=	$(SRCDIR)map/
 ENTDIR		=	$(SRCDIR)entity/
 GAROUDIR	=	$(SRCDIR)game_resource/
 INTRODIR	=	$(SRCDIR)intro/
-MENUDIR		=	$(SRCDIR)main_menu/
 
 SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)evt_close.c \

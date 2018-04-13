@@ -7,6 +7,7 @@
 
 #include <stdlib.h> //tmp
 #include "prototype.h"
+#include "type.h"
 
 int game_menu(sfRenderWindow *window)
 {
@@ -33,7 +34,7 @@ int game_menu(sfRenderWindow *window)
 			pos = (sfVector2i){garou.map.nb_case_x / 2, garou.map.nb_case_y / 2};
 		garou.entity[i] = entity_create();
 		garou.entity[i].level = 10;
-		garou.entity[i].type = TYPE_NORMAL;
+		garou.entity[i].type = i == 0 ? TYPE_NORMAL : TYPE_WATER;
 		garou.entity[i].type2 = TYPE_NULL;
 		garou.entity[i].ability = 0; // !!!
 		garou.entity[i].nature = 0; // !!!

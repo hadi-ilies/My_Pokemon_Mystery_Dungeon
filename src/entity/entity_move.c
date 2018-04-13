@@ -8,6 +8,7 @@
 #include "entity.h"
 #include "tile_name.h"
 #include "anime_name.h"
+#include "type.h"
 
 static void set_anime_move(entity_t *entity)
 {

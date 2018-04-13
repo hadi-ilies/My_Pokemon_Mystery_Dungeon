@@ -6,6 +6,7 @@
 */
 
 #include "entity.h"
+#include "type.h"
 
 entity_t entity_create(void)
 {

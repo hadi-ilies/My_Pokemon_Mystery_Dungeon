@@ -1,0 +1,33 @@
+/*
+** EPITECH PROJECT, 2018
+** for_norme
+** File description:
+** type.h
+*/
+
+#ifndef TYPE_H_
+#define TYPE_H_
+
+enum type {
+	TYPE_NULL,
+	TYPE_BUG,
+	TYPE_DARK,
+	TYPE_DRAGON,
+	TYPE_ELECTRIC,
+	TYPE_DAIRY,
+	TYPE_FIGHTING,
+	TYPE_FIRE,
+	TYPE_FLYING,
+	TYPE_GHOST,
+	TYPE_GRASS,
+	TYPE_GROUND,
+	TYPE_ICE,
+	TYPE_NORMAL,
+	TYPE_POISON,
+	TYPE_PSYCHIC,
+	TYPE_ROCK,
+	TYPE_STEEL,
+	TYPE_WATER,
+};
+
+#endif
