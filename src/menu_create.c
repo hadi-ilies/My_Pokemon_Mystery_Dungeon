@@ -6,7 +6,7 @@
 */
 
 #include "prototype.h"
-#include "menu.h"
+#include "main_menu/menu.h"
 
 void pages(menu_t *menu)
 {

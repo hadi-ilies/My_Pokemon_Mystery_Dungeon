@@ -7,7 +7,7 @@
 
 #include <stdbool.h>
 #include "prototype.h"
-#include "menu.h"
+#include "main_menu/menu.h"
 
 size_t move_curseur(menu_t *menu, sfEvent *event)
 {

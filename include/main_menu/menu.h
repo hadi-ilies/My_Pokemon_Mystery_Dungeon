@@ -5,14 +5,11 @@
 ** menu
 */
 
-#include "prototype.h"
-
 #define BACK "resources/texture/menu/back/1.png"
 #define FONT "resources/font/pokemon_char.ttf"
 #define NB_BUTTON 6
 
-typedef struct
-{
+typedef struct {
 	sfRectangleShape *rect[4];
 	sfTexture *texture;
 	sfColor color[3];

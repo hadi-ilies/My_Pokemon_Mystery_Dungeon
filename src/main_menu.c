@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include "prototype.h"
 #include "macro.h"
-#include "menu.h"
+#include "main_menu/menu.h"
 
 sfRenderWindow *window_create(void)
 {

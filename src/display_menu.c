@@ -6,8 +6,8 @@
 */
 
 #include "prototype.h"
-#include <string.h>
-#include "menu.h"
+#include <string.h> //tmp
+#include "main_menu/menu.h"
 
 char *concat_n(char *s1, char *s2, int n)
 {
