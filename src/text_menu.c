@@ -27,12 +27,13 @@ char *text_button(menu_t *menu)
 	return (str);
 }
 
-void load_text(sfRenderWindow *window, sfText *text)
+void load_text(sfRenderWindow *window, sfText *text, sfFont *font)
 {
 	sfText_setPosition(text, (sfVector2f) {420, 760});
 	sfText_setColor(text, (sfColor){250, 250, 0, 200});
 	sfRenderWindow_drawText(window, text, NULL);
 	sfText_destroy(text);
+	sfFont_destroy(font);
 }
 
 void display_texte_button(sfRenderWindow *window, menu_t *menu)
@@ -42,6 +43,7 @@ void display_texte_button(sfRenderWindow *window, menu_t *menu)
 	static int i = 1;
 	static bool test = true;
 	static size_t button = 0;
+	char *string;
 	char *str2 = "";
 	char *str = text_button(menu);
 
@@ -54,7 +56,9 @@ void display_texte_button(sfRenderWindow *window, menu_t *menu)
 		test = true;
 		button = menu->button;
 	}
-	sfText_setString(text, concat_n(str2, str, i));
+	string = concat_n(str2, str, i);
+	sfText_setString(text, string);
+	free(string);
 	test == true ? i++ : 0;
-	load_text(window, text);
+	load_text(window, text, font);
 }

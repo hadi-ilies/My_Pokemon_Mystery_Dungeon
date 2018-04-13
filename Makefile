@@ -25,6 +25,8 @@ SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)menu_create.c \
 			$(SRCDIR)display_menu.c \
 			$(SRCDIR)cursor_menu.c \
+			$(SRCDIR)set_icon.c \
+			$(SRCDIR)menu_destroy.c \
 			$(SRCDIR)text_menu.c \
 			$(INTRODIR)main_intro.c \
 			$(INTRODIR)music_intro.c \

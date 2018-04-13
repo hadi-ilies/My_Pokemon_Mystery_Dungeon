@@ -57,6 +57,7 @@ int main_menu(void)
 	menu_t menu = menu_create();
 	sfEvent event;
 
+	set_icon(window, "icon.png");
 	sfRenderWindow_display(window);
 	main_intro(window, &event);
 	for (int i = 0; i < NB_BUTTON; i++)
@@ -74,6 +75,6 @@ int main_menu(void)
 		display_menu(window, &menu);
 		sfRenderWindow_display(window);
 	}
-	sfRenderWindow_destroy(window);
+	destroy_all(&back, window, &menu);
 	return (0);
 }
