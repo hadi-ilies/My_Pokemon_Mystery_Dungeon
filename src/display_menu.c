@@ -27,7 +27,7 @@ char *concat_n(char *s1, char *s2, int n)
 
 void display_text(sfRenderWindow *window, menu_t *menu)
 {
-	int pos_y = 40;
+	int pos_y = 50;
 
 	sfText_setString(menu->text[0], "ADVENTURE");
 	sfText_setString(menu->text[1], "MAP EDITOR");

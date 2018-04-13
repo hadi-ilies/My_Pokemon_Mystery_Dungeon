@@ -23,8 +23,7 @@ size_t move_curseur(menu_t *menu, sfEvent *event)
 			r = -100;
 		}
 	}
-	y == 0 ? sfRectangleShape_setPosition(menu->rect[3], (sfVector2f) {10, 20}) :
-	sfRectangleShape_setPosition(menu->rect[3], (sfVector2f) {10, y * 100 + r});
+	sfRectangleShape_setPosition(menu->rect[3], (sfVector2f) {10, y * 100 + r + 20});
 	r > 0 ? r -= 10 : 0;
 	r < 0 ? r += 10 : 0;
 	return (y);
