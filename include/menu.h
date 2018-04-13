@@ -8,8 +8,9 @@
 #include "prototype.h"
 
 #define BACK "resources/texture/menu/back/1.png"
-#define FONT "pokemon_char.ttf"
+#define FONT "resources/font/pokemon_char.ttf"
 #define NB_BUTTON 6
+
 typedef struct
 {
 	sfRectangleShape *rect[4];

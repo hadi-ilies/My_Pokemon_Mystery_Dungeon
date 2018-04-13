@@ -83,9 +83,34 @@ static void set_anime_hurt(entity_t *entity)
 }
 
 bool attack(entity_t *entity, map_t *map,
-		  entity_t *info[map->nb_case_x][map->nb_case_y])
+	    entity_t *info[map->nb_case_x][map->nb_case_y])
 {
-	//
+	set_anime_atk(entity);
+	if (INFO) {
+		size_t level = INFO->level;
+		stats_t stat = INFO->base_stat;
+		stats_t ev = INFO->ev;
+		stats_t iv = INFO->iv;
+		stats_t boost = INFO->boost;
+		size_t atk = entity->base_stat.atk + entity->ev.atk + entity->iv.atk;
+		size_t pui = 40;
+		size_t def = stat.def + ev.def + iv.def;
+		size_t damage;
+
+		atk *= (float)level / 100.0;
+		def *= (float)level / 100.0;
+		atk += atk * entity->boost.atk;
+		def += def * boost.def;
+		damage = (((level * 0.4 + 2) * atk * pui) / (def * 50) + 2) * (rand() % (100 - 85 + 1) + 85) / 100.0;
+		printf("life : %ld\n", INFO->life);
+		printf("damage : %ld\n", damage);
+		if ((ssize_t)INFO->life - (ssize_t)damage > 0)
+			INFO->life -= damage;
+		else
+			INFO->life = 0;
+		set_anime_hurt(INFO);
+	}
+	return (true);
 }
 
 bool manage_input(entity_t *entity, map_t *map,
@@ -104,34 +129,9 @@ bool manage_input(entity_t *entity, map_t *map,
 	if (input & MOVE && input & (LEFT | RIGHT | UP | DOWN))
 		if (entity_move(entity, map, info))
 			return (true);
-	if (input & ATTACK) {
-		if (INFO) {
-			size_t level = INFO->level;
-			stats_t stat = INFO->base_stat;
-			stats_t ev = INFO->ev;
-			stats_t iv = INFO->iv;
-			stats_t boost = INFO->boost;
-			size_t atk = entity->base_stat.atk + entity->ev.atk + entity->iv.atk;
-			size_t pui = 40;
-			size_t def = stat.def + ev.def + iv.def;
-			size_t damage;
-
-			atk *= (float)level / 100.0;
-			def *= (float)level / 100.0;
-			atk += atk * entity->boost.atk;
-			def += def * boost.def;
-			damage = (((level * 0.4 + 2) * atk * pui) / (def * 50) + 2) * (rand() % (100 - 85 + 1) + 85) / 100.0;
-			printf("life : %ld\n", INFO->life);
-			printf("damage : %ld\n", damage);
-			if ((ssize_t)INFO->life - (ssize_t)damage > 0)
-				INFO->life -= damage;
-			else
-				INFO->life = 0;
-			set_anime_atk(entity);
-			set_anime_hurt(INFO);
-		}
-		return (true);
-	}
+	if (input & ATTACK)
+		if (attack(entity, map, info))
+			return (true);
 	if (input & WAIT)
 		return (true);
 	return (false);
