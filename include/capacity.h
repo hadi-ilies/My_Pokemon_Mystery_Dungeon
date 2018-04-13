@@ -10,12 +10,19 @@
 
 #include <stddef.h>
 
+enum capacity_category {
+	PHYSICAL,
+	SPECIAL,
+	STATUS
+};
+
 typedef struct {
 	char *name;
 	size_t type;
 	size_t category;
 	size_t power;
 	size_t accuracy;
+	size_t pp;
 } capacity_t;
 
 #endif

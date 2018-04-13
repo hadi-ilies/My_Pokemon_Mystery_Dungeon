@@ -13,6 +13,7 @@
 #include <stdbool.h>
 #include "map.h"
 #include "anime_tab.h"
+#include "capacity.h"
 
 // game_macros
 #define TIME_MOVE 300000
@@ -21,6 +22,13 @@
 #define NEW_X entity->pos.x + entity->dir.x
 #define NEW_Y entity->pos.y + entity->dir.y
 #define INFO info[NEW_X][NEW_Y]
+#define STAT(entity, stat) ((entity).base_stat.stat			\
+			    + (entity).ev.stat + (entity).iv.stat)	\
+	* ((entity).level / 100.0) * (entity).boost.stat
+#define STATATK(entity, capacity) (capacity).category == PHYSICAL ?	\
+		STAT(entity, atk) : STAT(entity, spa)
+#define STATDEF(entity, capacity) (capacity).category == PHYSICAL ?	\
+		STAT(entity, def) : STAT(entity, spd)
 
 typedef struct {
 	ssize_t life;
@@ -36,7 +44,8 @@ typedef struct {
 	size_t life;
 	size_t type;
 	size_t type2;
-	size_t capacity[4];
+	capacity_t *capacity[4];
+	size_t pp[4];
 	size_t ability;
 	size_t nature;
 	stats_t base_stat;

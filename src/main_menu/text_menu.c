@@ -56,7 +56,7 @@ void display_texte_button(sfRenderWindow *window, menu_t *menu)
 		test = true;
 		button = menu->button;
 	}
-	string = concat_n(str2, str, i);
+	string = my_strncat(str2, str, i);
 	sfText_setString(text, string);
 	free(string);
 	test == true ? i++ : 0;

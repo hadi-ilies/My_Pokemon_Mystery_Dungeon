@@ -11,6 +11,7 @@
 #include "prototype.h"
 #include "tile_name.h"
 #include "anime_name.h"
+#include "capacity_tab.h"
 
 enum input {
 	     DOWN = 0b00000000001,
@@ -25,6 +26,8 @@ enum input {
 	   ATTACK = 0b01000000000,
 	     WAIT = 0b10000000000,
 };
+
+#define capacityP(i) &capacity_tab[entity->capacity[i]]
 
 static void set_anime_idle(entity_t *entity)
 {
@@ -86,26 +89,18 @@ static void set_anime_hurt(entity_t *entity)
 		entity->anime_tab.num = ANIME_HURT_NE;
 }
 
-bool attack(entity_t *entity, map_t *map,
+void entity_attack(entity_t *entity, capacity_t *capacity, map_t *map,
 	    entity_t *info[map->nb_case_x][map->nb_case_y])
 {
 	set_anime_atk(entity);
 	if (INFO) {
-		stats_t stat = INFO->base_stat;
-		stats_t ev = INFO->ev;
-		stats_t iv = INFO->iv;
-		stats_t boost = INFO->boost;
-		size_t atk = entity->base_stat.atk + entity->ev.atk + entity->iv.atk;
-		size_t pui = 40;
-		size_t def = stat.def + ev.def + iv.def;
-		size_t damage;
-		double npa = (rand() % (100 - 85 + 1) + 85) / 100.0;
+		size_t attack = STATATK(*entity, *capacity);
+		size_t power = capacity->power;
+		size_t defense = STATDEF(*INFO, *capacity);
+		size_t damage = (entity->level * 0.4 + 2) * attack * power;
 
-		atk *= (float)entity->level / 100.0;
-		def *= (float)INFO->level / 100.0;
-		atk += atk * entity->boost.atk;
-		def += def * boost.def;
-		damage = (((entity->level * 0.4 + 2) * atk * pui) / (def * 50) + 2) * npa;
+		damage /= defense * 50 + 2;
+		damage *= (rand() % (100 - 85 + 1) + 85) / 100.0;
 		printf("life : %ld\n", INFO->life);
 		printf("damage : %ld\n", damage);
 		if (INFO->life > damage)
@@ -114,7 +109,6 @@ bool attack(entity_t *entity, map_t *map,
 			INFO->life = 0;
 		set_anime_hurt(INFO);
 	}
-	return (true);
 }
 
 bool manage_input(entity_t *entity, map_t *map,
@@ -125,17 +119,23 @@ bool manage_input(entity_t *entity, map_t *map,
 	set_anime_idle(entity);
 	if (input & (LEFT | RIGHT | UP | DOWN)) {
 		entity->dir = (sfVector2i){0, 0};
-		input & 0b1000 ? entity->dir.x = -1 : 0;
-		input & 0b0100 ? entity->dir.x = 1 : 0;
-		input & 0b0010 ? entity->dir.y = -1 : 0;
-		input & 0b0001 ? entity->dir.y = 1 : 0;
+		input & LEFT ? entity->dir.x = -1 : 0;
+		input & RIGHT ? entity->dir.x = 1 : 0;
+		input & UP ? entity->dir.y = -1 : 0;
+		input & DOWN ? entity->dir.y = 1 : 0;
 	}
 	if (input & MOVE && input & (LEFT | RIGHT | UP | DOWN))
 		if (entity_move(entity, map, info))
 			return (true);
-	if (input & ATTACK)
-		if (attack(entity, map, info))
-			return (true);
+	if (input & ATTACK) {
+		if (!(input & (CAPACITY1 | CAPACITY2 | CAPACITY3 | CAPACITY4)))
+			entity_attack(entity, &capacity_tab[0], map, info);
+		input & CAPACITY1 ? entity_attack(entity, entity->capacity[0], map, info) : 0;
+		input & CAPACITY2 ? entity_attack(entity, entity->capacity[1], map, info) : 0;
+		input & CAPACITY3 ? entity_attack(entity, entity->capacity[2], map, info) : 0;
+		input & CAPACITY4 ? entity_attack(entity, entity->capacity[3], map, info) : 0;
+		return (true);
+	}
 	if (input & WAIT)
 		return (true);
 	return (false);

@@ -6,10 +6,9 @@
 */
 
 #include <stdlib.h>
-#include <unistd.h>
 #include "my.h"
 
-char *concat_n(char *s1, char *s2, size_t n)
+char *my_strncat(char *s1, char *s2, size_t n)
 {
 	size_t c = 0;
 	char *str = malloc(sizeof(char) * (my_strlen(s1) + n + 1));

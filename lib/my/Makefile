@@ -9,8 +9,8 @@ NAME	=	../libmy.a
 
 SRC	=	my_fprintf.c \
 		my_getline.c \
-		my_printf.c \
 		my_strcmp.c \
+		my_strdup.c \
 		my_strlen.c \
 		my_strncat.c \
 		my_str_to_tab.c \
