@@ -16,5 +16,5 @@ size_t my_printf(const char *str, ...);
 int my_strcmp(const char *a, const char *b);
 size_t my_strlen(const char *str);
 char **my_str_to_tab(char *command, char *sep);
-
+char *concat_n(char *s1, char *s2, int n);
 #endif

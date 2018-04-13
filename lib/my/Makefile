@@ -13,6 +13,7 @@ SRC	=	my_fprintf.c \
 		my_strcmp.c \
 		my_strlen.c \
 		my_str_to_tab.c \
+		my_strncat.c
 
 OBJ	=	$(SRC:.c=.o)
 

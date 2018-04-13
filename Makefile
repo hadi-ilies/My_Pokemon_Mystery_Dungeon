@@ -18,16 +18,17 @@ MAPDIR		=	$(SRCDIR)map/
 ENTDIR		=	$(SRCDIR)entity/
 GAROUDIR	=	$(SRCDIR)game_resource/
 INTRODIR	=	$(SRCDIR)intro/
+MENUDIR		=	$(SRCDIR)main_menu/
 
 SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)evt_close.c \
-			$(SRCDIR)main_menu.c \
-			$(SRCDIR)menu_create.c \
-			$(SRCDIR)display_menu.c \
-			$(SRCDIR)cursor_menu.c \
-			$(SRCDIR)set_icon.c \
-			$(SRCDIR)menu_destroy.c \
-			$(SRCDIR)text_menu.c \
+			$(MENUDIR)main_menu.c \
+			$(MENUDIR)menu_create.c \
+			$(MENUDIR)display_menu.c \
+			$(MENUDIR)cursor_menu.c \
+			$(MENUDIR)set_icon.c \
+			$(MENUDIR)menu_destroy.c \
+			$(MENUDIR)text_menu.c \
 			$(INTRODIR)main_intro.c \
 			$(INTRODIR)music_intro.c \
 			$(INTRODIR)destroy_intro.c \
