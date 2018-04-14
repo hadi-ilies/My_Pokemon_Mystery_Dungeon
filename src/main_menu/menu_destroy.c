@@ -4,6 +4,7 @@
 ** File description:
 ** destroy
 */
+
 #include "prototype.h"
 #include "main_menu/menu.h"
 
@@ -20,6 +21,8 @@ void back_destroy(loading_t *back)
 {
 	sfSprite_destroy(back->sprite);
 	sfTexture_destroy(back->texture);
+	sfRectangleShape_destroy(back->icon_back);
+	sfTexture_destroy(back->texture_icon);
 }
 
 void destroy_all(loading_t *back, sfRenderWindow *window, menu_t *menu)

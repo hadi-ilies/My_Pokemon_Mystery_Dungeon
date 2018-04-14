@@ -7,8 +7,9 @@
 
 #define BACK "resources/texture/menu/back/1.png"
 #define FONT "resources/font/pokemon_char.ttf"
+#define ITEM "titre.png"
 #define NB_BUTTON 6
-
+#define BACK_OPTION "resources/texture/menu/option.png"
 typedef struct {
 	sfRectangleShape *rect[4];
 	sfText *text[NB_BUTTON];
@@ -19,6 +20,6 @@ typedef struct {
 menu_t menu_create(void);
 size_t move_curseur(menu_t *menu, sfEvent *event);
 void set_icon(sfRenderWindow *window, char *file_name);
-void display_menu(sfRenderWindow *window, menu_t *menu);
+void display_menu(sfRenderWindow *window, menu_t *menu, loading_t *back);
 void display_texte_button(sfRenderWindow *window, menu_t *menu);
 void destroy_all(loading_t *back, sfRenderWindow *window, menu_t *menu);

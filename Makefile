@@ -29,6 +29,8 @@ SRC		=	$(SRCDIR)main.c \
 			$(MENUDIR)set_icon.c \
 			$(MENUDIR)menu_destroy.c \
 			$(MENUDIR)text_menu.c \
+			$(MENUDIR)option.c \
+			$(MENUDIR)credit.c \
 			$(INTRODIR)main_intro.c \
 			$(INTRODIR)music_intro.c \
 			$(INTRODIR)destroy_intro.c \

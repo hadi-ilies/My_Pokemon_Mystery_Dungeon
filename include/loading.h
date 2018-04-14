@@ -14,5 +14,7 @@
 typedef struct {
 	sfSprite *sprite;
 	sfTexture *texture;
+	 sfRectangleShape *icon_back;
+	sfTexture *texture_icon;
 } loading_t;
 #endif

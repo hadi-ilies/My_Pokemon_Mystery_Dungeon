@@ -27,7 +27,7 @@ void loop_event(video_t video, bool *exit, sfRenderWindow *window, sfEvent *even
 		if(event->type == sfEvtClosed)
 			sfRenderWindow_close(window);
 		if(event->type == sfEvtKeyPressed
-		&& video.num >= video.nb_texture - 1)
+		&& video.num >= video.nb_texture)
 			*exit = true;
 	}
 }

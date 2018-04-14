@@ -27,8 +27,10 @@ void display_text(sfRenderWindow *window, menu_t *menu)
 	}
 }
 
-void display_menu(sfRenderWindow *window, menu_t *menu)
+void display_menu(sfRenderWindow *window, menu_t *menu, loading_t *back)
 {
+	sfRenderWindow_drawSprite(window, back->sprite, NULL);
+	sfRenderWindow_drawRectangleShape(window,  back->icon_back, NULL);
 	sfRenderWindow_drawRectangleShape(window, menu->rect[0], NULL);
 	sfRenderWindow_drawRectangleShape(window, menu->rect[1], NULL);
 	sfRenderWindow_drawRectangleShape(window, menu->rect[2], NULL);
