@@ -19,5 +19,5 @@ typedef struct {
 void move_map(sfVector2f *pos);
 void zoom_map(sfEvent *event, map_t *map);
 bool hit_point_rect(sfVector2i *point, sfFloatRect *rect);
-
+back_and_music_t optional_create(void);
 #endif

@@ -16,7 +16,7 @@
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
 #define WINDOW_BITS_PER_PIXEL 32
-#define WINDOW_PARAMS sfClose
+#define WINDOW_PARAMS sfFullscreen
 #define FRAMERATE_LIMIT 30
 
 int main_menu(void);
@@ -39,5 +39,10 @@ int main_intro(sfRenderWindow *window, sfEvent *event);
 int error_anime(video_t video);
 void credit_menu(sfRenderWindow *window, sfEvent *event);
 void option_menu(sfRenderWindow *window, sfEvent *event);
-
+void swap_alt(tile_map_t *tile_map, tva_t *tva);
+void pick_tile(sfRenderWindow *window, sfFloatRect rect,
+	tva_t tva, tva_t *mouse_tva);
+void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva);
+void refresh_map(sfEvent *event, map_t *map);
+bool dont_touch_borders(map_t *map, size_t x, size_t y);
 #endif

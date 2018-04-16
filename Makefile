@@ -38,6 +38,9 @@ SRC		=	$(SRCDIR)main.c \
 			$(GAMEDIR)game_menu.c \
 			$(GAMEDIR)game_loop.c \
 			$(MAPCDIR)map_editor_menu.c \
+			$(MAPCDIR)factories_editor.c \
+			$(MAPCDIR)optional_create.c \
+			$(MAPCDIR)display_tools.c \
 			$(MAPCDIR)map_editor_loop.c \
 			$(MAPCDIR)all_move.c \
 			$(MAPCDIR)hit_functions.c \
