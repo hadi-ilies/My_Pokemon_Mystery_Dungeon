@@ -25,7 +25,7 @@ void destroy_factories(anime_tab_t *animation, sfMusic *music[3],
 int destroy_and_check_error_anime(video_t *video, loading_t *load);
 void music_create(sfMusic *music[3]);
 void get_start(anime_tab_t *animation, sfMusic *music[3],
-	sfRenderWindow *window, video_t *video);
+	       sfRenderWindow *window, video_t *video, sfEvent *event);
 loading_t loading_create(sfRenderWindow *window);
 void destroy_music(sfMusic *music[3]);
 int game_menu(sfRenderWindow *window);

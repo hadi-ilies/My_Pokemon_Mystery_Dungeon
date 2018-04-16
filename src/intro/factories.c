@@ -29,9 +29,10 @@ void press_key_cond(sfMusic *music[3], sfRectangleShape *rect,
 	sfMusic_setVolume(music[0], 30);
 	*cond = false;
 }
-
+/*a free*/
+/*remove music for the mouli*/
 void get_start(anime_tab_t *animation, sfMusic *music[3],
-	sfRenderWindow *window, video_t *video)
+	       sfRenderWindow *window, video_t *video, sfEvent *event)
 {
 	static bool cond = true;
 	static sfRectangleShape *rect;
@@ -40,8 +41,7 @@ void get_start(anime_tab_t *animation, sfMusic *music[3],
 	static int size_w = 800;
 	static int size_h = 150;
 
-	sfKeyboard_isKeyPressed(sfKeySpace) == true
-		? video->num = video->nb_texture : 0;
+	event->key.code == sfKeySpace ? video->num = video->nb_texture : 0;
 	if (video->num >= video->nb_texture - 1) {
 		anime_tab_aff(window, animation, WIN_REC);
 		if (cond == true) {
