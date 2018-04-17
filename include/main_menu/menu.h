@@ -5,6 +5,8 @@
 ** menu
 */
 
+#pragma once
+
 #define BACK "resources/texture/menu/back/1.png"
 #define FONT "resources/font/pokemon_char.ttf"
 #define ITEM "titre.png"
@@ -27,3 +29,4 @@ void set_icon(sfRenderWindow *window, char *file_name);
 void display_menu(sfRenderWindow *window, menu_t *menu, loading_t *back);
 void display_texte_button(sfRenderWindow *window, menu_t *menu);
 void destroy_all(loading_t *back, sfRenderWindow *window, menu_t *menu);
+void menu_map_editor_menu(sfRenderWindow *window);

@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2018
+1;4804;0c** EPITECH PROJECT, 2018
 ** my_rpg_2017
 ** File description:
 ** map_editor_function.h
@@ -9,6 +9,7 @@
 #define MAP_EDITOR_FUNCTION_H_
 
 #include "prototype.h"
+#include "main_menu/menu.h"
 
 typedef struct {
 	sfSprite *sprite;
@@ -20,4 +21,17 @@ void move_map(sfVector2f *pos);
 void zoom_map(sfEvent *event, map_t *map);
 bool hit_point_rect(sfVector2i *point, sfFloatRect *rect);
 back_and_music_t optional_create(void);
+loading_t back_editor_create(sfRenderWindow *window);
+menu_t menu_editor_create(void);
+void text_editor(menu_t *menu);
+void pages_editor(menu_t *menu);
+size_t move_curseur_editor(menu_t *menu, sfEvent *event);
+void trans_cursor_editor(menu_t *menu, int *tmp1, int *tmp2);
+bool enter_editor(sfRenderWindow *window, menu_t *menu, sfEvent *event);
+void menu_map_editor_menu(sfRenderWindow *window);
+void trans_cursor_editor(menu_t *menu, int *tmp1, int *tmp2);
+size_t move_curseur_editor(menu_t *menu, sfEvent *event);
+void menu_map_editor_menu(sfRenderWindow *window);
+bool enter_editor(sfRenderWindow *window, menu_t *menu, sfEvent *event);
+void display_menu_editor(sfRenderWindow *window, menu_t *menu, loading_t *back);
 #endif
