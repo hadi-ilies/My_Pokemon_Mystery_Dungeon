@@ -51,19 +51,17 @@ loading_t back_create(void)
 
 bool enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 {
-	if (menu->button == 0 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
+	if (menu->button == 0 && event->key.code == sfKeyReturn) {
 		game_menu(window);
-	} if (menu->button == 1 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
-		map_editor_menu(window);
-	} if (menu->button == 2 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
+	} if (menu->button == 1 && event->key.code == sfKeyReturn) {
+		menu_map_editor_menu(window);
+	} if (menu->button == 2 && event->key.code == sfKeyReturn) {
 		anime_editor_menu(window);
-	} if (menu->button == 3 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
+	} if (menu->button == 3 && event->key.code == sfKeyReturn) {
 		option_menu(window, event);
-		printf("options\n");
-	} if (menu->button == 4 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
+	} if (menu->button == 4 && event->key.code == sfKeyReturn) {
 		credit_menu(window, event);
-		printf("Credit\n");
-	} if (menu->button == 5 && sfKeyboard_isKeyPressed(sfKeyReturn)) {
+	} if (menu->button == 5 && event->key.code == sfKeyReturn) {
 		return (false);
 	}
 	return (true);

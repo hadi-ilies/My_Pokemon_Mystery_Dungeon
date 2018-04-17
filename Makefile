@@ -42,6 +42,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPCDIR)optional_create.c \
 			$(MAPCDIR)display_tools.c \
 			$(MAPCDIR)map_editor_loop.c \
+			$(MAPCDIR)menu_map_editor_menu.c \
 			$(MAPCDIR)all_move.c \
 			$(MAPCDIR)hit_functions.c \
 			$(ANICDIR)anime_editor_menu.c \

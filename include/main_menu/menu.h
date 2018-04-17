@@ -10,6 +10,10 @@
 #define ITEM "titre.png"
 #define NB_BUTTON 6
 #define BACK_OPTION "resources/texture/menu/option.png"
+#define NB_BUTTON_EDITOR 5
+#define BACK_MENU_EDITOR "resources/texture/map_editor/back.jpg"
+#define CURSOR_EDITOR "resources/texture/map_editor/cursor.png"
+
 typedef struct {
 	sfRectangleShape *rect[4];
 	sfText *text[NB_BUTTON];

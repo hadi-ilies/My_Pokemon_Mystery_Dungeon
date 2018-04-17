@@ -33,7 +33,7 @@ void text(menu_t *menu)
 {
 	menu->font = sfFont_createFromFile(FONT);
 	for (int i = 0; i < NB_BUTTON; i++)//tmp
-		menu->text[i] =  sfText_create();
+		menu->text[i] = sfText_create();
 }
 
 menu_t menu_create(void)
