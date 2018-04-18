@@ -22,7 +22,7 @@ int map_editor_menu(sfRenderWindow *window)
 	map.size.y = map.size.x;
 	map.pos.x = map.nb_case_x / 2;
 	map.pos.y = map.nb_case_y / 2;
-	map_generator(&map);//tmp
+	map_random(&map);//tmp
 	map_editor_loop(window, &map);
 	map_save(&map, "map_test");
 	map_destroy(&map);
