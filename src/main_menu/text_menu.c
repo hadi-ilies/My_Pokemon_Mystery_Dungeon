@@ -5,7 +5,7 @@
 ** text
 */
 #include "prototype.h"
-#include <string.h> // tmp
+#include "my.h"
 #include "main_menu/menu.h"
 
 char *text_button(menu_t *menu)
