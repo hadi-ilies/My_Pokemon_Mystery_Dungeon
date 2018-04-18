@@ -70,7 +70,7 @@ void menu_map_editor_menu(sfRenderWindow *window)
 	int tmp2 = 5;
 
 	load_font_editor(&menu);
-	if (load_the_map(&map, menu.tile_map[0]) == 84)//
+	if (load_the_map(&map, &menu.tile_map[0]) == 84)//
 		return;//tmp
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
@@ -85,5 +85,5 @@ void menu_map_editor_menu(sfRenderWindow *window)
 		sfRenderWindow_display(window);
 	}
 	map_destroy(&map);
-	tile_map_destroy(&tile_map);
+	//tile_map_destroy(&menutile_map);
 }

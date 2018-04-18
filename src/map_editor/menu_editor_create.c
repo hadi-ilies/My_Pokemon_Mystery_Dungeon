@@ -34,7 +34,12 @@ void text_editor(menu_t *menu)
 	for (int i = 0; i < NB_BUTTON_EDITOR; i++)
 		menu->text[i] = sfText_create();
 }
-
+/*
+size_t count_tilemap()
+{
+	opendir()
+}
+*/
 menu_t menu_editor_create(void)
 {
 	menu_t menu;
@@ -42,6 +47,8 @@ menu_t menu_editor_create(void)
 	pages_editor(&menu);
 	text_editor(&menu);
 	menu.button = 0;
+	menu.tile_map = NULL;//malloc(sizeof(tile_map_t) * (count_tilemap()));
+
 	return (menu);
 }
 
