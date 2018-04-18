@@ -57,8 +57,8 @@ int main_intro(sfRenderWindow *window, sfEvent *event)
 		loop_event(video, &exit, window, event);
 		exit == false ? sfRenderWindow_clear(window, sfBlack) : 0;
 		exit == false ? video_aff(window, &video, WIN_REC) : 0;
-		exit == false ? get_start(&animation, music, window, &video, event) : 0;
-		if (exit == true && transition(window) || video.error != VIDEO_OK)
+		!exit ? get_start(&animation, music, window, &video, event) : 0;
+		if ((exit && transition(window)) || video.error != VIDEO_OK)
 			break;
 		sfRenderWindow_display(window);
 	}

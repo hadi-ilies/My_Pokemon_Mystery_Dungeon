@@ -14,7 +14,7 @@
 
 void launch_map(map_t *map, sfRenderWindow *window)
 {
-	map_generator(map);
+	map_random(map);
 	map_editor_loop(window, map);
 	map_save(map, "map_test");
 }
@@ -45,7 +45,7 @@ void load_font_editor(menu_t *menu)
 		sfText_setFont(menu->text[i], menu->font);
 }
 
-int load_the_map(sfRenderWindow *window, map_t *map, tile_map_t *tile_map)
+int load_the_map(map_t *map, tile_map_t *tile_map)
 {
 	*map = map_load("map_test");
 	if (map->error != MAP_OK)
@@ -70,7 +70,7 @@ void menu_map_editor_menu(sfRenderWindow *window)
 	int tmp2 = 5;
 
 	load_font_editor(&menu);
-	if (load_the_map(window, &map, &tile_map) == 84)
+	if (load_the_map(&map, &tile_map) == 84)
 		return;//tmp
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
