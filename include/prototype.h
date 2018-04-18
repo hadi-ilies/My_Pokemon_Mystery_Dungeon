@@ -22,7 +22,7 @@
 int main_menu(void);
 void destroy_factories(anime_tab_t *animation, sfMusic *music[3],
 		video_t *video);
-int destroy_and_check_error_anime(video_t *video, loading_t *load);
+int destroy_and_check_error_anime(anime_tab_t *animation, loading_t *load, video_t *video);
 void music_create(sfMusic *music[3]);
 void get_start(anime_tab_t *animation, sfMusic *music[3],
 	       sfRenderWindow *window, video_t *video, sfEvent *event);

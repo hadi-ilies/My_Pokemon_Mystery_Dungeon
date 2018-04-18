@@ -19,11 +19,11 @@ void destroy_factories(anime_tab_t *animation, sfMusic *music[3],
 	destroy_music(music);
 }
 
-int destroy_and_check_error_anime(video_t *video, loading_t *load)
+int destroy_and_check_error_anime(anime_tab_t *animation, loading_t *load, video_t *video)
 {
-	if (error_anime(*video) == 84)
-		return (84);
 	sfSprite_destroy(load->sprite);
 	sfTexture_destroy(load->texture);
+	if (animation->error != ANIME_TAB_OK || video->error != VIDEO_OK)
+		return (1);
 	return (0);
 }

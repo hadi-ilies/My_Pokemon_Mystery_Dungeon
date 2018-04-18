@@ -51,18 +51,20 @@ loading_t back_create(void)
 
 bool enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 {
-	if (menu->button == 0 && event->key.code == sfKeyReturn) {
-		game_menu(window);
-	} if (menu->button == 1 && event->key.code == sfKeyReturn) {
-		menu_map_editor_menu(window);
-	} if (menu->button == 2 && event->key.code == sfKeyReturn) {
-		anime_editor_menu(window);
-	} if (menu->button == 3 && event->key.code == sfKeyReturn) {
-		option_menu(window, event);
-	} if (menu->button == 4 && event->key.code == sfKeyReturn) {
+	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyReturn) {
+		if (menu->button == 0) {
+			game_menu(window);
+		} if (menu->button == 1) {
+			menu_map_editor_menu(window);
+		} if (menu->button == 2) {
+			anime_editor_menu(window);
+		} if (menu->button == 3) {
+			option_menu(window, event);
+		} if (menu->button == 4) {
 		credit_menu(window, event);
-	} if (menu->button == 5 && event->key.code == sfKeyReturn) {
-		return (false);
+		} if (menu->button == 5) {
+			return (false);
+		}
 	}
 	return (true);
 }

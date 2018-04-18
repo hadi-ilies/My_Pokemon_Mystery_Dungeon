@@ -18,7 +18,6 @@ int map_editor_menu(sfRenderWindow *window)
 	  return (84);
 	tile_map = tile_map_create_from_file("resources/texture/tile_map/grassy_config");
 	map.tile_map = &tile_map;
-
 	map.size.x = 100;
 	map.size.y = map.size.x;
 	map.pos.x = map.nb_case_x / 2;
