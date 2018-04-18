@@ -11,6 +11,7 @@ CC		=	cc
 
 SRCDIR		=	src/
 LIBDIR		=	lib/
+INCDIR		=	include/
 MENUDIR		=	$(SRCDIR)main_menu/
 GAMEDIR		=	$(SRCDIR)game/
 MAPCDIR		=	$(SRCDIR)map_editor/
@@ -68,7 +69,7 @@ SRC		=	$(SRCDIR)main.c \
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS		+=	-I./include
+CFLAGS		+=	-I $(INCDIR)
 CFLAGS		+=	-W -Wall -Wextra
 CFLAGS		+=	-fdiagnostics-color
 CFLAGS		+=	-g #debug

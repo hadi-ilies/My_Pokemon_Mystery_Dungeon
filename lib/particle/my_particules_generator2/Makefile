@@ -24,15 +24,15 @@ NAME=		particules
 all:            $(NAME)
 
 $(NAME):        $(OBJ)
-		make -C $(LIB_DIR)
-		gcc -o $(NAME) $(OBJ) $(LDFLAGS)
+		@make -C $(LIB_DIR) --no-print-directory
+		@gcc -o $(NAME) $(OBJ) $(LDFLAGS)
 
 clean:
-		make clean -C $(LIB_DIR)
-		rm -f $(OBJ)
+		@make clean -C $(LIB_DIR) --no-print-directory
+		@rm -f $(OBJ)
 
 fclean:		clean
-		make fclean -C $(LIB_DIR)
-		rm -f $(NAME)
+		@make fclean -C $(LIB_DIR) --no-print-directory
+		@rm -f $(NAME)
 
 re:		fclean all

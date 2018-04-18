@@ -1,0 +1,7 @@
+*~
+*.o
+#*#
+libmy.a
+my_rpg
+vgcore.*
+a.out
