@@ -51,7 +51,7 @@ int load_the_map(map_t *map, tile_map_t *tile_map)
 	*map = map_load("map_test");
 	if (map->error != MAP_OK)
 		return (84);
-	*tile_map = tile_map_create_from_file("resources/texture/tile_map/grassy_config");
+	*tile_map = tile_map_create_from_file("resources/tile_map/grassy_config");
 	map->tile_map = tile_map;
 	map->size.x = 100;
 	map->size.y = map->size.x;
@@ -63,7 +63,6 @@ int load_the_map(map_t *map, tile_map_t *tile_map)
 void menu_map_editor_menu(sfRenderWindow *window)
 {
 	map_t map;
-	tile_map_t tile_map;
 	sfEvent event;
 	loading_t back = back_editor_create(window);
 	menu_t menu = menu_editor_create();
@@ -71,7 +70,7 @@ void menu_map_editor_menu(sfRenderWindow *window)
 	int tmp2 = 5;
 
 	load_font_editor(&menu);
-	if (load_the_map(&map, &tile_map) == 84)
+	if (load_the_map(&map, menu.tile_map[0]) == 84)//
 		return;//tmp
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
