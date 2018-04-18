@@ -31,7 +31,7 @@ bool enter_editor(sfRenderWindow *window, menu_t *menu, sfEvent *event,	map_t *m
 		} if (menu->button == 2) {
 			printf("load\n");
 		} if (menu->button == 3) {
-			param_map(map, window);
+			param_map(menu, map, window);
 			printf("options\n");
 		} if (menu->button == 4) {
 			return (false);
@@ -51,7 +51,7 @@ int load_the_map(map_t *map, tile_map_t *tile_map)
 	*map = map_load("map_test");
 	if (map->error != MAP_OK)
 		return (84);
-	*tile_map = tile_map_create_from_file("resources/tile_map/grassy_config");
+	*tile_map = tile_map_create_from_file("resources/tile_map/Deep_cavern config");
 	map->tile_map = tile_map;
 	map->size.x = 100;
 	map->size.y = map->size.x;

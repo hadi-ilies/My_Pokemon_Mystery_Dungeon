@@ -13,6 +13,7 @@
 
 #define my_printf(str, ...) my_fprintf(STDOUT_FILENO, str, __VA_ARGS__)
 
+char **add_line(char **map, char *line);
 size_t my_fprintf(int fd, const char *str, ...);
 char *my_getline(int fd);
 int my_strcmp(const char *a, const char *b);

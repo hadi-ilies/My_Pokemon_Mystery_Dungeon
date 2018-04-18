@@ -7,7 +7,11 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <dirent.h>
+#include <sys/types.h>
+#include <fcntl.h>
 #include "prototype.h"
+#include "my.h"
 #include "macro.h"
 #include "main_menu/menu.h"
 #include "map_editor_function.h"
@@ -46,19 +50,54 @@ sfSprite *create_screen_param(sfRenderWindow *window)
 	return (sprite);
 }
 
-void param_map(map_t *map, sfRenderWindow *window)
+size_t change_tile_map(menu_t *menu, sfRenderWindow *window,
+		sfText *text[count_tilemap()], sfEvent *event)
 {
-	sfSprite *screen =  create_screen_param(window);
+	size_t nb_filename =  count_tilemap();
+	char **filename = take_filename();
+	static int nb_tile = 0;
+
+	for (size_t i = 0; i < nb_filename; i++)
+		sfText_setString(text[i], filename[i]);
+	if (nb_tile < nb_filename - 1 && event->type == sfEvtKeyPressed
+	&& event->key.code == sfKeyRight)
+		nb_tile++;
+	if (nb_tile > 0 && event->type == sfEvtKeyPressed
+	&& event->key.code == sfKeyLeft)
+		nb_tile--;
+	sfText_setPosition(text[nb_tile], (sfVector2f) {WINDOW_SIZE.x / 2 - 280,
+				WINDOW_SIZE.y / 2 - 300});//tmp
+	return (nb_tile);
+}
+
+void create_choose_tilemap(sfFont *font, sfText *text[count_tilemap()])
+{
+	font = sfFont_createFromFile(FONT);
+	for (size_t i = 0; i < count_tilemap(); i++) {
+		text[i] = sfText_create();
+		sfText_setFont(text[i], font);
+	}
+}
+
+void param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
+{
+	sfText *text[count_tilemap()];
+	sfFont *font;
+	sfSprite *screen = create_screen_param(window);
 	sfRectangleShape *back = create_back_param(window);
 	sfEvent event;
+	size_t nb_tile = 0;
 
+	create_choose_tilemap(font, text);
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			if (sfKeyboard_isKeyPressed(sfKeyEscape))
 				return;
+			nb_tile = change_tile_map(menu, window, text, &event);
 		}
 		sfRenderWindow_clear(window, sfBlack);
 		display_options_editor(screen, back, window);
+		sfRenderWindow_drawText(window, text[nb_tile], NULL);
 		sfRenderWindow_display(window);
 	}
 }

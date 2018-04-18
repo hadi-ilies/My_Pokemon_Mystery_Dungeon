@@ -48,6 +48,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPCDIR)display_menu_editor.c \
 			$(MAPCDIR)menu_editor_create.c \
 			$(MAPCDIR)cursor_editor.c \
+			$(MAPCDIR)take_filename.c \
 			$(MAPCDIR)all_move.c \
 			$(MAPCDIR)hit_functions.c \
 			$(ANICDIR)anime_editor_menu.c \

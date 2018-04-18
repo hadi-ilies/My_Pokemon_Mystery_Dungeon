@@ -18,7 +18,7 @@ int game_menu(sfRenderWindow *window)
 	//garou.map = map_create(rand() % 50 + 50, rand() % 50 + 50);
 	if (garou.map.error != MAP_OK)
 		return (84);
-	tile_map = tile_map_create_from_file("resources/texture/tile_map/grassy_config");
+	tile_map = tile_map_create_from_file("resources/tile_map/Deep_cavern config");
 	garou.map.tile_map = &tile_map;
 	if (garou.map.tile_map->error != TILE_MAP_OK)
 		return (84);
