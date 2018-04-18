@@ -34,5 +34,6 @@ size_t move_curseur_editor(menu_t *menu, sfEvent *event);
 void menu_map_editor_menu(sfRenderWindow *window);
 void display_menu_editor(sfRenderWindow *window, menu_t *menu, loading_t *back);
 size_t count_tilemap(void);
+char **take_filename();
 
 #endif

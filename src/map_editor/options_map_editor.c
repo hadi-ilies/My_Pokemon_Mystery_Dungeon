@@ -55,7 +55,7 @@ size_t change_tile_map(menu_t *menu, sfRenderWindow *window,
 {
 	size_t nb_filename =  count_tilemap();
 	char **filename = take_filename();
-	static int nb_tile = 0;
+	static size_t nb_tile = 0;
 
 	for (size_t i = 0; i < nb_filename; i++)
 		sfText_setString(text[i], filename[i]);
