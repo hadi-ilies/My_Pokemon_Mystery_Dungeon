@@ -11,7 +11,7 @@
 #include "prototype.h"
 #include "tile_name.h"
 
-void map_random(map_t *map)
+void map_random2(map_t *map)
 {
 	for (size_t i = 0; i < map->nb_case_x; i++)
 		for (size_t j = 0; j < map->nb_case_y; j++)
@@ -43,7 +43,7 @@ sfVector2i take_origin(map_t *map, sfVector2i *size)
 	return (origin);
 }
 
-void map_generator(map_t *map)
+void map_random(map_t *map)
 {
 	size_t nb_room = rand_min_max(4, 20);
 	for (size_t i = 0; i < map->nb_case_x; i++)
