@@ -21,6 +21,7 @@ typedef struct {
 	sfText *text[NB_BUTTON];
 	sfFont *font;
 	size_t button;
+	tile_map_t *tile_map;
 } menu_t;
 
 menu_t menu_create(void);

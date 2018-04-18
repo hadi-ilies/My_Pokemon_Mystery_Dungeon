@@ -43,5 +43,6 @@ menu_t menu_create(void)
 	pages(&menu);
 	text(&menu);
 	menu.button = 0;
+	menu.tile_map = NULL;
 	return (menu);
 }

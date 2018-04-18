@@ -31,6 +31,7 @@ bool enter_editor(sfRenderWindow *window, menu_t *menu, sfEvent *event,	map_t *m
 		} if (menu->button == 2) {
 			printf("load\n");
 		} if (menu->button == 3) {
+			param_map(map, window);
 			printf("options\n");
 		} if (menu->button == 4) {
 			return (false);
