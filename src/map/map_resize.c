@@ -24,7 +24,7 @@ void map_resize(map_t *map, size_t new_nb_case_x, size_t new_nb_case_y)
 	size_t nb_case_x = map->nb_case_x;
 	size_t nb_case_y = map->nb_case_y;
 
-	if (new_nb_case_x == 0 || new_nb_case_y == 0)
+	if (new_nb_case_x <= 0 || new_nb_case_y <= 0)
 		return;
 	tab = malloc(sizeof(tva_t *) * new_nb_case_x);
 	for (size_t i = 0; i < new_nb_case_x; i++) {

@@ -5,7 +5,7 @@
 ** game.c
 */
 
-#include <stdio.h> // tmp
+#include <stdio.h> //tmp
 #include <stdlib.h>
 #include <stdbool.h>
 #include "prototype.h"
@@ -169,43 +169,39 @@ bool entity_set_dir(entity_t *entity, map_t *map,
 		    entity_t *info[map->nb_case_x][map->nb_case_y])
 {
 	size_t input = 0;
+	static bool can_atk = true;
 
 	if (entity->ia == 0) {
-		sfKeyboard_isKeyPressed(sfKeyLeft) ? input |= LEFT : 0;
-		sfKeyboard_isKeyPressed(sfKeyRight) ? input |= RIGHT : 0;
-		sfKeyboard_isKeyPressed(sfKeyUp) ? input |= UP : 0;
-		sfKeyboard_isKeyPressed(sfKeyDown)? input |= DOWN : 0;
 		if (!sfKeyboard_isKeyPressed(sfKeyLShift))
 			input |= MOVE;
-		if (sfKeyboard_isKeyPressed(sfKeySpace))
-			input |= ATTACK;
-		if (sfKeyboard_isKeyPressed(sfKeyNum1))
-			input |= ATTACK | CAPACITY1;
-		if (sfKeyboard_isKeyPressed(sfKeyNum2))
-			input |= ATTACK | CAPACITY2;
-		if (sfKeyboard_isKeyPressed(sfKeyNum3))
-			input |= ATTACK | CAPACITY3;
-		if (sfKeyboard_isKeyPressed(sfKeyNum4))
-			input |= ATTACK | CAPACITY4;
+		if (sfKeyboard_isKeyPressed(sfKeySpace)) {
+			if (can_atk) {
+				if (sfKeyboard_isKeyPressed(sfKeyUp))
+					input |= ATTACK | CAPACITY1;
+				if (sfKeyboard_isKeyPressed(sfKeyLeft))
+					input |= ATTACK | CAPACITY2;
+				if (sfKeyboard_isKeyPressed(sfKeyRight))
+					input |= ATTACK | CAPACITY3;
+				if (sfKeyboard_isKeyPressed(sfKeyDown))
+					input |= ATTACK | CAPACITY4;
+				can_atk = false;
+			}
+		}
+		else {
+			sfKeyboard_isKeyPressed(sfKeyLeft) ? input |= LEFT : 0;
+			sfKeyboard_isKeyPressed(sfKeyRight) ? input |= RIGHT : 0;
+			sfKeyboard_isKeyPressed(sfKeyUp) ? input |= UP : 0;
+			sfKeyboard_isKeyPressed(sfKeyDown)? input |= DOWN : 0;
+			can_atk = true;
+		}
 		if (sfKeyboard_isKeyPressed(sfKeyW))
 			input |= WAIT;
+		if (input != 16)
+		printf("my input : %ld\n", input);
 	}
 	else
 		input = (rand() % 0b1111 + 1) | MOVE | WAIT;
 	return (manage_input(entity, map, info, input));
-}
-
-void game_aff(sfRenderWindow *window, garou_t *garou)
-{
-	sfVector2f pos = entity_get_move_pos(&garou->entity[0]);
-
-	sfRenderWindow_clear(window, sfBlack);
-	garou->map.pos = pos;
-	map_aff(window, &garou->map);
-	for (size_t i = 0; i < garou->nb_entity; i++)
-		if (garou->entity[i].life > 0)
-			entity_aff(window, &garou->entity[i], &garou->map, pos);
-	sfRenderWindow_display(window);
 }
 
 void info_update(garou_t *garou,
@@ -223,6 +219,50 @@ void info_update(garou_t *garou,
 		}
 }
 
+/*---life_aff---------
+  rect.left -> pos.x
+  rect.top -> pos.y
+  rect.width -> size.x of 1 HP and height of white rods
+  rect.height -> size.y
+  -----------------*/
+void entity_life_aff(sfRenderWindow *window, entity_t *entity, sfFloatRect rect)
+{
+	sfRectangleShape *rectangle = sfRectangleShape_create();
+	size_t life_max = STAT(*entity, life);
+	sfVector2f pos = {rect.left, rect.top};
+	sfVector2f size = {rect.width * life_max, rect.height};
+
+	sfRectangleShape_setPosition(rectangle, pos);
+	sfRectangleShape_setSize(rectangle, size);
+	sfRectangleShape_setFillColor(rectangle, (sfColor){250, 250, 250, 250});
+	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
+	pos.y += rect.width;
+	size.y -= rect.width * 2;
+	sfRectangleShape_setPosition(rectangle, pos);
+	sfRectangleShape_setSize(rectangle, size);
+	sfRectangleShape_setFillColor(rectangle, (sfColor){0, 0, 0, 250});
+	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
+	size.x = rect.width * entity->life;
+	sfRectangleShape_setSize(rectangle, size);
+	sfRectangleShape_setFillColor(rectangle, (sfColor){0, 220, 0, 250});
+	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
+	sfRectangleShape_destroy(rectangle);
+}
+
+void game_aff(sfRenderWindow *window, garou_t *garou)
+{
+	sfVector2f pos = entity_get_move_pos(&garou->entity[0]);
+
+	sfRenderWindow_clear(window, sfBlack);
+	garou->map.pos = pos;
+	map_aff(window, &garou->map);
+	for (size_t i = 0; i < garou->nb_entity; i++)
+		if (garou->entity[i].life > 0)
+			entity_aff(window, &garou->entity[i], &garou->map, pos);
+	entity_life_aff(window, &garou->entity[0], (sfFloatRect){10, 10, 10, 70});
+	sfRenderWindow_display(window);
+}
+
 int game_loop(sfRenderWindow *window, garou_t *garou)
 {
 	sfEvent event;
@@ -230,19 +270,23 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 	size_t entity_num = 0;
 
 	while (sfRenderWindow_isOpen(window)) {
+		bool next = false;
+
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
 		}
 		if (garou->entity[entity_num].life > 0) {
 			info_update(garou, info);
 			if (entity_set_dir(&garou->entity[entity_num], &garou->map, info))
-				entity_num++;
+				next = true;
 		}
 		else
-			entity_num++;
-		if (entity_num >= garou->nb_entity)
+			next = true;
+		;
+		if (next == false)
+			game_aff(window, garou);
+		else if (++entity_num >= garou->nb_entity)
 			entity_num = 0;
-		game_aff(window, garou);
 	}
 	return (0);
 }
