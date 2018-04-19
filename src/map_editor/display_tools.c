@@ -48,7 +48,7 @@ void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva)
 	sfRectangleShape_setFillColor(reck, (sfColor) {150, 150, 150, 100});
 	for (size_t i = 0; i < map->tile_map->nb_type; i++) {
 		sfFloatRect rect = {.width = TOOL_SIZE, .height = TOOL_SIZE};
-		tva_t tva = {i, V111_1X1_111, 0};
+		tva_t tva = {i, 4, 0};
 
 		rect.left = origin.x + i * TOOL_DIST;
 		rect.top = origin.y;

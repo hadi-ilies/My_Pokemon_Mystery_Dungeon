@@ -24,7 +24,7 @@
 #define INFO info[NEW_X][NEW_Y]
 #define STAT(entity, stat) ((entity).base_stat.stat			\
 			    + (entity).ev.stat + (entity).iv.stat)	\
-	* ((entity).level / 100.0) * (entity).boost.stat
+	* ((entity).level / 100.0) * ((entity).boost.stat * 0.5 + 1.0)
 #define STATATK(entity, capacity) (capacity).category == PHYSICAL ?	\
 		STAT(entity, atk) : STAT(entity, spa)
 #define STATDEF(entity, capacity) (capacity).category == PHYSICAL ?	\

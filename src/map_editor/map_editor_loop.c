@@ -71,7 +71,7 @@ void manage_map(sfEvent *event, sfRenderWindow *window, map_t *map, tva_t *mouse
 
 int map_editor_loop(sfRenderWindow *window, map_t *map)
 {
-	tva_t mouse_tva = {map->tile_map->nb_type, V111_1X1_111, 0};
+	tva_t mouse_tva = {map->tile_map->nb_type, 4, 0};
 	sfEvent event;
 	back_and_music_t optional = optional_create();
 
