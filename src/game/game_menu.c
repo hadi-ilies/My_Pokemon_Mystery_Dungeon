@@ -8,6 +8,7 @@
 #include <stdlib.h> //tmp
 #include "prototype.h"
 #include "type.h"
+#include "capacity_tab.h"
 
 int game_menu(sfRenderWindow *window)
 {
@@ -18,7 +19,7 @@ int game_menu(sfRenderWindow *window)
 	//garou.map = map_create(rand() % 50 + 50, rand() % 50 + 50);
 	if (garou.map.error != MAP_OK)
 		return (84);
-	tile_map = tile_map_create_from_file("resources/tile_map/Deep_cavern config");
+	tile_map = tile_map_create_from_file("resources/tile_map/Deep cavern config");
 	garou.map.tile_map = &tile_map;
 	if (garou.map.tile_map->error != TILE_MAP_OK)
 		return (84);
@@ -36,6 +37,12 @@ int game_menu(sfRenderWindow *window)
 		garou.entity[i].level = 10;
 		garou.entity[i].type = i == 0 ? TYPE_NORMAL : TYPE_WATER;
 		garou.entity[i].type2 = TYPE_NULL;
+		garou.entity[i].capacity[0] = &capacity_tab[1];
+		garou.entity[i].capacity[1] = &capacity_tab[2];
+		garou.entity[i].capacity[2] = &capacity_tab[3];
+		garou.entity[i].capacity[3] = &capacity_tab[4];
+		for (size_t j = 0; j < 4; j++)
+			garou.entity[i].pp[j] = garou.entity[i].capacity[j]->pp;
 		garou.entity[i].ability = 0; // !!!
 		garou.entity[i].nature = 0; // !!!
 		garou.entity[i].base_stat = (stats_t){210, 145, 105, 105, 105, 85};
