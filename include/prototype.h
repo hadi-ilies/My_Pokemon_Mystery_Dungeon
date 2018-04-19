@@ -13,10 +13,11 @@
 #include "game_resource.h"
 #include "loading.h"
 #include "video.h"
+
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
 #define WINDOW_BITS_PER_PIXEL 32
-#define WINDOW_PARAMS sfClose
+#define WINDOW_PARAMS sfFullscreen
 #define FRAMERATE_LIMIT 30
 
 int main_menu(void);
@@ -45,4 +46,5 @@ void pick_tile(sfRenderWindow *window, sfFloatRect rect,
 void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva);
 void refresh_map(sfEvent *event, map_t *map);
 bool dont_touch_borders(map_t *map, size_t x, size_t y);
+
 #endif
