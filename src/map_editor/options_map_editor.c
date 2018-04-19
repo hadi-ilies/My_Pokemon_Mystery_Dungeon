@@ -15,6 +15,7 @@
 #include "macro.h"
 #include "main_menu/menu.h"
 #include "map_editor_function.h"
+#include "option_map_editor.h"
 
 sfRectangleShape *create_back_param(sfRenderWindow *window)
 {
@@ -30,11 +31,13 @@ sfRectangleShape *create_back_param(sfRenderWindow *window)
 	return (back);
 }
 
-void display_options_editor(sfSprite *screen, sfRectangleShape *back,
-			sfRenderWindow *window)
+void display_options_editor(option_editor_t *option, sfRenderWindow *window)
 {
-	sfRenderWindow_drawSprite(window, screen, NULL);
-	sfRenderWindow_drawRectangleShape(window, back, NULL);
+	sfRenderWindow_drawSprite(window, option->screen, NULL);
+	sfRenderWindow_drawRectangleShape(window, option->back, NULL);
+	sfRenderWindow_drawText(window, option->text[option->nb_tile], NULL);
+	sfRenderWindow_drawText(window, option->size_map_x, NULL);
+	sfRenderWindow_drawText(window, option->size_map_y, NULL);
 }
 
 sfSprite *create_screen_param(sfRenderWindow *window)
@@ -50,57 +53,110 @@ sfSprite *create_screen_param(sfRenderWindow *window)
 	return (sprite);
 }
 
-size_t change_tile_map(menu_t *menu, sfRenderWindow *window,
-		sfText *text[count_tilemap()], sfEvent *event)
+void change_tile_map(menu_t *menu, sfRenderWindow *window,
+		option_editor_t *option, sfEvent *event)
 {
 	size_t nb_filename =  count_tilemap();
 	char **filename = take_filename();
-	static size_t nb_tile = 0;
 
 	for (size_t i = 0; i < nb_filename; i++)
-		sfText_setString(text[i], filename[i]);
-	if (nb_tile < nb_filename - 1 && event->type == sfEvtKeyPressed
+		sfText_setString(option->text[i], filename[i]);
+	if (option->nb_tile < nb_filename - 1 && event->type == sfEvtKeyPressed
 	&& event->key.code == sfKeyRight)
-		nb_tile++;
-	if (nb_tile > 0 && event->type == sfEvtKeyPressed
+		option->nb_tile++;
+	if (option->nb_tile > 0 && event->type == sfEvtKeyPressed
 	&& event->key.code == sfKeyLeft)
-		nb_tile--;
-	sfText_setPosition(text[nb_tile], (sfVector2f) {WINDOW_SIZE.x / 2 - 280,
-				WINDOW_SIZE.y / 2 - 300});//tmp
-	return (nb_tile);
+		option->nb_tile--;
+	sfText_setPosition(option->text[option->nb_tile],
+	(sfVector2f) {WINDOW_SIZE.x / 2 - 280, WINDOW_SIZE.y / 2 - 300});//tmp
 }
 
-void create_choose_tilemap(sfFont *font, sfText *text[count_tilemap()])
+void create_choose_tilemap(option_editor_t *option)
 {
-	font = sfFont_createFromFile(FONT);
+	option->font = sfFont_createFromFile(FONT);
 	for (size_t i = 0; i < count_tilemap(); i++) {
-		text[i] = sfText_create();
-		sfText_setFont(text[i], font);
+		option->text[i] = sfText_create();
+		sfText_setFont(option->text[i], option->font);
 	}
+}
+
+void size_tile_map_x(map_t *map, sfEvent *event,
+		   sfRenderWindow *window, option_editor_t *option)
+{
+	char *str;
+
+	if (option->size_x < 999 && event->type == sfEvtKeyPressed
+	    && event->key.code == sfKeyRight) {
+		option->size_x++;
+	} if (option->size_x > 30 && event->type == sfEvtKeyPressed
+	      && event->key.code == sfKeyLeft) {
+		option->size_x--;
+	}
+	str = inttostr(option->size_x);
+	//map->nb_case_x = option->size_x;
+	sfText_setString(option->size_map_x, str);
+	sfText_setPosition(option->size_map_x, (sfVector2f) {WINDOW_SIZE.x / 2 - 280,
+				WINDOW_SIZE.y / 2 });
+}
+
+void size_tile_map_y(map_t *map, sfEvent *event,
+		   sfRenderWindow *window, option_editor_t *option)
+{
+	char *str;
+
+	if (option->size_y < 999 && event->type == sfEvtKeyPressed
+	    && event->key.code == sfKeyRight) {
+		option->size_y++;
+	} if (option->size_y > 30 && event->type == sfEvtKeyPressed
+	      && event->key.code == sfKeyLeft) {
+		option->size_y--;
+	}
+	str = inttostr(option->size_y);
+	//map->nb_case_y = option->size_y;
+	sfText_setString(option->size_map_y, str);
+	sfText_setPosition(option->size_map_y, (sfVector2f) {WINDOW_SIZE.x / 2 - 280,
+				WINDOW_SIZE.y / 2 - 30 });
+}
+
+option_editor_t option_editor_create(sfRenderWindow *window)
+{
+	option_editor_t option;
+
+	option.text = malloc(sizeof(sfText *) * count_tilemap());
+	create_choose_tilemap(&option);
+	option.screen = create_screen_param(window);
+	option.back =  create_back_param(window);
+	option.size_map_x = sfText_create();
+	option.size_map_y = sfText_create();
+	sfText_setFont(option.size_map_y, option.font);
+	sfText_setFont(option.size_map_x, option.font);
+	sfText_setString(option.size_map_x, "50");
+	sfText_setString(option.size_map_y, "50");
+	option.nb_tile = 0;
+	option.size_x = 50;
+	option.size_y = 50;
+	return (option);
 }
 
 void param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 {
-	sfText *text[count_tilemap()];
-	sfFont *font;
-	sfSprite *screen = create_screen_param(window);
-	sfRectangleShape *back = create_back_param(window);
 	sfEvent event;
-	size_t nb_tile = 0;
+	option_editor_t option = option_editor_create(window);
 
-	create_choose_tilemap(font, text);
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			if (sfKeyboard_isKeyPressed(sfKeyEscape))
 				return;
-			nb_tile = change_tile_map(menu, window, text, &event);//tmp
+			size_tile_map_x(map, &event, window, &option);
+			size_tile_map_y(map, &event, window, &option);
+			map_resize(map, option.size_x, option.size_y);
+			change_tile_map(menu, window, &option, &event);//tmp
 			menu->tile_map[0] = tile_map_create_from_file(concat("resources/tile_map/",
-			sfText_getString(text[nb_tile])));
+			sfText_getString(option.text[option.nb_tile])));
 			map->tile_map = &menu->tile_map[0];//tmp
 		}
 		sfRenderWindow_clear(window, sfBlack);
-		display_options_editor(screen, back, window);
-		sfRenderWindow_drawText(window, text[nb_tile], NULL);
+		display_options_editor(&option, window);
 		sfRenderWindow_display(window);
 	}
 }

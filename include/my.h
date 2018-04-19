@@ -22,5 +22,5 @@ size_t my_strlen(const char *str);
 char *my_strncat(char *s1, char *s2, size_t n);
 char **my_str_to_tab(char *command, char *sep);
 char *concat(char *s1, char *s2);
-
+char *inttostr(int nb);
 #endif
