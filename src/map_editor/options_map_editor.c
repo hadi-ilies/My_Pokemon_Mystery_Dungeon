@@ -93,7 +93,10 @@ void param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			if (sfKeyboard_isKeyPressed(sfKeyEscape))
 				return;
-			nb_tile = change_tile_map(menu, window, text, &event);
+			nb_tile = change_tile_map(menu, window, text, &event);//tmp
+			menu->tile_map[0] = tile_map_create_from_file(concat("resources/tile_map/",
+			sfText_getString(text[nb_tile])));
+			map->tile_map = &menu->tile_map[0];//tmp
 		}
 		sfRenderWindow_clear(window, sfBlack);
 		display_options_editor(screen, back, window);

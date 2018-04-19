@@ -15,6 +15,7 @@ SRC	=	my_fprintf.c \
 		my_strncat.c \
 		my_str_to_tab.c \
 		add_line.c\
+		concat.c\
 
 OBJ	=	$(SRC:.c=.o)
 

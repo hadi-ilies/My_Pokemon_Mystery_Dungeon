@@ -78,8 +78,10 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
-			if (sfKeyboard_isKeyPressed(sfKeyEscape))
+			if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
+				sfMusic_destroy(optional.music);
 				return (0);
+			}
 			zoom_map(&event, map);
 			refresh_map(&event, map);
 			manage_map(&event, window, map, &mouse_tva);

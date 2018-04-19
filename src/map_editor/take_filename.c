@@ -13,31 +13,46 @@
 #include "main_menu/menu.h"
 #include "map_editor_function.h"
 
-char *name_conf(char *name)
+char **malloc_filename(void)
 {
-	char *str = malloc(sizeof(char) * 100);
+	char **filename = malloc(sizeof(char *) * count_tilemap());
+	DIR *dir = NULL;
 	int i = 0;
+	struct dirent *d;
 
-	for (i = 0; name[i] > ' '; i++)
-		str[i] = name[i];
-	str[i] = '\0';
-	return (str);
+	if (filename == NULL)
+		return (NULL);
+	dir = opendir("resources/tile_map");
+	if (dir == NULL)
+		return (0);
+	while ((d = readdir(dir))) {
+		if (d->d_name[0] != '.') {
+			filename[i] = malloc(sizeof(char) *
+					my_strlen(d->d_name));
+			i++;
+		}
+	}
+	closedir(dir);
+	return (filename);
 }
 
 char **take_filename(void)
 {
-	char **filename = NULL;
+	char **filename = malloc_filename();
 	DIR *dir = NULL;
 	struct dirent *d;
+	size_t j = 0;
+	size_t i = 0;
 
 	dir = opendir("resources/tile_map");
 	if (dir == NULL)
 		return (0);
 	while ((d = readdir(dir))) {
 		if (d->d_name[0] != '.') {
-			char *str = name_conf(d->d_name);
-
-			filename = add_line(filename, str);
+			for (j = 0; d->d_name[j] != '\0'; j++)
+				filename[i][j] = d->d_name[j];
+			filename[i][j] = '\0';
+			i++;
 		}
 	}
 	closedir(dir);
