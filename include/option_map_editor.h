@@ -10,6 +10,8 @@
 #include "SFML/Graphics.h"
 
 typedef struct {
+	sfText *choice[3];
+	size_t choice_curs;
 	sfText **text;
 	sfFont *font;
 	sfText *size_map_x;

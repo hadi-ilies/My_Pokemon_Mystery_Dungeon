@@ -31,13 +31,31 @@ sfRectangleShape *create_back_param(sfRenderWindow *window)
 	return (back);
 }
 
+void choice_cursor(option_editor_t *option, sfRenderWindow *window)
+{
+	int pos_y = WINDOW_SIZE.y / 2 - 300;
+
+	sfText_setString(option->choice[0], "MAP TYPE");
+	sfText_setString(option->choice[1], "MAP HEIGHT");
+	sfText_setString(option->choice[2], "MAP WIDTH");
+	for (size_t i = 0; i < 3; i++) {
+		sfText_setPosition(option->choice[i], (sfVector2f) {WINDOW_SIZE.x / 2 - 300, pos_y});
+		sfText_setColor(option->choice[i], (sfColor){250, 250, 0,
+					option->choice_curs == i ? 255 : 180});
+		sfRenderWindow_drawText(window, option->choice[i], NULL);
+		pos_y += 100;
+	}
+}
+
 void display_options_editor(option_editor_t *option, sfRenderWindow *window)
 {
 	sfRenderWindow_drawSprite(window, option->screen, NULL);
 	sfRenderWindow_drawRectangleShape(window, option->back, NULL);
-	sfRenderWindow_drawText(window, option->text[option->nb_tile], NULL);
-	sfRenderWindow_drawText(window, option->size_map_x, NULL);
-	sfRenderWindow_drawText(window, option->size_map_y, NULL);
+	choice_cursor(option, window);
+	option->choice_curs == 0 ? sfRenderWindow_drawText(window,
+							  option->text[option->nb_tile], NULL) : 0;
+	option->choice_curs == 2 ? sfRenderWindow_drawText(window, option->size_map_x, NULL) : 0;
+	option->choice_curs == 1 ? sfRenderWindow_drawText(window, option->size_map_y, NULL) : 0;
 }
 
 sfSprite *create_screen_param(sfRenderWindow *window)
@@ -68,7 +86,7 @@ void change_tile_map(menu_t *menu, sfRenderWindow *window,
 	&& event->key.code == sfKeyLeft)
 		option->nb_tile--;
 	sfText_setPosition(option->text[option->nb_tile],
-	(sfVector2f) {WINDOW_SIZE.x / 2 - 280, WINDOW_SIZE.y / 2 - 300});//tmp
+	(sfVector2f) {WINDOW_SIZE.x / 2 - 150, WINDOW_SIZE.y / 2 - 300});//tmp
 }
 
 void create_choose_tilemap(option_editor_t *option)
@@ -93,10 +111,8 @@ void size_tile_map_x(map_t *map, sfEvent *event,
 		option->size_x--;
 	}
 	str = inttostr(option->size_x);
-	//map->nb_case_x = option->size_x;
 	sfText_setString(option->size_map_x, str);
-	sfText_setPosition(option->size_map_x, (sfVector2f) {WINDOW_SIZE.x / 2 - 280,
-				WINDOW_SIZE.y / 2 });
+	sfText_setPosition(option->size_map_x, (sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 100});
 }
 
 void size_tile_map_y(map_t *map, sfEvent *event,
@@ -112,10 +128,17 @@ void size_tile_map_y(map_t *map, sfEvent *event,
 		option->size_y--;
 	}
 	str = inttostr(option->size_y);
-	//map->nb_case_y = option->size_y;
 	sfText_setString(option->size_map_y, str);
-	sfText_setPosition(option->size_map_y, (sfVector2f) {WINDOW_SIZE.x / 2 - 280,
-				WINDOW_SIZE.y / 2 - 30 });
+	sfText_setPosition(option->size_map_y, (sfVector2f) {WINDOW_SIZE.x / 2,
+				WINDOW_SIZE.y / 2 - 200});
+}
+
+void create_and_setchoice_curs(option_editor_t *option)
+{
+	for (size_t i = 0; i < 3; i++) {
+		option->choice[i] = sfText_create();
+		sfText_setFont(option->choice[i], option->font);
+	}
 }
 
 option_editor_t option_editor_create(sfRenderWindow *window)
@@ -124,6 +147,7 @@ option_editor_t option_editor_create(sfRenderWindow *window)
 
 	option.text = malloc(sizeof(sfText *) * count_tilemap());
 	create_choose_tilemap(&option);
+	create_and_setchoice_curs(&option);
 	option.screen = create_screen_param(window);
 	option.back =  create_back_param(window);
 	option.size_map_x = sfText_create();
@@ -135,6 +159,7 @@ option_editor_t option_editor_create(sfRenderWindow *window)
 	option.nb_tile = 0;
 	option.size_x = 50;
 	option.size_y = 50;
+	option.choice_curs = 0;
 	return (option);
 }
 
@@ -147,10 +172,11 @@ void param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			if (sfKeyboard_isKeyPressed(sfKeyEscape))
 				return;
-			size_tile_map_x(map, &event, window, &option);
-			size_tile_map_y(map, &event, window, &option);
+			move_curseur_option_editor(&option, &event);
+			option.choice_curs == 2 ? size_tile_map_x(map, &event, window, &option) : 0;
+			option.choice_curs == 1 ? size_tile_map_y(map, &event, window, &option) : 0;
 			map_resize(map, option.size_x, option.size_y);
-			change_tile_map(menu, window, &option, &event);//tmp
+			option.choice_curs == 0 ? change_tile_map(menu, window, &option, &event) : 0;
 			menu->tile_map[0] = tile_map_create_from_file(concat("resources/tile_map/",
 			sfText_getString(option.text[option.nb_tile])));
 			map->tile_map = &menu->tile_map[0];//tmp
