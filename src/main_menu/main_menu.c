@@ -74,7 +74,7 @@ int main_menu(void)
 	sfRenderWindow *window = window_create();
 	loading_t back = back_create();
 	menu_t menu = menu_create();
-	sfEvent event;
+	sfEvent event = {.type = sfEvtJoystickButtonPressed};
 
 	set_icon(window, "icon.png");
 	sfRenderWindow_display(window);
