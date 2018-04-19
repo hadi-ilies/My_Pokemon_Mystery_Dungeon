@@ -28,7 +28,7 @@ char **malloc_filename(void)
 	while ((d = readdir(dir))) {
 		if (d->d_name[0] != '.') {
 			filename[i] = malloc(sizeof(char) *
-					my_strlen(d->d_name));
+					(my_strlen(d->d_name) + 1));
 			i++;
 		}
 	}
