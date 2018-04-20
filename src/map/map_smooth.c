@@ -10,7 +10,7 @@
 #include "map.h"
 #include "tile_name.h"
 
-static char tile_var[] = {
+const char tile_var[] = {
 	0b00001011,
 	0b00011111,
 	0b00010110,

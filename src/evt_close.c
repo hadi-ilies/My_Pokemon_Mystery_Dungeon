@@ -9,5 +9,6 @@
 
 void evt_close(sfEvent *event, sfRenderWindow *window)
 {
-	event->type == sfEvtClosed ? sfRenderWindow_close(window) : 0;
+	if (event->type == sfEvtClosed)
+		sfRenderWindow_close(window);
 }

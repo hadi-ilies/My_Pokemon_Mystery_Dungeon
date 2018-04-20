@@ -110,7 +110,8 @@ void entity_attack(entity_t *entity, capacity_t *capacity, map_t *map,
 }
 
 bool manage_input(entity_t *entity, map_t *map,
-		  entity_t *info[map->nb_case_x][map->nb_case_y], size_t input)
+		  entity_t *info[map->nb_case_x][map->nb_case_y],
+		  size_t input)
 {
 	if (sfClock_getElapsedTime(entity->clock).microseconds <= TIME_MOVE)
 		return (false);
@@ -166,25 +167,24 @@ bool manage_input(entity_t *entity, map_t *map,
 }
 
 bool entity_set_dir(entity_t *entity, map_t *map,
-		    entity_t *info[map->nb_case_x][map->nb_case_y])
+		    entity_t *info[map->nb_case_x][map->nb_case_y],
+		    sfEvent *event)
 {
 	size_t input = 0;
-	static bool can_atk = true;
 
 	if (entity->ia == 0) {
 		if (!sfKeyboard_isKeyPressed(sfKeyLShift))
 			input |= MOVE;
 		if (sfKeyboard_isKeyPressed(sfKeySpace)) {
-			if (can_atk) {
-				if (sfKeyboard_isKeyPressed(sfKeyUp))
+			if (event && event->type == sfEvtKeyPressed) {
+				if (event->key.code == sfKeyUp)
 					input |= ATTACK | CAPACITY1;
-				if (sfKeyboard_isKeyPressed(sfKeyLeft))
+				if (event->key.code == sfKeyLeft)
 					input |= ATTACK | CAPACITY2;
-				if (sfKeyboard_isKeyPressed(sfKeyRight))
+				if (event->key.code == sfKeyRight)
 					input |= ATTACK | CAPACITY3;
-				if (sfKeyboard_isKeyPressed(sfKeyDown))
+				if (event->key.code == sfKeyDown)
 					input |= ATTACK | CAPACITY4;
-				can_atk = false;
 			}
 		}
 		else {
@@ -192,12 +192,9 @@ bool entity_set_dir(entity_t *entity, map_t *map,
 			sfKeyboard_isKeyPressed(sfKeyRight) ? input |= RIGHT : 0;
 			sfKeyboard_isKeyPressed(sfKeyUp) ? input |= UP : 0;
 			sfKeyboard_isKeyPressed(sfKeyDown)? input |= DOWN : 0;
-			can_atk = true;
 		}
-		if (sfKeyboard_isKeyPressed(sfKeyW))
+		if (event && event->type == sfEvtKeyPressed && event->key.code == sfKeyW)
 			input |= WAIT;
-		if (input != 16)
-		printf("my input : %ld\n", input);
 	}
 	else
 		input = (rand() % 0b1111 + 1) | MOVE | WAIT;
@@ -270,19 +267,21 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 	size_t entity_num = 0;
 
 	while (sfRenderWindow_isOpen(window)) {
-		bool next = false;
+		bool next = garou->entity[entity_num].life ? false : true;
 
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
+			if (!next && !garou->entity[entity_num].ia) {
+				info_update(garou, info);
+				if (entity_set_dir(&garou->entity[entity_num], &garou->map, info, &event))
+					next = true;
+			}
 		}
-		if (garou->entity[entity_num].life > 0) {
+		if (!next) {
 			info_update(garou, info);
-			if (entity_set_dir(&garou->entity[entity_num], &garou->map, info))
+			if (entity_set_dir(&garou->entity[entity_num], &garou->map, info, NULL))
 				next = true;
 		}
-		else
-			next = true;
-		;
 		if (next == false)
 			game_aff(window, garou);
 		else if (++entity_num >= garou->nb_entity)
