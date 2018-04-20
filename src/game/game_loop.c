@@ -259,7 +259,7 @@ void game_aff(sfRenderWindow *window, garou_t *garou)
 	for (size_t i = 0; i < garou->nb_entity; i++)
 		if (garou->entity[i].life > 0)
 			entity_aff(window, &garou->entity[i], &garou->map, pos);
-	entity_life_aff(window, &garou->entity[0], (sfFloatRect){10, 10, 10, 70});
+	entity_life_aff(window, &garou->entity[0], (sfFloatRect){LIFE_RECT});
 	sfRenderWindow_display(window);
 }
 

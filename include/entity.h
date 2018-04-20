@@ -17,6 +17,7 @@
 
 // game_macros
 #define TIME_MOVE 300000
+#define LIFE_RECT 10, 10, 10, 50
 
 // code_macros
 #define NEW_X entity->pos.x + entity->dir.x

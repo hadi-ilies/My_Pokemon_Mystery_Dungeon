@@ -32,7 +32,7 @@ void map_resize(map_t *map, size_t new_nb_case_x, size_t new_nb_case_y)
 		if (tab == NULL || tab[i] == NULL)
 			return;
 		for (size_t j = 0; j < new_nb_case_y; j++)
-			tab[i][j] = (tva_t){0, 0, 0};
+			tab[i][j] = (tva_t){0, 4, 0};
 	}
 	new_nb_case_x < nb_case_x ? nb_case_x = new_nb_case_x : 0;
 	new_nb_case_y < nb_case_y ? nb_case_y = new_nb_case_y : 0;
