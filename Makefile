@@ -44,6 +44,8 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPCDIR)optional_create.c \
 			$(MAPCDIR)display_tools.c \
 			$(MAPCDIR)map_editor_loop.c \
+			$(MAPCDIR)option_editor_create.c \
+			$(MAPCDIR)param_options_map_editor.c\
 			$(MAPCDIR)menu_map_editor_menu.c \
 			$(MAPCDIR)display_menu_editor.c \
 			$(MAPCDIR)menu_editor_create.c \

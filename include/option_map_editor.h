@@ -7,7 +7,12 @@
 
 #pragma once
 
-#include "SFML/Graphics.h"
+#include <SFML/Graphics.h>
+#include <prototype.h>
+#include <my.h>
+
+#define TILEFILE concat("resources/tile_map/", \
+			(char *) sfText_getString(option.text[option.nb_tile]))
 
 typedef struct {
 	sfText *choice[3];
@@ -22,3 +27,12 @@ typedef struct {
 	size_t size_x;
 	size_t size_y;
 } option_editor_t;
+
+void move_curseur_option_editor(option_editor_t *option, sfEvent *event);
+option_editor_t option_editor_create(sfRenderWindow *window);
+void size_tile_map_x(sfEvent *event,
+		sfRenderWindow *window, option_editor_t *option);
+void size_tile_map_y(sfEvent *event,
+		sfRenderWindow *window, option_editor_t *option);
+void change_tile_map(sfRenderWindow *window,
+		option_editor_t *option, sfEvent *event);

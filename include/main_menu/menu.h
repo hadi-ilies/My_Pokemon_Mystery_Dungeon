@@ -31,3 +31,4 @@ void display_menu(sfRenderWindow *window, menu_t *menu, loading_t *back);
 void display_texte_button(sfRenderWindow *window, menu_t *menu);
 void destroy_all(loading_t *back, sfRenderWindow *window, menu_t *menu);
 void menu_map_editor_menu(sfRenderWindow *window);
+void param_map(menu_t *menu, map_t *map, sfRenderWindow *window);

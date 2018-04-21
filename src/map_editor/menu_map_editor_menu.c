@@ -14,7 +14,6 @@
 
 void launch_map(map_t *map, sfRenderWindow *window)
 {
-	//map_random(map);
 	map_editor_loop(window, map);
 	map_save(map, "map_test");
 }

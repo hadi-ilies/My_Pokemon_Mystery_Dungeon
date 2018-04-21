@@ -19,7 +19,7 @@ void display_text_editor(sfRenderWindow *window, menu_t *menu)
 	sfText_setString(menu->text[1], "NEW MAP");
 	sfText_setString(menu->text[2], "LOAD MAP");
 	sfText_setString(menu->text[3], "OPTIONS");
-	sfText_setString(menu->text[4], "EXIT");
+	sfText_setString(menu->text[4], "BACK");
 	for (size_t i = 0; i < NB_BUTTON_EDITOR; i++) {
 		sfText_setPosition(menu->text[i], (sfVector2f) {60, pos_y});
 		sfText_setColor(menu->text[i], (sfColor){250, 250, 0,
