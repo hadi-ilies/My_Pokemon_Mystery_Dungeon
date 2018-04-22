@@ -13,16 +13,16 @@
 #include "main_menu/menu.h"
 #include "map_editor_function.h"
 
-char **malloc_filename(void)
+char **malloc_filename(char *path)
 {
-	char **filename = malloc(sizeof(char *) * count_tilemap());
+	char **filename = malloc(sizeof(char *) * count_file(path));
 	DIR *dir = NULL;
 	int i = 0;
 	struct dirent *d;
 
 	if (filename == NULL)
 		return (NULL);
-	dir = opendir("resources/tile_map");
+	dir = opendir(path);
 	if (dir == NULL)
 		return (0);
 	while ((d = readdir(dir))) {
@@ -36,15 +36,15 @@ char **malloc_filename(void)
 	return (filename);
 }
 
-char **take_filename(void)
+char **take_filename(char *path)
 {
-	char **filename = malloc_filename();
+	char **filename = malloc_filename(path);
 	DIR *dir = NULL;
 	struct dirent *d;
 	size_t j = 0;
 	size_t i = 0;
 
-	dir = opendir("resources/tile_map");
+	dir = opendir(path);
 	if (dir == NULL)
 		return (0);
 	while ((d = readdir(dir))) {

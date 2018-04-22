@@ -20,8 +20,8 @@
 void change_tile_map(sfRenderWindow *window,
 		option_editor_t *option, sfEvent *event)
 {
-	size_t nb_filename =  count_tilemap();
-	char **filename = take_filename();
+	size_t nb_filename =  count_file("resources/tile_map");
+	char **filename = take_filename("resources/tile_map");
 
 	for (size_t i = 0; i < nb_filename; i++)
 		sfText_setString(option->text[i], filename[i]);

@@ -38,13 +38,13 @@ void text_editor(menu_t *menu)
 		menu->text[i] = sfText_create();
 }
 
-size_t count_tilemap(void)
+size_t count_file(char *path)
 {
 	size_t nb_file = 0;
 	DIR *dir = NULL;
 	struct dirent *d;
 
-	dir = opendir("resources/tile_map");
+	dir = opendir(path);
 	if (dir == NULL)
 		return (0);
 	while ((d = readdir(dir)) != NULL)
@@ -61,7 +61,8 @@ menu_t menu_editor_create(void)
 	pages_editor(&menu);
 	text_editor(&menu);
 	menu.button = 0;
-	menu.tile_map = malloc(sizeof(tile_map_t) * (count_tilemap() + 1));
+	menu.tile_map = malloc(sizeof(tile_map_t) *
+			(count_file("resources/tile_map") + 1));
 	return (menu);
 }
 
