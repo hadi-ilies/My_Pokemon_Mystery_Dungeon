@@ -31,7 +31,6 @@ typedef struct {
 
 garou_t garou_create(void);
 void garou_destroy(garou_t *garou);
-void garou_add_tile_map(garou_t *garou, tile_map_t *tile_map);
-void garou_add_anime_tab(garou_t *garou, anime_tab_t *anime_tab);
+void capacity_aff(sfRenderWindow *window, garou_t *garou);
 
 #endif

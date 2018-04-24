@@ -38,6 +38,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(INTRODIR)factories.c \
 			$(GAMEDIR)game_menu.c \
 			$(GAMEDIR)game_loop.c \
+			$(GAMEDIR)capacity_aff.c \
 			$(MAPCDIR)map_editor_menu.c \
 			$(MAPCDIR)factories_editor.c \
 			$(MAPCDIR)options_map_editor.c \
@@ -49,13 +50,13 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPCDIR)menu_map_editor_menu.c \
 			$(MAPCDIR)display_menu_editor.c \
 			$(MAPCDIR)menu_editor_create.c \
-			$(MAPCDIR)new_map.c \
-			$(MAPCDIR)map_editor_save.c \
 			$(MAPCDIR)cursor_option_map_editor.c \
 			$(MAPCDIR)cursor_editor.c \
 			$(MAPCDIR)take_filename.c \
 			$(MAPCDIR)all_move.c \
 			$(MAPCDIR)hit_functions.c \
+			$(MAPCDIR)new_map.c \
+			$(MAPCDIR)map_editor_save.c \
 			$(ANICDIR)anime_editor_menu.c \
 			$(ANICDIR)anime_editor_loop.c \
 			$(MAPDIR)map_create.c \
