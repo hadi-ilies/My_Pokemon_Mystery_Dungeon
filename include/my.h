@@ -12,6 +12,8 @@
 #include <unistd.h>
 
 #define my_printf(str, ...) my_fprintf(STDOUT_FILENO, str, __VA_ARGS__)
+#define CREAT(file_name, mode) open(file_name, O_WRONLY | O_TRUNC | O_CREAT, \
+				    S_IRWXU, mode)
 
 char **add_line(char **map, char *line);
 size_t my_fprintf(int fd, const char *str, ...);

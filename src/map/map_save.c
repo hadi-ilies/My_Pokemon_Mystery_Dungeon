@@ -9,10 +9,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "map.h"
+#include "my.h"
 
 void map_save(map_t *map, char *file_name)
 {
-	int fd = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU, S_IRWXU | S_IRWXG);
+	int fd = CREAT(file_name, S_IRWXU | S_IRWXG);
 
 	if (fd == -1) {
 		map->error = MAP_OPEN;

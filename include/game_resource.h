@@ -12,6 +12,13 @@
 #include "map.h"
 #include "entity.h"
 
+// file_macros
+#define GAME_FONT "resources/font/Minecraftia.ttf"
+#define CAPACITY_UP "Bup.png"
+#define CAPACITY_LEFT "Bleft.png"
+#define CAPACITY_RIGHT "Bright.png"
+#define CAPACITY_DOWN "Bdown.png"
+
 typedef struct {
 	size_t nb_tile_map;
 	tile_map_t *tile_map;
