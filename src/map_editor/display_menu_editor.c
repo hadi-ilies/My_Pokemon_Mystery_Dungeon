@@ -16,10 +16,11 @@ void display_text_editor(sfRenderWindow *window, menu_t *menu)
 	 int pos_y = 50;
 
 	sfText_setString(menu->text[0], "LAUNCH EDITOR");
-	sfText_setString(menu->text[1], "NEW MAP");
-	sfText_setString(menu->text[2], "LOAD MAP");
-	sfText_setString(menu->text[3], "OPTIONS");
-	sfText_setString(menu->text[4], "BACK");
+	sfText_setString(menu->text[1], "SAVE MAP");
+	sfText_setString(menu->text[2], "NEW MAP");
+	sfText_setString(menu->text[3], "LOAD MAP");
+	sfText_setString(menu->text[4], "OPTIONS");
+	sfText_setString(menu->text[5], "BACK");
 	for (size_t i = 0; i < NB_BUTTON_EDITOR; i++) {
 		sfText_setPosition(menu->text[i], (sfVector2f) {60, pos_y});
 		sfText_setColor(menu->text[i], (sfColor){250, 250, 0,

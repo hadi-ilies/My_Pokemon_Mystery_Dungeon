@@ -49,6 +49,8 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPCDIR)menu_map_editor_menu.c \
 			$(MAPCDIR)display_menu_editor.c \
 			$(MAPCDIR)menu_editor_create.c \
+			$(MAPCDIR)new_map.c \
+			$(MAPCDIR)map_editor_save.c \
 			$(MAPCDIR)cursor_option_map_editor.c \
 			$(MAPCDIR)cursor_editor.c \
 			$(MAPCDIR)take_filename.c \
