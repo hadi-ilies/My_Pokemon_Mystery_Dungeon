@@ -9,6 +9,7 @@
 #define GAME_RESOURCE_H_
 
 #include <SFML/Graphics.h>
+#include "settings.h"
 #include "map.h"
 #include "entity.h"
 
@@ -27,6 +28,7 @@ typedef struct {
 	map_t map;
 	size_t nb_entity;
 	entity_t *entity;
+	settings_t settings;
 } garou_t;
 
 garou_t garou_create(void);
