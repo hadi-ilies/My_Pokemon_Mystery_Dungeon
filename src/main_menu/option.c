@@ -31,6 +31,13 @@ void create_option_choice(sfText *choice[3], sfFont *font)
 	}
 }
 
+void insert_win_size(sfText *win_size[3])
+{
+	sfText_setString(win_size[0], "800 X 600");
+	sfText_setString(win_size[1], "1600 X 1200");
+	sfText_setString(win_size[2], "1920 X 1080");
+}
+
 option_t option_create(sfRenderWindow *window)
 {
 	option_t option;
@@ -38,6 +45,7 @@ option_t option_create(sfRenderWindow *window)
 	option.font = sfFont_createFromFile(FONT);
 	create_option_choice(option.choice, option.font);
 	create_option_choice(option.window_size, option.font);
+	insert_win_size(option.window_size);
 	option.screen = create_screen_param(window);
 	option.back =  create_back_param(window);
 	option.size_x = 1920;
@@ -52,7 +60,7 @@ void option_choice_cursor(option_t *option, sfRenderWindow *window)
 
 	sfText_setString(option->choice[0], "WINDOW_RESOLUTION");
 	sfText_setString(option->choice[1], "GAME VOLUME");
-	sfText_setString(option->choice[2], "SOUND_VOLUME");
+	sfText_setString(option->choice[2], "SOUND VOLUME");
 	for (size_t i = 0; i < 3; i++) {
 		sfText_setPosition(option->choice[i], (sfVector2f) {WINDOW_SIZE.x / 2 - 300, pos_y});
 		sfText_setColor(option->choice[i], (sfColor){250, 250, 0,
@@ -74,7 +82,24 @@ void option_move_cursor(option_t *option, sfEvent *event)
 		}
 	}
 }
+/*
+void change_win_size(option_t *option, sfEvent *event)
+{
 
+	for (size_t i = 0; i < nb_filename; i++)
+		sfText_setString(option->text[i], filename[i]);
+	if (option->choice_curs == 0) {
+		if (option->nb_tile < nb_filename - 1 && event->type == sfEvtKeyPressed
+		&& event->key.code == sfKeyRight)
+			option->nb_tile++;
+		if (option->nb_tile > 0 && event->type == sfEvtKeyPressed
+		&& event->key.code == sfKeyLeft)
+			option->nb_tile--;
+	}
+	sfText_setPosition(option->text[option->nb_tile],
+			(sfVector2f) {WINDOW_SIZE.x / 2 - 150, WINDOW_SIZE.y / 2 - 300});//tmp
+}
+*/
 void option_menu(sfRenderWindow *window, sfEvent *event)
 {
 	option_t option = option_create(window);
@@ -84,6 +109,7 @@ void option_menu(sfRenderWindow *window, sfEvent *event)
 			if (sfKeyboard_isKeyPressed(sfKeyEscape))
 				return;
 			option_move_cursor(&option, event);
+			//change_win_size(&option, event);
 		}
 		sfRenderWindow_clear(window, sfBlack);
 		display_options(&option, window);
