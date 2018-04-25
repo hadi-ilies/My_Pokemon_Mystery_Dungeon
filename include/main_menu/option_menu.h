@@ -15,6 +15,7 @@ typedef struct {
 	sfText *choice[3];
 	size_t choice_curs;
 	sfText *window_size[3];
+	sfText *sound_value[3];
 	sfFont *font;
 	sfSprite *screen;
 	sfRectangleShape *back;

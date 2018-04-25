@@ -54,7 +54,7 @@ void size_tile_map_y(sfEvent *event,
 	str = inttostr(option->size_y);
 	sfText_setString(option->size_map_y, str);
 	sfText_setPosition(option->size_map_y,
-			   (sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 200});
+			(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 200});
 }
 
 void size_tile_map_x(sfEvent *event,
@@ -64,10 +64,10 @@ void size_tile_map_x(sfEvent *event,
 
 	if (option->choice_curs == 2) {
 		if (option->size_x < 999 && event->type == sfEvtKeyPressed
-		    && event->key.code == sfKeyRight) {
+		&& event->key.code == sfKeyRight) {
 			option->size_x++;
 		} if (option->size_x > 30 && event->type == sfEvtKeyPressed
-		      && event->key.code == sfKeyLeft) {
+		&& event->key.code == sfKeyLeft) {
 			option->size_x--;
 		}
 	}

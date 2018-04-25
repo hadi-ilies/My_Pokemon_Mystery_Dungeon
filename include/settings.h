@@ -16,4 +16,6 @@ typedef struct {
 	float sound_volume;
 } settings_t;
 
+settings_t create_setting(void);
+
 #endif

@@ -24,6 +24,7 @@ INTRODIR	=	$(SRCDIR)intro/
 SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)evt_close.c \
 			$(MENUDIR)main_menu.c \
+			$(MENUDIR)create_settings.c \
 			$(MENUDIR)menu_create.c \
 			$(MENUDIR)display_menu.c \
 			$(MENUDIR)cursor_menu.c \

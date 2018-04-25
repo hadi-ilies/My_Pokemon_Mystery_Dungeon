@@ -9,6 +9,7 @@
 #include "prototype.h"
 #include "macro.h"
 #include "main_menu/menu.h"
+#include "settings.h"
 
 sfRenderWindow *window_create(void)
 {
@@ -60,9 +61,9 @@ bool enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 		} if (menu->button == 2) {
 			anime_editor_menu(window);
 		} if (menu->button == 3) {
-			option_menu(window, event);
+			option_menu(window, event, menu);
 		} if (menu->button == 4) {
-		credit_menu(window, event);
+			credit_menu(window, event);
 		} if (menu->button == 5) {
 			return (false);
 		}

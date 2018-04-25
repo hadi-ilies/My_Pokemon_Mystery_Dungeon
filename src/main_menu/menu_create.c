@@ -44,5 +44,6 @@ menu_t menu_create(void)
 	text(&menu);
 	menu.button = 0;
 	menu.tile_map = NULL;
+	menu.settings = create_setting();
 	return (menu);
 }

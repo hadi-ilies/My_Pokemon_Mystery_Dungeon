@@ -12,6 +12,7 @@
 #include <SFML/Audio.h>
 #include "game_resource.h"
 #include "loading.h"
+#include "main_menu/menu.h"
 #include "video.h"
 
 #define WINDOW_WIDTH 1920
@@ -39,7 +40,7 @@ void evt_close(sfEvent *event, sfRenderWindow *window);
 int main_intro(sfRenderWindow *window, sfEvent *event);
 int error_anime(video_t video);
 void credit_menu(sfRenderWindow *window, sfEvent *event);
-void option_menu(sfRenderWindow *window, sfEvent *event);
+void option_menu(sfRenderWindow *window, sfEvent *event, menu_t *menu);
 void swap_alt(tile_map_t *tile_map, tva_t *tva);
 void pick_tile(sfRenderWindow *window, sfFloatRect rect,
 	tva_t tva, tva_t *mouse_tva);

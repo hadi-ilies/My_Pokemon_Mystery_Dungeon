@@ -1,30 +1,25 @@
 /*
-** EPITECH PROJECT, 2018
-** my
+** EPITECH PROJECT, 2017
+** test
 ** File description:
-** my_atoi
+** test
 */
 
-#include "my.h"
+#include <stdlib.h>
+#include <unistd.h>
 
-bool my_atoi(int *nb, char *str)
+int my_atoi(char *str)
 {
-	size_t i = 0;
+	int nb = 0;
 
-	if (nb == NULL || str == NULL)
-		return (false);
-	for (; str[i] != '\0'; i++) {
-		bool tmp = false;
-
-		str[i] >= '0' && str[i] <= '9' ? tmp = true : 0;
-		!i && (str[i] == '+' || str[i] == '-') ? tmp = true : 0;
-		if (tmp == false)
-			return (false);
-	}
-	*nb = 0;
-	i = (*str == '-' || *str == '+' ? 1 : 0);
-	for (; str[i] != '\0'; i++)
-		*nb = *nb * 10 + str[i] - '0';
-	*nb = (*str == '-' ? -*nb : *nb);
-	return (true);
+	if (str == NULL)
+		return (-1);
+	for (int i = 0; str[i] != '\0' && str[i] != '\n'; i++) {
+		if (str[i] < '0' || str[i] > '9')
+			return (-2);
+	} for (; *str >= '0' && *str <= '9'; (str)++)
+		nb = nb * 10 + (*str - '0');
+	if (str[0] == '-')
+		return (-nb);
+	return (nb);
 }

@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "settings.h"
+
 #define BACK "resources/texture/menu/back/1.png"
 #define FONT "resources/font/pokemon_char.ttf"
 #define ITEM "titre.png"
@@ -22,6 +24,7 @@ typedef struct {
 	sfFont *font;
 	size_t button;
 	tile_map_t *tile_map;
+	settings_t settings;
 } menu_t;
 
 menu_t menu_create(void);
