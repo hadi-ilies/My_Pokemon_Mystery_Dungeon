@@ -8,6 +8,7 @@
 #ifndef MY_H_
 #define MY_H_
 
+#include <stdbool.h>
 #include <stddef.h>
 #include <unistd.h>
 
@@ -25,5 +26,6 @@ char *my_strncat(char *s1, char *s2, size_t n);
 char **my_str_to_tab(char *command, char *sep);
 char *concat(char *s1, char *s2);
 char *inttostr(int nb);
+bool my_atoi(int *nb, char *str);
 
 #endif
