@@ -18,6 +18,7 @@ typedef struct {
 	sfFont *font;
 	sfSprite *screen;
 	sfRectangleShape *back;
+	size_t nb_tile;
 	size_t size_x;
 	size_t size_y;
 } option_t;

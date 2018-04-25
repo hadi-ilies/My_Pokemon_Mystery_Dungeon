@@ -9,5 +9,8 @@
 
 int main(void)
 {
-	return (main_menu());
+	sfRenderWindow *window = window_create();
+
+	sfRenderWindow_display(window);
+	return (main_menu(window));
 }

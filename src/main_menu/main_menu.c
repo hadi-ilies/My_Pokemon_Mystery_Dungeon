@@ -19,6 +19,7 @@ sfRenderWindow *window_create(void)
 	if (window == NULL)
 		return (NULL);
 	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
+	set_icon(window, "icon.png");
 	return (window);
 }
 
@@ -69,15 +70,12 @@ bool enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 	return (true);
 }
 
-int main_menu(void)
+int main_menu(sfRenderWindow *window)
 {
-	sfRenderWindow *window = window_create();
 	loading_t back = back_create();
 	menu_t menu = menu_create();
 	sfEvent event = {.type = sfEvtJoystickButtonPressed};
 
-	set_icon(window, "icon.png");
-	sfRenderWindow_display(window);
 	main_intro(window, &event);
 	for (int i = 0; i < NB_BUTTON; i++)
 		sfText_setFont(menu.text[i], menu.font);
