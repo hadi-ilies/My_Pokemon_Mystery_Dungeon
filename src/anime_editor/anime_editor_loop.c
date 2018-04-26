@@ -152,6 +152,8 @@ int anime_editor_loop(sfRenderWindow *window, anime_tab_t *anime_tab)
 			zoom(&event, &sprite_rect);
 			set_rectex_pos(&event, window, rectex, sprite_rect);
 			sprite_move(&event, window, &sprite_rect);
+			if (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape)
+				return(0);
 			if (event.type == sfEvtKeyPressed) {
 				manage_rectex(rectex);
 				manage_rectex2(anime_tab, rectex, &anime_num, &rectex_num);
