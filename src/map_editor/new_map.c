@@ -5,12 +5,9 @@
 ** new map
 */
 
-#include <stdbool.h>
-#include <stdio.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "prototype.h"
-#include "macro.h"
 #include "main_menu/menu.h"
 #include "map_editor_function.h"
 
