@@ -20,6 +20,7 @@ MAPDIR		=	$(SRCDIR)map/
 ENTDIR		=	$(SRCDIR)entity/
 GAROUDIR	=	$(SRCDIR)game_resource/
 INTRODIR	=	$(SRCDIR)intro/
+STGSDIR		=	$(SRCDIR)settings/
 
 SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)evt_close.c \
@@ -75,6 +76,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(ENTDIR)entity_aff.c \
 			$(GAROUDIR)garou_create.c \
 			$(GAROUDIR)garou_destroy.c \
+			$(STGSDIR)settings_load.c \
 
 OBJ		=	$(SRC:.c=.o)
 

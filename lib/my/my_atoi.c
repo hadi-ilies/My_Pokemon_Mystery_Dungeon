@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2017
 ** test
 ** File description:
-** test
+** my_atoi.c
 */
 
 #include <stdlib.h>
