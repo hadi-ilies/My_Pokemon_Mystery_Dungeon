@@ -13,7 +13,7 @@
 
 void map_save(map_t *map, char *file_name)
 {
-	int fd = CREAT(file_name, S_IRWXU | S_IRWXG);
+	int fd = CREAT(file_name, S_IRUSR | S_IWUSR | S_IRGRP);
 
 	if (fd == -1) {
 		map->error = MAP_OPEN;
