@@ -30,7 +30,7 @@ void option_menu(sfRenderWindow *window, sfEvent *event, menu_t *menu)
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, event)) {
 			if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
-				//settings_save(&menu->settings, "resources/config");
+				settings_save(&menu->settings, "resources/config");
 				return;
 			}
 			option_move_cursor(&option, event);
