@@ -37,7 +37,6 @@ SRC		=	$(SRCDIR)main.c \
 			$(MENUDIR)option_create.c \
 			$(MENUDIR)resize_window.c \
 			$(MENUDIR)sound_and_music_volume.c \
-			$(STGSDIR)settings_load.c \
 			$(MENUDIR)credit.c \
 			$(INTRODIR)main_intro.c \
 			$(INTRODIR)music_intro.c \
