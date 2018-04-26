@@ -4,6 +4,7 @@
 ** File description:
 ** text
 */
+
 #include "prototype.h"
 #include "my.h"
 #include "main_menu/menu.h"
@@ -21,7 +22,7 @@ char *text_button(menu_t *menu)
 	if (menu->button == 3)
 		str ="Settings";
 	if (menu->button == 4)
-		str = "who is the best programmer";
+		str = "guess who is the best programmer !";
 	if (menu->button == 5)
 		str = "are You Sure you wanna Go ?";
 	return (str);

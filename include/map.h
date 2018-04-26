@@ -13,10 +13,16 @@
 #include "tile_map.h"
 
 // code_macros
-#define X_MIN (map->pos.x - center.x / map->size.x > 0 ? map->pos.x - center.x / map->size.x : 0)
-#define Y_MIN (map->pos.y - center.y / map->size.y > 0 ? map->pos.y - center.y / map->size.y : 0)
-#define X_MAX ((win_size.x - center.x) / map->size.x + map->pos.x + 2 < map->nb_case_x ? (win_size.x - center.x) / map->size.x + map->pos.x + 2 : map->nb_case_x)
-#define Y_MAX ((win_size.y - center.y) / map->size.y + map->pos.y + 2 < map->nb_case_y ? (win_size.y - center.y) / map->size.y + map->pos.y + 2 : map->nb_case_y)
+#define X_MIN (map->pos.x - center.x / map->size.x > 0 ? \
+	map->pos.x - center.x / map->size.x : 0)
+#define Y_MIN (map->pos.y - center.y / map->size.y > 0 ? \
+	map->pos.y - center.y / map->size.y : 0)
+#define X_MAX ((win_size.x - center.x) / map->size.x + map->pos.x + 2 < \
+	map->nb_case_x ? (win_size.x - center.x) / \
+	map->size.x + map->pos.x + 2 : map->nb_case_x)
+#define Y_MAX ((win_size.y - center.y) / map->size.y + \
+	map->pos.y + 2 < map->nb_case_y ? (win_size.y - center.y) / \
+	map->size.y + map->pos.y + 2 : map->nb_case_y)
 
 enum map_error {
 	MAP_OK,

@@ -1,5 +1,5 @@
 /*
-1;4804;0c** EPITECH PROJECT, 2018
+** EPITECH PROJECT, 2018
 ** my_rpg_2017
 ** File description:
 ** map_editor_function.h
@@ -27,7 +27,8 @@ void text_editor(menu_t *menu);
 void pages_editor(menu_t *menu);
 size_t move_curseur_editor(menu_t *menu, sfEvent *event);
 void trans_cursor_editor(menu_t *menu, int *tmp1, int *tmp2);
-bool enter_editor(sfRenderWindow *window, menu_t *menu, sfEvent *event, map_t *map);
+bool enter_editor(sfRenderWindow *window, menu_t *menu,
+		sfEvent *event, map_t *map);
 void menu_map_editor_menu(sfRenderWindow *window);
 void trans_cursor_editor(menu_t *menu, int *tmp1, int *tmp2);
 size_t move_curseur_editor(menu_t *menu, sfEvent *event);
