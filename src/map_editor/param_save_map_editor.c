@@ -5,7 +5,6 @@
 ** save
 */
 
-#include <string.h>///tmp
 #include <stdbool.h>
 #include <stdio.h>
 #include "my.h"
