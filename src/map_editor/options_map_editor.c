@@ -50,7 +50,7 @@ void param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (sfKeyboard_isKeyPressed(sfKeyEscape))
+			if (sfKeyboard_isKeyPressed(sfKeyEscape) || map->error != MAP_OK)
 				return;
 			move_curseur_option_editor(&option, &event);
 			size_tile_map_x(&event, window, &option);

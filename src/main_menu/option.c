@@ -142,7 +142,8 @@ void sound_volume(sfEvent *event,
 void resize_win(sfRenderWindow *window, option_t *option)
 {
 	if (option->choice_curs == 0) {
-		char **size = my_str_to_tab(sfText_getString(option->window_size[option->nb_tile]), "X");
+		char **size = my_str_to_tab(
+			sfText_getString(option->window_size[option->nb_tile]), "X");
 		//printf("%s\n", sfText_getString(option->window_size[option->nb_tile]));
 		//printf("%d|%d\n", atoi(size[0]), atoi(size[1]));
 		sfRenderWindow_setSize(window, (sfVector2u) {atoi(size[0]), atoi(size[1])});

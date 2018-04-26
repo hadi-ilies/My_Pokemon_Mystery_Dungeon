@@ -65,7 +65,7 @@ void move_curseur_save_editor(save_editor_t *save, sfRenderWindow *window,
 		    && save->choice_curs > 0) {
 			save->choice_curs--;
 		} if (sfKeyboard_isKeyPressed(sfKeyDown)
-		      && save->choice_curs <  2) {
+		      && save->choice_curs <  1) {
 			save->choice_curs++;
 		}
 	}

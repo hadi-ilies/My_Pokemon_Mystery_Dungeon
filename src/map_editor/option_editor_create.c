@@ -66,6 +66,8 @@ option_editor_t option_editor_create(sfRenderWindow *window)
 	option_editor_t option;
 
 	option.text = malloc(sizeof(sfText *) * count_file("resources/tile_map"));
+	if (option.text == NULL)
+		return (option);
 	create_choose_tilemap(&option);
 	create_and_setchoice_curs(&option);
 	option.screen = create_screen_param(window);
