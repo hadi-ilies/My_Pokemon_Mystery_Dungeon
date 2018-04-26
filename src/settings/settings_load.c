@@ -83,7 +83,7 @@ static void get_settings(settings_t *settings, char *line)
 	if (my_strcmp(tab[0], "MusicVolume:") == 0)
 		settings->music_volume = get_float(tab[1]);
 	if (my_strcmp(tab[0], "SoundVolume:") == 0)
-		settings->music_volume = get_float(tab[1]);
+		settings->sound_volume = get_float(tab[1]);
 	get_key(settings, tab);
 	for (size_t i = 0; tab[i] != NULL; i++)
 		free(tab[i]);
