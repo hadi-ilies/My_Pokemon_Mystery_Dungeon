@@ -108,5 +108,6 @@ settings_t settings_load(char *file_name)
 			get_settings(&settings, line);
 		free(line);
 	}
+	close(fd);
 	return (settings);
 }
