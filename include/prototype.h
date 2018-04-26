@@ -22,6 +22,7 @@
 #define FRAMERATE_LIMIT 30
 
 int main_menu(sfRenderWindow *window);
+sfRenderWindow *window_create(void);
 void destroy_factories(anime_tab_t *animation, sfMusic *music[3],
 		video_t *video);
 int destroy_and_check_error_anime(anime_tab_t *animation, loading_t *load, video_t *video);
