@@ -12,19 +12,6 @@
 #include "main_menu/menu.h"
 #include "settings.h"
 
-sfRenderWindow *window_create(void)
-{
-	sfVideoMode mode = {WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_BITS_PER_PIXEL};
-	sfRenderWindow *window;
-
-	window = sfRenderWindow_create(mode, "my_rpg", WINDOW_PARAMS, NULL);
-	if (window == NULL)
-		return (NULL);
-	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
-	set_icon(window, "icon.png");
-	return (window);
-}
-
 void back_create_icon(loading_t *optional)
 {
 	optional->icon_back = sfRectangleShape_create();
@@ -55,19 +42,18 @@ loading_t back_create(void)
 bool enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 {
 	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyReturn) {
-		if (menu->button == 0) {
+		if (menu->button == 0)
 			game_menu(window);
-		} if (menu->button == 1) {
+		if (menu->button == 1)
 			menu_map_editor_menu(window);
-		} if (menu->button == 2) {
+		if (menu->button == 2)
 			anime_editor_menu(window);
-		} if (menu->button == 3) {
+		if (menu->button == 3)
 			option_menu(window, event, menu);
-		} if (menu->button == 4) {
+		if (menu->button == 4)
 			credit_menu(window, event);
-		} if (menu->button == 5) {
+		if (menu->button == 5)
 			return (false);
-		}
 	}
 	return (true);
 }

@@ -23,6 +23,7 @@ INTRODIR	=	$(SRCDIR)intro/
 STGSDIR		=	$(SRCDIR)settings/
 
 SRC		=	$(SRCDIR)main.c \
+			$(SRCDIR)create_window.c\
 			$(SRCDIR)evt_close.c \
 			$(MENUDIR)main_menu.c \
 			$(MENUDIR)create_settings.c \
