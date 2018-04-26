@@ -84,7 +84,9 @@ SRC		=	$(SRCDIR)main.c \
 			$(ENTDIR)entity_aff.c \
 			$(GAROUDIR)garou_create.c \
 			$(GAROUDIR)garou_destroy.c \
+			$(STGSDIR)settings_defaut.c \
 			$(STGSDIR)settings_load.c \
+			$(STGSDIR)settings_save.c \
 
 OBJ		=	$(SRC:.c=.o)
 

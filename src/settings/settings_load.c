@@ -5,28 +5,10 @@
 ** settings_load.c
 */
 
+#include <stdlib.h>
 #include <fcntl.h>
 #include "settings.h"
 #include "my.h"
-
-static settings_t get_base(void)
-{
-	settings_t settings;
-
-	settings.window_size = (sfVector2u){1920, 1080};
-	settings.music_volume = 100.0;
-	settings.sound_volume = 100.0;
-	settings.key[KEY_UP] = sfKeyUp;
-	settings.key[KEY_LEFT] = sfKeyLeft;
-	settings.key[KEY_RIGHT] = sfKeyRight;
-	settings.key[KEY_DOWN] = sfKeyDown;
-	settings.key[KEY_ENTER] = sfKeyReturn;
-	settings.key[KEY_ECHAP] = sfKeyEscape;
-	settings.key[KEY_WAIT] = sfKeyW;
-	settings.key[KEY_ROTATE] = sfKeyLShift;
-	settings.key[KEY_ATTACK] = sfKeySpace;
-	return (settings);
-}
 
 static size_t get_uint(char *str)
 {
@@ -110,7 +92,7 @@ static void get_settings(settings_t *settings, char *line)
 
 settings_t settings_load(char *file_name)
 {
-	settings_t settings = get_base();
+	settings_t settings = settings_defaut();
 	int fd = open(file_name, O_RDONLY);
 	char *line;
 

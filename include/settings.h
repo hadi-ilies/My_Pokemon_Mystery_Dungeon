@@ -31,6 +31,7 @@ typedef struct {
 } settings_t;
 
 settings_t create_setting(void);
+settings_t settings_defaut(void);
 settings_t settings_load(char *file_name);
 void settings_save(settings_t *settings, char *file_name);
 
