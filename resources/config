@@ -1,0 +1,63 @@
+## Key ##
+#sfKeyA -> 0
+#sfKeyB -> 1
+#...
+#sfKeyZ -> 25
+#sfKeyNum0 -> 26
+#sfKeyNum1 -> 27
+#...
+#sfKeyNum9 -> 35
+#sfKeyEscape -> 36
+#sfKeyLControl -> 37
+#sfKeyLShift -> 38
+#sfKeyLAlt -> 39
+#sfKeyLSystem -> 40
+#sfKeyRControl -> 41
+#sfKeyRShift -> 42
+#sfKeyRAlt -> 43
+#sfKeyRSystem -> 44
+#sfKeyMenu -> 45
+#sfKeyLBracket -> 46
+#sfKeyRBracket -> 47
+#sfKeySemiColon -> 48
+#sfKeyComma -> 49
+#sfKeyPeriod -> 50
+#sfKeyQuote -> 51
+#sfKeySlash -> 52
+#sfKeyBackSlash -> 53
+#sfKeyTilde -> 54
+#sfKeyEqual -> 55
+#sfKeyDash -> 56
+#sfKeySpace -> 57
+#sfKeyReturn -> 58
+#sfKeyBack -> 59
+#sfKeyTab -> 60
+#sfKeyPageUp -> 61
+#sfKeyPageDown -> 62
+#sfKeyEnd -> 63
+#sfKeyHome -> 64
+#sfKeyInsert -> 65
+#sfKeyDelete -> 66
+#sfKeyAdd -> 67
+#sfKeySubtract -> 68
+#sfKeyMultiply -> 69
+#sfKeyDivide -> 70
+#sfKeyLeft -> 71
+#sfKeyRight -> 72
+#sfKeyUp -> 73
+#sfKeyDown -> 74
+#sfKeyNumpad0 -> 75
+#sfKeyNumpad1 -> 76
+#...
+#sfKeyNumpad9 -> 84
+
+WindowSize: 1920 1080
+MusicVolume: 100.0
+SoundVolume: 100.0
+KeyUp: 73
+KeyDown: 74
+KeyLeft: 71
+KeyRight: 72
+KeyAttack: 57
+KeyWait: 22
+KeyRotate: 38
