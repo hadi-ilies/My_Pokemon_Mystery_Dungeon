@@ -37,5 +37,5 @@ size_t count_file(char *path);
 char **take_filename(char *path);
 void new_map(menu_t *menu, map_t *map);
 int load_the_map(map_t *map, tile_map_t *tile_map);
-
+void menu_save_map(map_t *map, sfRenderWindow *window);
 #endif
