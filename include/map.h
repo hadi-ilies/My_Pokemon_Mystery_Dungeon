@@ -30,7 +30,8 @@ enum map_error {
 	MAP_READ,
 	MAP_WRITE,
 	MAP_MALLOC,
-	MAP_INVALID_NUMBER
+	MAP_INVALID_NUMBER,
+	MAP_TILE_MAP
 };
 
 typedef struct {
@@ -39,7 +40,7 @@ typedef struct {
 	tva_t **tab;
 	sfVector2f size;
 	sfVector2f pos;
-	tile_map_t *tile_map;
+	tile_map_t tile_map;
 	size_t error;
 } map_t;
 
