@@ -53,7 +53,7 @@ int load_the_map(map_t *map, tile_map_t *tile_map)
 	if (map->error != MAP_OK)
 		return (84);
 	*tile_map = tile_map_create_from_file("resources/tile_map/Deep_cavern config");
-	map->tile_map = tile_map;
+	map->tile_map = *tile_map;
 	map->size.x = 100;
 	map->size.y = map->size.x;
 	map->pos.x = map->nb_case_x / 2;

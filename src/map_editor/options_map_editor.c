@@ -58,7 +58,7 @@ void param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 			map_resize(map, option.size_x, option.size_y);
 			change_tile_map(window, &option, &event);
 			menu->tile_map[0] = tile_map_create_from_file(TILEFILE);
-			map->tile_map = &menu->tile_map[0];//tmp
+			map->tile_map = menu->tile_map[0];//tmp
 		}
 		sfRenderWindow_clear(window, sfBlack);
 		display_options_editor(&option, window);

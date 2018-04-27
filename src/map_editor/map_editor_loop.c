@@ -19,9 +19,9 @@ bool isit_on_inventory(map_t *map, sfRenderWindow *window)
 	sfVector2i coord_mouse = sfMouse_getPositionRenderWindow(window);
 	sfVector2f origin;
 
-	origin.x = win_size.x / 2 - map->tile_map->nb_type / 2 * TOOL_DIST;
+	origin.x = win_size.x / 2 - map->tile_map.nb_type / 2 * TOOL_DIST;
 	origin.y = win_size.y - TOOL_SIZE / 2;
-	for (size_t i = 0; i < map->tile_map->nb_type; i++) {
+	for (size_t i = 0; i < map->tile_map.nb_type; i++) {
 		sfFloatRect rect = {.width = TOOL_SIZE, .height = TOOL_SIZE};
 
 		rect.left = origin.x + i * TOOL_DIST;
@@ -58,20 +58,20 @@ void manage_map(sfEvent *event, sfRenderWindow *window, map_t *map, tva_t *mouse
 	if (cond && sfMouse_isButtonPressed(sfMouseMiddle) == true)
 		mouse_tva->type = map->tab[x][y].type;
 	if (sfMouse_isButtonPressed(sfMouseRight) == true)
-		swap_alt(map->tile_map, &map->tab[x][y]);
-	if (mouse_tva->type >= map->tile_map->nb_type)
+		swap_alt(&map->tile_map, &map->tab[x][y]);
+	if (mouse_tva->type >= map->tile_map.nb_type)
 		return;
 	if (sfMouse_isButtonPressed(sfMouseLeft) == true
 	&& isit_on_inventory(map, window) != true
 	&& dont_touch_borders(map, x, y)) {
-		insert_to_map(map->tile_map, &map->tab[x][y], *mouse_tva);
+		insert_to_map(&map->tile_map, &map->tab[x][y], *mouse_tva);
 		map_smooth(map, x, y);
 	}
 }
 
 int map_editor_loop(sfRenderWindow *window, map_t *map)
 {
-	tva_t mouse_tva = {map->tile_map->nb_type, 4, 0};
+	tva_t mouse_tva = {map->tile_map.nb_type, 4, 0};
 	sfEvent event;
 	back_and_music_t optional = optional_create();
 
@@ -91,7 +91,7 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 		sfRenderWindow_drawSprite(window, optional.sprite, NULL);
 		map_aff(window, map);
 		display_tools(window, map, &mouse_tva);
-		tile_map_aff(window, map->tile_map, mouse_tva, RECT_MOUSE);
+		tile_map_aff(window, &map->tile_map, mouse_tva, RECT_MOUSE);
 		sfRenderWindow_display(window);
 	}
 	return (0);

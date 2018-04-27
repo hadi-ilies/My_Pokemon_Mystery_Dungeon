@@ -42,11 +42,11 @@ void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva)
 	sfVector2f origin;
 	sfRectangleShape *reck = sfRectangleShape_create();
 
-	origin.x = win_size.x / 2 - map->tile_map->nb_type / 2 * TOOL_DIST;
+	origin.x = win_size.x / 2 - map->tile_map.nb_type / 2 * TOOL_DIST;
 	origin.y = win_size.y - TOOL_SIZE / 2;
 	sfRectangleShape_setSize(reck, POS_SIZE_SHAPE);
 	sfRectangleShape_setFillColor(reck, (sfColor) {150, 150, 150, 100});
-	for (size_t i = 0; i < map->tile_map->nb_type; i++) {
+	for (size_t i = 0; i < map->tile_map.nb_type; i++) {
 		sfFloatRect rect = {.width = TOOL_SIZE, .height = TOOL_SIZE};
 		tva_t tva = {i, 4, 0};
 
@@ -54,7 +54,7 @@ void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva)
 		rect.top = origin.y;
 		sfRectangleShape_setPosition(reck, (sfVector2f){PIX, PIY});
 		sfRenderWindow_drawRectangleShape(window, reck, NULL);
-		tile_map_aff(window, map->tile_map, tva, rect);
+		tile_map_aff(window, &map->tile_map, tva, rect);
 		pick_tile(window, rect, tva, mouse_tva);
 	}
 	sfRectangleShape_destroy(reck);
