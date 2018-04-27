@@ -26,7 +26,7 @@ int game_menu(sfRenderWindow *window)
 	//map_random(&garou.map);
 	garou.map.size.x = 200;
 	garou.map.size.y = garou.map.size.x;
-	garou.nb_entity = 20;
+	garou.nb_entity = 2;
 	garou.entity = malloc(sizeof(entity_t) * garou.nb_entity);
 	for (size_t i = 0; i < garou.nb_entity; i++) {
 		sfVector2i pos = {garou.map.nb_case_x / 2 + rand() % 5 - 2, garou.map.nb_case_y / 2 + rand() % 5 - 2};

@@ -13,7 +13,12 @@ char *get_pp(entity_t *entity, size_t capacity_num)
 	size_t pp_max = entity->capacity[capacity_num]->pp;
 	size_t pp = entity->pp[capacity_num];
 
-	sprintf(str_pp, "%ld/%ld", pp, pp_max);
+	str_pp[0] = (pp / 10) % 10 + '0';
+	str_pp[1] = pp % 10 + '0';
+	str_pp[2] = '/';
+	str_pp[3] = (pp_max / 10) % 10 + '0';
+	str_pp[4] = pp_max % 10 + '0';
+	str_pp[5] = '\0';
 	return (str_pp);
 }
 

@@ -33,12 +33,7 @@ static void set_anime_move(entity_t *entity)
 bool entity_move(entity_t *entity, map_t *map,
 		 entity_t *info[map->nb_case_x][map->nb_case_y])
 {
-	bool cond_type = map->tab[NEW_X][NEW_Y].type == GROUND;
-	bool type = entity->type == TYPE_WATER || entity->type == TYPE_FLYING;
-
-	type |= entity->type2 == TYPE_WATER || entity->type2 == TYPE_FLYING;
-	cond_type |= (map->tab[NEW_X][NEW_Y].type == WATER && type);
-	if (!INFO && cond_type) {
+	if (CAN_MOVE(*entity)) {
 		entity->pos.x += entity->dir.x;
 		entity->pos.y += entity->dir.y;
 		sfClock_restart(entity->clock);

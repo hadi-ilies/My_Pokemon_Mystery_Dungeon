@@ -91,21 +91,21 @@ void entity_attack(entity_t *entity, capacity_t *capacity, map_t *map,
 		   entity_t *info[map->nb_case_x][map->nb_case_y])
 {
 	set_anime_atk(entity);
-	if (INFO) {
+	if (INFO(*entity)) {
 		size_t attack = STATATK(*entity, *capacity);
 		size_t power = capacity->power;
-		size_t defense = STATDEF(*INFO, *capacity);
+		size_t defense = STATDEF(*INFO(*entity), *capacity);
 		size_t damage = (entity->level * 0.4 + 2) * attack * power;
 
 		damage /= defense * 50 + 2;
 		damage *= (rand() % (100 - 85 + 1) + 85) / 100.0;
-		printf("%s : %ld - %ld = ", capacity->name, INFO->life, damage);
-		if (INFO->life > damage)
-			INFO->life -= damage;
+		printf("%s : %ld - %ld = ", capacity->name, INFO(*entity)->life, damage);
+		if (INFO(*entity)->life > damage)
+			INFO(*entity)->life -= damage;
 		else
-			INFO->life = 0;
-		printf("%ld\n", INFO->life);
-		set_anime_hurt(INFO);
+			INFO(*entity)->life = 0;
+		printf("%ld\n", INFO(*entity)->life);
+		set_anime_hurt(INFO(*entity));
 	}
 }
 
@@ -166,6 +166,69 @@ bool manage_input(entity_t *entity, map_t *map,
 	return (false);
 }
 
+entity_t *get_cible(entity_t *entity, map_t *map,
+		    entity_t *info[map->nb_case_x][map->nb_case_y])
+{
+	size_t dist = 10;
+	size_t i_min = (entity->pos.x - (ssize_t)dist >= 0 ? entity->pos.x - dist : 0);
+	size_t j_min = (entity->pos.y - (ssize_t)dist >= 0 ? entity->pos.y - dist : 0);
+	size_t i_max = (entity->pos.x + dist <= map->nb_case_x - 1 ? entity->pos.x + dist : map->nb_case_x - 1);
+	size_t j_max = (entity->pos.y + dist <= map->nb_case_y - 1 ? entity->pos.y + dist : map->nb_case_y - 1);
+
+	for (size_t i = i_min; i < i_max; i++)
+		for (size_t j = j_min; j < j_max; j++)
+			if (info[i][j] && info[i][j]->ia == 0)
+				return (info[i][j]);
+	return (NULL);
+}
+
+void ia2(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y], size_t x, size_t y)
+{
+	for (char i = -1; i <= 1; i++)
+		for (char j = -1; j <= 1; j++)
+			if (map->tab[x + i][y + j].type == GROUND && tab[x + i][y + j] == 0) //
+				tab[x + i][y + j] = tab[x][y] + 1;
+}
+
+size_t ia(entity_t *entity, map_t *map,
+	  entity_t *info[map->nb_case_x][map->nb_case_y])
+{
+	size_t input = 0;
+	entity_t *cible = get_cible(entity, map, info);
+
+	if (cible) {
+		size_t tab[map->nb_case_x][map->nb_case_y];
+
+		for (size_t i = 0; i < map->nb_case_x; i++)
+			for (size_t j = 0; j < map->nb_case_y; j++)
+				tab[i][j] = 0;
+		tab[cible->pos.x][cible->pos.y] = 1;
+		for (size_t n = 1; n <= 10; n++)
+			for (size_t i = 1; i < map->nb_case_x - 1; i++)
+				for (size_t j = 1; j < map->nb_case_y - 1; j++)
+					if (tab[i][j] == n)
+						ia2(map, tab, i, j);
+		if (tab[entity->pos.x][entity->pos.y] == 0)
+			input = (rand() % 0b1111 + 1) | MOVE | WAIT;
+		else
+			for (char i = -1; i <= 1; i++)
+				for (char j = -1; j <= 1; j++)
+					if (tab[entity->pos.x + i][entity->pos.y + j] < tab[entity->pos.x][entity->pos.y] && tab[entity->pos.x + i][entity->pos.y + j] != 0) {
+						i == -1 ? input |= LEFT : 0;
+						i == 1 ? input |= RIGHT : 0;
+						j == -1 ? input |= UP : 0;
+						j == 1 ? input |= DOWN : 0;
+						if (info[entity->pos.x + i][entity->pos.y + j])
+							input |= ATTACK;
+						else
+							input |= MOVE;
+					}
+	}
+	else
+		input = (rand() % 0b1111 + 1) | MOVE | WAIT;
+	return (input);
+}
+
 bool entity_set_dir(entity_t *entity, map_t *map,
 		    entity_t *info[map->nb_case_x][map->nb_case_y],
 		    sfEvent *event)
@@ -197,7 +260,7 @@ bool entity_set_dir(entity_t *entity, map_t *map,
 			input |= WAIT;
 	}
 	else
-		input = (rand() % 0b1111 + 1) | MOVE | WAIT;
+		input = ia(entity, map, info);
 	return (manage_input(entity, map, info, input));
 }
 

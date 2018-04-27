@@ -20,9 +20,9 @@
 #define LIFE_RECT 10, 10, 10, 50
 
 // code_macros
-#define NEW_X entity->pos.x + entity->dir.x
-#define NEW_Y entity->pos.y + entity->dir.y
-#define INFO info[NEW_X][NEW_Y]
+#define NEW_X(entity) (entity).pos.x + (entity).dir.x
+#define NEW_Y(entity) (entity).pos.y + (entity).dir.y
+#define INFO(entity) info[NEW_X(entity)][NEW_Y(entity)]
 #define STAT(entity, stat) ((entity).base_stat.stat			\
 			    + (entity).ev.stat + (entity).iv.stat)	\
 	* ((entity).level / 100.0) * ((entity).boost.stat * 0.5 + 1.0)
@@ -30,6 +30,13 @@
 		STAT(entity, atk) : STAT(entity, spa)
 #define STATDEF(entity, capacity) (capacity).category == PHYSICAL ?	\
 		STAT(entity, def) : STAT(entity, spd)
+#define CAN_MOVE(entity) !INFO(entity)					\
+	&& (map->tab[NEW_X(entity)][NEW_Y(entity)].type == GROUND	\
+	    || (map->tab[NEW_X(entity)][NEW_Y(entity)].type == WATER	\
+		&& ((entity).type == TYPE_WATER				\
+		    || (entity).type == TYPE_FLYING			\
+		    || (entity).type2 == TYPE_WATER			\
+		    || (entity).type2 == TYPE_FLYING)))
 
 typedef struct {
 	ssize_t life;

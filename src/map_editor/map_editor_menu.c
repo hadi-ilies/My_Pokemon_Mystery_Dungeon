@@ -15,14 +15,17 @@ int map_editor_menu(sfRenderWindow *window)
 
 	map = map_load("map_test");
 	if (map.error != MAP_OK)
-	  return (84);
-	tile_map = tile_map_create_from_file("resources/texture/tile_map/grassy_config");
+		return (84);
+	tile_map = tile_map_create_from_file("resources/tile_map/Forest config");
+
+	if (tile_map.error != TILE_MAP_OK)
+		return (84);
 	map.tile_map = &tile_map;
 	map.size.x = 100;
 	map.size.y = map.size.x;
 	map.pos.x = map.nb_case_x / 2;
 	map.pos.y = map.nb_case_y / 2;
-	map_random(&map);//tmp
+	//map_random(&map);//tmp
 	map_editor_loop(window, &map);
 	map_save(&map, "map_test");
 	map_destroy(&map);
