@@ -11,10 +11,12 @@
 #include "main_menu/menu.h"
 #include "map_editor_function.h"
 
-void new_map(menu_t *menu, map_t *map)
+void new_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 {
-	if (load_the_map(map, &menu->tile_map[0]) == 84)
-		return;
-	else
-		menu->button = 4;
+	 option_editor_t option = param_map(menu, NULL, window);
+	 char *str = sfText_getString(option.text[option.nb_tile]);
+
+	 *map = map_create(option.size_x, option.size_y,
+			concat("resources/tile_map/", str));
+	 map_random(map);
 }

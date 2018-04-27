@@ -43,25 +43,27 @@ void display_options_editor(option_editor_t *option, sfRenderWindow *window)
 	sfRenderWindow_drawText(window, option->size_map_y, NULL);
 }
 
-void param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
+option_editor_t param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 {
 	sfEvent event;
-	option_editor_t option = option_editor_create(window);
+	option_editor_t option = option_editor_create(window, map);
 
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (sfKeyboard_isKeyPressed(sfKeyEscape) || map->error != MAP_OK)
-				return;
 			move_curseur_option_editor(&option, &event);
 			size_tile_map_x(&event, window, &option);
 			size_tile_map_y(&event, window, &option);
-			map_resize(map, option.size_x, option.size_y);
 			change_tile_map(window, &option, &event);
-			menu->tile_map[0] = tile_map_create_from_file(TILEFILE);
-			map->tile_map = menu->tile_map[0];//tmp
-		}
+			if (map != NULL) {
+				map_resize(map, option.size_x, option.size_y);
+				menu->tile_map[0] = tile_map_create_from_file(TILEFILE);
+				map->tile_map = menu->tile_map[0];//tmp
+			}
+		} if (sfKeyboard_isKeyPressed(sfKeyEscape))
+			  break;
 		sfRenderWindow_clear(window, sfBlack);
 		display_options_editor(&option, window);
 		sfRenderWindow_display(window);
 	}
+	return (option);
 }

@@ -15,7 +15,6 @@
 void launch_map(map_t *map, sfRenderWindow *window)
 {
 	map_editor_loop(window, map);
-	map_save(map, "resources/maps/map_test");
 }
 
 bool enter_editor(sfRenderWindow *window, menu_t *menu, sfEvent *event,	map_t *map)
@@ -27,7 +26,7 @@ bool enter_editor(sfRenderWindow *window, menu_t *menu, sfEvent *event,	map_t *m
 			menu_save_map(map, window);
 			printf("save\n");
 		} if (menu->button == 2) {
-			new_map(menu, map);
+			new_map(menu, map, window);
 			printf("new map\n");
 		} if (menu->button == 3) {
 			printf("load\n");

@@ -29,7 +29,7 @@ typedef struct {
 } option_editor_t;
 
 void move_curseur_option_editor(option_editor_t *option, sfEvent *event);
-option_editor_t option_editor_create(sfRenderWindow *window);
+option_editor_t option_editor_create(sfRenderWindow *window, map_t *map);
 void size_tile_map_x(sfEvent *event,
 		sfRenderWindow *window, option_editor_t *option);
 void size_tile_map_y(sfEvent *event,

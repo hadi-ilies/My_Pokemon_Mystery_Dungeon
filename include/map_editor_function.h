@@ -36,7 +36,7 @@ void menu_map_editor_menu(sfRenderWindow *window);
 void display_menu_editor(sfRenderWindow *window, menu_t *menu, loading_t *back);
 size_t count_file(char *path);
 char **take_filename(char *path);
-void new_map(menu_t *menu, map_t *map);
+void new_map(menu_t *menu, map_t *map, sfRenderWindow *window);
 int load_the_map(map_t *map, tile_map_t *tile_map);
 void menu_save_map(map_t *map, sfRenderWindow *window);
 #endif

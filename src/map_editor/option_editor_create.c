@@ -61,7 +61,7 @@ void create_choose_tilemap(option_editor_t *option)
 	}
 }
 
-option_editor_t option_editor_create(sfRenderWindow *window)
+option_editor_t option_editor_create(sfRenderWindow *window, map_t *map)
 {
 	option_editor_t option;
 
@@ -71,16 +71,27 @@ option_editor_t option_editor_create(sfRenderWindow *window)
 	create_choose_tilemap(&option);
 	create_and_setchoice_curs(&option);
 	option.screen = create_screen_param(window);
-	option.back =  create_back_param(window);
+	option.back = create_back_param(window);
 	option.size_map_x = sfText_create();
 	option.size_map_y = sfText_create();
 	sfText_setFont(option.size_map_y, option.font);
 	sfText_setFont(option.size_map_x, option.font);
-	sfText_setString(option.size_map_x, "50");
-	sfText_setString(option.size_map_y, "50");
-	option.nb_tile = 0;
-	option.size_x = 50;
-	option.size_y = 50;
-	option.choice_curs = 0;
+	if (map == NULL) {
+		sfText_setString(option.size_map_x, "50");
+		sfText_setString(option.size_map_y, "50");
+		option.nb_tile = 0;
+		option.size_x = 50;
+		option.size_y = 50;
+		option.choice_curs = 0;
+	} else {
+		sfText_setString(option.size_map_x, inttostr(map->nb_case_x));
+		sfText_setString(option.size_map_y, inttostr(map->nb_case_y));
+		sfText_setString(option.text[0], map->tile_map_file_name);
+		option.size_x = map->nb_case_x;
+		option.size_y = map->nb_case_y;
+		option.choice_curs = 0;
+		option.nb_tile = 0;
+
+	}
 	return (option);
 }
