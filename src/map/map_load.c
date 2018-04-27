@@ -46,7 +46,6 @@ map_t map_load(char *file_name)
 	}
 	tile_map_file_name[len] = '\0';
 	map.tile_map = tile_map_create_from_file(tile_map_file_name);
-	free(tile_map_file_name);
 	if (map.tile_map.error != TILE_MAP_OK) {
 		map.error = MAP_TILE_MAP;
 		return (map);

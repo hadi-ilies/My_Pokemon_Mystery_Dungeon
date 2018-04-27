@@ -40,6 +40,7 @@ typedef struct {
 	tva_t **tab;
 	sfVector2f size;
 	sfVector2f pos;
+	char *tile_map_file_name;
 	tile_map_t tile_map;
 	size_t error;
 } map_t;
