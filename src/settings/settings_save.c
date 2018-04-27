@@ -29,5 +29,6 @@ void settings_save(settings_t *settings, char *file_name)
 	my_fprintf(fd, "%s %d\n", "KeyWait:", settings->key[KEY_WAIT]);
 	my_fprintf(fd, "%s %d\n", "KeyRotate:", settings->key[KEY_ROTATE]);
 	my_fprintf(fd, "%s %d\n", "KeyAttack:", settings->key[KEY_ATTACK]);
+	my_fprintf(fd, "%s %d\n", "KeyInventory:", settings->key[KEY_INVENTORY]);
 	close(fd);
 }

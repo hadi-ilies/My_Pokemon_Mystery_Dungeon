@@ -68,6 +68,8 @@ static void get_key(settings_t *settings, char **tab)
 		settings->key[KEY_ROTATE] = get_sfkeycode(tab[1]);
 	if (my_strcmp(tab[0], "KeyAttack:") == 0)
 		settings->key[KEY_ATTACK] = get_sfkeycode(tab[1]);
+	if (my_strcmp(tab[0], "KeyInventory:") == 0)
+		settings->key[KEY_INVENTORY] = get_sfkeycode(tab[1]);
 }
 
 static void get_settings(settings_t *settings, char *line)

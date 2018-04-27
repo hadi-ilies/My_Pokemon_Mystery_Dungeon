@@ -11,7 +11,7 @@ void map_aff(sfRenderWindow *window, map_t *map)
 {
 	sfVector2u win_size = sfRenderWindow_getSize(window);
 	sfVector2f center = {win_size.x / 2, win_size.y / 2};
-	tile_map_t *tile_map = map->tile_map;
+	tile_map_t *tile_map = &map->tile_map;
 	size_t i_min = X_MIN;
 	size_t i_max = X_MAX;
 	size_t j_min = Y_MIN;

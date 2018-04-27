@@ -23,5 +23,6 @@ settings_t settings_defaut(void)
 	settings.key[KEY_WAIT] = sfKeyW;
 	settings.key[KEY_ROTATE] = sfKeyLShift;
 	settings.key[KEY_ATTACK] = sfKeySpace;
+	settings.key[KEY_INVENTORY] = sfKeyI;
 	return (settings);
 }

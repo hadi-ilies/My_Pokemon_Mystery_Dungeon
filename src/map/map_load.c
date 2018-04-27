@@ -5,6 +5,7 @@
 ** map_load.c
 */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include "map.h"
@@ -15,6 +16,8 @@ map_t map_load(char *file_name)
 	map_t map;
 	size_t nb_case_x;
 	size_t nb_case_y;
+	size_t len;
+	char *name;
 
 	if (fd == -1) {
 		map.error = MAP_OPEN;
@@ -38,5 +41,25 @@ map_t map_load(char *file_name)
 				return (map);
 			}
 		}
+	if (read(fd, &len, sizeof(size_t)) != sizeof(size_t)) {
+		map.error = MAP_READ;
+		return (map);
+	}
+	name = malloc(sizeof(char) * (len + 1));
+	if (name == NULL) {
+		map.error = MAP_MALLOC;
+		return (map);
+	}
+	if (read(fd, &name, len) != (int)len) {
+		map.error = MAP_READ;
+		return (map);
+	}
+	name[len] = '\0';
+	map.tile_map = tile_map_create_from_file(name);
+	free(name);
+	if (map.tile_map.error != TILE_MAP_OK) {
+		map.error = MAP_TILE_MAP;
+		return (map);
+	}
 	return (map);
 }

@@ -12,7 +12,6 @@ void map_param_set_to_0(map_t *map)
 {
 	map->size = (sfVector2f){0, 0};
 	map->pos = (sfVector2f){0, 0};
-	map->tile_map = NULL;
 }
 
 map_t map_create(size_t nb_case_x, size_t nb_case_y)

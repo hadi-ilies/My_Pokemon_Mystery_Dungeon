@@ -20,6 +20,7 @@ enum key {
 	KEY_WAIT,
 	KEY_ROTATE,
 	KEY_ATTACK,
+	KEY_INVENTORY,
 	NB_KEY
 };
 
