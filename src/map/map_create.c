@@ -12,6 +12,9 @@ static void map_param_set_to_0(map_t *map)
 {
 	map->size = (sfVector2f){0, 0};
 	map->pos = (sfVector2f){0, 0};
+	for (size_t i = 0; i < map->nb_case_x; i++)
+		for (size_t j = 0; j < map->nb_case_y; j++)
+			map->tab[i][j] = (tva_t){0, 0, 0};
 }
 
 map_t map_create(size_t nb_case_x, size_t nb_case_y, char *tile_map_file_name)
