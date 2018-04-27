@@ -59,9 +59,8 @@ option_editor_t param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 				map->tile_map_file_name = TILEFILE;
 				map->tile_map = tile_map_create_from_file(TILEFILE);
 			}
-		} if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
+		} if (sfKeyboard_isKeyPressed(sfKeyEscape))
 			break;
-		}
 		sfRenderWindow_clear(window, sfBlack);
 		display_options_editor(&option, window);
 		sfRenderWindow_display(window);

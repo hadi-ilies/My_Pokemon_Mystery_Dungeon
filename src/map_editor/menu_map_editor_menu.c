@@ -30,6 +30,7 @@ bool enter_editor(sfRenderWindow *window, menu_t *menu,
 			new_map(menu, map, window);
 			printf("new map\n");
 		} if (menu->button == 3) {
+			load_editor_loop(menu, map, window);
 			printf("load\n");
 		} if (menu->button == 4 && map->error != 84) {
 			param_map(menu, map, window);
