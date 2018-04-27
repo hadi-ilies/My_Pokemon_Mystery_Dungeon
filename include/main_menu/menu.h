@@ -11,7 +11,7 @@
 
 #define BACK "resources/texture/menu/back/1.png"
 #define FONT "resources/font/pokemon_char.ttf"
-#define ITEM "titre.png"
+#define ITEM "resources/texture/titre.png"
 #define NB_BUTTON 6
 #define BACK_OPTION "resources/texture/menu/option.png"
 #define NB_BUTTON_EDITOR 6

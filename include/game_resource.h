@@ -15,10 +15,10 @@
 
 // file_macros
 #define GAME_FONT "resources/font/Minecraftia.ttf"
-#define CAPACITY_UP "Bup.png"
-#define CAPACITY_LEFT "Bleft.png"
-#define CAPACITY_RIGHT "Bright.png"
-#define CAPACITY_DOWN "Bdown.png"
+#define CAPACITY_UP "resources/texture/Bup.png"
+#define CAPACITY_LEFT "resources/texture/Bleft.png"
+#define CAPACITY_RIGHT "resources/texture/Bright.png"
+#define CAPACITY_DOWN "resources/texture/Bdown.png"
 
 typedef struct {
 	size_t nb_tile_map;
