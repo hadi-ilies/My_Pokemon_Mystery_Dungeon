@@ -22,4 +22,4 @@ void choice_cursor_save(save_editor_t *save, sfRenderWindow *window);
 void move_curseur_save_editor(save_editor_t *save, sfEvent *event);
 void take_keyboard(save_editor_t *save, sfEvent *event,
 		sfRenderWindow *window);
-void ok_map(save_editor_t *save, sfEvent *event, map_t *map);
+bool ok_map(save_editor_t *save, sfEvent *event, map_t *map);

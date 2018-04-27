@@ -23,13 +23,20 @@ void take_keyboard(save_editor_t *save, sfEvent *event, sfRenderWindow *window)
 			(sfVector2f) {WINDOW_SIZE.x / 2 - 150, WINDOW_SIZE.y / 2 - 300});
 }
 
-void ok_map(save_editor_t *save, sfEvent *event, map_t *map)
+bool ok_map(save_editor_t *save, sfEvent *event, map_t *map)
 {
 	char *str;
 
 	if (save->choice_curs == 1 && event->type == sfEvtKeyPressed
 	&& event->key.code == sfKeyReturn) {
-		str = concat("resources/maps/", save->name_file);
-		map_save(map, str);
+		if (save->name_file == NULL || save->name_file[0] == '\0')
+			return (true);
+		else {
+			str = concat("resources/maps/", save->name_file);
+			map_save(map, str);
+			free(str);
+			return (false);
+		}
 	}
+	return (true);
 }

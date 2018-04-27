@@ -28,11 +28,11 @@ void menu_save_map(map_t *map, sfRenderWindow *window)
 
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (sfKeyboard_isKeyPressed(sfKeyEscape))
+			if (sfKeyboard_isKeyPressed(sfKeyEscape)
+			|| ok_map(&save, &event, map) == false)
 				return;
 			move_curseur_save_editor(&save, &event);
 			take_keyboard(&save, &event, window);
-			ok_map(&save, &event, map);
 		}
 		sfRenderWindow_clear(window, sfBlack);
 		display_save_editor(&save, window);

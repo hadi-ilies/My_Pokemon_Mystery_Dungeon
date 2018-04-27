@@ -28,9 +28,13 @@ char *inttostr(int nb)
 
 char *concat(char *s1, char *s2)
 {
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
 	int c = 0;
 	char *str = malloc(sizeof(char) * (my_strlen(s1) + my_strlen(s2) + 1));
 
+	if (str == NULL)
+		return (NULL);
 	for (int i = 0; s1[i] != '\0'; i++) {
 		str[c] = s1[i];
 		c++;

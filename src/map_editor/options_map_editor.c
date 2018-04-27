@@ -56,11 +56,12 @@ option_editor_t param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 			change_tile_map(window, &option, &event);
 			if (map != NULL) {
 				map_resize(map, option.size_x, option.size_y);
-				menu->tile_map[0] = tile_map_create_from_file(TILEFILE);
-				map->tile_map = menu->tile_map[0];//tmp
+				map->tile_map_file_name = TILEFILE;
+				map->tile_map = tile_map_create_from_file(TILEFILE);
 			}
-		} if (sfKeyboard_isKeyPressed(sfKeyEscape))
-			  break;
+		} if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
+			break;
+		}
 		sfRenderWindow_clear(window, sfBlack);
 		display_options_editor(&option, window);
 		sfRenderWindow_display(window);

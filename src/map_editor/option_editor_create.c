@@ -61,6 +61,45 @@ void create_choose_tilemap(option_editor_t *option)
 	}
 }
 
+void tile_map_stock(option_editor_t *option, map_t *map)
+{
+	char **filename = take_filename("resources/tile_map");
+	size_t nb_file = count_file("resources/tile_map");
+
+	for (size_t i = 0; i < nb_file; i++) {
+		char *str = concat("resources/tile_map/", filename[i]);
+
+		if (my_strcmp(str, map->tile_map_file_name) == 0) {
+			option->nb_tile = i;
+			free(str);
+			break;
+		}
+		free(str);
+	} for (size_t i = 0; i < nb_file; i++)
+		free(filename[i]);
+	free(filename);
+}
+
+void stock_map(option_editor_t *option, map_t *map)
+{
+	if (map == NULL) {
+		sfText_setString(option->size_map_x, "50");
+		sfText_setString(option->size_map_y, "50");
+		option->nb_tile = 0;
+		option->size_x = 50;
+		option->size_y = 50;
+		option->choice_curs = 0;
+	} else {
+		sfText_setString(option->size_map_x, inttostr(map->nb_case_x));
+		sfText_setString(option->size_map_y, inttostr(map->nb_case_y));
+		sfText_setString(option->text[0], map->tile_map_file_name);
+		option->size_x = map->nb_case_x;
+		option->size_y = map->nb_case_y;
+		option->choice_curs = 0;
+		tile_map_stock(option, map);
+	}
+}
+
 option_editor_t option_editor_create(sfRenderWindow *window, map_t *map)
 {
 	option_editor_t option;
@@ -76,22 +115,6 @@ option_editor_t option_editor_create(sfRenderWindow *window, map_t *map)
 	option.size_map_y = sfText_create();
 	sfText_setFont(option.size_map_y, option.font);
 	sfText_setFont(option.size_map_x, option.font);
-	if (map == NULL) {
-		sfText_setString(option.size_map_x, "50");
-		sfText_setString(option.size_map_y, "50");
-		option.nb_tile = 0;
-		option.size_x = 50;
-		option.size_y = 50;
-		option.choice_curs = 0;
-	} else {
-		sfText_setString(option.size_map_x, inttostr(map->nb_case_x));
-		sfText_setString(option.size_map_y, inttostr(map->nb_case_y));
-		sfText_setString(option.text[0], map->tile_map_file_name);
-		option.size_x = map->nb_case_x;
-		option.size_y = map->nb_case_y;
-		option.choice_curs = 0;
-		option.nb_tile = 0;
-
-	}
+	stock_map(&option, map);
 	return (option);
 }

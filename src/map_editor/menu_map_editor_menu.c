@@ -17,12 +17,13 @@ void launch_map(map_t *map, sfRenderWindow *window)
 	map_editor_loop(window, map);
 }
 
-bool enter_editor(sfRenderWindow *window, menu_t *menu, sfEvent *event,	map_t *map)
+bool enter_editor(sfRenderWindow *window, menu_t *menu,
+		sfEvent *event,	map_t *map)
 {
 	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyReturn) {
 		if (menu->button == 0) {
 			launch_map(map, window);
-		} if (menu->button == 1) {
+		} if (menu->button == 1 && map->error != 84) {
 			menu_save_map(map, window);
 			printf("save\n");
 		} if (menu->button == 2) {
@@ -30,7 +31,7 @@ bool enter_editor(sfRenderWindow *window, menu_t *menu, sfEvent *event,	map_t *m
 			printf("new map\n");
 		} if (menu->button == 3) {
 			printf("load\n");
-		} if (menu->button == 4) {
+		} if (menu->button == 4 && map->error != 84) {
 			param_map(menu, map, window);
 			printf("options\n");
 		} if (menu->button == 5) {
@@ -62,7 +63,7 @@ int load_the_map(map_t *map, tile_map_t *tile_map)
 
 void menu_map_editor_menu(sfRenderWindow *window)
 {
-	map_t map;
+	map_t map = {.error = 84};
 	sfEvent event;
 	loading_t back = back_editor_create(window);
 	menu_t menu = menu_editor_create();

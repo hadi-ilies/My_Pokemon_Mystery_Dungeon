@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2017
+1;4804;0c** EPITECH PROJECT, 2017
 ** my_rpg_2017
 ** File description:
 ** prototype.h
@@ -18,7 +18,7 @@
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
 #define WINDOW_BITS_PER_PIXEL 32
-#define WINDOW_PARAMS sfFullscreen
+#define WINDOW_PARAMS sfClose
 #define FRAMERATE_LIMIT 30
 
 int main_menu(sfRenderWindow *window);
