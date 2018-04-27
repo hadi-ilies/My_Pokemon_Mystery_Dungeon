@@ -33,5 +33,6 @@ void map_save(map_t *map, char *file_name)
 				map->error = MAP_WRITE;
 				return;
 			}
+	//map
 	close(fd);
 }

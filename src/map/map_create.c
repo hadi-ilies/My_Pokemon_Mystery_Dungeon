@@ -8,13 +8,13 @@
 #include <stdlib.h>
 #include "map.h"
 
-void map_param_set_to_0(map_t *map)
+static void map_param_set_to_0(map_t *map)
 {
 	map->size = (sfVector2f){0, 0};
 	map->pos = (sfVector2f){0, 0};
 }
 
-map_t map_create(size_t nb_case_x, size_t nb_case_y)
+map_t map_create(size_t nb_case_x, size_t nb_case_y, char *tile_map_file_name)
 {
 	map_t map = {.nb_case_x = nb_case_x, .nb_case_y = nb_case_y};
 
@@ -36,5 +36,10 @@ map_t map_create(size_t nb_case_x, size_t nb_case_y)
 		}
 	}
 	map_param_set_to_0(&map);
+	map.tile_map = tile_map_create_from_file(tile_map_file_name);
+	if (map.tile_map.error != TILE_MAP_OK) {
+		map.error = MAP_TILE_MAP;
+		return (map);
+	}
 	return (map);
 }
