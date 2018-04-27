@@ -30,7 +30,6 @@ SRC		=	$(SRCDIR)main.c \
 			$(MENUDIR)menu_create.c \
 			$(MENUDIR)display_menu.c \
 			$(MENUDIR)cursor_menu.c \
-			$(MENUDIR)set_icon.c \
 			$(MENUDIR)menu_destroy.c \
 			$(MENUDIR)text_menu.c \
 			$(MENUDIR)option.c \

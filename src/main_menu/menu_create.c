@@ -44,6 +44,6 @@ menu_t menu_create(void)
 	text(&menu);
 	menu.button = 0;
 	menu.tile_map = NULL;
-	menu.settings = create_setting();
+	menu.settings = settings_load("resources/config");
 	return (menu);
 }
