@@ -20,7 +20,7 @@ int map_editor_menu(sfRenderWindow *window)
 
 	if (tile_map.error != TILE_MAP_OK)
 		return (84);
-	map.tile_map = &tile_map;
+	map.tile_map = tile_map;
 	map.size.x = 100;
 	map.size.y = map.size.x;
 	map.pos.x = map.nb_case_x / 2;
