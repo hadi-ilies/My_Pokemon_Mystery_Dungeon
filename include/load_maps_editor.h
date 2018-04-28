@@ -9,10 +9,12 @@
 #pragma once
 
 typedef struct {
+	sfText *choice[2];
 	sfRectangleShape *back;
 	sfText **text;
 	sfFont *font;
 	sfSprite *screen;
-	int choice_curs;
+	size_t choice_curs;
+	size_t text_curs;
 	char *name_file;
 }load_editor_t;
