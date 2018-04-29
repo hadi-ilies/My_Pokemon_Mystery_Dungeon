@@ -59,19 +59,19 @@ load_editor_t load_editor_create(sfRenderWindow *window)
 		sfText_setFont(load.text[i], load.font);
 	}
 	load.choice_curs = 0;
-	load.text_curs = 2;
+	load.text_curs = 0;
 	load.name_file = NULL;
 	return (load);
 }
 
 void move_curseur_load_editor(load_editor_t *load, sfEvent *event)
-{//
+{
 	if (event && event->type == sfEvtKeyPressed) {
 		if (sfKeyboard_isKeyPressed(sfKeyUp)
 		&& load->choice_curs > 0) {
 			load->choice_curs--;
 		} if (sfKeyboard_isKeyPressed(sfKeyDown)
-		&& load->choice_curs < 1) {
+		      && load->choice_curs < 1) {
 			load->choice_curs++;
 		}
 	}
@@ -91,7 +91,7 @@ void load_list_choice_cursor(load_editor_t *load, sfRenderWindow *window)
 		load->text_curs = 0;
 	} for (size_t j = i - 5; j < i; j++) {
 		sfText_setPosition(load->text[j],
-				   (sfVector2f) {WINDOW_SIZE.x / 2 + 500, pos_y});
+				(sfVector2f) {WINDOW_SIZE.x / 2 + 500, pos_y});
 		sfText_setColor(load->text[j], (sfColor){250, 250, 0,
 						load->text_curs == j ? 255 : 180});
 		sfRenderWindow_drawText(window, load->text[j], NULL);
@@ -133,7 +133,7 @@ void insert_maps_text(load_editor_t *load)
 		sfText_setString(load->text[i], filename[i]);
 }
 
-void maps_list(map_t *map, sfRenderWindow *window, load_editor_t *load)
+char *maps_list(map_t *map, sfRenderWindow *window, load_editor_t *load)
 {
 	sfEvent event;
 	sfRectangleShape *back = create_back_param(window);
@@ -144,7 +144,9 @@ void maps_list(map_t *map, sfRenderWindow *window, load_editor_t *load)
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			if (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape) {
 				//destroy back and screnn
-				return;
+				return (NULL);
+			} if (event.type == sfEvtKeyPressed && event.key.code == sfKeyReturn) {
+				return ((char *)sfText_getString(load->text[load->text_curs]));
 			}
 			move_curseur_load_list(load, &event);
 		}
@@ -152,15 +154,22 @@ void maps_list(map_t *map, sfRenderWindow *window, load_editor_t *load)
 		display_load_list(load, window, back, screen);
 		sfRenderWindow_display(window);
 	}
-
+	return (NULL);
 }
 bool load_entry(map_t *map, sfRenderWindow *window, load_editor_t *load, sfEvent *event)
 {
 	if (event && event->type == sfEvtKeyPressed) {
 		if (event->key.code == sfKeyReturn && load->choice_curs == 0) {
-			maps_list(map, window, load);
-		} if (event->key.code == sfKeyReturn && load->choice_curs == 1)
+			load->name_file = maps_list(map, window, load);
+		} if (event->key.code == sfKeyReturn && load->choice_curs == 1) {
+			char *str = concat("resources/maps/", load->name_file);
+
+			if (str == NULL)
+				return (false);
+			*map = map_load(str);
+			//printf("%d|%d\n", map->nb_case_x, map->nb_case_y);
 			return (true);
+		}
 	}
 	return (false);
 }
@@ -176,8 +185,10 @@ void load_editor_loop(menu_t *menu, map_t *map, sfRenderWindow *window)
 				//destroy back and screnn
 				return;
 			}
-			load_entry(map, window, &load, &event);
-			move_curseur_load_editor(&load, &event);
+			if (load_entry(map, window, &load, &event) == true)
+				//destroy back and screnn
+				return;
+				move_curseur_load_editor(&load, &event);
 		}
 		sfRenderWindow_clear(window, sfBlack);
 		display_load_editor(&load, window);
