@@ -45,12 +45,11 @@ bool transition(sfRenderWindow *window)
 int main_intro(sfRenderWindow *window, sfEvent *event)
 {
 	sfMusic *music[3];
-	loading_t load = loading_create(window);
 	anime_tab_t animation = anime_tab_create_from_file(ANIME_START_FILE);
 	video_t video = video_create_from_file(ANIME_INTRO_FILE);
 	bool exit = false;
 
-	if (destroy_and_check_error_anime(&animation, &load, &video) == 1)
+	if (destroy_and_check_error_anime(&animation, &video) == 1)
 		return (0);
 	music_create(music);
 	while(sfRenderWindow_isOpen(window)) {

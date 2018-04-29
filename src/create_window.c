@@ -25,6 +25,18 @@ void set_icon(sfRenderWindow *window, char *file_name)
 		set_icon(window, file_name);
 }
 
+loading_t loading_create(sfRenderWindow *window)
+{
+	loading_t optional;
+
+	optional.sprite = sfSprite_create();
+	optional.texture = sfTexture_createFromFile(LOAD, NULL);
+	sfSprite_setTexture(optional.sprite, optional.texture, sfTrue);
+	sfRenderWindow_drawSprite(window, optional.sprite, NULL);
+	sfRenderWindow_display(window);
+	return (optional);
+}
+
 sfRenderWindow *window_create(void)
 {
 	sfVideoMode mode = {WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_BITS_PER_PIXEL};
@@ -34,6 +46,10 @@ sfRenderWindow *window_create(void)
 	if (window == NULL)
 		return (NULL);
 	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
+	loading_t load = loading_create(window);
+
 	set_icon(window, ICON);
+	sfSprite_destroy(load.sprite);
+	sfTexture_destroy(load.texture);
 	return (window);
 }

@@ -156,6 +156,7 @@ char *maps_list(map_t *map, sfRenderWindow *window, load_editor_t *load)
 	}
 	return (NULL);
 }
+
 bool load_entry(map_t *map, sfRenderWindow *window, load_editor_t *load, sfEvent *event)
 {
 	if (event && event->type == sfEvtKeyPressed) {

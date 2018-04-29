@@ -53,7 +53,7 @@ void get_start(anime_tab_t *animation, sfMusic *music[3],
 		cond == false ? COND_WIDTH : 0;
 	}
 }
-
+/*
 loading_t loading_create(sfRenderWindow *window)
 {
 	loading_t optional;
@@ -64,4 +64,4 @@ loading_t loading_create(sfRenderWindow *window)
 	sfRenderWindow_drawSprite(window, optional.sprite, NULL);
 	sfRenderWindow_display(window);
 	return (optional);
-}
+}*/
