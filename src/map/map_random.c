@@ -35,7 +35,11 @@ sfVector2i take_origin(map_t *map, sfVector2i *size)
 
 void map_random(map_t *map)
 {
-	size_t nb_room = rand_min_max(4, 20);
+	size_t area = map->nb_case_x * map->nb_case_y;
+	size_t min = 4;
+	size_t max = 20 % map->nb_case_x;
+	size_t nb_room = rand_min_max(min, max);
+
 	for (size_t i = 0; i < map->nb_case_x; i++)
 		for (size_t j = 0; j < map->nb_case_y; j++)
 			map->tab[i][j] = TVA(0, 0, 0);

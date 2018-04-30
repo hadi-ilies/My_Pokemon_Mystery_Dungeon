@@ -99,6 +99,21 @@ void load_list_choice_cursor(load_editor_t *load, sfRenderWindow *window)
 	}
 }
 
+void load_list_choice_min(load_editor_t *load, sfRenderWindow *window)
+{
+	int pos_y = WINDOW_SIZE.y / 2 - 300;
+	size_t nb_file = count_file("resources/maps");
+
+	for (size_t i = 0; i < nb_file; i++) {
+		sfText_setPosition(load->text[i],
+				(sfVector2f) {WINDOW_SIZE.x / 2 + 500, pos_y});
+		sfText_setColor(load->text[i], (sfColor){250, 250, 0,
+						load->text_curs == i ? 255 : 180});
+		sfRenderWindow_drawText(window, load->text[i], NULL);
+		pos_y += 100;
+	}
+}
+
 void display_load_list(load_editor_t *load, sfRenderWindow *window,
 		sfRectangleShape *back, sfSprite *screen)
 {
@@ -106,7 +121,9 @@ void display_load_list(load_editor_t *load, sfRenderWindow *window,
 	sfRectangleShape_setPosition(back, (sfVector2f) {WINDOW_SIZE.x / 2 + 600, WINDOW_SIZE.y / 2});
 	sfRenderWindow_drawSprite(window, screen, NULL);
 	sfRenderWindow_drawRectangleShape(window, back, NULL);
-	load_list_choice_cursor(load, window);
+	count_file("resources/maps") > 5  ?
+		load_list_choice_cursor(load, window) :
+		load_list_choice_min(load, window);
 }
 
 void move_curseur_load_list(load_editor_t *load, sfEvent *event)
