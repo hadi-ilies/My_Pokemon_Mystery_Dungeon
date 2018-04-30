@@ -41,15 +41,18 @@ void write_func(sfEvent *event, save_editor_t *save)
 {
 	for (sfKeyCode i = sfKeyA; i <= sfKeyZ; i++)
 		if (event->key.code == i)
-			save->name_file = add_letter(save->name_file, i + 'a');
+			save->name_file =
+			add_letter(save->name_file, i + 'a');
 	for (sfKeyCode i = sfKeyNum0; i <= sfKeyNum9; i++)
 		if (event->key.code == i)
-			save->name_file = add_letter(save->name_file, i - sfKeyNum0 + '0');
+			save->name_file =
+			add_letter(save->name_file, i - sfKeyNum0 + '0');
 	if (event->key.code == sfKeySpace)
 		save->name_file = add_letter(save->name_file, ' ');
 	for (sfKeyCode i = sfKeyNumpad0; i <= sfKeyNumpad9; i++)
 		if (event->key.code == i)
-			save->name_file = add_letter(save->name_file, i - sfKeyNumpad0 + '0');
+			save->name_file =
+			add_letter(save->name_file, i - sfKeyNumpad0 + '0');
 }
 
 void write_name(sfEvent *event, save_editor_t *save)
@@ -58,7 +61,8 @@ void write_name(sfEvent *event, save_editor_t *save)
 		if (my_strlen(save->name_file) < 20)
 			write_func(event, save);
 		if (event->key.code == sfKeyBack)
-			if (save->name_file != NULL && save->name_file[0] != '\0')
-				save->name_file = supr_last_letter(save->name_file);
+			if (save->name_file != NULL
+			&& save->name_file[0] != '\0')
+			save->name_file = supr_last_letter(save->name_file);
 	}
 }

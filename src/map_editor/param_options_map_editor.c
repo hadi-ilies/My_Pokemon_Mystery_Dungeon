@@ -26,7 +26,8 @@ void change_tile_map(sfRenderWindow *window,
 	for (size_t i = 0; i < nb_filename; i++)
 		sfText_setString(option->text[i], filename[i]);
 	if (option->choice_curs == 0) {
-		if (option->nb_tile < nb_filename - 1 && event->type == sfEvtKeyPressed
+		if (option->nb_tile < nb_filename - 1
+		&& event->type == sfEvtKeyPressed
 		&& event->key.code == sfKeyRight)
 			option->nb_tile++;
 		if (option->nb_tile > 0 && event->type == sfEvtKeyPressed
