@@ -83,6 +83,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(ENTDIR)entity_move.c \
 			$(ENTDIR)entity_get_move_pos.c \
 			$(ENTDIR)entity_aff.c \
+			$(ENTDIR)entity_level_up.c \
 			$(GAROUDIR)garou_create.c \
 			$(GAROUDIR)garou_destroy.c \
 			$(STGSDIR)settings_defaut.c \

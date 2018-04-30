@@ -106,6 +106,9 @@ void entity_attack(entity_t *entity, capacity_t *capacity, map_t *map,
 			INFO(*entity)->life = 0;
 		printf("%ld\n", INFO(*entity)->life);
 		set_anime_hurt(INFO(*entity));
+		//INFO(*entity)->dir.x = 0;
+		//INFO(*entity)->dir.y = 0;
+		//sfClock_restart(INFO(*entity)->clock);
 	}
 }
 
@@ -309,6 +312,76 @@ void entity_life_aff(sfRenderWindow *window, entity_t *entity, sfFloatRect rect)
 	sfRectangleShape_destroy(rectangle);
 }
 
+void inventory_aff(sfRenderWindow *window, garou_t *garou)
+{
+	sfRectangleShape *rectangle = sfRectangleShape_create();
+	sfRectangleShape *rectangle_ombre = sfRectangleShape_create();
+	sfTexture *texture = sfTexture_createFromFile(STAT_RECT, NULL);
+	sfTexture *texture_ombre = sfTexture_createFromFile(STAT_SHADOW, NULL);
+	sfFont *font = sfFont_createFromFile(GAME_FONT);
+	sfText *text = sfText_create();
+	char *str = malloc(sizeof(char) * 20);
+	sfVector2f size = {600, 600};
+
+	sfRectangleShape_setPosition(rectangle, (sfVector2f){250, 250});
+	sfRectangleShape_setPosition(rectangle_ombre, (sfVector2f){250 + size.x / 20, 250 + size.y / (6 * 2) - (30 * 2.666) / 2});
+	sfRectangleShape_setSize(rectangle, size);
+	sfRectangleShape_setSize(rectangle_ombre, (sfVector2f){500, 30 * 2.666});
+	sfRectangleShape_setTexture(rectangle, texture, sfTrue);
+	sfRectangleShape_setTexture(rectangle_ombre, texture_ombre, sfTrue);
+	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
+
+	sfText_setPosition(text, (sfVector2f){250 + size.x / 5, 250 + size.y / (6 * 2) - 30 / 2});
+	sfText_setFont(text, font);
+	sprintf(str, "HP : %ld/%ld\n", garou->entity[0].life, STAT(garou->entity[0], life));
+	sfText_setString(text, str);
+	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
+	sfRenderWindow_drawText(window, text, NULL);
+
+	sfText_move(text, (sfVector2f){0, size.y / 6});
+	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
+	sprintf(str, "atk : %ld\n", STAT(garou->entity[0], atk));
+	sfText_setString(text, str);
+	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
+	sfRenderWindow_drawText(window, text, NULL);
+
+	sfText_move(text, (sfVector2f){0, size.y / 6});
+	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
+	sprintf(str, "def : %ld\n", STAT(garou->entity[0], def));
+	sfText_setString(text, str);
+	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
+	sfRenderWindow_drawText(window, text, NULL);
+
+	sfText_move(text, (sfVector2f){0, size.y / 6});
+	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
+	sprintf(str, "spa : %ld\n", STAT(garou->entity[0], spa));
+	sfText_setString(text, str);
+	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
+	sfRenderWindow_drawText(window, text, NULL);
+
+	sfText_move(text, (sfVector2f){0, size.y / 6});
+	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
+	sprintf(str, "spd : %ld\n", STAT(garou->entity[0], spd));
+	sfText_setString(text, str);
+	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
+	sfRenderWindow_drawText(window, text, NULL);
+
+	sfText_move(text, (sfVector2f){0, size.y / 6});
+	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
+	sprintf(str, "speed : %ld\n", STAT(garou->entity[0], speed));
+	sfText_setString(text, str);
+	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
+	sfRenderWindow_drawText(window, text, NULL);
+
+	free(str);
+	sfFont_destroy(font);
+	sfText_destroy(text);
+	sfTexture_destroy(texture);
+	sfTexture_destroy(texture_ombre);
+	sfRectangleShape_destroy(rectangle);
+	sfRectangleShape_destroy(rectangle_ombre);
+}
+
 void game_aff(sfRenderWindow *window, garou_t *garou)
 {
 	sfVector2f pos = entity_get_move_pos(&garou->entity[0]);
@@ -324,7 +397,9 @@ void game_aff(sfRenderWindow *window, garou_t *garou)
 				tmp = false;
 		}
 	entity_life_aff(window, &garou->entity[0], (sfFloatRect){LIFE_RECT});
-	if (sfKeyboard_isKeyPressed(sfKeySpace) && tmp)
+	if (sfKeyboard_isKeyPressed(sfKeyI))
+		inventory_aff(window, garou);
+	else if (sfKeyboard_isKeyPressed(sfKeySpace) && tmp)
 		capacity_aff(window, garou);
 	sfRenderWindow_display(window);
 }

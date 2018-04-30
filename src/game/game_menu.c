@@ -8,24 +8,22 @@
 #include <stdlib.h> //tmp
 #include "prototype.h"
 #include "type.h"
+#include "tile_name.h"
 #include "capacity_tab.h"
 
 int game_menu(sfRenderWindow *window)
 {
 	garou_t garou = garou_create();
-	tile_map_t tile_map;
 
-	garou.map = map_load("map_test"); //
-	//garou.map = map_create(rand() % 50 + 50, rand() % 50 + 50);
+	garou.map = map_load("resources/maps/map test"); //
 	if (garou.map.error != MAP_OK)
 		return (84);
-	//map_random(&garou.map);
 	garou.map.size.x = 200;
 	garou.map.size.y = garou.map.size.x;
 	garou.nb_entity = 2;
 	garou.entity = malloc(sizeof(entity_t) * garou.nb_entity);
 	for (size_t i = 0; i < garou.nb_entity; i++) {
-		sfVector2i pos = {garou.map.nb_case_x / 2 + rand() % 5 - 2, garou.map.nb_case_y / 2 + rand() % 5 - 2};
+		sfVector2i pos = {rand() % garou.map.nb_case_x, rand() % garou.map.nb_case_y};
 
 		if (i == 0)
 			pos = (sfVector2i){garou.map.nb_case_x / 2, garou.map.nb_case_y / 2};
@@ -59,10 +57,11 @@ int game_menu(sfRenderWindow *window)
 		if (garou.entity[i].anime_tab.error != ANIME_TAB_OK)
 			return (84);
 		garou.entity[i].anime_tab.num = rand() % 8;
+		while (garou.map.tab[pos.x][pos.y].type != GROUND)
+			pos = (sfVector2i){rand() % garou.map.nb_case_x, rand() % garou.map.nb_case_y};
 		garou.entity[i].pos = pos;
 	}
 	game_loop(window, &garou);
 	garou_destroy(&garou);
-	tile_map_destroy(&tile_map);
 	return (0);
 }

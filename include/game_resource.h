@@ -19,6 +19,8 @@
 #define CAPACITY_LEFT "resources/texture/Bleft.png"
 #define CAPACITY_RIGHT "resources/texture/Bright.png"
 #define CAPACITY_DOWN "resources/texture/Bdown.png"
+#define STAT_RECT "resources/texture/n1.png"
+#define STAT_SHADOW "resources/texture/n5.png"
 
 typedef struct {
 	size_t nb_tile_map;

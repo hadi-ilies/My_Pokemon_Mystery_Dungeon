@@ -20,12 +20,14 @@
 #define LIFE_RECT 10, 10, 10, 50
 
 // code_macros
+#define EXP_MAX(entity) (entity).level * ((entity).level + 10)
 #define NEW_X(entity) (entity).pos.x + (entity).dir.x
 #define NEW_Y(entity) (entity).pos.y + (entity).dir.y
 #define INFO(entity) info[NEW_X(entity)][NEW_Y(entity)]
-#define STAT(entity, stat) ((entity).base_stat.stat			\
-			    + (entity).ev.stat + (entity).iv.stat)	\
-	* ((entity).level / 100.0) * ((entity).boost.stat * 0.5 + 1.0)
+#define STAT(entity, stat) (size_t)(((entity).base_stat.stat		\
+				     + (entity).ev.stat + (entity).iv.stat) \
+				    * ((entity).level / 100.0) *	\
+				    ((entity).boost.stat * 0.5 + 1.0))
 #define STATATK(entity, capacity) (capacity).category == PHYSICAL ?	\
 		STAT(entity, atk) : STAT(entity, spa)
 #define STATDEF(entity, capacity) (capacity).category == PHYSICAL ?	\
@@ -49,6 +51,7 @@ typedef struct {
 
 typedef struct {
 	size_t level;
+	size_t exp;
 	size_t life;
 	size_t type;
 	size_t type2;
@@ -77,5 +80,6 @@ bool entity_move(entity_t *entity, map_t *map,
 sfVector2f entity_get_move_pos(entity_t *entity);
 void entity_aff(sfRenderWindow *window, entity_t *entity,
 		map_t *map, sfVector2f pos);
+void entity_level_up(entity_t *entity);
 
 #endif

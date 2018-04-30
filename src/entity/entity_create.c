@@ -13,6 +13,7 @@ entity_t entity_create(void)
 	entity_t entity;
 
 	entity.level = 0;
+	entity.exp = 0;
 	entity.life = 0;
 	entity.type = TYPE_NULL;
 	entity.type2 = TYPE_NULL;
