@@ -49,6 +49,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPCDIR)load_map_editor.c \
 			$(MAPCDIR)save_map_editor_create.c \
 			$(MAPCDIR)factories_editor.c \
+			$(MAPCDIR)manage_map_and_insert_into_map.c \
 			$(MAPCDIR)graphic_write.c \
 			$(MAPCDIR)options_map_editor.c \
 			$(MAPCDIR)save_editor_cursor.c \

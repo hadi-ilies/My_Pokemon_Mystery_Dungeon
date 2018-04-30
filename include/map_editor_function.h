@@ -39,4 +39,8 @@ char **take_filename(char *path);
 void new_map(menu_t *menu, map_t *map, sfRenderWindow *window);
 int load_the_map(map_t *map, tile_map_t *tile_map);
 void menu_save_map(map_t *map, sfRenderWindow *window);
+void manage_map(sfEvent *event, sfRenderWindow *window,
+		map_t *map, tva_t *mouse_tva);
+void insert_to_map(tile_map_t *tile_map, tva_t *tva, tva_t mouse_tva);
+
 #endif
