@@ -102,8 +102,10 @@ void entity_attack(entity_t *entity, capacity_t *capacity, map_t *map,
 		printf("%s : %ld - %ld = ", capacity->name, INFO(*entity)->life, damage);
 		if (INFO(*entity)->life > damage)
 			INFO(*entity)->life -= damage;
-		else
+		else {
 			INFO(*entity)->life = 0;
+			entity_gain_exp(entity, INFO(*entity)->level + rand() % INFO(*entity)->level);
+		}
 		printf("%ld\n", INFO(*entity)->life);
 		set_anime_hurt(INFO(*entity));
 		//INFO(*entity)->dir.x = 0;
@@ -164,15 +166,18 @@ bool manage_input(entity_t *entity, map_t *map,
 			return (true);
 		}
 	}
-	if (input & WAIT)
+	if (input & WAIT) {
+		if (entity->life < STAT(*entity, life))
+			entity->life++;
 		return (true);
+	}
 	return (false);
 }
 
 entity_t *get_cible(entity_t *entity, map_t *map,
 		    entity_t *info[map->nb_case_x][map->nb_case_y])
 {
-	size_t dist = 10;
+	size_t dist = 5;
 	size_t i_min = (entity->pos.x - (ssize_t)dist >= 0 ? entity->pos.x - dist : 0);
 	size_t j_min = (entity->pos.y - (ssize_t)dist >= 0 ? entity->pos.y - dist : 0);
 	size_t i_max = (entity->pos.x + dist <= map->nb_case_x - 1 ? entity->pos.x + dist : map->nb_case_x - 1);
@@ -206,7 +211,7 @@ size_t ia(entity_t *entity, map_t *map,
 			for (size_t j = 0; j < map->nb_case_y; j++)
 				tab[i][j] = 0;
 		tab[cible->pos.x][cible->pos.y] = 1;
-		for (size_t n = 1; n <= 10; n++)
+		for (size_t n = 1; n <= 5; n++)
 			for (size_t i = 1; i < map->nb_case_x - 1; i++)
 				for (size_t j = 1; j < map->nb_case_y - 1; j++)
 					if (tab[i][j] == n)

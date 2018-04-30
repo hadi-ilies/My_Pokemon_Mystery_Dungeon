@@ -101,11 +101,11 @@ int anime_editor_menu(sfRenderWindow *window)
 		anime_tab.anime[i].time = 500000;
 		anime_tab.anime[i].num = 0;
 		}*/
-	anime_tab = anime_tab_create_from_file("resources/texture/anime_tab/insolourdo_config");
+	anime_tab = anime_tab_create_from_file("resources/texture/anime_tab/gobou_config");
 	if (anime_tab.error != ANIME_TAB_OK)
 		return (84);
 	anime_editor_loop(window, &anime_tab);
-	save(&anime_tab, "resources/texture/anime_tab/insolourdo_config");
+	save(&anime_tab, "resources/texture/anime_tab/gobou_config");
 	anime_tab_destroy(&anime_tab);
 	return (0);
 }

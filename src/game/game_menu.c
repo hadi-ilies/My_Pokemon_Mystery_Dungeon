@@ -20,7 +20,7 @@ int game_menu(sfRenderWindow *window)
 		return (84);
 	garou.map.size.x = 200;
 	garou.map.size.y = garou.map.size.x;
-	garou.nb_entity = 2;
+	garou.nb_entity = 20;
 	garou.entity = malloc(sizeof(entity_t) * garou.nb_entity);
 	for (size_t i = 0; i < garou.nb_entity; i++) {
 		sfVector2i pos = {rand() % garou.map.nb_case_x, rand() % garou.map.nb_case_y};
@@ -28,7 +28,7 @@ int game_menu(sfRenderWindow *window)
 		if (i == 0)
 			pos = (sfVector2i){garou.map.nb_case_x / 2, garou.map.nb_case_y / 2};
 		garou.entity[i] = entity_create();
-		garou.entity[i].level = 10;
+		garou.entity[i].level = 5;
 		garou.entity[i].type = i == 0 ? TYPE_NORMAL : TYPE_WATER;
 		garou.entity[i].type2 = TYPE_NULL;
 		garou.entity[i].capacity[0] = &capacity_tab[1];

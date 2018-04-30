@@ -80,6 +80,6 @@ bool entity_move(entity_t *entity, map_t *map,
 sfVector2f entity_get_move_pos(entity_t *entity);
 void entity_aff(sfRenderWindow *window, entity_t *entity,
 		map_t *map, sfVector2f pos);
-void entity_level_up(entity_t *entity);
+size_t entity_gain_exp(entity_t *entity, size_t exp);
 
 #endif
