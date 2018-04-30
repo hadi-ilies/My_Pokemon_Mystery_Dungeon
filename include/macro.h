@@ -34,4 +34,9 @@
 #define GET_MAP_Y MOUSE_POS.y / map->size.y + map->pos.y + 0.5 \
 	- (WINDOW_SIZE.y / 2) / map->size.y
 
+#define LINK_ROOMS_WITH_P (event.type == sfEvtKeyPressed && \
+			event.key.code == sfKeyP) ? linking_rooms(map) : 0
+#define CLEAN_MAP_WITH_C (event.type == sfEvtKeyPressed && \
+			event.key.code == sfKeyC) ? clean_map(map) : 0
+
 #endif

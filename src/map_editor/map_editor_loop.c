@@ -69,6 +69,26 @@ void manage_map(sfEvent *event, sfRenderWindow *window, map_t *map, tva_t *mouse
 	}
 }
 
+void clean_map(map_t *map)
+{
+	for (size_t i = 0; i < map->nb_case_x; i++)
+		for (size_t j = 0; j < map->nb_case_y; j++)
+			map->tab[i][j] = TVA(0, 0, 0);
+	map_smooth_all(map);
+}
+
+void window_open_func(sfRenderWindow *window, map_t *map,
+		tva_t *mouse_tva, back_and_music_t *optional)
+{
+	move_map(&map->pos);
+	sfRenderWindow_clear(window, sfBlack);
+	sfRenderWindow_drawSprite(window, optional->sprite, NULL);
+	map_aff(window, map);
+	display_tools(window, map, mouse_tva);
+	tile_map_aff(window, &map->tile_map, *mouse_tva, RECT_MOUSE);
+	sfRenderWindow_display(window);
+}
+
 int map_editor_loop(sfRenderWindow *window, map_t *map)
 {
 	tva_t mouse_tva = {map->tile_map.nb_type, 4, 0};
@@ -81,21 +101,14 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 			if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
 				sfMusic_destroy(optional.music);
 				return (0);
-			} if (event.type == sfEvtKeyPressed && event.key.code == sfKeyP)
-				  linking_rooms(map);
-			if (event.type == sfEvtKeyPressed && event.key.code == sfKeyC)
-				;// clean
+			}
+			LINK_ROOMS_WITH_P;
+			CLEAN_MAP_WITH_C;
 			zoom_map(&event, map);
 			refresh_map(&event, map);
 			manage_map(&event, window, map, &mouse_tva);
 		}
-		move_map(&map->pos);
-		sfRenderWindow_clear(window, sfBlack);
-		sfRenderWindow_drawSprite(window, optional.sprite, NULL);
-		map_aff(window, map);
-		display_tools(window, map, &mouse_tva);
-		tile_map_aff(window, &map->tile_map, mouse_tva, RECT_MOUSE);
-		sfRenderWindow_display(window);
+		window_open_func(window, map, &mouse_tva, &optional);
 	}
 	return (0);
 }
