@@ -166,9 +166,8 @@ bool load_entry(map_t *map, sfRenderWindow *window, load_editor_t *load, sfEvent
 			char *str = concat("resources/maps/", load->name_file);
 
 			*map = map_load(str);
-			if (map->error != MAP_OK)
-				return (false);
-			return (true);
+			free(str);
+			return (map->error == MAP_OK ? true : false);
 		}
 	}
 	return (false);
