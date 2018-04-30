@@ -40,16 +40,11 @@ map_t map_load(char *file_name)
 		map.error = MAP_MALLOC;
 		return (map);
 	}
-	if (read(fd, &tile_map_file_name, len) != (int)len) {
+	if (read(fd, tile_map_file_name, len) != (int)len) {
 		map.error = MAP_READ;
 		return (map);
 	}
 	tile_map_file_name[len] = '\0';
-	map.tile_map = tile_map_create_from_file(tile_map_file_name);
-	if (map.tile_map.error != TILE_MAP_OK) {
-		map.error = MAP_TILE_MAP;
-		return (map);
-	}
 	map = map_create(nb_case_x, nb_case_y, tile_map_file_name);
 	if (map.error != MAP_OK)
 		return (map);
