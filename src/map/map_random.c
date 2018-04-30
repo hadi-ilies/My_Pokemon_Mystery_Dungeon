@@ -33,7 +33,7 @@ sfVector2i take_origin(map_t *map, sfVector2i *size)
 	return (origin);
 }
 
-bool ee2(map_t *map, size_t x, size_t y)
+bool insert_water(map_t *map, size_t x, size_t y)
 {
 	bool tmp = false;
 
@@ -46,12 +46,12 @@ bool ee2(map_t *map, size_t x, size_t y)
 	return (tmp);
 }
 
-bool ee(map_t *map)
+bool insert_water_loop(map_t *map)
 {
 	for (size_t i = 0; i < map->nb_case_x; i++)
 		for (size_t j = 0; j < map->nb_case_y; j++)
 			if (map->tab[i][j].type == WATER)
-				if (ee2(map, i, j)) {
+				if (insert_water(map, i, j)) {
 					i--;
 					j--;
 				}
@@ -62,7 +62,7 @@ bool ee(map_t *map)
 	return (true);
 }
 
-sfVector2i aa(map_t *map, size_t x, size_t y, ssize_t nx, ssize_t ny)
+sfVector2i path_map(map_t *map, size_t x, size_t y, ssize_t nx, ssize_t ny)
 {
 	bool tmp = false;
 	ssize_t size_x = 0;
@@ -111,7 +111,7 @@ void dig_path(map_t *map, sfVector2i size, size_t x, size_t y)
 void linking_rooms(map_t *map)
 {
 	set_origin(map);
-	for (size_t n = 0; n < 100000 && ee(map) == false;) {
+	for (size_t n = 0; n < 100000 && insert_water_loop(map) == false;) {
 		size_t x = 0;
 		size_t y = 0;
 		sfVector2i size;
@@ -120,9 +120,9 @@ void linking_rooms(map_t *map)
 			x = rand() % map->nb_case_x;
 			y = rand() % map->nb_case_y;
 		} if (rand() % 2)
-			size = aa(map, x, y, rand() % 2 ? 1 : -1, 0);
+			size = path_map(map, x, y, rand() % 2 ? 1 : -1, 0);
 		else
-			size = aa(map, x, y, 0, rand() % 2 ? 1 : -1);
+			size = path_map(map, x, y, 0, rand() % 2 ? 1 : -1);
 		size.x || size.y ? dig_path(map, size, x, y) : n++;
 	} for (size_t i = 0; i < map->nb_case_x; i++)
 		  for (size_t j = 0; j < map->nb_case_y; j++) {
