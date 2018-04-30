@@ -29,8 +29,8 @@ option_t option_create(sfRenderWindow *window)
 	insert_win_size(option.window_size);
 	option.screen = create_screen_param(window);
 	option.back = create_back_param(window);
-	option.size_x = 1920;
-	option.size_y = 1080;
+	option.size_x = 1920; // setting
+	option.size_y = 1080; // setting call from there
 	option.choice_curs = 0;
 	option.nb_tile = 0;
 	return (option);

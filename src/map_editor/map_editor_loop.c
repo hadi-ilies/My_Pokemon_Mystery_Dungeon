@@ -81,7 +81,10 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 			if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
 				sfMusic_destroy(optional.music);
 				return (0);
-			}
+			} if (event.type == sfEvtKeyPressed && event.key.code == sfKeyP)
+				  linking_rooms(map);
+			if (event.type == sfEvtKeyPressed && event.key.code == sfKeyC)
+				;// clean
 			zoom_map(&event, map);
 			refresh_map(&event, map);
 			manage_map(&event, window, map, &mouse_tva);
