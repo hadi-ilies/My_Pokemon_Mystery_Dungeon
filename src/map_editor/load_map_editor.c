@@ -160,15 +160,14 @@ char *maps_list(map_t *map, sfRenderWindow *window, load_editor_t *load)
 bool load_entry(map_t *map, sfRenderWindow *window, load_editor_t *load, sfEvent *event)
 {
 	if (event && event->type == sfEvtKeyPressed) {
-		if (event->key.code == sfKeyReturn && load->choice_curs == 0) {
+		if (event->key.code == sfKeyReturn && load->choice_curs == 0)
 			load->name_file = maps_list(map, window, load);
-		} if (event->key.code == sfKeyReturn && load->choice_curs == 1) {
+		if (event->key.code == sfKeyReturn && load->choice_curs == 1) {
 			char *str = concat("resources/maps/", load->name_file);
 
-			if (str == NULL)
-				return (false);
 			*map = map_load(str);
-			//printf("%d|%d\n", map->nb_case_x, map->nb_case_y);
+			if (map->error != MAP_OK)
+				return (false);
 			return (true);
 		}
 	}
