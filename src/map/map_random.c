@@ -36,8 +36,8 @@ sfVector2i take_origin(map_t *map, sfVector2i *size)
 void map_random(map_t *map)
 {
 	size_t area = map->nb_case_x * map->nb_case_y;
-	size_t min = 4;
-	size_t max = 20 % map->nb_case_x;
+	size_t min = (area / 49) * 0.2;
+	size_t max = (area / 49) * 0.3;
 	size_t nb_room = rand_min_max(min, max);
 
 	for (size_t i = 0; i < map->nb_case_x; i++)

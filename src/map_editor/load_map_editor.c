@@ -71,7 +71,7 @@ void move_curseur_load_editor(load_editor_t *load, sfEvent *event)
 		&& load->choice_curs > 0) {
 			load->choice_curs--;
 		} if (sfKeyboard_isKeyPressed(sfKeyDown)
-		      && load->choice_curs < 1) {
+		&& load->choice_curs < 1) {
 			load->choice_curs++;
 		}
 	}
@@ -135,7 +135,7 @@ void move_curseur_load_list(load_editor_t *load, sfEvent *event)
 		&& load->text_curs > 0) {
 			load->text_curs--;
 		} if (sfKeyboard_isKeyPressed(sfKeyDown)
-		      && load->text_curs < nb_file) {
+		&& load->text_curs < nb_file - 1) {
 			load->text_curs++;
 		}
 	}

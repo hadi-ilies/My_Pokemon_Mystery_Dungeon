@@ -18,5 +18,5 @@ void new_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 
 	 *map = map_create(option.size_x, option.size_y,
 			concat("resources/tile_map/", str));
-	 map_random(map);
+	map_random(map);
 }
