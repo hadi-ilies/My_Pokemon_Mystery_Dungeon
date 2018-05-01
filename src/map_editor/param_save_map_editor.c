@@ -34,6 +34,8 @@ bool ok_map(save_editor_t *save, sfEvent *event, map_t *map)
 		else {
 			str = concat("resources/maps/", save->name_file);
 			map_save(map, str);
+			map->file_name =
+				concat("resources/maps/", save->name_file);
 			free(str);
 			return (false);
 		}

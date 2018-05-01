@@ -52,6 +52,13 @@ void window_open_func(sfRenderWindow *window, map_t *map,
 	sfRenderWindow_display(window);
 }
 
+void key_command_editor(sfRenderWindow *window, map_t *map, sfEvent *event)
+{
+	LINK_ROOMS_WITH_P;
+	CLEAN_MAP_WITH_C;
+	PLAY_YOUR_MAP_WITH_G;
+}
+
 int map_editor_loop(sfRenderWindow *window, map_t *map)
 {
 	tva_t mouse_tva = {map->tile_map.nb_type, 4, 0};
@@ -65,8 +72,7 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 				sfMusic_destroy(optional.music);
 				return (0);
 			}
-			LINK_ROOMS_WITH_P;
-			CLEAN_MAP_WITH_C;
+			key_command_editor(window, map, &event);
 			zoom_map(&event, map);
 			refresh_map(&event, map);
 			manage_map(&event, window, map, &mouse_tva);

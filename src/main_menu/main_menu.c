@@ -43,7 +43,7 @@ bool enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 {
 	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyReturn) {
 		if (menu->button == 0)
-			game_menu(window);
+			game_menu(window, "resources/maps/map test");
 		if (menu->button == 1)
 			menu_map_editor_menu(window);
 		if (menu->button == 2)

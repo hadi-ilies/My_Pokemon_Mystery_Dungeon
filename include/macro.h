@@ -34,10 +34,13 @@
 #define GET_MAP_Y MOUSE_POS.y / map->size.y + map->pos.y + 0.5 \
 	- (WINDOW_SIZE.y / 2) / map->size.y
 
-#define LINK_ROOMS_WITH_P (event.type == sfEvtKeyPressed && \
-			event.key.code == sfKeyP) ? linking_rooms(map) : 0
-#define CLEAN_MAP_WITH_C (event.type == sfEvtKeyPressed && \
-			event.key.code == sfKeyC) ? clean_map(map) : 0
+#define PLAY_YOUR_MAP_WITH_G (map->file_name != NULL && \
+	event->type == sfEvtKeyPressed && event->key.code == sfKeyG) \
+	? game_menu(window, map->file_name) : 0
+#define LINK_ROOMS_WITH_P (event->type == sfEvtKeyPressed && \
+			event->key.code == sfKeyP) ? linking_rooms(map) : 0
+#define CLEAN_MAP_WITH_C (event->type == sfEvtKeyPressed && \
+			event->key.code == sfKeyC) ? clean_map(map) : 0
 #define PATH_MAP_COND map->tab[x + size_x][y + size_y].type
 #define EXIT (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape)
 #define ENTER_COND event.type == sfEvtKeyPressed && event.key.code ==sfKeyReturn

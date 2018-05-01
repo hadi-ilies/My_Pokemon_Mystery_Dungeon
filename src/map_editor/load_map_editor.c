@@ -60,6 +60,8 @@ bool load_entry(map_t *map, sfRenderWindow *window,
 			char *str = concat("resources/maps/", load->name_file);
 
 			*map = map_load(str);
+			map->file_name = concat("resources/maps/",
+						load->name_file);
 			free(str);
 			return (map->error == MAP_OK ? true : false);
 		}

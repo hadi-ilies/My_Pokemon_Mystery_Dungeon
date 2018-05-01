@@ -19,24 +19,19 @@ void map_save(map_t *map, char *file_name)
 	if (fd == -1) {
 		map->error = MAP_OPEN;
 		return;
-	}
-	if (write(fd, &map->nb_case_x, sizeof(size_t)) != sizeof(size_t)) {
+	} if (write(fd, &map->nb_case_x, sizeof(size_t)) != sizeof(size_t)) {
 		map->error = MAP_WRITE;
 		return;
-	}
-	if (write(fd, &map->nb_case_y, sizeof(size_t)) != sizeof(size_t)) {
+	} if (write(fd, &map->nb_case_y, sizeof(size_t)) != sizeof(size_t)) {
 		map->error = MAP_WRITE;
 		return;
-	}
-	if (write(fd, &len, sizeof(size_t)) != sizeof(size_t)) {
+	} if (write(fd, &len, sizeof(size_t)) != sizeof(size_t)) {
 		map->error = MAP_WRITE;
 		return;
-	}
-	if (write(fd, map->tile_map_file_name, len) != (int)len) {
+	} if (write(fd, map->tile_map_file_name, len) != (int)len) {
 		map->error = MAP_WRITE;
 		return;
-	}
-	for (size_t i = 0; i < map->nb_case_x; i++)
+	} for (size_t i = 0; i < map->nb_case_x; i++)
 		for (size_t j = 0; j < map->nb_case_y; j++)
 			if (write(fd, &map->tab[i][j], sizeof(tva_t)) != sizeof(tva_t)) {
 				map->error = MAP_WRITE;
