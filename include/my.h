@@ -28,5 +28,7 @@ char **my_str_to_tab(char *command, char *sep);
 char *concat(char *s1, char *s2);
 char *inttostr(int nb);
 bool my_atoi(char *str);
+size_t get_uint(char *str);
+float get_float(char *str);
 
 #endif

@@ -10,32 +10,6 @@
 #include "settings.h"
 #include "my.h"
 
-static size_t get_uint(char *str)
-{
-	unsigned int nb = 0;
-
-	for (size_t i = 0; str[i] != '\0'; i++)
-		if (str[i] >= '0' && str[i] <= '9')
-			nb = nb * 10 + str[i] - '0';
-		else
-			return (0);
-	return (nb);
-}
-
-static float get_float(char *str)
-{
-	float nb = 0;
-
-	for (size_t i = 0; str[i] != '\0'; i++)
-		if (str[i] >= '0' && str[i] <= '9')
-			nb = nb * 10 + str[i] - '0';
-		else if (str[i] == '.')
-			break;
-		else
-			return (0);
-	return (nb);
-}
-
 static sfKeyCode get_sfkeycode(char *str)
 {
 	sfKeyCode nb = 0;

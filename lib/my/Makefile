@@ -18,6 +18,8 @@ SRC	=	my_fprintf.c \
 		add_line.c \
 		concat.c \
 		my_atoi.c \
+		my_str_to_unsigned_int.c \
+		my_str_to_float.c \
 
 OBJ	=	$(SRC:.c=.o)
 

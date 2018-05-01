@@ -13,7 +13,6 @@
 #include "map.h"
 #include "entity.h"
 
-// file_macros
 #define GAME_FONT "resources/font/Minecraftia.ttf"
 #define CAPACITY_UP "resources/texture/Bup.png"
 #define CAPACITY_LEFT "resources/texture/Bleft.png"
