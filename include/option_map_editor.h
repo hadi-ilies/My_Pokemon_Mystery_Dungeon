@@ -12,7 +12,7 @@
 #include <my.h>
 
 #define TILEFILE concat("resources/tile_map/", \
-			(char *) sfText_getString(option.text[option.nb_tile]))
+			(char *) sfText_getString(option->text[option->nb_tile]))
 
 typedef struct {
 	sfText *choice[3];

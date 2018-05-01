@@ -17,6 +17,8 @@ typedef struct {
 	sfMusic *music;
 } back_and_music_t;
 
+void load_editor_loop(menu_t *menu, map_t *map, sfRenderWindow *window);
+void screen_and_back_destroy(sfRectangleShape *back, sfSprite *screen);
 void move_map(sfVector2f *pos);
 void zoom_map(sfEvent *event, map_t *map);
 bool hit_point_rect(sfVector2i *point, sfFloatRect *rect);

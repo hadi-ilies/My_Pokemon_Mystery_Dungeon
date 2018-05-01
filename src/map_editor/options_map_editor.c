@@ -25,7 +25,8 @@ void choice_cursor(option_editor_t *option, sfRenderWindow *window)
 	sfText_setString(option->choice[1], "MAP HEIGHT");
 	sfText_setString(option->choice[2], "MAP WIDTH");
 	for (size_t i = 0; i < 3; i++) {
-		sfText_setPosition(option->choice[i], (sfVector2f) {WINDOW_SIZE.x / 2 - 300, pos_y});
+		sfText_setPosition(option->choice[i],
+				(sfVector2f) {WINDOW_SIZE.x / 2 - 300, pos_y});
 		sfText_setColor(option->choice[i], (sfColor){250, 250, 0,
 					option->choice_curs == i ? 255 : 180});
 		sfRenderWindow_drawText(window, option->choice[i], NULL);
@@ -43,6 +44,20 @@ void display_options_editor(option_editor_t *option, sfRenderWindow *window)
 	sfRenderWindow_drawText(window, option->size_map_y, NULL);
 }
 
+void event_param(map_t *map, option_editor_t *option,
+		sfRenderWindow *window, sfEvent *event)
+{
+	move_curseur_option_editor(option, event);
+	size_tile_map_x(event, window, option);
+	size_tile_map_y(event, window, option);
+	change_tile_map(window, option, event);
+	if (map != NULL) {
+		map_resize(map, option->size_x, option->size_y);
+		map->tile_map_file_name = TILEFILE;
+		map->tile_map = tile_map_create_from_file(TILEFILE);
+	}
+}
+
 option_editor_t param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 {
 	sfEvent event;
@@ -50,15 +65,7 @@ option_editor_t param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
 
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			move_curseur_option_editor(&option, &event);
-			size_tile_map_x(&event, window, &option);
-			size_tile_map_y(&event, window, &option);
-			change_tile_map(window, &option, &event);
-			if (map != NULL) {
-				map_resize(map, option.size_x, option.size_y);
-				map->tile_map_file_name = TILEFILE;
-				map->tile_map = tile_map_create_from_file(TILEFILE);
-			}
+			event_param(map, &option, window, &event);
 		} if (sfKeyboard_isKeyPressed(sfKeyEscape))
 			break;
 		sfRenderWindow_clear(window, sfBlack);

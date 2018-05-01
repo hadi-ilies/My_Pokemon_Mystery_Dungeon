@@ -10,6 +10,7 @@ NAME	=	../libmy.a
 SRC	=	my_fprintf.c \
 		my_getline.c \
 		my_strcmp.c \
+		my_strncpy.c \
 		my_strdup.c \
 		my_strlen.c \
 		my_strncat.c \

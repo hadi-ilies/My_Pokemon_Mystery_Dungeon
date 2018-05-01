@@ -58,6 +58,14 @@ bool enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 	return (true);
 }
 
+void open_window_menu(sfRenderWindow *window, menu_t *menu, loading_t *back)
+{
+	move_curseur(menu, NULL);
+	sfRenderWindow_clear(window, sfBlack);
+	display_menu(window, menu, back);
+	sfRenderWindow_display(window);
+}
+
 int main_menu(sfRenderWindow *window)
 {
 	loading_t back = back_create();
@@ -74,10 +82,7 @@ int main_menu(sfRenderWindow *window)
 			if (enter(window, &menu, &event) == false)
 				sfRenderWindow_close(window);
 		}
-		move_curseur(&menu, NULL);
-		sfRenderWindow_clear(window, sfBlack);
-		display_menu(window, &menu, &back);
-		sfRenderWindow_display(window);
+		open_window_menu(window, &menu, &back);
 	}
 	destroy_all(&back, window, &menu);
 	return (0);

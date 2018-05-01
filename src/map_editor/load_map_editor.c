@@ -18,52 +18,6 @@
 #include "option_map_editor.h"
 #include "load_maps_editor.h"
 
-void display_load_editor(load_editor_t *load, sfRenderWindow *window)
-{
-	sfRenderWindow_drawSprite(window, load->screen, NULL);
-	sfRenderWindow_drawRectangleShape(window, load->back, NULL);
-	load_choice_cursor(load, window);
-}
-
-load_editor_t load_editor_create(sfRenderWindow *window)
-{
-	load_editor_t load;
-
-	load.text = malloc(sizeof(sfText *) * count_file("resources/maps"));
-	if (load.text == NULL)
-		return (load);
-	load.back = create_back_param(window);
-	load.screen = create_screen_param(window);
-	load.font = sfFont_createFromFile(FONT);
-	for (size_t i = 0; i < 2; i++) {
-		load.choice[i] = sfText_create();
-		sfText_setFont(load.choice[i], load.font);
-	}
-	sfText_setString(load.choice[0], "MAPS");
-	sfText_setString(load.choice[1], "OK");
-	for (size_t i = 0; i < count_file("resources/maps"); i++) {
-		load.text[i] = sfText_create();
-		sfText_setFont(load.text[i], load.font);
-	}
-	load.choice_curs = 0;
-	load.text_curs = 0;
-	load.name_file = NULL;
-	return (load);
-}
-
-void display_load_list(load_editor_t *load, sfRenderWindow *window,
-		sfRectangleShape *back, sfSprite *screen)
-{
-	sfRectangleShape_setOutlineColor(back, sfGreen);
-	sfRectangleShape_setPosition(back,
-		(sfVector2f) {WINDOW_SIZE.x / 2 + 600, WINDOW_SIZE.y / 2});
-	sfRenderWindow_drawSprite(window, screen, NULL);
-	sfRenderWindow_drawRectangleShape(window, back, NULL);
-	count_file("resources/maps") > 5  ?
-		load_list_choice_cursor(load, window) :
-		load_list_choice_min(load, window);
-}
-
 void insert_maps_text(load_editor_t *load)
 {
 	char **filename = take_filename("resources/maps");
@@ -73,7 +27,7 @@ void insert_maps_text(load_editor_t *load)
 		sfText_setString(load->text[i], filename[i]);
 }
 
-char *maps_list(map_t *map, sfRenderWindow *window, load_editor_t *load)
+char *maps_list(sfRenderWindow *window, load_editor_t *load)
 {
 	sfEvent event;
 	sfRectangleShape *back = create_back_param(window);
@@ -82,12 +36,11 @@ char *maps_list(map_t *map, sfRenderWindow *window, load_editor_t *load)
 	insert_maps_text(load);
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape) {
-				//destroy back and screnn
+			if (EXIT) {
+				screen_and_back_destroy(back, screen);
 				return (NULL);
-			} if (event.type == sfEvtKeyPressed && event.key.code == sfKeyReturn) {
-				return ((char *)sfText_getString(load->text[load->text_curs]));
-			}
+			} if (ENTER_COND)
+				return ((char *) GET_STRING);
 			move_curseur_load_list(load, &event);
 		}
 		sfRenderWindow_clear(window, sfBlack);
@@ -97,11 +50,12 @@ char *maps_list(map_t *map, sfRenderWindow *window, load_editor_t *load)
 	return (NULL);
 }
 
-bool load_entry(map_t *map, sfRenderWindow *window, load_editor_t *load, sfEvent *event)
+bool load_entry(map_t *map, sfRenderWindow *window,
+		load_editor_t *load, sfEvent *event)
 {
 	if (event && event->type == sfEvtKeyPressed) {
 		if (event->key.code == sfKeyReturn && load->choice_curs == 0)
-			load->name_file = maps_list(map, window, load);
+			load->name_file = maps_list(window, load);
 		if (event->key.code == sfKeyReturn && load->choice_curs == 1) {
 			char *str = concat("resources/maps/", load->name_file);
 
@@ -120,13 +74,11 @@ void load_editor_loop(menu_t *menu, map_t *map, sfRenderWindow *window)
 
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape) {
-				//destroy back and screnn
+			if (EXIT
+			|| load_entry(map, window, &load, &event) == true) {
+				load_editor_destroy(&load);
 				return;
 			}
-			if (load_entry(map, window, &load, &event) == true)
-				//destroy back and screnn
-				return;
 				move_curseur_load_editor(&load, &event);
 		}
 		sfRenderWindow_clear(window, sfBlack);

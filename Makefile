@@ -65,6 +65,8 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPCDIR)display_menu_editor.c \
 			$(MAPCDIR)menu_editor_create.c \
 			$(MAPCDIR)cursor_option_map_editor.c \
+			$(MAPCDIR)load_editor_create.c \
+			$(MAPCDIR)load_editor_display.c \
 			$(MAPCDIR)cursor_editor.c \
 			$(MAPCDIR)take_filename.c \
 			$(MAPCDIR)all_move.c \

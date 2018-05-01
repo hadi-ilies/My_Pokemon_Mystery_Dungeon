@@ -19,12 +19,12 @@ char *add_letter(char *str, char c)
 	size_t len = 2;
 
 	if (str != NULL)
-		len += strlen(str);
+		len += my_strlen(str);
 	new_str = malloc(sizeof(char) * len);
 	if (new_str == NULL)
 		return (str);
 	if (str != NULL)
-		strcpy(new_str, str);
+		my_strncpy(new_str, str, my_strlen(str));
 	new_str[len - 2] = c;
 	new_str[len - 1] = '\0';
 	free(str);
@@ -33,7 +33,7 @@ char *add_letter(char *str, char c)
 
 char *supr_last_letter(char *str)
 {
-	str[strlen(str) - 1] = '\0';
+	str[my_strlen(str) - 1] = '\0';
 	return (str);
 }
 

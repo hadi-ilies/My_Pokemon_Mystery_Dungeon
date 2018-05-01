@@ -19,8 +19,13 @@ typedef struct {
 	char *name_file;
 }load_editor_t;
 
+void load_editor_destroy(load_editor_t *load);
+load_editor_t load_editor_create(sfRenderWindow *window);
 void load_choice_cursor(load_editor_t *load, sfRenderWindow *window);
 void move_curseur_load_editor(load_editor_t *load, sfEvent *event);
 void load_list_choice_cursor(load_editor_t *load, sfRenderWindow *window);
 void load_list_choice_min(load_editor_t *load, sfRenderWindow *window);
 void move_curseur_load_list(load_editor_t *load, sfEvent *event);
+void display_load_list(load_editor_t *load, sfRenderWindow *window,
+		sfRectangleShape *back, sfSprite *screen);
+void display_load_editor(load_editor_t *load, sfRenderWindow *window);

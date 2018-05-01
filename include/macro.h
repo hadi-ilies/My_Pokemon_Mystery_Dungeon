@@ -39,4 +39,7 @@
 #define CLEAN_MAP_WITH_C (event.type == sfEvtKeyPressed && \
 			event.key.code == sfKeyC) ? clean_map(map) : 0
 #define PATH_MAP_COND map->tab[x + size_x][y + size_y].type
+#define EXIT (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape)
+#define ENTER_COND event.type == sfEvtKeyPressed && event.key.code ==sfKeyReturn
+#define GET_STRING sfText_getString(load->text[load->text_curs])
 #endif
