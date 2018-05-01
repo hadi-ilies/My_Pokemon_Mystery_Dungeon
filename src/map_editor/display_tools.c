@@ -27,7 +27,8 @@ void swap_alt(tile_map_t *tile_map, tva_t *tva)
 		}
 }
 
-void pick_tile(sfRenderWindow *window, sfFloatRect rect, tva_t tva, tva_t *mouse_tva)
+void pick_tile(sfRenderWindow *window, sfFloatRect rect,
+	tva_t tva, tva_t *mouse_tva)
 {
 	sfVector2i coord_mouse = sfMouse_getPositionRenderWindow(window);
 	bool tmp = sfMouse_isButtonPressed(sfMouseLeft);

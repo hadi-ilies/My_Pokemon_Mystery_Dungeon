@@ -20,7 +20,8 @@ void pages_editor(menu_t *menu)
 	sfTexture *texture;
 
 	menu->rect[0] = sfRectangleShape_create();
-	sfRectangleShape_setFillColor(menu->rect[0], (sfColor) {0, 0, 0, 150});
+	sfRectangleShape_setFillColor(menu->rect[0],
+				(sfColor) {0, 0, 0, 150});
 	sfRectangleShape_setOutlineThickness(menu->rect[0], 10);
 	sfRectangleShape_setOutlineColor(menu->rect[0], sfRed);
 	sfRectangleShape_setSize(menu->rect[0], (sfVector2f) {400, 620});
@@ -62,7 +63,7 @@ menu_t menu_editor_create(void)
 	text_editor(&menu);
 	menu.button = 0;
 	menu.tile_map = malloc(sizeof(tile_map_t) *
-			(count_file("resources/tile_map") + 1));
+			(count_file(TILE_MAP) + 1));
 	return (menu);
 }
 
@@ -75,7 +76,7 @@ loading_t back_editor_create(sfRenderWindow *window)
 	sfSprite_setTexture(optional.sprite, optional.texture, sfTrue);
 	sfFloatRect size = sfSprite_getLocalBounds(optional.sprite);
 
-	sfSprite_setScale(optional.sprite, (sfVector2f) {WINDOW_SIZE.x / size.width,
-				WINDOW_SIZE.y / size.height});
+	sfSprite_setScale(optional.sprite,
+	(sfVector2f) {WINDOW_SIZE.x / size.width, WINDOW_SIZE.y / size.height});
 	return (optional);
 }

@@ -31,16 +31,15 @@ void change_win_size(option_t *option, sfEvent *event, sfRenderWindow *window)
 			option->nb_tile--;
 	}
 	sfText_setPosition(option->window_size[option->nb_tile],
-			(sfVector2f) {WINDOW_SIZE.x / 2 + 50, WINDOW_SIZE.y / 2 - 300});
+		(sfVector2f) {WINDOW_SIZE.x / 2 + 50, WINDOW_SIZE.y / 2 - 300});
 }
 
 void resize_win(sfRenderWindow *window, option_t *option)
 {
 	if (option->choice_curs == 0) {
-		char *str = (char *)sfText_getString(option->window_size[option->nb_tile]);
+		char *str = (char *) GET_STRING_SIZE;
 		char **size = my_str_to_tab(str, "X");
-		//printf("%s\n", sfText_getString(option->window_size[option->nb_tile]));
-		//printf("%d|%d\n", atoi(size[0]), atoi(size[1]));
-		sfRenderWindow_setSize(window, (sfVector2u) {atoi(size[0]), atoi(size[1])});
+		sfRenderWindow_setSize(window,
+		(sfVector2u) {atoi(size[0]), atoi(size[1])});
 	}
 }

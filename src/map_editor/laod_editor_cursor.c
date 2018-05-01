@@ -49,7 +49,7 @@ void load_list_choice_cursor(load_editor_t *load, sfRenderWindow *window)
 {
 	int pos_y = WINDOW_SIZE.y / 2 - 300;
 	static size_t i = 5;
-	size_t nb_file = count_file("resources/maps");
+	size_t nb_file = count_file(MAPS);
 
 	(load->text_curs > 0 && load->text_curs < i - 5) ? i -= 5 : 0;
 	(load->text_curs == i) ? i += 5 : 0;
@@ -70,7 +70,7 @@ void load_list_choice_cursor(load_editor_t *load, sfRenderWindow *window)
 void load_list_choice_min(load_editor_t *load, sfRenderWindow *window)
 {
 	int pos_y = WINDOW_SIZE.y / 2 - 300;
-	size_t nb_file = count_file("resources/maps");
+	size_t nb_file = count_file(MAPS);
 
 	for (size_t i = 0; i < nb_file; i++) {
 		sfText_setPosition(load->text[i],
@@ -84,7 +84,7 @@ void load_list_choice_min(load_editor_t *load, sfRenderWindow *window)
 
 void move_curseur_load_list(load_editor_t *load, sfEvent *event)
 {
-	size_t nb_file = count_file("resources/maps");
+	size_t nb_file = count_file(MAPS);
 
 	if (event && event->type == sfEvtKeyPressed) {
 		if (sfKeyboard_isKeyPressed(sfKeyUp)

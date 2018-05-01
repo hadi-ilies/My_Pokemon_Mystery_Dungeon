@@ -37,6 +37,16 @@ void load_text(sfRenderWindow *window, sfText *text, sfFont *font)
 	sfFont_destroy(font);
 }
 
+void insert_button_text(char *str, sfText *text, int *i, bool test)
+{
+	char *str2 = "";
+	char *string = my_strncat(str2, str, *i);
+
+	sfText_setString(text, string);
+	free(string);
+	test == true ? (*i)++ : 0;
+}
+
 void display_texte_button(sfRenderWindow *window, menu_t *menu)
 {
 	sfFont *font = sfFont_createFromFile(FONT);
@@ -44,8 +54,6 @@ void display_texte_button(sfRenderWindow *window, menu_t *menu)
 	static int i = 1;
 	static bool test = true;
 	static size_t button = 0;
-	char *string;
-	char *str2 = "";
 	char *str = text_button(menu);
 
 	sfText_setFont(text, font);
@@ -57,9 +65,6 @@ void display_texte_button(sfRenderWindow *window, menu_t *menu)
 		test = true;
 		button = menu->button;
 	}
-	string = my_strncat(str2, str, i);
-	sfText_setString(text, string);
-	free(string);
-	test == true ? i++ : 0;
+	insert_button_text(str, text, &i, test);
 	load_text(window, text, font);
 }

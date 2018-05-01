@@ -42,4 +42,8 @@
 #define EXIT (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape)
 #define ENTER_COND event.type == sfEvtKeyPressed && event.key.code ==sfKeyReturn
 #define GET_STRING sfText_getString(load->text[load->text_curs])
+#define GET_STRING_SIZE sfText_getString(option->window_size[option->nb_tile]);
+#define TILE_MAP "resources/tile_map"
+#define MAPS "resources/maps"
+#define CONFIG "resources/config"
 #endif

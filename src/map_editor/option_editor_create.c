@@ -28,7 +28,7 @@ void create_and_setchoice_curs(option_editor_t *option)
 void create_choose_tilemap(option_editor_t *option)
 {
 	option->font = sfFont_createFromFile(FONT);
-	for (size_t i = 0; i < count_file("resources/tile_map"); i++) {
+	for (size_t i = 0; i < count_file(TILE_MAP); i++) {
 		option->text[i] = sfText_create();
 		sfText_setFont(option->text[i], option->font);
 	}
@@ -36,8 +36,8 @@ void create_choose_tilemap(option_editor_t *option)
 
 void tile_map_stock(option_editor_t *option, map_t *map)
 {
-	char **filename = take_filename("resources/tile_map");
-	size_t nb_file = count_file("resources/tile_map");
+	char **filename = take_filename(TILE_MAP);
+	size_t nb_file = count_file(TILE_MAP);
 
 	for (size_t i = 0; i < nb_file; i++) {
 		char *str = concat("resources/tile_map/", filename[i]);
@@ -77,7 +77,7 @@ option_editor_t option_editor_create(sfRenderWindow *window, map_t *map)
 {
 	option_editor_t option;
 
-	option.text = malloc(sizeof(sfText *) * count_file("resources/tile_map"));
+	option.text = malloc(sizeof(sfText *) * count_file(TILE_MAP));
 	if (option.text == NULL)
 		return (option);
 	create_choose_tilemap(&option);

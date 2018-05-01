@@ -29,7 +29,7 @@ void load_editor_destroy(load_editor_t *load)
 	sfRectangleShape_destroy(load->back);
 	sfSprite_destroy(load->screen);
 	sfFont_destroy(load->font);
-	for (size_t i = 0; i < count_file("resources/maps"); i++)
+	for (size_t i = 0; i < count_file(MAPS); i++)
 		free(load->text[i]);
 	for (size_t i = 0; i < 2; i++)
 		sfText_destroy(load->choice[i]);
@@ -39,14 +39,14 @@ load_editor_t load_editor_create(sfRenderWindow *window)
 {
 	load_editor_t load;
 
-	load.text = malloc(sizeof(sfText *) * count_file("resources/maps"));
+	load.text = malloc(sizeof(sfText *) * count_file(MAPS));
 	if (load.text == NULL)
 		return (load);
 	load.back = create_back_param(window);
 	load.screen = create_screen_param(window);
 	load.font = sfFont_createFromFile(FONT);
 	insert_font_in_choice(&load);
-	for (size_t i = 0; i < count_file("resources/maps"); i++) {
+	for (size_t i = 0; i < count_file(MAPS); i++) {
 		load.text[i] = sfText_create();
 		sfText_setFont(load.text[i], load.font);
 	}

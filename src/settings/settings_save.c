@@ -9,15 +9,10 @@
 #include "settings.h"
 #include "my.h"
 
-void settings_save(settings_t *settings, char *file_name)
+void insert_in_file(settings_t *settings, int fd)
 {
-	int fd = CREAT(file_name, S_IRUSR | S_IWUSR | S_IRGRP);
-
-	if (fd == -1)
-		return;
-	if (settings == NULL)
-		*settings = settings_defaut();
-	my_fprintf(fd, "%s %d %d\n", "WindowSize:", settings->window_size.x, settings->window_size.y);
+	my_fprintf(fd, "%s %d %d\n", "WindowSize:", settings->window_size.x,
+		settings->window_size.y);
 	my_fprintf(fd, "%s %f\n", "MusicVolume:", settings->music_volume);
 	my_fprintf(fd, "%s %f\n", "SoundVolume:", settings->sound_volume);
 	my_fprintf(fd, "%s %d\n", "KeyUp:", settings->key[KEY_UP]);
@@ -29,6 +24,18 @@ void settings_save(settings_t *settings, char *file_name)
 	my_fprintf(fd, "%s %d\n", "KeyWait:", settings->key[KEY_WAIT]);
 	my_fprintf(fd, "%s %d\n", "KeyRotate:", settings->key[KEY_ROTATE]);
 	my_fprintf(fd, "%s %d\n", "KeyAttack:", settings->key[KEY_ATTACK]);
-	my_fprintf(fd, "%s %d\n", "KeyInventory:", settings->key[KEY_INVENTORY]);
+	my_fprintf(fd, "%s %d\n", "KeyInventory:",
+		settings->key[KEY_INVENTORY]);
+}
+
+void settings_save(settings_t *settings, char *file_name)
+{
+	int fd = CREAT(file_name, S_IRUSR | S_IWUSR | S_IRGRP);
+
+	if (fd == -1)
+		return;
+	if (settings == NULL)
+		*settings = settings_defaut();
+	insert_in_file(settings, fd);
 	close(fd);
 }

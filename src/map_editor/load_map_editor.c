@@ -20,8 +20,8 @@
 
 void insert_maps_text(load_editor_t *load)
 {
-	char **filename = take_filename("resources/maps");
-	size_t nb_file = count_file("resources/maps");
+	char **filename = take_filename(MAPS);
+	size_t nb_file = count_file(MAPS);
 
 	for (size_t i = 0; i < nb_file; i++)
 		sfText_setString(load->text[i], filename[i]);

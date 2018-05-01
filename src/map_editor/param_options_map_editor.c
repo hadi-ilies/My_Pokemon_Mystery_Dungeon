@@ -20,8 +20,8 @@
 void change_tile_map(sfRenderWindow *window,
 		option_editor_t *option, sfEvent *event)
 {
-	size_t nb_filename =  count_file("resources/tile_map");
-	char **filename = take_filename("resources/tile_map");
+	size_t nb_filename =  count_file(TILE_MAP);
+	char **filename = take_filename(TILE_MAP);
 
 	for (size_t i = 0; i < nb_filename; i++)
 		sfText_setString(option->text[i], filename[i]);
@@ -35,7 +35,7 @@ void change_tile_map(sfRenderWindow *window,
 			option->nb_tile--;
 	}
 	sfText_setPosition(option->text[option->nb_tile],
-			(sfVector2f) {WINDOW_SIZE.x / 2 - 150, WINDOW_SIZE.y / 2 - 300});//tmp
+	(sfVector2f) {WINDOW_SIZE.x / 2 - 150, WINDOW_SIZE.y / 2 - 300});
 }
 
 void size_tile_map_y(sfEvent *event,
@@ -55,7 +55,7 @@ void size_tile_map_y(sfEvent *event,
 	str = inttostr(option->size_y);
 	sfText_setString(option->size_map_y, str);
 	sfText_setPosition(option->size_map_y,
-			(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 200});
+	(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 200});
 }
 
 void size_tile_map_x(sfEvent *event,
@@ -75,5 +75,5 @@ void size_tile_map_x(sfEvent *event,
 	str = inttostr(option->size_x);
 	sfText_setString(option->size_map_x, str);
 	sfText_setPosition(option->size_map_x,
-			(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 100});
+	(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 100});
 }

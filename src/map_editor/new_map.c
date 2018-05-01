@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "prototype.h"
+#include "macro.h"
 #include "main_menu/menu.h"
 #include "map_editor_function.h"
 
@@ -18,7 +19,7 @@ void destroy_option_editor(option_editor_t *option)
 	sfRectangleShape_destroy(option->back);
 	sfSprite_destroy(option->screen);
 	sfFont_destroy(option->font);
-	for (size_t i = 0; i < count_file("resources/tile_map"); i++)
+	for (size_t i = 0; i < count_file(TILE_MAP); i++)
 		free(option->text[i]);
 	for (size_t i = 0; i < 3; i++)
 		sfText_destroy(option->choice[i]);

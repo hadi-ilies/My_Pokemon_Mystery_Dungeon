@@ -12,32 +12,22 @@
 #include "main_menu/menu.h"
 #include "map_editor_function.h"
 
-void launch_map(map_t *map, sfRenderWindow *window)
-{
-	map_editor_loop(window, map);
-}
-
 bool enter_editor(sfRenderWindow *window, menu_t *menu,
 		sfEvent *event,	map_t *map)
 {
 	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyReturn) {
-		if (menu->button == 0 && map->error == MAP_OK) {
-			launch_map(map, window);
-		} if (menu->button == 1 && map->error != 84) {
+		if (menu->button == 0 && map->error == MAP_OK)
+			map_editor_loop(window, map);
+		if (menu->button == 1 && map->error != 84)
 			menu_save_map(map, window);
-			printf("save\n");
-		} if (menu->button == 2) {
+		if (menu->button == 2)
 			new_map(menu, map, window);
-			printf("new map\n");
-		} if (menu->button == 3) {
+		if (menu->button == 3)
 			load_editor_loop(menu, map, window);
-			printf("load\n");
-		} if (menu->button == 4 && map->error != 84) {
+		if (menu->button == 4 && map->error != 84)
 			param_map(menu, map, window);
-			printf("options\n");
-		} if (menu->button == 5) {
+		if (menu->button == 5)
 			return (false);
-		}
 	}
 	return (true);
 }
@@ -48,18 +38,13 @@ void load_font_editor(menu_t *menu)
 		sfText_setFont(menu->text[i], menu->font);
 }
 
-int load_the_map(map_t *map, tile_map_t *tile_map)
+void window_open_menu_editor(sfVector2i *tmp, menu_t *menu,
+			sfRenderWindow *window, loading_t *back)
 {
-	*map = map_load("resources/maps/map_test");
-	if (map->error != MAP_OK)
-		return (84);
-	*tile_map = tile_map_create_from_file("resources/tile_map/Deep_cavern config");
-	map->tile_map = *tile_map;
-	map->size.x = 100;
-	map->size.y = map->size.x;
-	map->pos.x = map->nb_case_x / 2;
-	map->pos.y = map->nb_case_y / 2;
-	return (0);
+	trans_cursor_editor(menu, &tmp->x, &tmp->y);
+	sfRenderWindow_clear(window, sfBlack);
+	display_menu_editor(window, menu, back);
+	sfRenderWindow_display(window);
 }
 
 void menu_map_editor_menu(sfRenderWindow *window)
@@ -68,10 +53,9 @@ void menu_map_editor_menu(sfRenderWindow *window)
 	sfEvent event;
 	loading_t back = back_editor_create(window);
 	menu_t menu = menu_editor_create();
-	int tmp1 = 250;
-	int tmp2 = 5;
+	sfVector2i tmp = {250, 5};
 
-	load_font_editor(&menu);//reput
+	load_font_editor(&menu);
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
@@ -79,11 +63,7 @@ void menu_map_editor_menu(sfRenderWindow *window)
 			if (enter_editor(window, &menu, &event, &map) == false)
 				return;
 		}
-		trans_cursor_editor(&menu, &tmp1, &tmp2);
-		sfRenderWindow_clear(window, sfBlack);
-		display_menu_editor(window, &menu, &back);
-		sfRenderWindow_display(window);
+		window_open_menu_editor(&tmp, &menu, window, &back);
 	}
 	map_destroy(&map);
-	//tile_map_destroy(&menutile_map);
 }

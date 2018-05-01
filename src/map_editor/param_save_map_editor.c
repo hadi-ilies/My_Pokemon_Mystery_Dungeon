@@ -20,7 +20,7 @@ void take_keyboard(save_editor_t *save, sfEvent *event, sfRenderWindow *window)
 	}
 	sfText_setString(save->text[3], save->name_file);
 	sfText_setPosition(save->text[3],
-			(sfVector2f) {WINDOW_SIZE.x / 2 - 150, WINDOW_SIZE.y / 2 - 300});
+	(sfVector2f) {WINDOW_SIZE.x / 2 - 150, WINDOW_SIZE.y / 2 - 300});
 }
 
 bool ok_map(save_editor_t *save, sfEvent *event, map_t *map)

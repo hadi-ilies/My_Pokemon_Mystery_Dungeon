@@ -14,12 +14,13 @@
 #include "video.h"
 #include "macro.h"
 
-void loop_event(video_t video, bool *exit, sfRenderWindow *window, sfEvent *event)
+void loop_event(video_t video, bool *exit,
+		sfRenderWindow *window, sfEvent *event)
 {
-	while(sfRenderWindow_pollEvent(window, event)) {
-		if(event->type == sfEvtClosed)
+	while (sfRenderWindow_pollEvent(window, event)) {
+		if (event->type == sfEvtClosed)
 			sfRenderWindow_close(window);
-		if(event->type == sfEvtKeyPressed
+		if (event->type == sfEvtKeyPressed
 		&& video.num >= video.nb_texture)
 			*exit = true;
 	}
@@ -52,7 +53,7 @@ int main_intro(sfRenderWindow *window, sfEvent *event)
 	if (destroy_and_check_error_anime(&animation, &video) == 1)
 		return (0);
 	music_create(music);
-	while(sfRenderWindow_isOpen(window)) {
+	while (sfRenderWindow_isOpen(window)) {
 		loop_event(video, &exit, window, event);
 		exit == false ? sfRenderWindow_clear(window, sfBlack) : 0;
 		exit == false ? video_aff(window, &video, WIN_REC) : 0;

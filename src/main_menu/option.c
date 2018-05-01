@@ -18,7 +18,8 @@ void display_options(option_t *option, sfRenderWindow *window)
 	sfRenderWindow_drawSprite(window, option->screen, NULL);
 	sfRenderWindow_drawRectangleShape(window, option->back, NULL);
 	option_choice_cursor(option, window);
-	sfRenderWindow_drawText(window, option->window_size[option->nb_tile], NULL);
+	sfRenderWindow_drawText(window,
+			option->window_size[option->nb_tile], NULL);
 	sfRenderWindow_drawText(window, option->sound_value[0], NULL);
 	sfRenderWindow_drawText(window, option->sound_value[1], NULL);
 }
@@ -30,7 +31,7 @@ void option_menu(sfRenderWindow *window, sfEvent *event, menu_t *menu)
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, event)) {
 			if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
-				settings_save(&menu->settings, "resources/config");
+				settings_save(&menu->settings, CONFIG);
 				return;
 			}
 			option_move_cursor(&option, event);
