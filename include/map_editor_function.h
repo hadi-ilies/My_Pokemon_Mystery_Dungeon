@@ -42,5 +42,7 @@ void menu_save_map(map_t *map, sfRenderWindow *window);
 void manage_map(sfEvent *event, sfRenderWindow *window,
 		map_t *map, tva_t *mouse_tva);
 void insert_to_map(tile_map_t *tile_map, tva_t *tva, tva_t mouse_tva);
+void linking_rooms(map_t *map);
+bool isit_on_inventory(map_t *map, sfRenderWindow *window);
 
 #endif

@@ -18,19 +18,6 @@
 #include "option_map_editor.h"
 #include "load_maps_editor.h"
 
-void load_choice_cursor(load_editor_t *load, sfRenderWindow *window)
-{
-	int pos_y = WINDOW_SIZE.y / 2 - 300;
-
-	for (size_t i = 0; i < 2; i++) {
-		sfText_setPosition(load->choice[i], (sfVector2f) {WINDOW_SIZE.x / 2 - 300, pos_y});
-		sfText_setColor(load->choice[i], (sfColor){250, 250, 0,
-					load->choice_curs == i ? 255 : 180});
-		sfRenderWindow_drawText(window, load->choice[i], NULL);
-		pos_y += 100;
-	}
-}
-
 void display_load_editor(load_editor_t *load, sfRenderWindow *window)
 {
 	sfRenderWindow_drawSprite(window, load->screen, NULL);
@@ -64,81 +51,17 @@ load_editor_t load_editor_create(sfRenderWindow *window)
 	return (load);
 }
 
-void move_curseur_load_editor(load_editor_t *load, sfEvent *event)
-{
-	if (event && event->type == sfEvtKeyPressed) {
-		if (sfKeyboard_isKeyPressed(sfKeyUp)
-		&& load->choice_curs > 0) {
-			load->choice_curs--;
-		} if (sfKeyboard_isKeyPressed(sfKeyDown)
-		&& load->choice_curs < 1) {
-			load->choice_curs++;
-		}
-	}
-}
-
-void load_list_choice_cursor(load_editor_t *load, sfRenderWindow *window)
-{
-	int pos_y = WINDOW_SIZE.y / 2 - 300;
-	static size_t i = 5;
-	size_t nb_file = count_file("resources/maps");
-
-	(load->text_curs > 0 && load->text_curs < i - 5) ? i -= 5 : 0;
-	(load->text_curs == i) ? i += 5 : 0;
-	(i >nb_file - 1) ? i = nb_file - 1 : 0;
-	if (load->text_curs == nb_file - 1) {
-		i = 5;
-		load->text_curs = 0;
-	} for (size_t j = i - 5; j < i; j++) {
-		sfText_setPosition(load->text[j],
-				(sfVector2f) {WINDOW_SIZE.x / 2 + 500, pos_y});
-		sfText_setColor(load->text[j], (sfColor){250, 250, 0,
-						load->text_curs == j ? 255 : 180});
-		sfRenderWindow_drawText(window, load->text[j], NULL);
-		pos_y += 100;
-	}
-}
-
-void load_list_choice_min(load_editor_t *load, sfRenderWindow *window)
-{
-	int pos_y = WINDOW_SIZE.y / 2 - 300;
-	size_t nb_file = count_file("resources/maps");
-
-	for (size_t i = 0; i < nb_file; i++) {
-		sfText_setPosition(load->text[i],
-				(sfVector2f) {WINDOW_SIZE.x / 2 + 500, pos_y});
-		sfText_setColor(load->text[i], (sfColor){250, 250, 0,
-						load->text_curs == i ? 255 : 180});
-		sfRenderWindow_drawText(window, load->text[i], NULL);
-		pos_y += 100;
-	}
-}
-
 void display_load_list(load_editor_t *load, sfRenderWindow *window,
 		sfRectangleShape *back, sfSprite *screen)
 {
 	sfRectangleShape_setOutlineColor(back, sfGreen);
-	sfRectangleShape_setPosition(back, (sfVector2f) {WINDOW_SIZE.x / 2 + 600, WINDOW_SIZE.y / 2});
+	sfRectangleShape_setPosition(back,
+		(sfVector2f) {WINDOW_SIZE.x / 2 + 600, WINDOW_SIZE.y / 2});
 	sfRenderWindow_drawSprite(window, screen, NULL);
 	sfRenderWindow_drawRectangleShape(window, back, NULL);
 	count_file("resources/maps") > 5  ?
 		load_list_choice_cursor(load, window) :
 		load_list_choice_min(load, window);
-}
-
-void move_curseur_load_list(load_editor_t *load, sfEvent *event)
-{
-	size_t nb_file = count_file("resources/maps");
-
-	if (event && event->type == sfEvtKeyPressed) {
-		if (sfKeyboard_isKeyPressed(sfKeyUp)
-		&& load->text_curs > 0) {
-			load->text_curs--;
-		} if (sfKeyboard_isKeyPressed(sfKeyDown)
-		&& load->text_curs < nb_file - 1) {
-			load->text_curs++;
-		}
-	}
 }
 
 void insert_maps_text(load_editor_t *load)

@@ -52,6 +52,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPCDIR)manage_map_and_insert_into_map.c \
 			$(MAPCDIR)graphic_write.c \
 			$(MAPCDIR)options_map_editor.c \
+			$(MAPCDIR)laod_editor_cursor.c \
 			$(MAPCDIR)save_editor_cursor.c \
 			$(MAPCDIR)param_save_map_editor.c \
 			$(MAPCDIR)optional_create.c \
@@ -80,6 +81,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPDIR)map_save.c \
 			$(MAPDIR)map_load.c \
 			$(MAPDIR)map_random.c \
+			$(MAPDIR)map_tools.c \
 			$(ENTDIR)entity_create.c \
 			$(ENTDIR)entity_destroy.c \
 			$(ENTDIR)entity_move.c \

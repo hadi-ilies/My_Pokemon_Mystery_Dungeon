@@ -38,5 +38,5 @@
 			event.key.code == sfKeyP) ? linking_rooms(map) : 0
 #define CLEAN_MAP_WITH_C (event.type == sfEvtKeyPressed && \
 			event.key.code == sfKeyC) ? clean_map(map) : 0
-
+#define PATH_MAP_COND map->tab[x + size_x][y + size_y].type
 #endif

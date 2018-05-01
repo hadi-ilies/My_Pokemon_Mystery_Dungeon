@@ -48,5 +48,5 @@ void pick_tile(sfRenderWindow *window, sfFloatRect rect,
 void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva);
 void refresh_map(sfEvent *event, map_t *map);
 bool dont_touch_borders(map_t *map, size_t x, size_t y);
-
+bool insert_water_loop(map_t *map);
 #endif
