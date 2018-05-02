@@ -1,9 +1,8 @@
 *~
 *.o
 #*#
-libmy.a
+*.a
 my_rpg
 vgcore.*
 a.out
-map_test
 resources/texture/intro_animation

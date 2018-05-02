@@ -21,11 +21,11 @@ void save(anime_tab_t *anime_tab, char *file_name)
 		//map->error = MAP_OPEN;
 		return;
 	}
-	if (write(fd, &anime_tab->nb_texture, sizeof(size_t)) != sizeof(size_t)) {
+	if (write(fd, &anime_tab->nb_texname, sizeof(size_t)) != sizeof(size_t)) {
 		//map->error = MAP_WRITE;
 		return;
 	}
-	for (size_t i = 0; i < anime_tab->nb_texture; i++) {
+	for (size_t i = 0; i < anime_tab->nb_texname; i++) {
 		size_t len = 0;
 
 		for (; anime_tab->texname[i].file_name[len] != '\0'; len++);
@@ -62,23 +62,23 @@ void save(anime_tab_t *anime_tab, char *file_name)
 
 void anime_tab_add_texture(anime_tab_t *anime_tab, char *file_name)
 {
-	texname_t *texname = malloc(sizeof(texname_t) * (anime_tab->nb_texture + 1));
+	texname_t *texname = malloc(sizeof(texname_t) * (anime_tab->nb_texname + 1));
 
 	if (texname == NULL) {
 		anime_tab->error = ANIME_TAB_MALLOC;
 		return;
 	}
-	for (size_t i = 0; i < anime_tab->nb_texture; i++)
+	for (size_t i = 0; i < anime_tab->nb_texname; i++)
 		texname[i] = anime_tab->texname[i];
-	texname[anime_tab->nb_texture].file_name = strdup(file_name);
-	texname[anime_tab->nb_texture].texture = sfTexture_createFromFile(file_name, NULL);
-	if (texname[anime_tab->nb_texture].texture == NULL) {
+	texname[anime_tab->nb_texname].file_name = strdup(file_name);
+	texname[anime_tab->nb_texname].texture = sfTexture_createFromFile(file_name, NULL);
+	if (texname[anime_tab->nb_texname].texture == NULL) {
 		anime_tab->error = ANIME_TAB_TEXTURE_CREATE;
 		return;
 	}
 	free(anime_tab->texname);
 	anime_tab->texname = texname;
-	anime_tab->nb_texture++;
+	anime_tab->nb_texname++;
 }
 
 int anime_editor_menu(sfRenderWindow *window)

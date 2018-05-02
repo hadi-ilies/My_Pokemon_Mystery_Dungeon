@@ -44,7 +44,6 @@ SRC		=	$(SRCDIR)main.c \
 			$(INTRODIR)factories.c \
 			$(GAMEDIR)game_menu.c \
 			$(GAMEDIR)game_loop.c \
-			$(GAMEDIR)capacity_aff.c \
 			$(MAPCDIR)load_map_editor.c \
 			$(MAPCDIR)save_map_editor_create.c \
 			$(MAPCDIR)factories_editor.c \
@@ -91,6 +90,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(ENTDIR)entity_gain_exp.c \
 			$(GAROUDIR)garou_create.c \
 			$(GAROUDIR)garou_destroy.c \
+			$(GAROUDIR)capacity_aff.c \
 			$(STGSDIR)settings_defaut.c \
 			$(STGSDIR)settings_load.c \
 			$(STGSDIR)settings_save.c \
@@ -111,14 +111,23 @@ LDFLAGS		+=	-L $(LIBDIR) -l my
 all		:	$(NAME)
 
 $(NAME)		:	$(OBJ)
+			@make re -C $(LIBDIR)/Tile_map --no-print-directory
+			@make re -C $(LIBDIR)/Anime_tab --no-print-directory
+			@make re -C $(LIBDIR)/Video --no-print-directory
 			@make re -C $(LIBDIR)/my --no-print-directory
 			@$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 clean		:
+			@make clean -C $(LIBDIR)/Tile_map --no-print-directory
+			@make clean -C $(LIBDIR)/Anime_tab --no-print-directory
+			@make clean -C $(LIBDIR)/Video --no-print-directory
 			@make clean -C $(LIBDIR)/my --no-print-directory
 			@rm -f $(OBJ)
 
 fclean		:	clean
+			@make fclean -C $(LIBDIR)/Tile_map --no-print-directory
+			@make fclean -C $(LIBDIR)/Anime_tab --no-print-directory
+			@make fclean -C $(LIBDIR)/Video --no-print-directory
 			@make fclean -C $(LIBDIR)/my --no-print-directory
 			@rm -f $(NAME)
 

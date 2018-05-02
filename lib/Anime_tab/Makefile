@@ -1,30 +1,24 @@
 ##
 ## EPITECH PROJECT, 2017
-## my
+## for_norme
 ## File description:
 ## Makefile
 ##
 
-NAME	=	../libmy.a
+NAME	=	../libAnime_tab.a
 
-SRC	=	my_fprintf.c \
-		my_getline.c \
-		my_strcmp.c \
-		my_strncpy.c \
-		my_strdup.c \
-		my_strlen.c \
-		my_strncat.c \
-		my_str_to_tab.c \
-		add_line.c \
-		concat.c \
-		my_atoi.c \
-		my_str_to_unsigned_int.c \
-		my_str_to_float.c \
+SRC	=	anime_tab_create.c \
+		anime_tab_create_from_fd.c \
+		anime_tab_create_from_file.c \
+		anime_tab_copy.c \
+		anime_tab_destroy.c \
+		anime_tab_aff.c \
 
 OBJ	=	$(SRC:.c=.o)
 
 CFLAGS	+=	-I../../include
 CFLAGS	+=	-W -Wall -Wextra
+CFLAGS	+=	-l c_graph_prog
 
 all	:	$(NAME)
 

@@ -1,30 +1,25 @@
 ##
 ## EPITECH PROJECT, 2017
-## my
+## for_norme
 ## File description:
 ## Makefile
 ##
 
-NAME	=	../libmy.a
+NAME	=	../libVideo.a
 
-SRC	=	my_fprintf.c \
-		my_getline.c \
-		my_strcmp.c \
-		my_strncpy.c \
-		my_strdup.c \
-		my_strlen.c \
-		my_strncat.c \
-		my_str_to_tab.c \
-		add_line.c \
-		concat.c \
-		my_atoi.c \
-		my_str_to_unsigned_int.c \
-		my_str_to_float.c \
+
+SRC	=	video_create.c \
+		video_create_from_fd.c \
+		video_create_from_file.c \
+		video_aff.c \
+		video_destroy.c \
 
 OBJ	=	$(SRC:.c=.o)
 
 CFLAGS	+=	-I../../include
 CFLAGS	+=	-W -Wall -Wextra
+
+LDFLAGS	+=	-l c_graph_prog
 
 all	:	$(NAME)
 

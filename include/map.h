@@ -43,7 +43,6 @@ typedef struct {
 	char *tile_map_file_name;
 	tile_map_t tile_map;
 	size_t error;
-	char *file_name;
 } map_t;
 
 map_t map_create(size_t nb_case_x, size_t nb_case_y, char *tile_map_file_name);

@@ -18,7 +18,7 @@
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
 #define WINDOW_BITS_PER_PIXEL 32
-#define WINDOW_PARAMS sfClose
+#define WINDOW_PARAMS sfFullscreen
 #define FRAMERATE_LIMIT 30
 
 int main_menu(sfRenderWindow *window);
@@ -31,7 +31,7 @@ void get_start(anime_tab_t *animation, sfMusic *music[3],
 	       sfRenderWindow *window, video_t *video, sfEvent *event);
 loading_t loading_create(sfRenderWindow *window);
 void destroy_music(sfMusic *music[3]);
-int game_menu(sfRenderWindow *window, char *file_name);
+int game_menu(sfRenderWindow *window);
 int map_editor_menu(sfRenderWindow *window);
 int anime_editor_menu(sfRenderWindow *window);
 int game_loop(sfRenderWindow *window, garou_t *garou);

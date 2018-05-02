@@ -114,6 +114,8 @@ void entity_attack(entity_t *entity, capacity_t *capacity, map_t *map,
 	}
 }
 
+
+
 bool manage_input(entity_t *entity, map_t *map,
 		  entity_t *info[map->nb_case_x][map->nb_case_y],
 		  size_t input)
@@ -198,6 +200,17 @@ void ia2(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y], size_t x, size_
 				tab[x + i][y + j] = tab[x][y] + 1;
 }
 
+sfVector2i new_pos(entity_t *entity, size_t input)
+{
+	sfVector2i pos = entity->pos;
+
+	input & LEFT ? pos.x += -1 : 0;
+	input & RIGHT ? pos.x += 1 : 0;
+	input & UP ? pos.y += -1 : 0;
+	input & DOWN ? pos.y += 1 : 0;
+	return (pos);
+}
+
 size_t ia(entity_t *entity, map_t *map,
 	  entity_t *info[map->nb_case_x][map->nb_case_y])
 {
@@ -211,7 +224,7 @@ size_t ia(entity_t *entity, map_t *map,
 			for (size_t j = 0; j < map->nb_case_y; j++)
 				tab[i][j] = 0;
 		tab[cible->pos.x][cible->pos.y] = 1;
-		for (size_t n = 1; n <= 5; n++)
+		for (size_t n = 1; n <= 20; n++)
 			for (size_t i = 1; i < map->nb_case_x - 1; i++)
 				for (size_t j = 1; j < map->nb_case_y - 1; j++)
 					if (tab[i][j] == n)
@@ -226,14 +239,26 @@ size_t ia(entity_t *entity, map_t *map,
 						i == 1 ? input |= RIGHT : 0;
 						j == -1 ? input |= UP : 0;
 						j == 1 ? input |= DOWN : 0;
-						if (info[entity->pos.x + i][entity->pos.y + j])
+						if (info[entity->pos.x + i][entity->pos.y + j] && info[entity->pos.x + i][entity->pos.y + j]->ia == 0)
 							input |= ATTACK;
 						else
 							input |= MOVE;
+						input |= WAIT;
 					}
 	}
-	else
-		input = (rand() % 0b1111 + 1) | MOVE | WAIT;
+	else {
+		/*map->tab[entity->pos.x - entity->dir.x][entity->pos.y - entity->dir.y].type = WATER;
+		while (1) {
+			sfVector2i pos;
+		*/
+			input = (0b001 << (rand() % 4));
+			/*	pos = new_pos(entity, input);
+			if (map->tab[pos.x][pos.y].type == GROUND)
+				break;
+		}
+		map->tab[entity->pos.x - entity->dir.x][entity->pos.y - entity->dir.y].type = GROUND;*/
+		input |= MOVE | WAIT;
+	}
 	return (input);
 }
 

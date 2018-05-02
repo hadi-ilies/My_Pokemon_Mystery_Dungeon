@@ -45,7 +45,7 @@ typedef struct {
 } anime_t;
 
 typedef struct {
-	size_t nb_texture;
+	size_t nb_texname;
 	texname_t *texname;
 	size_t nb_anime;
 	anime_t *anime;

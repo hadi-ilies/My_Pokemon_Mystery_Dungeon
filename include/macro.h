@@ -34,9 +34,9 @@
 #define GET_MAP_Y MOUSE_POS.y / map->size.y + map->pos.y + 0.5 \
 	- (WINDOW_SIZE.y / 2) / map->size.y
 
-#define PLAY_YOUR_MAP_WITH_G (map->file_name != NULL && \
+/*#define PLAY_YOUR_MAP_WITH_G (map->file_name != NULL &&	     \
 	event->type == sfEvtKeyPressed && event->key.code == sfKeyG) \
-	? game_menu(window, map->file_name) : 0
+	? game_menu(window) : 0*/
 #define LINK_ROOMS_WITH_P (event->type == sfEvtKeyPressed && \
 			event->key.code == sfKeyP) ? linking_rooms(map) : 0
 #define CLEAN_MAP_WITH_C (event->type == sfEvtKeyPressed && \

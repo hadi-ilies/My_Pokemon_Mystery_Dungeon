@@ -11,11 +11,11 @@
 #include "tile_name.h"
 #include "capacity_tab.h"
 
-int game_menu(sfRenderWindow *window, char *file_name)
+int game_menu(sfRenderWindow *window)
 {
-	garou_t garou = garou_create();
+	garou_t garou = garou_create("resources/config");
 
-	garou.map = map_load(file_name); //
+	garou.map = map_load("resources/maps/map test"); //
 	if (garou.map.error != MAP_OK)
 		return (84);
 	garou.map.size.x = 200;

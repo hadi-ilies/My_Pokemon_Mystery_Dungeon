@@ -56,7 +56,12 @@ void key_command_editor(sfRenderWindow *window, map_t *map, sfEvent *event)
 {
 	LINK_ROOMS_WITH_P;
 	CLEAN_MAP_WITH_C;
-	PLAY_YOUR_MAP_WITH_G;
+	//PLAY_YOUR_MAP_WITH_G;
+	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyG) {
+		garou_t garou;
+
+		game_loop(window, &garou);
+	}
 }
 
 int map_editor_loop(sfRenderWindow *window, map_t *map)
