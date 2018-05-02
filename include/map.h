@@ -13,6 +13,9 @@
 #include "error.h"
 #include "tile_map.h"
 
+// game_macros
+#define GAME_ZOOM 200, 200
+
 // code_macros
 #define X_MIN (map->pos.x - center.x / map->size.x > 0 ? \
 	map->pos.x - center.x / map->size.x : 0)
@@ -37,6 +40,7 @@ typedef struct {
 } map_t;
 
 map_t map_create(size_t nb_case_x, size_t nb_case_y, char *tile_map_file_name);
+map_t map_copy(map_t *map);
 void map_resize(map_t *map, size_t new_nb_case_x, size_t new_nb_case_y);
 void map_destroy(map_t *map);
 void map_aff(sfRenderWindow *window, map_t *map);

@@ -28,10 +28,10 @@ entity_t entity_create(void)
 	entity.dir = (sfVector2i){0, 0};
 	entity.pos = (sfVector2i){0, 0};
 	entity.clock = sfClock_create();
-	if (entity.clock != ERR_OK)
+	if (entity.clock == NULL)
 		entity.error = ERR_CLOCK_CREATE;
 	else
 		entity.error = ERR_OK;
-	entity.anime_tab_file_map = NULL;
+	entity.anime_tab_file_name = NULL;
 	return (entity);
 }

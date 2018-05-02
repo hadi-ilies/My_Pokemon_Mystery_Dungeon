@@ -11,7 +11,7 @@
 #include "capacity.h"
 #include "type.h"
 
-static capacity_t capacity_tab[] = {
+static const capacity_t capacity_tab[] = {
 	{"Tackle", TYPE_NORMAL, PHYSICAL, 40, 100, 35},
 	{"Aqua Tail", TYPE_WATER, PHYSICAL, 90, 90, 10},
 	{"Cut", TYPE_NORMAL, PHYSICAL, 50, 95, 30},

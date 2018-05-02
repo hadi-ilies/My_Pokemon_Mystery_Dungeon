@@ -58,9 +58,27 @@ void key_command_editor(sfRenderWindow *window, map_t *map, sfEvent *event)
 	CLEAN_MAP_WITH_C;
 	//PLAY_YOUR_MAP_WITH_G;
 	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyG) {
-		garou_t garou;
+		garou_t garou = garou_create("resources/config");
 
+		garou.map = map_copy(map);
+		if (garou.map.error != ERR_OK)
+			return;
+		garou.map.size = (sfVector2f){GAME_ZOOM};
+		garou.nb_entity = (map->nb_case_x * map->nb_case_y) / 100;
+		garou.entity = malloc(sizeof(entity_t) * garou.nb_entity);
+		if (garou.entity == NULL)
+			return;
+		for (size_t i = 0; i < garou.nb_entity; i++) {
+			sfVector2i pos = {rand() % garou.map.nb_case_x, rand() % garou.map.nb_case_y};
+
+			garou.entity[i] = entity_create_from_file(i == 0 ? "my" : "nomy");
+			while (garou.map.tab[pos.x][pos.y].type != GROUND)
+				pos = (sfVector2i){rand() % garou.map.nb_case_x, rand() % garou.map.nb_case_y};
+			garou.entity[i].dir = (sfVector2i){0, 1};
+			garou.entity[i].pos = pos;
+		}
 		game_loop(window, &garou);
+		//garou_destroy(&garou);
 	}
 }
 

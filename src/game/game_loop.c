@@ -87,7 +87,7 @@ static void set_anime_hurt(entity_t *entity)
 		entity->anime_tab.num = ANIME_HURT_NE;
 }
 
-void entity_attack(entity_t *entity, capacity_t *capacity, map_t *map,
+void entity_attack(entity_t *entity, const capacity_t *capacity, map_t *map,
 		   entity_t *info[map->nb_case_x][map->nb_case_y])
 {
 	set_anime_atk(entity);
@@ -114,8 +114,6 @@ void entity_attack(entity_t *entity, capacity_t *capacity, map_t *map,
 	}
 }
 
-
-
 bool manage_input(entity_t *entity, map_t *map,
 		  entity_t *info[map->nb_case_x][map->nb_case_y],
 		  size_t input)
@@ -138,26 +136,26 @@ bool manage_input(entity_t *entity, map_t *map,
 			bool tmp = false;
 
 			if (input & CAPACITY1 && entity->pp[0]) {
-				if ((size_t)rand() % 100 < entity->capacity[0]->accuracy)
-					entity_attack(entity, entity->capacity[0], map, info);
+				if ((size_t)rand() % 100 < CAPACITY(*entity, 0).accuracy)
+					entity_attack(entity, &CAPACITY(*entity, 0), map, info);
 				entity->pp[0]--;
 				tmp = true;
 			}
 			if (input & CAPACITY2 && entity->pp[1]) {
-				if ((size_t)rand() % 100 < entity->capacity[1]->accuracy)
-					entity_attack(entity, entity->capacity[1], map, info);
+				if ((size_t)rand() % 100 < CAPACITY(*entity, 1).accuracy)
+					entity_attack(entity, &CAPACITY(*entity, 1), map, info);
 				entity->pp[1]--;
 				tmp = true;
 			}
 			if (input & CAPACITY3 && entity->pp[2]) {
-				if ((size_t)rand() % 100 < entity->capacity[2]->accuracy)
-					entity_attack(entity, entity->capacity[2], map, info);
+				if ((size_t)rand() % 100 < CAPACITY(*entity, 2).accuracy)
+					entity_attack(entity, &CAPACITY(*entity, 2), map, info);
 				entity->pp[2]--;
 				tmp = true;
 			}
 			if (input & CAPACITY4 && entity->pp[3]) {
-				if ((size_t)rand() % 100 < entity->capacity[3]->accuracy)
-					entity_attack(entity, entity->capacity[3], map, info);
+				if ((size_t)rand() % 100 < CAPACITY(*entity, 0).accuracy)
+					entity_attack(entity, &CAPACITY(*entity, 0), map, info);
 				entity->pp[3]--;
 				tmp = true;
 			}

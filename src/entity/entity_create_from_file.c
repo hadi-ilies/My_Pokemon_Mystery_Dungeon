@@ -5,7 +5,6 @@
 ** entity_create_from_file.c
 */
 
-#include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include "entity.h"

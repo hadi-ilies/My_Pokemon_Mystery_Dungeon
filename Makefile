@@ -74,6 +74,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(ANICDIR)anime_editor_menu.c \
 			$(ANICDIR)anime_editor_loop.c \
 			$(MAPDIR)map_create.c \
+			$(MAPDIR)map_copy.c \
 			$(MAPDIR)map_resize.c \
 			$(MAPDIR)map_destroy.c \
 			$(MAPDIR)map_aff.c \
@@ -86,6 +87,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(ENTDIR)entity_create_from_file.c \
 			$(ENTDIR)entity_create_from_fd.c \
 			$(ENTDIR)entity_destroy.c \
+			$(ENTDIR)entity_save.c \
 			$(ENTDIR)entity_move.c \
 			$(ENTDIR)entity_get_move_pos.c \
 			$(ENTDIR)entity_aff.c \

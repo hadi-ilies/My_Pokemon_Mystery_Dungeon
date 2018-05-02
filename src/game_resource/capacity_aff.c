@@ -6,12 +6,13 @@
 */
 
 #include "game_resource.h"
+#include "capacity_tab.h"
 
-char *get_pp(entity_t *entity, size_t capacity_num)
+char *get_pp(entity_t *entity, size_t num)
 {
 	char *str_pp = malloc(sizeof(char) * (2 + 1 + 2 + 1));
-	size_t pp_max = entity->capacity[capacity_num]->pp;
-	size_t pp = entity->pp[capacity_num];
+	size_t pp_max = CAPACITY(*entity, num).pp;
+	size_t pp = entity->pp[num];
 
 	str_pp[0] = (pp / 10) % 10 + '0';
 	str_pp[1] = pp % 10 + '0';
@@ -38,7 +39,7 @@ void capacity_aff_rect(sfRenderWindow *window, sfVector2f pos, char *file_name)
 }
 
 void capacity_aff_name(sfRenderWindow *window, garou_t *garou,
-	     sfVector2f pos, size_t capacity_num)
+	     sfVector2f pos, size_t num)
 {
 	sfFont *font = sfFont_createFromFile(GAME_FONT);
 	sfText *text = sfText_create();
@@ -51,20 +52,20 @@ void capacity_aff_name(sfRenderWindow *window, garou_t *garou,
 	pos.x += size.x / 4;
 	pos.y += size.y / 3 - text_size / 2;
 	sfText_setPosition(text, pos);
-	sfText_setString(text, garou->entity[0].capacity[capacity_num]->name);
+	sfText_setString(text, CAPACITY(garou->entity[0], num).name);
 	sfRenderWindow_drawText(window, text, NULL);
 	sfFont_destroy(font);
 	sfText_destroy(text);
 }
 
 void capacity_aff_pp(sfRenderWindow *window, garou_t *garou,
-	     sfVector2f pos, size_t capacity_num)
+	     sfVector2f pos, size_t num)
 {
 	sfFont *font = sfFont_createFromFile(GAME_FONT);
 	sfText *text = sfText_create();
 	sfVector2f size = {597, 179};
 	unsigned int text_size = size.y / 5;
-	char *str_pp = get_pp(&garou->entity[0], capacity_num);
+	char *str_pp = get_pp(&garou->entity[0], num);
 
 	sfText_setFont(text, font);
 	sfText_setColor(text, (sfColor){0, 0, 0, 200});

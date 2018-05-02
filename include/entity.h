@@ -33,6 +33,7 @@
 		STAT(entity, atk) : STAT(entity, spa)
 #define STATDEF(entity, capacity) (capacity).category == PHYSICAL ?	\
 		STAT(entity, def) : STAT(entity, spd)
+#define CAPACITY(entity, num) capacity_tab[(entity).capacity_num[num]]
 #define CAN_MOVE(entity) !INFO(entity)					\
 	&& (map->tab[NEW_X(entity)][NEW_Y(entity)].type == GROUND	\
 	    || (map->tab[NEW_X(entity)][NEW_Y(entity)].type == WATER	\
@@ -56,7 +57,7 @@ typedef struct {
 	size_t life;
 	size_t type;
 	size_t type2;
-	capacity_t *capacity[4];
+	size_t capacity_num[4];
 	size_t pp[4];
 	size_t ability;
 	size_t nature;
@@ -71,7 +72,7 @@ typedef struct {
 	sfVector2i dir;
 	sfVector2i pos;
 	sfClock *clock;
-	char *anime_tab_file_map;
+	char *anime_tab_file_name;
 	anime_tab_t anime_tab;
 	enum error_e error;
 } entity_t;
@@ -80,6 +81,7 @@ entity_t entity_create(void);
 entity_t entity_create_from_file(char *file_name);
 entity_t entity_create_from_fd(int fd);
 void entity_destroy(entity_t *entity);
+void entity_save(entity_t *entity, char *file_name);
 bool entity_move(entity_t *entity, map_t *map,
 		 entity_t *info[map->nb_case_x][map->nb_case_y]);
 sfVector2f entity_get_move_pos(entity_t *entity);

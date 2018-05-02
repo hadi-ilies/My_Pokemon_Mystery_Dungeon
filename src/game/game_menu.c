@@ -26,23 +26,33 @@ int game_menu(sfRenderWindow *window)
 		sfVector2i pos = {rand() % garou.map.nb_case_x, rand() % garou.map.nb_case_y};
 
 		if (i == 0)
+			garou.entity[i] = entity_create_from_file("my");
+		else
+			garou.entity[i] = entity_create_from_file("nomy");
+		if (garou.entity[i].error != ERR_OK) {
+			printf("db err : %d\n", garou.entity[i].error);
+			return (84);
+		}//*/
+		/*sfVector2i pos = {rand() % garou.map.nb_case_x, rand() % garou.map.nb_case_y};
+
+		if (i == 0)
 			pos = (sfVector2i){garou.map.nb_case_x / 2, garou.map.nb_case_y / 2};
 		garou.entity[i] = entity_create();
+		if (garou.entity[i].error != ERR_OK)
+			return (84);
 		garou.entity[i].level = 5;
 		garou.entity[i].type = i == 0 ? TYPE_NORMAL : TYPE_WATER;
 		garou.entity[i].type2 = TYPE_NULL;
-		garou.entity[i].capacity[0] = &capacity_tab[1];
-		garou.entity[i].capacity[1] = &capacity_tab[2];
-		garou.entity[i].capacity[2] = &capacity_tab[3];
-		garou.entity[i].capacity[3] = &capacity_tab[4];
 		for (size_t j = 0; j < 4; j++)
-			garou.entity[i].pp[j] = garou.entity[i].capacity[j]->pp;
+			garou.entity[i].capacity_num[j] = j + 1;
+		for (size_t j = 0; j < 4; j++)
+			garou.entity[i].pp[j] = capacity_tab[garou.entity[i].capacity_num[j]].pp;
 		garou.entity[i].ability = 0; // !!!
 		garou.entity[i].nature = 0; // !!!
 		if (i == 0)
 			garou.entity[i].base_stat = (stats_t){310, 145, 145, 135, 135, 95};
 		else
-		garou.entity[i].base_stat = (stats_t){210, 145, 105, 105, 105, 85};
+			garou.entity[i].base_stat = (stats_t){210, 145, 105, 105, 105, 85};
 		garou.entity[i].iv = (stats_t){rand() % 32, rand() % 32, rand() % 32, rand() % 32, rand() % 32, rand() % 32};
 		garou.entity[i].item = 0; // !!!
 		if (i == 0)
@@ -51,17 +61,20 @@ int game_menu(sfRenderWindow *window)
 			garou.entity[i].ia = 1; // !!!
 		garou.entity[i].life = STAT(garou.entity[i], life);
 		if (i == 0)
-			garou.entity[i].anime_tab = anime_tab_create_from_file("resources/texture/anime_tab/insolourdo_config");
+			garou.entity[i].anime_tab_file_name = strdup("resources/texture/anime_tab/insolourdo_config");
 		else
-			garou.entity[i].anime_tab = anime_tab_create_from_file("resources/texture/anime_tab/gobou_config");
+			garou.entity[i].anime_tab_file_name = strdup("resources/texture/anime_tab/gobou_config");
+		garou.entity[i].anime_tab = anime_tab_create_from_file(garou.entity[i].anime_tab_file_name);
 		if (garou.entity[i].anime_tab.error != ERR_OK)
 			return (84);
-		garou.entity[i].anime_tab.num = rand() % 8;
+			garou.entity[i].anime_tab.num = rand() % 8;//*/
 		while (garou.map.tab[pos.x][pos.y].type != GROUND)
 			pos = (sfVector2i){rand() % garou.map.nb_case_x, rand() % garou.map.nb_case_y};
-		garou.entity[i].pos = pos;
+			garou.entity[i].pos = pos;
 	}
 	game_loop(window, &garou);
+	entity_save(&garou.entity[0], "my");
+	entity_save(&garou.entity[1], "nomy");
 	garou_destroy(&garou);
 	return (0);
 }
