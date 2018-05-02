@@ -16,7 +16,7 @@ bool enter_editor(sfRenderWindow *window, menu_t *menu,
 		sfEvent *event,	map_t *map)
 {
 	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyReturn) {
-		if (menu->button == 0 && map->error == MAP_OK)
+		if (menu->button == 0 && map->error == ERR_OK)
 			map_editor_loop(window, map);
 		if (menu->button == 1 && map->error != 84)
 			menu_save_map(map, window);

@@ -30,7 +30,7 @@ anime_tab_t anime_tab_copy(anime_tab_t *anime_tab)
 	anime_tab_cpy.nb_texname = anime_tab->nb_texname;
 	anime_tab_cpy.texname = malloc(sizeof(texname_t) * anime_tab_cpy.nb_texname);
 	if (anime_tab_cpy.texname == NULL) {
-		anime_tab_cpy.error = ANIME_TAB_MALLOC;
+		anime_tab_cpy.error = ERR_MALLOC;
 		return (anime_tab_cpy);
 	}
 	for (size_t i = 0; i < anime_tab_cpy.nb_texname; i++) {
@@ -40,14 +40,14 @@ anime_tab_t anime_tab_copy(anime_tab_t *anime_tab)
 	anime_tab_cpy.nb_anime = anime_tab->nb_anime;
 	anime_tab_cpy.anime = malloc(sizeof(anime_t) * anime_tab_cpy.nb_anime);
 	if (anime_tab_cpy.anime == NULL) {
-		anime_tab_cpy.error = ANIME_TAB_MALLOC;
+		anime_tab_cpy.error = ERR_MALLOC;
 		return (anime_tab_cpy);
 	}
 	for (size_t i = 0; i < anime_tab_cpy.nb_anime; i++) {
 		anime_tab_cpy.anime[i].nb_rectex = anime_tab->anime[i].nb_rectex;
 		anime_tab_cpy.anime[i].rectex = malloc(sizeof(rectex_t) * anime_tab_cpy.anime[i].nb_rectex);
 		if (anime_tab_cpy.anime[i].rectex == NULL) {
-			anime_tab_cpy.error = ANIME_TAB_MALLOC;
+			anime_tab_cpy.error = ERR_MALLOC;
 			return (anime_tab_cpy);
 		}
 		for (size_t j = 0; j < anime_tab_cpy.anime[i].nb_rectex; j++)

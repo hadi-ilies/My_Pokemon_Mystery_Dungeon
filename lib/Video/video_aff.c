@@ -20,7 +20,7 @@ void video_aff(sfRenderWindow *window, video_t *video, sfFloatRect rect)
 		return;
 	video->texture = sfTexture_createFromFile(video->texture_name[video->num], NULL);
 	if (video->texture == NULL) {
-		video->error = VIDEO_TEXTURE_CREATE;
+		video->error = ERR_TEXTURE_CREATE;
 		return;
 	}
 	sfSprite_setTexture(sprite, video->texture, sfTrue);

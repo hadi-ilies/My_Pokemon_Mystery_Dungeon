@@ -10,6 +10,7 @@
 
 #include <SFML/Graphics.h>
 #include <stddef.h>
+#include "error.h"
 #include "tile_map.h"
 
 // code_macros
@@ -24,16 +25,6 @@
 	map->pos.y + 2 < map->nb_case_y ? (win_size.y - center.y) / \
 	map->size.y + map->pos.y + 2 : map->nb_case_y)
 
-enum map_error {
-	MAP_OK,
-	MAP_OPEN,
-	MAP_READ,
-	MAP_WRITE,
-	MAP_MALLOC,
-	MAP_INVALID_NUMBER,
-	MAP_TILE_MAP
-};
-
 typedef struct {
 	size_t nb_case_x;
 	size_t nb_case_y;
@@ -42,7 +33,7 @@ typedef struct {
 	sfVector2f pos;
 	char *tile_map_file_name;
 	tile_map_t tile_map;
-	size_t error;
+	enum error_e error;
 } map_t;
 
 map_t map_create(size_t nb_case_x, size_t nb_case_y, char *tile_map_file_name);

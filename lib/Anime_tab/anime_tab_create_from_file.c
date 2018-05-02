@@ -16,7 +16,7 @@ anime_tab_t anime_tab_create_from_file(char *file_name)
 
 	if (fd == -1) {
 		anime_tab = anime_tab_create();
-		anime_tab.error = ANIME_TAB_OPEN;
+		anime_tab.error = ERR_OPEN;
 		return (anime_tab);
 	}
 	anime_tab = anime_tab_create_from_fd(fd);

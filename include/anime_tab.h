@@ -10,17 +10,7 @@
 
 #include <SFML/Graphics.h>
 #include <stddef.h>
-
-enum anime_tab_error {
-	ANIME_TAB_OK,
-	ANIME_TAB_CLOCK_CREATE,
-	ANIME_TAB_TEXTURE_CREATE,
-	ANIME_TAB_SPRITE_CREATE,
-	ANIME_TAB_OPEN,
-	ANIME_TAB_READ,
-	ANIME_TAB_MALLOC,
-	ANIME_TAB_INVALID_NUMBER
-};
+#include "error.h"
 
 #ifndef RECTEX_T_
 #define RECTEX_T_
@@ -52,7 +42,7 @@ typedef struct {
 	sfClock *clock;
 	sfSprite *sprite;
 	size_t num;
-	size_t error;
+	enum error_e error;
 } anime_tab_t;
 
 anime_tab_t anime_tab_create(void);

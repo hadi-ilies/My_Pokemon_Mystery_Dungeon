@@ -11,6 +11,7 @@
 #include <SFML/Graphics.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "error.h"
 #include "map.h"
 #include "anime_tab.h"
 #include "capacity.h"
@@ -70,10 +71,13 @@ typedef struct {
 	sfVector2i dir;
 	sfVector2i pos;
 	sfClock *clock;
+	char *anime_tab_file_map;
 	anime_tab_t anime_tab;
+	enum error_e error;
 } entity_t;
 
 entity_t entity_create(void);
+entity_t entity_create_from_file(char *file_name);
 void entity_destroy(entity_t *entity);
 bool entity_move(entity_t *entity, map_t *map,
 		 entity_t *info[map->nb_case_x][map->nb_case_y]);

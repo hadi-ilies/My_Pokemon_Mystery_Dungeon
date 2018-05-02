@@ -20,41 +20,41 @@ map_t map_load(char *file_name)
 	char *tile_map_file_name;
 
 	if (fd == -1) {
-		map.error = MAP_OPEN;
+		map.error = ERR_OPEN;
 		return (map);
 	}
 	if (read(fd, &nb_case_x, sizeof(size_t)) != sizeof(size_t)) {
-		map.error = MAP_READ;
+		map.error = ERR_READ;
 		return (map);
 	}
 	if (read(fd, &nb_case_y, sizeof(size_t)) != sizeof(size_t)) {
-		map.error = MAP_READ;
+		map.error = ERR_READ;
 		return (map);
 	}
 	if (read(fd, &len, sizeof(size_t)) != sizeof(size_t)) {
-		map.error = MAP_READ;
+		map.error = ERR_READ;
 		return (map);
 	}
 	tile_map_file_name = malloc(sizeof(char) * (len + 1));
 	if (tile_map_file_name == NULL) {
-		map.error = MAP_MALLOC;
+		map.error = ERR_MALLOC;
 		return (map);
 	}
 	if (read(fd, tile_map_file_name, len) != (int)len) {
-		map.error = MAP_READ;
+		map.error = ERR_READ;
 		return (map);
 	}
 	tile_map_file_name[len] = '\0';
 	map = map_create(nb_case_x, nb_case_y, tile_map_file_name);
-	if (map.error != MAP_OK)
+	if (map.error != ERR_OK)
 		return (map);
 	for (size_t i = 0; i < map.nb_case_x; i++)
 		for (size_t j = 0; j < map.nb_case_y; j++) {
 			if (read(fd, &map.tab[i][j], sizeof(tva_t)) != sizeof(tva_t)) {
-				map.error = MAP_READ;
+				map.error = ERR_READ;
 				return (map);
 			}
 		}
-
+	close(fd);
 	return (map);
 }

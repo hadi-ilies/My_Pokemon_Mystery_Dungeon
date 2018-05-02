@@ -10,17 +10,7 @@
 
 #include <SFML/Graphics.h>
 #include <stddef.h>
-
-enum video_error {
-	VIDEO_OK,
-	VIDEO_TEXTURE_CREATE,
-	VIDEO_SPRITE_CREATE,
-	VIDEO_CLOCK_CREATE,
-	VIDEO_OPEN,
-	VIDEO_READ,
-	VIDEO_MALLOC,
-	VIDEO_INVALID_NUMBER
-};
+#include "error.h"
 
 typedef struct {
 	size_t nb_texture;
@@ -30,7 +20,7 @@ typedef struct {
 	sfClock *clock;
 	size_t time;
 	size_t num;
-	size_t error;
+	enum error_e error;
 } video_t;
 
 video_t video_create(void);

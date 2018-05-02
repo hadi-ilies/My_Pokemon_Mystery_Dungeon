@@ -19,10 +19,10 @@ video_t video_create(void)
 	video.time = 0;
 	video.num = 0;
 	if (video.sprite == NULL)
-		video.error = VIDEO_SPRITE_CREATE;
+		video.error = ERR_SPRITE_CREATE;
 	else if (video.clock == NULL)
-		video.error = VIDEO_CLOCK_CREATE;
+		video.error = ERR_CLOCK_CREATE;
 	else
-		video.error = VIDEO_OK;
+		video.error = ERR_OK;
 	return (video);
 }

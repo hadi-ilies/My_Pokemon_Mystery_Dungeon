@@ -14,7 +14,7 @@ video_t video_create_from_file(char *file_name)
 	video_t video;
 
 	if (fd == -1) {
-		video.error = VIDEO_OPEN;
+		video.error = ERR_OPEN;
 		return (video);
 	}
 	video = video_create_from_fd(fd);

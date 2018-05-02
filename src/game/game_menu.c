@@ -16,7 +16,7 @@ int game_menu(sfRenderWindow *window)
 	garou_t garou = garou_create("resources/config");
 
 	garou.map = map_load("resources/maps/map test"); //
-	if (garou.map.error != MAP_OK)
+	if (garou.map.error != ERR_OK)
 		return (84);
 	garou.map.size.x = 200;
 	garou.map.size.y = garou.map.size.x;
@@ -54,7 +54,7 @@ int game_menu(sfRenderWindow *window)
 			garou.entity[i].anime_tab = anime_tab_create_from_file("resources/texture/anime_tab/insolourdo_config");
 		else
 			garou.entity[i].anime_tab = anime_tab_create_from_file("resources/texture/anime_tab/gobou_config");
-		if (garou.entity[i].anime_tab.error != ANIME_TAB_OK)
+		if (garou.entity[i].anime_tab.error != ERR_OK)
 			return (84);
 		garou.entity[i].anime_tab.num = rand() % 8;
 		while (garou.map.tab[pos.x][pos.y].type != GROUND)

@@ -61,7 +61,7 @@ bool load_entry(map_t *map, sfRenderWindow *window,
 
 			*map = map_load(str);
 			free(str);
-			return (map->error == MAP_OK ? true : false);
+			return (map->error == ERR_OK ? true : false);
 		}
 	}
 	return (false);

@@ -16,7 +16,7 @@ tile_map_t tile_map_create_from_file(char *file_name)
 
 	if (fd == -1) {
 		tile_map = tile_map_create();
-		tile_map.error = TILE_MAP_OPEN;
+		tile_map.error = ERR_OPEN;
 		return (tile_map);
 	}
 	tile_map = tile_map_create_from_fd(fd);

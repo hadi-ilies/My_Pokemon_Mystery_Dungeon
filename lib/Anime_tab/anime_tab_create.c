@@ -19,10 +19,10 @@ anime_tab_t anime_tab_create(void)
 	anime_tab.sprite = sfSprite_create();
 	anime_tab.num = 0;
 	if (anime_tab.clock == NULL)
-		anime_tab.error = ANIME_TAB_CLOCK_CREATE;
+		anime_tab.error = ERR_CLOCK_CREATE;
 	else if (anime_tab.sprite == NULL)
-		anime_tab.error = ANIME_TAB_SPRITE_CREATE;
+		anime_tab.error = ERR_SPRITE_CREATE;
 	else
-		anime_tab.error = ANIME_TAB_OK;
+		anime_tab.error = ERR_OK;
 	return (anime_tab);
 }

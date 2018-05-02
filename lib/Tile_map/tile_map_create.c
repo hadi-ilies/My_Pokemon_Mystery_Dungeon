@@ -19,8 +19,8 @@ tile_map_t tile_map_create(void)
 	tile_map.texture = NULL;
 	tile_map.sprite = sfSprite_create();
 	if (tile_map.sprite == NULL)
-		tile_map.error = TILE_MAP_SPRITE_CREATE;
+		tile_map.error = ERR_SPRITE_CREATE;
 	else
-		tile_map.error = TILE_MAP_OK;
+		tile_map.error = ERR_OK;
 	return (tile_map);
 }
