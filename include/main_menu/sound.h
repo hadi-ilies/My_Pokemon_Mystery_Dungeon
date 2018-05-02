@@ -13,8 +13,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define NB_SOUND_EFFECT 8
-#define NB_MUSIC_EFFECT 3
+#define NB_SOUND_EFFECT 7
+#define NB_MUSIC_EFFECT 1
 #define ENTER_SOUND "resources/sound_effect/enter.wav"
 #define RETURN_SOUND "resources/sound_effect/return.wav"
 #define CLOSE_SOUND "resources/sound_effect/close.wav"
