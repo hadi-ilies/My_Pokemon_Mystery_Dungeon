@@ -262,39 +262,39 @@ size_t ia(entity_t *entity, map_t *map,
 	return (input);
 }
 
-bool entity_set_dir(entity_t *entity, map_t *map,
-		    entity_t *info[map->nb_case_x][map->nb_case_y],
+bool entity_set_dir(entity_t *entity, garou_t *garou,
+		    entity_t *info[garou->map.nb_case_x][garou->map.nb_case_y],
 		    sfEvent *event)
 {
 	size_t input = 0;
 
 	if (entity->ia == 0) {
-		if (!sfKeyboard_isKeyPressed(sfKeyLShift))
+		if (!sfKeyboard_isKeyPressed(garou->settings.key[KEY_MOVE]))
 			input |= MOVE;
-		if (sfKeyboard_isKeyPressed(sfKeySpace)) {
+		if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_ATTACK])) {
 			if (event && event->type == sfEvtKeyPressed) {
-				if (event->key.code == sfKeyUp)
+				if (event->key.code == garou->settings.key[KEY_UP])
 					input |= ATTACK | CAPACITY1;
-				if (event->key.code == sfKeyLeft)
+				if (event->key.code == garou->settings.key[KEY_LEFT])
 					input |= ATTACK | CAPACITY2;
-				if (event->key.code == sfKeyRight)
+				if (event->key.code == garou->settings.key[KEY_RIGHT])
 					input |= ATTACK | CAPACITY3;
-				if (event->key.code == sfKeyDown)
+				if (event->key.code == garou->settings.key[KEY_DOWN])
 					input |= ATTACK | CAPACITY4;
 			}
 		}
 		else {
-			sfKeyboard_isKeyPressed(sfKeyLeft) ? input |= LEFT : 0;
-			sfKeyboard_isKeyPressed(sfKeyRight) ? input |= RIGHT : 0;
-			sfKeyboard_isKeyPressed(sfKeyUp) ? input |= UP : 0;
-			sfKeyboard_isKeyPressed(sfKeyDown)? input |= DOWN : 0;
+			sfKeyboard_isKeyPressed(garou->settings.key[KEY_LEFT]) ? input |= LEFT : 0;
+			sfKeyboard_isKeyPressed(garou->settings.key[KEY_RIGHT]) ? input |= RIGHT : 0;
+			sfKeyboard_isKeyPressed(garou->settings.key[KEY_UP]) ? input |= UP : 0;
+			sfKeyboard_isKeyPressed(garou->settings.key[KEY_DOWN])? input |= DOWN : 0;
 		}
-		if (event && event->type == sfEvtKeyPressed && event->key.code == sfKeyW)
+		if (event && event->type == sfEvtKeyPressed && event->key.code == garou->settings.key[KEY_WAIT])
 			input |= WAIT;
 	}
 	else
-		input = ia(entity, map, info);
-	return (manage_input(entity, map, info, input));
+		input = ia(entity, &garou->map, info);
+	return (manage_input(entity, &garou->map, info, input));
 }
 
 void info_update(garou_t *garou,
@@ -427,9 +427,9 @@ void game_aff(sfRenderWindow *window, garou_t *garou)
 				tmp = false;
 		}
 	entity_life_aff(window, &garou->entity[0], (sfFloatRect){LIFE_RECT});
-	if (sfKeyboard_isKeyPressed(sfKeyI))
+	if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_INVENTORY]))
 		inventory_aff(window, garou);
-	else if (sfKeyboard_isKeyPressed(sfKeySpace) && tmp)
+	else if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_ATTACK]) && tmp)
 		capacity_aff(window, garou);
 	sfRenderWindow_display(window);
 }
@@ -447,13 +447,13 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 			evt_close(&event, window);
 			if (!next && !garou->entity[entity_turn].ia) {
 				info_update(garou, info);
-				if (entity_set_dir(&garou->entity[entity_turn], &garou->map, info, &event))
+				if (entity_set_dir(&garou->entity[entity_turn], garou, info, &event))
 					next = true;
 			}
 		}
 		if (!next) {
 			info_update(garou, info);
-			if (entity_set_dir(&garou->entity[entity_turn], &garou->map, info, NULL))
+			if (entity_set_dir(&garou->entity[entity_turn], garou, info, NULL))
 				next = true;
 		}
 		if (next == false)

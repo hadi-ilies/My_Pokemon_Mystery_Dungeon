@@ -78,6 +78,7 @@ typedef struct {
 
 entity_t entity_create(void);
 entity_t entity_create_from_file(char *file_name);
+entity_t entity_create_from_fd(int fd);
 void entity_destroy(entity_t *entity);
 bool entity_move(entity_t *entity, map_t *map,
 		 entity_t *info[map->nb_case_x][map->nb_case_y]);

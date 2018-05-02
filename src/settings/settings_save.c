@@ -22,7 +22,7 @@ void insert_in_file(settings_t *settings, int fd)
 	my_fprintf(fd, "%s %d\n", "KeyEnter:", settings->key[KEY_ENTER]);
 	my_fprintf(fd, "%s %d\n", "KeyEchap:", settings->key[KEY_ECHAP]);
 	my_fprintf(fd, "%s %d\n", "KeyWait:", settings->key[KEY_WAIT]);
-	my_fprintf(fd, "%s %d\n", "KeyRotate:", settings->key[KEY_ROTATE]);
+	my_fprintf(fd, "%s %d\n", "KeyMove:", settings->key[KEY_MOVE]);
 	my_fprintf(fd, "%s %d\n", "KeyAttack:", settings->key[KEY_ATTACK]);
 	my_fprintf(fd, "%s %d\n", "KeyInventory:",
 		settings->key[KEY_INVENTORY]);

@@ -84,6 +84,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPDIR)map_tools.c \
 			$(ENTDIR)entity_create.c \
 			$(ENTDIR)entity_create_from_file.c \
+			$(ENTDIR)entity_create_from_fd.c \
 			$(ENTDIR)entity_destroy.c \
 			$(ENTDIR)entity_move.c \
 			$(ENTDIR)entity_get_move_pos.c \

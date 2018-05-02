@@ -1,13 +1,13 @@
 WindowSize: 1920 1080
-MusicVolume: 82.0
-SoundVolume: 78.0
-KeyUp: 271812128
-KeyLeft: 32766
-KeyRight: 4205102
-KeyDown: 0
-KeyEnter: 4202544
-KeyEchap: 0
-KeyWait: 271812224
-KeyRotate: 32766
-KeyAttack: 0
+MusicVolume: 100.0
+SoundVolume: 100.0
+KeyUp: 73
+KeyLeft: 71
+KeyRight: 72
+KeyDown: 74
+KeyEnter: 58
+KeyEchap: 36
+KeyWait: 22
+KeyMove: 38
+KeyAttack: 57
 KeyInventory: 8
