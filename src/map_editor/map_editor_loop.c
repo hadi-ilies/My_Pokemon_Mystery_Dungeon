@@ -86,5 +86,6 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 		}
 		window_open_func(window, map, &mouse_tva, &optional);
 	}
+	sfMusic_destroy(optional.music);
 	return (0);
 }
