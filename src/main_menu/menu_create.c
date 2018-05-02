@@ -7,6 +7,7 @@
 
 #include "prototype.h"
 #include "macro.h"
+#include "main_menu/sound.h"
 #include "main_menu/menu.h"
 
 void pages(menu_t *menu)
@@ -39,6 +40,34 @@ void text(menu_t *menu)
 		menu->text[i] = sfText_create();
 }
 
+sfMusic **sound_effect_create(void)
+{
+	sfMusic **sound_effect = malloc(sizeof(sound_effect) * NB_SOUND_EFFECT);
+
+	if (sound_effect == NULL)
+		return (NULL);
+	sound_effect[0] = sfMusic_createFromFile(ENTER_SOUND);
+	sound_effect[1] = sfMusic_createFromFile(RETURN_SOUND);
+	sound_effect[2] = sfMusic_createFromFile(CLOSE_SOUND);
+	sound_effect[3] = sfMusic_createFromFile(MYSTERY_SOUND);
+	sound_effect[4] = sfMusic_createFromFile(ERROR_SOUND);
+	sound_effect[5] = sfMusic_createFromFile(MOVE_SOUND);
+	sound_effect[6] = sfMusic_createFromFile(MAIN_SOUND);
+	sfMusic_play(sound_effect[2]);
+	sfMusic_pause(sound_effect[2]);
+	return (sound_effect);
+}
+
+sfMusic **music_effect_create(void)
+{
+	sfMusic **music_effect = malloc(sizeof(music_effect) * NB_MUSIC_EFFECT);
+
+	if (music_effect == NULL)
+		return (NULL);
+	music_effect[0] = sfMusic_createFromFile(HOW_TO_PLAY_SONG);
+	return (music_effect);
+}
+
 menu_t menu_create(void)
 {
 	menu_t menu;
@@ -48,5 +77,7 @@ menu_t menu_create(void)
 	menu.button = 0;
 	menu.tile_map = NULL;
 	menu.settings = settings_load(CONFIG);
+	menu.sound.sound_effect = sound_effect_create();
+	menu.sound.music = music_effect_create();
 	return (menu);
 }

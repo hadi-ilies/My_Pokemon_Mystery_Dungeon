@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include"sound.h"
 #include "settings.h"
 #include "option_map_editor.h"
 
@@ -26,6 +27,7 @@ typedef struct {
 	size_t button;
 	tile_map_t *tile_map;
 	settings_t settings;
+	sound_bank_t sound;
 } menu_t;
 
 menu_t menu_create(void);
@@ -33,8 +35,8 @@ size_t move_curseur(menu_t *menu, sfEvent *event);
 void set_icon(sfRenderWindow *window, char *file_name);
 void display_menu(sfRenderWindow *window, menu_t *menu, loading_t *back);
 void display_texte_button(sfRenderWindow *window, menu_t *menu);
+void menu_map_editor_menu(sfRenderWindow *window, sfMusic **sound_effect);
 void destroy_all(loading_t *back, sfRenderWindow *window, menu_t *menu);
-void menu_map_editor_menu(sfRenderWindow *window);
 option_editor_t param_map(menu_t *menu, map_t *map, sfRenderWindow *window);
 sfSprite *create_screen_param(sfRenderWindow *window);
 sfRectangleShape *create_back_param(sfRenderWindow *window);

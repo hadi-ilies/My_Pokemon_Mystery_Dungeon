@@ -55,7 +55,7 @@ size_t count_file(char *path)
 	return (nb_file);
 }
 
-menu_t menu_editor_create(void)
+menu_t menu_editor_create(sfMusic **sound_effect)
 {
 	menu_t menu;
 
@@ -64,6 +64,7 @@ menu_t menu_editor_create(void)
 	menu.button = 0;
 	menu.tile_map = malloc(sizeof(tile_map_t) *
 			(count_file(TILE_MAP) + 1));
+	menu.sound.sound_effect = sound_effect;
 	return (menu);
 }
 

@@ -18,11 +18,14 @@ size_t move_curseur_editor(menu_t *menu, sfEvent *event)
 	static size_t y = 0;
 
 	if (event && event->type == sfEvtKeyPressed) {
-		if (sfKeyboard_isKeyPressed(sfKeyUp) && y > 0)
+		if (sfKeyboard_isKeyPressed(sfKeyUp) && y > 0) {
+			sfMusic_play(menu->sound.sound_effect[5]);
 			y--;
-		if (sfKeyboard_isKeyPressed(sfKeyDown)
-		&& y <  NB_BUTTON_EDITOR - 1)
+		} if (sfKeyboard_isKeyPressed(sfKeyDown)
+		&& y <  NB_BUTTON_EDITOR - 1) {
+			sfMusic_play(menu->sound.sound_effect[5]);
 			y++;
+		}
 	}
 	sfRectangleShape_setPosition(menu->rect[1],
 				(sfVector2f) {10, y * 100 + 45});

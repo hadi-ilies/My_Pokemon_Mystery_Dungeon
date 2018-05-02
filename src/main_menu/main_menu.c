@@ -39,13 +39,14 @@ loading_t back_create(void)
 	return (optional);
 }
 
-bool enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
+void enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 {
 	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyReturn) {
+		sfMusic_play(menu->sound.sound_effect[0]);//tmp
 		if (menu->button == 0)
 			game_menu(window);
 		if (menu->button == 1)
-			menu_map_editor_menu(window);
+			menu_map_editor_menu(window, menu->sound.sound_effect);
 		if (menu->button == 2)
 			anime_editor_menu(window);
 		if (menu->button == 3)
@@ -53,9 +54,8 @@ bool enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 		if (menu->button == 4)
 			credit_menu(window, event);
 		if (menu->button == 5)
-			return (false);
+			sfMusic_play(menu->sound.sound_effect[2]);//tmp
 	}
-	return (true);
 }
 
 void open_window_menu(sfRenderWindow *window, menu_t *menu, loading_t *back)
@@ -64,6 +64,8 @@ void open_window_menu(sfRenderWindow *window, menu_t *menu, loading_t *back)
 	sfRenderWindow_clear(window, sfBlack);
 	display_menu(window, menu, back);
 	sfRenderWindow_display(window);
+	if (sfMusic_getStatus(menu->sound.sound_effect[2]) == sfStopped)
+		sfRenderWindow_close(window);
 }
 
 int main_menu(sfRenderWindow *window)
@@ -75,12 +77,13 @@ int main_menu(sfRenderWindow *window)
 	main_intro(window, &event);
 	for (int i = 0; i < NB_BUTTON; i++)
 		sfText_setFont(menu.text[i], menu.font);
+	sfMusic_play(menu.sound.sound_effect[6]);
+	sfMusic_setLoop(menu.sound.sound_effect[6], sfTrue);
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
 			menu.button = move_curseur(&menu, &event);
-			if (enter(window, &menu, &event) == false)
-				sfRenderWindow_close(window);
+			enter(window, &menu, &event);
 		}
 		open_window_menu(window, &menu, &back);
 	}

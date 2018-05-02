@@ -16,7 +16,7 @@
 #define ANIME_START_FILE "intro_files/anime_start"
 #define ANIME_INTRO_FILE "intro_files/intro_anime"
 #define MUSIC_INTRO "resources/music/pokemon-theme.ogg"
-#define SOUND_START "resources/music/Sound_intro.ogg"
+#define SOUND_START "resources/sound_effect/Sound_intro.ogg"
 #define BACK_MAP "resources/texture/map_editor/background_map_editor.jpg"
 #define MUSIC_EDITOR "resources/texture/map_editor/OstMapEditor.ogg"
 #define COND_AFF sfRenderWindow_drawRectangleShape(window, rect, NULL)

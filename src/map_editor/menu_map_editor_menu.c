@@ -16,9 +16,12 @@ bool enter_editor(sfRenderWindow *window, menu_t *menu,
 		sfEvent *event,	map_t *map)
 {
 	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyReturn) {
-		if (menu->button == 0 && map->error == ERR_OK)
+		sfMusic_play(menu->sound.sound_effect[0]);
+		if (menu->button == 0 && map->error == ERR_OK) {
+			sfMusic_pause(menu->sound.sound_effect[6]);
 			map_editor_loop(window, map);
-		if (menu->button == 1 && map->error != 84)
+			sfMusic_play(menu->sound.sound_effect[6]);
+		} if (menu->button == 1 && map->error != 84)
 			menu_save_map(map, window);
 		if (menu->button == 2)
 			new_map(menu, map, window);
@@ -26,8 +29,10 @@ bool enter_editor(sfRenderWindow *window, menu_t *menu,
 			load_editor_loop(menu, map, window);
 		if (menu->button == 4 && map->error != 84)
 			param_map(menu, map, window);
-		if (menu->button == 5)
+		if (menu->button == 5) {
+			sfMusic_play(menu->sound.sound_effect[1]);
 			return (false);
+		}
 	}
 	return (true);
 }
@@ -47,12 +52,12 @@ void window_open_menu_editor(sfVector2i *tmp, menu_t *menu,
 	sfRenderWindow_display(window);
 }
 
-void menu_map_editor_menu(sfRenderWindow *window)
+void menu_map_editor_menu(sfRenderWindow *window, sfMusic **sound_effect)
 {
 	map_t map = {.error = 84};
 	sfEvent event;
 	loading_t back = back_editor_create(window);
-	menu_t menu = menu_editor_create();
+	menu_t menu = menu_editor_create(sound_effect);
 	sfVector2i tmp = {250, 5};
 
 	load_font_editor(&menu);
