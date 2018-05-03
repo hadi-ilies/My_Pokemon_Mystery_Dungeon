@@ -41,9 +41,12 @@ int game_menu(sfRenderWindow *window)
 		garou.entity[i].pos = pos;
 	}
 	game_loop(window, &garou);
+	garou.entity[0].life = STAT(garou.entity[0], life);
+	for (size_t i = 0; i < 4; i++)
+		garou.entity[0].pp[i] = CAPACITY(garou.entity[0], i).pp;
 	entity_save(&garou.entity[0], "my");
-	//garou.entity[1].life = STAT(garou.entity[1], life);
-	//entity_save(&garou.entity[1], "nomy");
+	garou.entity[1].life = STAT(garou.entity[1], life);
+	entity_save(&garou.entity[1], "nomy");
 	garou_destroy(&garou);
 	return (0);
 }

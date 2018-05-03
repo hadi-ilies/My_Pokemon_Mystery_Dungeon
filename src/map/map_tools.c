@@ -40,7 +40,7 @@ void set_origin(map_t *map)
 	size_t origin_x = 0;
 	size_t origin_y = 0;
 
-	while (map->tab[origin_x][origin_y].type == WALL) {
+	while (map->tab[origin_x][origin_y].type != GROUND) {
 		origin_x = rand() % map->nb_case_x;
 		origin_y = rand() % map->nb_case_y;
 	}
