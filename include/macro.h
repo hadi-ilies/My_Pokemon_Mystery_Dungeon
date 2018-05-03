@@ -48,4 +48,6 @@
 #define TILE_MAP "resources/tile_map"
 #define MAPS "resources/maps"
 #define CONFIG "resources/config"
+#define SIZE_T sizeof(size_t)
+#define RECTEX_T sizeof(rectex_t)
 #endif

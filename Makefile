@@ -74,6 +74,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPCDIR)map_editor_save.c \
 			$(ANICDIR)anime_editor_menu.c \
 			$(ANICDIR)anime_editor_loop.c \
+			$(ANICDIR)save_anime.c\
 			$(MAPDIR)map_create.c \
 			$(MAPDIR)map_copy.c \
 			$(MAPDIR)map_resize.c \
