@@ -21,6 +21,7 @@ ENTDIR		=	$(SRCDIR)entity/
 GAROUDIR	=	$(SRCDIR)game_resource/
 INTRODIR	=	$(SRCDIR)intro/
 STGSDIR		=	$(SRCDIR)settings/
+AD_DIR		=	$(SRCDIR)adventure_intro/
 
 SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)create_window.c\
@@ -101,6 +102,9 @@ SRC		=	$(SRCDIR)main.c \
 			$(STGSDIR)settings_defaut.c \
 			$(STGSDIR)settings_load.c \
 			$(STGSDIR)settings_save.c \
+			$(AD_DIR)adventure_intro.c\
+			$(AD_DIR)adventure_intro_create.c\
+			$(AD_DIR)naration.c\
 
 OBJ		=	$(SRC:.c=.o)
 

@@ -42,10 +42,11 @@ loading_t back_create(void)
 void enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 {
 	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyReturn) {
-		sfMusic_play(menu->sound.sound_effect[0]);//tmp
-		if (menu->button == 0)
+		sfMusic_play(menu->sound.sound_effect[0]);
+		if (menu->button == 0) {
+			adventure_intro(window, menu);
 			game_menu(window);
-		if (menu->button == 1)
+		} if (menu->button == 1)
 			menu_map_editor_menu(window, menu->sound.sound_effect);
 		if (menu->button == 2)
 			anime_editor_menu(window);
@@ -54,7 +55,7 @@ void enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 		if (menu->button == 4)
 			credit_menu(window, event);
 		if (menu->button == 5)
-			sfMusic_play(menu->sound.sound_effect[2]);//tmp
+			sfMusic_play(menu->sound.sound_effect[2]);
 	}
 }
 
