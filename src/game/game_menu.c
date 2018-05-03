@@ -15,11 +15,10 @@ int game_menu(sfRenderWindow *window)
 {
 	garou_t garou = garou_create("resources/config");
 
-	//garou.map = map_load("resources/maps/map test"); /*
-	garou.map = map_create(50, 50, strdup("resources/tile_map/Forest config"));
+	garou.map = map_create(50, 50, my_strdup("resources/tile_map/Forest config"));
 	if (garou.map.error != ERR_OK)
 		return (84);
-	map_random(&garou.map);//*/
+	map_random(&garou.map);
 	garou.map.size.x = 200;
 	garou.map.size.y = garou.map.size.x;
 	garou.nb_entity = 20;

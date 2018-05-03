@@ -32,6 +32,7 @@ typedef struct {
 	size_t nb_case_x;
 	size_t nb_case_y;
 	tva_t **tab;
+	size_t **item;
 	sfVector2f size;
 	sfVector2f pos;
 	char *tile_map_file_name;
