@@ -33,5 +33,5 @@ void play_your_map(sfRenderWindow *window, garou_t *garou, map_t *map)
 		garou->entity[i].pos = pos;
 	}
 	game_loop(window, garou);
-	garou_destroy(&garou);
+	garou_destroy(garou);
 }
