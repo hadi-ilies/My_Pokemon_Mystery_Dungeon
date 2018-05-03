@@ -51,10 +51,6 @@ void entity_save(entity_t *entity, char *file_name)
 		entity->error = ERR_WRITE;
 	if (write(fd, &entity->ia, sizeof(size_t)) != sizeof(size_t))
 		entity->error = ERR_WRITE;
-	if (write(fd, &entity->dir, sizeof(sfVector2i)) != sizeof(sfVector2i))
-		entity->error = ERR_WRITE;
-	if (write(fd, &entity->pos, sizeof(sfVector2i)) != sizeof(sfVector2i))
-		entity->error = ERR_WRITE;
 	if (write(fd, &len, sizeof(size_t)) != sizeof(size_t))
 		entity->error = ERR_WRITE;
 	if (write(fd, entity->anime_tab_file_name, len) != (int)len)

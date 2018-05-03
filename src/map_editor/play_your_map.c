@@ -21,17 +21,17 @@ void play_your_map(sfRenderWindow *window, garou_t *garou, map_t *map)
 	if (garou->entity == NULL)
 		return;
 	for (size_t i = 0; i < garou->nb_entity; i++) {
-		sfVector2i pos = {rand() % garou->map.nb_case_x,
-				  rand() % garou->map.nb_case_y};
+		sfVector2i pos;
 
-		garou->entity[i] = entity_create_from_file(i == 0 ?
-							   "my" : "nomy");
-		while (garou->map.tab[pos.x][pos.y].type != GROUND)
-			pos = (sfVector2i){rand() % garou->map.nb_case_x,
-					   rand() % garou->map.nb_case_y};
-		garou->entity[i].dir = (sfVector2i){0, 1};
+		garou->entity[i] = entity_create_from_file(i ? "nomy" : "my");
+		do {
+			pos.x = rand() % garou->map.nb_case_x;
+			pos.y = rand() % garou->map.nb_case_y;
+		}
+		while (garou->map.tab[pos.x][pos.y].type != GROUND);
+		garou->entity[i].dir = (sfVector2i){0, 0};
 		garou->entity[i].pos = pos;
 	}
 	game_loop(window, garou);
-	//garou_destroy(&garou);
+	garou_destroy(&garou);
 }

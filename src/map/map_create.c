@@ -21,6 +21,7 @@ map_t map_create(size_t nb_case_x, size_t nb_case_y, char *tile_map_file_name)
 {
 	map_t map = {.nb_case_x = nb_case_x, .nb_case_y = nb_case_y};
 
+	printf("%ld %ld %s\n", nb_case_x, nb_case_y, tile_map_file_name);
 	map.error = ERR_OK;
 	if (nb_case_x < 3 || nb_case_y < 3) {
 		map.error = ERR_INVALID_NUMBER;
