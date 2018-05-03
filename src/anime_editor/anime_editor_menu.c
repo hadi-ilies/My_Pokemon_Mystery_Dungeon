@@ -7,53 +7,63 @@
 
 #include <stdlib.h> //tmp
 #include <unistd.h> //tmp
-#include <string.h> //tmp
 #include <fcntl.h> //tmp
 #include "prototype.h"
 #include "anime_tab.h"
 #include "anime_name.h"
 
-void save(anime_tab_t *anime_tab, char *file_name)
+void save_anime_part1(anime_tab_t *anime_tab, char *file_name, int fd)
 {
-	int fd = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU, S_IRWXU | S_IRWXG);
-
 	if (fd == -1) {
-		//map->error = MAP_OPEN;
+		anime_tab->error = ERR_OPEN;
 		return;
 	}
 	if (write(fd, &anime_tab->nb_texname, sizeof(size_t)) != sizeof(size_t)) {
-		//map->error = MAP_WRITE;
+		anime_tab->error = ERR_WRITE;
 		return;
 	}
+}
+
+void save_anime_part2(anime_tab_t *anime_tab, char *file_name, int fd)
+{
 	for (size_t i = 0; i < anime_tab->nb_texname; i++) {
 		size_t len = 0;
 
 		for (; anime_tab->texname[i].file_name[len] != '\0'; len++);
 		if (write(fd, &len, sizeof(size_t)) != sizeof(size_t)) {
-			//map->error = MAP_WRITE;
+			anime_tab->error = ERR_WRITE;
 			return;
-		}
-		if (write(fd, anime_tab->texname[i].file_name, sizeof(char) * len) != (ssize_t)(sizeof(char) * len)) {
-			//map->error = MAP_WRITE;
+		} if (write(fd, anime_tab->texname[i].file_name,
+		sizeof(char) * len) != (ssize_t)(sizeof(char) * len)) {
+			anime_tab->error = ERR_WRITE;
 			return;
 		}
 	}
+}
+
+void save(anime_tab_t *anime_tab, char *file_name)
+{
+	int fd = CREAT(file_name, S_IRUSR | S_IWUSR | S_IRGRP);
+
+	save_anime(anime_tab, file_name, fd);
+
+	save_anime_part2(anime_tab, file_name, fd);
 	if (write(fd, &anime_tab->nb_anime, sizeof(size_t)) != sizeof(size_t)) {
-		//map->error = MAP_WRITE;
+		anime_tab->error = ERR_WRITE;
 		return;
 	}
 	for (size_t i = 0; i < anime_tab->nb_anime; i++) {
 		if (write(fd, &anime_tab->anime[i].nb_rectex, sizeof(size_t)) != sizeof(size_t)) {
-			//map->error = MAP_WRITE;
+			anime_tab->error = ERR_WRITE;
 			return;
 		}
 		for (size_t j = 0; j < anime_tab->anime[i].nb_rectex; j++)
 			if (write(fd, &anime_tab->anime[i].rectex[j], sizeof(rectex_t)) != sizeof(rectex_t)) {
-				//map->error = MAP_WRITE;
+				anime_tab->error = ERR_WRITE;
 				return;
 			}
 		if (write(fd, &anime_tab->anime[i].time, sizeof(size_t)) != sizeof(size_t)) {
-			//map->error = MAP_WRITE;
+			anime_tab->error = ERR_WRITE;
 			return;
 		}
 	}
@@ -70,7 +80,7 @@ void anime_tab_add_texture(anime_tab_t *anime_tab, char *file_name)
 	}
 	for (size_t i = 0; i < anime_tab->nb_texname; i++)
 		texname[i] = anime_tab->texname[i];
-	texname[anime_tab->nb_texname].file_name = strdup(file_name);
+	texname[anime_tab->nb_texname].file_name = my_strdup(file_name);
 	texname[anime_tab->nb_texname].texture = sfTexture_createFromFile(file_name, NULL);
 	if (texname[anime_tab->nb_texname].texture == NULL) {
 		anime_tab->error = ERR_TEXTURE_CREATE;

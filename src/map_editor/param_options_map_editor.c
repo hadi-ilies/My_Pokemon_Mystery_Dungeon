@@ -56,6 +56,7 @@ void size_tile_map_y(sfEvent *event,
 	sfText_setString(option->size_map_y, str);
 	sfText_setPosition(option->size_map_y,
 	(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 200});
+	free(str);
 }
 
 void size_tile_map_x(sfEvent *event,
@@ -76,4 +77,5 @@ void size_tile_map_x(sfEvent *event,
 	sfText_setString(option->size_map_x, str);
 	sfText_setPosition(option->size_map_x,
 	(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 100});
+	free(str);
 }

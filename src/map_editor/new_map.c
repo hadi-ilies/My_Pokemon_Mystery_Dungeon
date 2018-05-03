@@ -20,10 +20,10 @@ void destroy_option_editor(option_editor_t *option)
 	sfSprite_destroy(option->screen);
 	sfFont_destroy(option->font);
 	for (size_t i = 0; i < count_file(TILE_MAP); i++)
-		free(option->text[i]);
+		sfText_destroy(option->text[i]);
+	free(option->text);
 	for (size_t i = 0; i < 3; i++)
 		sfText_destroy(option->choice[i]);
-
 }
 
 void new_map(menu_t *menu, map_t *map, sfRenderWindow *window)

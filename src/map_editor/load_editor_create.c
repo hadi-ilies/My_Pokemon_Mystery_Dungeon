@@ -30,7 +30,8 @@ void load_editor_destroy(load_editor_t *load)
 	sfSprite_destroy(load->screen);
 	sfFont_destroy(load->font);
 	for (size_t i = 0; i < count_file(MAPS); i++)
-		free(load->text[i]);
+		sfText_destroy(load->text[i]);
+	free(load->text);
 	for (size_t i = 0; i < 2; i++)
 		sfText_destroy(load->choice[i]);
 }
