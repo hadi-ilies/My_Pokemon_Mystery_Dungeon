@@ -31,12 +31,13 @@ void put_item(map_t *map)
 	map->item[pos.x][pos.y] = STAIRCASE;
 }
 
-int game_menu(sfRenderWindow *window)
+int run_stage(sfRenderWindow *window, size_t level, char *tile_map_file_name)
 {
 	garou_t garou = garou_create("resources/config");
-	size_t size = 60;
+	const size_t size = 60;
+	int result;
 
-	garou.map = map_create(size, size, my_strdup("resources/tile_map/Forest config"));
+	garou.map = map_create(size, size, my_strdup(tile_map_file_name));
 	if (garou.map.error != ERR_OK)
 		return (84);
 	map_random(&garou.map);
@@ -46,17 +47,35 @@ int game_menu(sfRenderWindow *window)
 	garou.entity = malloc(sizeof(entity_t) * garou.nb_entity);
 	if (garou.entity == NULL)
 		return (84);
-	for (size_t i = 0; i < garou.nb_entity; i++) {
-		garou.entity[i] = entity_create_from_file(i ? "nomy" : "my");
+	for (size_t i = 1; i < garou.nb_entity; i++) {
+		garou.entity[i] = entity_create_from_file("nomy");
 		if (garou.entity[i].error != ERR_OK)
 			return (84);
-		garou.entity[i].ia = i ? 1 : 0;
+		garou.entity[i].level = level;
+		garou.entity[i].life = STAT(garou.entity[i], life);
+		garou.entity[i].ia = 1;
 		garou.entity[i].dir = (sfVector2i){0, 0};
 		garou.entity[i].pos = rand_pos_ground(&garou.map);
 	}
-	game_loop(window, &garou);
-	//entity_save(&garou.entity[0], "my");
-	//entity_save(&garou.entity[1], "nomy");
+	// -------------player--------------------------------
+	garou.entity[0] = entity_create_from_file("my");
+	garou.entity[0].ia = 0;
+	garou.entity[0].dir = (sfVector2i){0, 0};
+	garou.entity[0].pos = rand_pos_ground(&garou.map);
+	// ---------------------------------------------------
+	result = game_loop(window, &garou);
 	garou_destroy(&garou);
+	return (result);
+}
+
+int game_menu(sfRenderWindow *window)
+{
+	int result = 1;
+
+	while (result) {
+		result = run_stage(window, 10, "resources/tile_map/Forest config");
+		if (result == 84)
+			return (84);
+	}
 	return (0);
 }
