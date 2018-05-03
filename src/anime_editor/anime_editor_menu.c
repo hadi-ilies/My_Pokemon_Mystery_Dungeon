@@ -41,12 +41,15 @@ void save_anime_part2(anime_tab_t *anime_tab, char *file_name, int fd)
 	}
 }
 
+void save_anime_part3(anime_tab_t *anime_tab, char *file_name, int fd)
+{
+
+}
 void save(anime_tab_t *anime_tab, char *file_name)
 {
 	int fd = CREAT(file_name, S_IRUSR | S_IWUSR | S_IRGRP);
 
-	save_anime(anime_tab, file_name, fd);
-
+	save_anime_part1(anime_tab, file_name, fd);
 	save_anime_part2(anime_tab, file_name, fd);
 	if (write(fd, &anime_tab->nb_anime, sizeof(size_t)) != sizeof(size_t)) {
 		anime_tab->error = ERR_WRITE;
