@@ -31,25 +31,28 @@ char *text_history(size_t button)
 	return (str);
 }
 
-void load_history_text(sfRenderWindow *window, intro_adventure_t *ad_intro)
+void load_history_text(sfRenderWindow *window, intro_adventure_t *ad_intro,
+		size_t len)
 {
-	sfText_setPosition(ad_intro->text, (sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2});
+	sfText_setPosition(ad_intro->text, (sfVector2f) {WINDOW_SIZE.x / len, 20});
 	sfRenderWindow_drawText(window, ad_intro->text, NULL);
 }
 
-void insert_history_text(char *str, intro_adventure_t *ad_intro,
+size_t insert_history_text(char *str, intro_adventure_t *ad_intro,
 			int *i, bool test)
 {
 	char *str2 = "";
 	char *string = my_strncat(str2, str, *i);
+	size_t len = my_strlen(string);
 
 	sfText_setString(ad_intro->text, string);
 	free(string);
 	test == true ? (*i)++ : 0;
+	return (len);
 }
 
 void display_history(sfRenderWindow *window, intro_adventure_t *ad_intro,
-		size_t button)
+		size_t button, menu_t *menu)
 {
 	static int i = 1;
 	static bool test = true;
@@ -62,6 +65,7 @@ void display_history(sfRenderWindow *window, intro_adventure_t *ad_intro,
 		tmp = button;
 		i = 1;
 	}
-	insert_history_text(str, ad_intro, &i, test);
-	load_history_text(window, ad_intro);
+	test == true ? sfMusic_play(menu->sound.sound_effect[4]) : 0;
+	load_history_text(window, ad_intro,
+			insert_history_text(str, ad_intro, &i, test));
 }

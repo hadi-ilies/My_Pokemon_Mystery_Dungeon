@@ -11,13 +11,13 @@
 #include "macro.h"
 #include "main_menu/menu.h"
 #include "adventure_intro.h"
-
-//void display_ad_intro(sfRenderWindow *window, intro_adventure_t *ad_intro)
-//{
-	//sfRenderWindow_drawRectangleShape(window, menu->rect[0], NULL);
-	//sfRenderWindow_drawText(window, ad_intro->text, NULL);
-//}
-
+/*
+void display_ad_intro(sfRenderWindow *window, intro_adventure_t *ad_intro)
+{
+	sfRenderWindow_drawRectangleShape(window, menu->rect[0], NULL);
+	sfRenderWindow_drawText(window, ad_intro->text, NULL);
+}
+*/
 void adventure_intro(sfRenderWindow *window, menu_t *menu)
 {
 	(void)menu;
@@ -34,7 +34,7 @@ void adventure_intro(sfRenderWindow *window, menu_t *menu)
 				button++;
 		}
 		sfRenderWindow_clear(window, sfBlack);
-		display_history(window, &ad_intro, button);
+		display_history(window, &ad_intro, button, menu);
 		//display_ad_intro(window, &ad_intro);
 		sfRenderWindow_display(window);
 	}

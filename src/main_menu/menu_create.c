@@ -50,7 +50,7 @@ sfMusic **sound_effect_create(void)
 	sound_effect[1] = sfMusic_createFromFile(RETURN_SOUND);
 	sound_effect[2] = sfMusic_createFromFile(CLOSE_SOUND);
 	sound_effect[3] = sfMusic_createFromFile(MYSTERY_SOUND);
-	sound_effect[4] = sfMusic_createFromFile(ERROR_SOUND);
+	sound_effect[4] = sfMusic_createFromFile(TEXT_SOUND);
 	sound_effect[5] = sfMusic_createFromFile(MOVE_SOUND);
 	sound_effect[6] = sfMusic_createFromFile(MAIN_SOUND);
 	sfMusic_play(sound_effect[2]);

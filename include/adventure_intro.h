@@ -20,4 +20,4 @@ typedef struct {
 intro_adventure_t ad_intro_create(void);
 void adventure_intro(sfRenderWindow *window, menu_t *menu);
 void display_history(sfRenderWindow *window, intro_adventure_t *ad_intro,
-		     size_t button);
+		size_t button, menu_t *menu);

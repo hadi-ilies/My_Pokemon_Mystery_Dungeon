@@ -19,7 +19,7 @@
 #define RETURN_SOUND "resources/sound_effect/return.wav"
 #define CLOSE_SOUND "resources/sound_effect/close.wav"
 #define MYSTERY_SOUND "resources/sound_effect/mystery.wav"
-#define ERROR_SOUND "resources/sound_effect/error.wav"
+#define TEXT_SOUND "resources/sound_effect/text.wav"
 #define MAIN_SOUND "resources/music/pokemon_menu.ogg"
 #define HOW_TO_PLAY_SONG "resources/music/black_clo.ogg"
 #define MOVE_SOUND "resources/sound_effect/move_curs.wav"
