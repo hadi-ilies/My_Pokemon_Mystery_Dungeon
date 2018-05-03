@@ -6,19 +6,42 @@
 */
 
 #include "map.h"
+#include "item.h"
+
+const char *item_file_name[] = {
+	"resources/texture/staircase.png",
+	NULL
+};
+
+void item_aff(sfRenderWindow *window, size_t item, sfFloatRect rect)
+{
+	sfRectangleShape *rectangle;
+	sfTexture *texture;
+	sfVector2f pos = {rect.left, rect.top};
+	sfVector2f size = {rect.width, rect.height};
+
+	if (item == 0)
+		return;
+	pos.x -= rect.width / 2;
+	pos.y -= rect.height / 2;
+	rectangle = sfRectangleShape_create();
+	texture = sfTexture_createFromFile(item_file_name[item - 1], NULL);
+	sfRectangleShape_setTexture(rectangle, texture, sfTrue);
+	sfRectangleShape_setPosition(rectangle, pos);
+	sfRectangleShape_setSize(rectangle, size);
+	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
+	sfTexture_destroy(texture);
+	sfRectangleShape_destroy(rectangle);
+}
 
 void map_aff(sfRenderWindow *window, map_t *map)
 {
 	sfVector2u win_size = sfRenderWindow_getSize(window);
 	sfVector2f center = {win_size.x / 2, win_size.y / 2};
 	tile_map_t *tile_map = &map->tile_map;
-	size_t i_min = X_MIN;
-	size_t i_max = X_MAX;
-	size_t j_min = Y_MIN;
-	size_t j_max = Y_MAX;
 
-	for (size_t i = i_min; i < i_max; i++)
-		for (size_t j = j_min; j < j_max; j++) {
+	for (size_t i = X_MIN; i < X_MAX; i++)
+		for (size_t j = Y_MIN; j < Y_MAX; j++) {
 			sfFloatRect rect;
 
 			rect.left = map->size.x * (i - map->pos.x) + center.x;
@@ -28,5 +51,6 @@ void map_aff(sfRenderWindow *window, map_t *map)
 			rect.left = (int)rect.left;
 			rect.top = (int)rect.top;
 			tile_map_aff(window, tile_map, map->tab[i][j], rect);
+			item_aff(window, map->item[i][j], rect);
 		}
 }

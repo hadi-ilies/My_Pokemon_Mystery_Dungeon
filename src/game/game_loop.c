@@ -12,6 +12,7 @@
 #include "tile_name.h"
 #include "anime_name.h"
 #include "capacity_tab.h"
+#include "item.h"
 
 enum input {
 	     DOWN = 0b00000000001,
@@ -118,7 +119,7 @@ bool manage_input(entity_t *entity, map_t *map,
 		  entity_t *info[map->nb_case_x][map->nb_case_y],
 		  size_t input)
 {
-	if (sfClock_getElapsedTime(entity->clock).microseconds <= TIME_MOVE)
+	if (sfClock_getElapsedTime(entity->clock).microseconds < TIME_MOVE)
 		return (false);
 	if (input & (LEFT | RIGHT | UP | DOWN)) {
 		entity->dir = (sfVector2i){0, 0};
@@ -186,7 +187,8 @@ entity_t *get_cible(entity_t *entity, map_t *map,
 	for (size_t i = i_min; i < i_max; i++)
 		for (size_t j = j_min; j < j_max; j++)
 			if (info[i][j] && info[i][j]->ia == 0)
-				return (info[i][j]);
+			return (info[i][j]);
+
 	return (NULL);
 }
 
@@ -421,7 +423,7 @@ void game_aff(sfRenderWindow *window, garou_t *garou)
 	for (size_t i = 0; i < garou->nb_entity; i++)
 		if (garou->entity[i].life > 0) {
 			entity_aff(window, &garou->entity[i], &garou->map, pos);
-			if (sfClock_getElapsedTime(garou->entity[i].clock).microseconds <= TIME_MOVE)
+			if (sfClock_getElapsedTime(garou->entity[i].clock).microseconds < TIME_MOVE)
 				tmp = false;
 		}
 	entity_life_aff(window, &garou->entity[0], (sfFloatRect){LIFE_RECT});
@@ -458,6 +460,8 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 			game_aff(window, garou);
 		else if (++entity_turn >= garou->nb_entity)
 			entity_turn = 0;
+		if (garou->map.item[garou->entity[0].pos.x][garou->entity[0].pos.y] == STAIRCASE && sfClock_getElapsedTime(garou->entity[0].clock).microseconds >= TIME_MOVE)
+			return (1);
 	}
 	return (0);
 }

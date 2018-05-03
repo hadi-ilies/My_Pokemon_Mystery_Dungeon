@@ -44,8 +44,6 @@ entity_t entity_create_from_fd(int fd)
 		return (entity.error = ERR_READ, entity);
 	if (read(fd, &entity.item, sizeof(size_t)) != sizeof(size_t))
 		return (entity.error = ERR_READ, entity);
-	if (read(fd, &entity.ia, sizeof(size_t)) != sizeof(size_t))
-		return (entity.error = ERR_READ, entity);
 	if (read(fd, &len, sizeof(size_t)) != sizeof(size_t))
 		return (entity.error = ERR_READ, entity);
 	entity.anime_tab_file_name = malloc(sizeof(char) * (len + 1));

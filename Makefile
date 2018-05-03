@@ -14,7 +14,7 @@ LIBDIR		=	lib/
 INCDIR		=	include/
 MENUDIR		=	$(SRCDIR)main_menu/
 GAMEDIR		=	$(SRCDIR)game/
-MAPCDIR		=	$(SRCDIR)map_editor/
+MAPEDIR		=	$(SRCDIR)map_editor/
 ANICDIR		=	$(SRCDIR)anime_editor/
 MAPDIR		=	$(SRCDIR)map/
 ENTDIR		=	$(SRCDIR)entity/
@@ -44,34 +44,35 @@ SRC		=	$(SRCDIR)main.c \
 			$(INTRODIR)factories.c \
 			$(GAMEDIR)game_menu.c \
 			$(GAMEDIR)game_loop.c \
-			$(MAPCDIR)load_map_editor.c \
-			$(MAPCDIR)save_map_editor_create.c \
-			$(MAPCDIR)factories_editor.c \
-			$(MAPCDIR)manage_map_and_insert_into_map.c \
-			$(MAPCDIR)graphic_write.c \
-			$(MAPCDIR)options_map_editor.c \
-			$(MAPCDIR)laod_editor_cursor.c \
-			$(MAPCDIR)save_editor_cursor.c \
-			$(MAPCDIR)param_save_map_editor.c \
-			$(MAPCDIR)optional_create.c \
-			$(MAPCDIR)play_your_map.c \
-			$(MAPCDIR)display_tools.c \
-			$(MAPCDIR)map_editor_loop.c \
-			$(MAPCDIR)option_editor_create.c \
-			$(MAPCDIR)create_back_and_screen.c \
-			$(MAPCDIR)param_options_map_editor.c\
-			$(MAPCDIR)menu_map_editor_menu.c \
-			$(MAPCDIR)display_menu_editor.c \
-			$(MAPCDIR)menu_editor_create.c \
-			$(MAPCDIR)cursor_option_map_editor.c \
-			$(MAPCDIR)load_editor_create.c \
-			$(MAPCDIR)load_editor_display.c \
-			$(MAPCDIR)cursor_editor.c \
-			$(MAPCDIR)take_filename.c \
-			$(MAPCDIR)all_move.c \
-			$(MAPCDIR)hit_functions.c \
-			$(MAPCDIR)new_map.c \
-			$(MAPCDIR)map_editor_save.c \
+			$(MAPEDIR)load_map_editor.c \
+			$(MAPEDIR)save_map_editor_create.c \
+			$(MAPEDIR)factories_editor.c \
+			$(MAPEDIR)manage_map.c \
+			$(MAPEDIR)insert_into_map.c \
+			$(MAPEDIR)graphic_write.c \
+			$(MAPEDIR)options_map_editor.c \
+			$(MAPEDIR)laod_editor_cursor.c \
+			$(MAPEDIR)save_editor_cursor.c \
+			$(MAPEDIR)param_save_map_editor.c \
+			$(MAPEDIR)optional_create.c \
+			$(MAPEDIR)play_your_map.c \
+			$(MAPEDIR)display_tools.c \
+			$(MAPEDIR)map_editor_loop.c \
+			$(MAPEDIR)option_editor_create.c \
+			$(MAPEDIR)create_back_and_screen.c \
+			$(MAPEDIR)param_options_map_editor.c\
+			$(MAPEDIR)menu_map_editor_menu.c \
+			$(MAPEDIR)display_menu_editor.c \
+			$(MAPEDIR)menu_editor_create.c \
+			$(MAPEDIR)cursor_option_map_editor.c \
+			$(MAPEDIR)load_editor_create.c \
+			$(MAPEDIR)load_editor_display.c \
+			$(MAPEDIR)cursor_editor.c \
+			$(MAPEDIR)take_filename.c \
+			$(MAPEDIR)all_move.c \
+			$(MAPEDIR)hit_functions.c \
+			$(MAPEDIR)new_map.c \
+			$(MAPEDIR)map_editor_save.c \
 			$(ANICDIR)anime_editor_menu.c \
 			$(ANICDIR)anime_editor_loop.c \
 			$(ANICDIR)save_anime.c\
