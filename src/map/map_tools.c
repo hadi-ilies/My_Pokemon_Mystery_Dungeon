@@ -61,7 +61,7 @@ void dig_path(map_t *map, sfVector2i size, size_t x, size_t y)
 void linking_rooms(map_t *map)
 {
 	set_origin(map);
-	for (size_t n = 0; n < 100000 && insert_water_loop(map) == false;) {
+	for (size_t n = 0; n < 100000 && insert_water_loop(map) == false; n++) {
 		size_t x = 0;
 		size_t y = 0;
 		sfVector2i size;
