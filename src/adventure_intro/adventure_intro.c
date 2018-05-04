@@ -18,20 +18,29 @@ void display_ad_intro(sfRenderWindow *window, intro_adventure_t *ad_intro)
 	sfRenderWindow_drawText(window, ad_intro->text, NULL);
 }
 */
+bool event_intro(sfEvent *event, size_t *button, menu_t *menu)
+{
+	if (sfKeyboard_isKeyPressed(sfKeyEscape) || *button > 5) {
+		sfMusic_pause(menu->sound.music[1]);
+		return (true);
+	} if (event->type == sfEvtKeyPressed
+	&& event->key.code == sfKeyReturn)
+		(*button)++;
+	return (false);
+}
+
 void adventure_intro(sfRenderWindow *window, menu_t *menu)
 {
-	(void)menu;
 	intro_adventure_t ad_intro = ad_intro_create();
 	sfEvent event;
 	size_t button = 0;
 
+	sfMusic_pause(menu->sound.sound_effect[6]);
+	sfMusic_play(menu->sound.music[1]);
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (sfKeyboard_isKeyPressed(sfKeyEscape) || button > 5)
+			if (event_intro(&event, &button, menu))
 				return;
-			if (event.type == sfEvtKeyPressed
-			&& event.key.code == sfKeyReturn)
-				button++;
 		}
 		sfRenderWindow_clear(window, sfBlack);
 		display_history(window, &ad_intro, button, menu);

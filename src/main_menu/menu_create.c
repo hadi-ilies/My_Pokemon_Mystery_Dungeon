@@ -65,6 +65,7 @@ sfMusic **music_effect_create(void)
 	if (music_effect == NULL)
 		return (NULL);
 	music_effect[0] = sfMusic_createFromFile(HOW_TO_PLAY_SONG);
+	music_effect[1] = sfMusic_createFromFile(INTRO_AD);
 	return (music_effect);
 }
 
