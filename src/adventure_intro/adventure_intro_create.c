@@ -19,8 +19,6 @@ intro_adventure_t ad_intro_create(void)
 	sfRectangleShape_setSize(ad_intro.rect, (sfVector2f) {1920, 1080});
 	sfRectangleShape_setPosition(ad_intro.rect, (sfVector2f) {0, 0});
 	ad_intro.texture = sfTexture_createFromFile(PICTURE1, NULL);
-	sfRectangleShape_setTexture(ad_intro.rect,
-				ad_intro.texture, sfTrue);
 	sfText_setFont(ad_intro.text, ad_intro.font);
 	return (ad_intro);
 }

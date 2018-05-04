@@ -50,4 +50,7 @@
 #define CONFIG "resources/config"
 #define SIZE_T sizeof(size_t)
 #define RECTEX_T sizeof(rectex_t)
+#define TRANS_RECT_COND i < 255 ? sfRectangleShape_setFillColor(ad_intro->rect,\
+					(sfColor) {255, 255, 255, i++}) : 0
+
 #endif
