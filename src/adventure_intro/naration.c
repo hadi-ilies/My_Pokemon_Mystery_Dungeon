@@ -34,7 +34,8 @@ char *text_history(size_t button)
 void load_history_text(sfRenderWindow *window, intro_adventure_t *ad_intro,
 		size_t len)
 {
-	sfText_setPosition(ad_intro->text, (sfVector2f) {WINDOW_SIZE.x / len, 20});
+	sfText_setPosition(ad_intro->text,
+	(sfVector2f) {WINDOW_SIZE.x / len, 20});
 	sfRenderWindow_drawText(window, ad_intro->text, NULL);
 }
 
@@ -65,7 +66,10 @@ void display_history(sfRenderWindow *window, intro_adventure_t *ad_intro,
 		tmp = button;
 		i = 1;
 	}
-	test == true ? sfMusic_play(menu->sound.sound_effect[4]) : 0;
-	load_history_text(window, ad_intro,
-			insert_history_text(str, ad_intro, &i, test));
+	size_t len = insert_history_text(str, ad_intro, &i, test);
+
+	test == false ? sfMusic_stop(menu->sound.sound_effect[4]) : 0;
+	len % 3 == 0 && test == true ?
+		sfMusic_play(menu->sound.sound_effect[4]) : 0;
+	load_history_text(window, ad_intro, len);
 }

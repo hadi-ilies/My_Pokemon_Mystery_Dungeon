@@ -11,13 +11,7 @@
 #include "macro.h"
 #include "main_menu/menu.h"
 #include "adventure_intro.h"
-/*
-void display_ad_intro(sfRenderWindow *window, intro_adventure_t *ad_intro)
-{
-	sfRenderWindow_drawRectangleShape(window, menu->rect[0], NULL);
-	sfRenderWindow_drawText(window, ad_intro->text, NULL);
-}
-*/
+
 bool event_intro(sfEvent *event, size_t *button, menu_t *menu)
 {
 	if (sfKeyboard_isKeyPressed(sfKeyEscape) || *button > 5) {
@@ -43,8 +37,8 @@ void adventure_intro(sfRenderWindow *window, menu_t *menu)
 				return;
 		}
 		sfRenderWindow_clear(window, sfBlack);
+		illustration(window, button, &ad_intro);
 		display_history(window, &ad_intro, button, menu);
-		//display_ad_intro(window, &ad_intro);
 		sfRenderWindow_display(window);
 	}
 }
