@@ -10,6 +10,8 @@
 
 const char *item_file_name[] = {
 	"resources/texture/staircase.png",
+	"resources/texture/Oran Berry.png",
+	"resources/texture/Max Elixir.png",
 	NULL
 };
 

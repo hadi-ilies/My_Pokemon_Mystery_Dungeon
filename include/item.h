@@ -11,6 +11,8 @@
 enum item {
 	NONE,
 	STAIRCASE,
+	ORAN_BERRY,
+	MAX_ELIXIR,
 	NB_ITEM
 };
 

@@ -26,8 +26,14 @@ sfVector2i rand_pos_ground(map_t *map)
 
 void put_item(map_t *map)
 {
-	sfVector2i pos = rand_pos_ground(map);
+	sfVector2i pos;
+	size_t nb_item = rand() % 20 + 20;
 
+	for (size_t i = 0; i < nb_item; i++) {
+		pos = rand_pos_ground(map);
+		map->item[pos.x][pos.y] = rand() % (NB_ITEM - 1) + 1;
+	}
+	pos = rand_pos_ground(map);
 	map->item[pos.x][pos.y] = STAIRCASE;
 }
 
