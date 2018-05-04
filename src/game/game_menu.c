@@ -31,7 +31,8 @@ void put_item(map_t *map)
 	map->item[pos.x][pos.y] = STAIRCASE;
 }
 
-int run_stage(sfRenderWindow *window, size_t level, char *tile_map_file_name)
+int run_stage(sfRenderWindow *window, entity_t *player,
+	      size_t level, char *tile_map_file_name)
 {
 	garou_t garou = garou_create("resources/config");
 	const size_t size = 60;
@@ -58,12 +59,14 @@ int run_stage(sfRenderWindow *window, size_t level, char *tile_map_file_name)
 		garou.entity[i].pos = rand_pos_ground(&garou.map);
 	}
 	// -------------player--------------------------------
-	garou.entity[0] = entity_create_from_file("my");
-	garou.entity[0].ia = 0;
-	garou.entity[0].dir = (sfVector2i){0, 0};
-	garou.entity[0].pos = rand_pos_ground(&garou.map);
+	player->ia = 0;
+	player->dir = (sfVector2i){0, 0};
+	player->pos = rand_pos_ground(&garou.map);
+	garou.entity[0] = *player;
 	// ---------------------------------------------------
 	result = game_loop(window, &garou);
+	if (result == 1)
+		*player = garou.entity[0];
 	garou_destroy(&garou);
 	return (result);
 }
@@ -71,11 +74,16 @@ int run_stage(sfRenderWindow *window, size_t level, char *tile_map_file_name)
 int game_menu(sfRenderWindow *window)
 {
 	int result = 1;
+	entity_t player = entity_create_from_file("my");
 
+	if (player.error != ERR_OK)
+		return (84);
+	printf("level : %ld\n", player.level);
 	while (result) {
-		result = run_stage(window, 10, "resources/tile_map/Forest config");
+		result = run_stage(window, &player, player.level - 1, "resources/tile_map/Forest config");
 		if (result == 84)
 			return (84);
 	}
+	entity_destroy(&player);
 	return (0);
 }

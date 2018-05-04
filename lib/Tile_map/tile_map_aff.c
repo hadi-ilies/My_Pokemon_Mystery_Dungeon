@@ -5,7 +5,22 @@
 ** tile_map_aff.c
 */
 
+#include <stdbool.h>
 #include "tile_map.h"
+
+static bool manage_error(sfRenderWindow *window, tile_map_t *tile_map,
+			 tva_t tva)
+{
+	if (window == NULL || tile_map == NULL)
+		return (true);
+	if (tva.type >= tile_map->nb_type)
+		return (true);
+	if (tva.var >= tile_map->nb_var[tva.type])
+		return (true);
+	if (tva.alt >= tile_map->nb_alt[tva.type][tva.var])
+		return (true);
+	return (false);
+}
 
 void tile_map_aff(sfRenderWindow *window, tile_map_t *tile_map,
 		  tva_t tva, sfFloatRect rect)
@@ -16,13 +31,7 @@ void tile_map_aff(sfRenderWindow *window, tile_map_t *tile_map,
 	sfVector2f origin;
 	sfVector2f scale;
 
-	if (window == NULL || tile_map == NULL)
-		return;
-	if (tva.type >= tile_map->nb_type)
-		return;
-	if (tva.var >= tile_map->nb_var[tva.type])
-		return;
-	if (tva.alt >= tile_map->nb_alt[tva.type][tva.var])
+	if (manage_error(window, tile_map, tva))
 		return;
 	sprite = tile_map->sprite;
 	rectex = tile_map->rectex[tva.type][tva.var][tva.alt];
@@ -31,8 +40,7 @@ void tile_map_aff(sfRenderWindow *window, tile_map_t *tile_map,
 	bounds = sfSprite_getLocalBounds(sprite);
 	scale.x = rect.width / bounds.width;
 	scale.y = rect.height / bounds.height;
-	origin.x = bounds.width / 2;
-	origin.y = bounds.height / 2;
+	origin = (sfVector2f){bounds.width / 2, bounds.height / 2};
 	sfSprite_setScale(sprite, scale);
 	sfSprite_setOrigin(sprite, origin);
 	sfSprite_setPosition(sprite, (sfVector2f){rect.left, rect.top});

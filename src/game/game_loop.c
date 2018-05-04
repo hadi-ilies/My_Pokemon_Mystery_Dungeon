@@ -155,8 +155,8 @@ bool manage_input(entity_t *entity, map_t *map,
 				tmp = true;
 			}
 			if (input & CAPACITY4 && entity->pp[3]) {
-				if ((size_t)rand() % 100 < CAPACITY(*entity, 0).accuracy)
-					entity_attack(entity, &CAPACITY(*entity, 0), map, info);
+				if ((size_t)rand() % 100 < CAPACITY(*entity, 3).accuracy)
+					entity_attack(entity, &CAPACITY(*entity, 3), map, info);
 				entity->pp[3]--;
 				tmp = true;
 			}
