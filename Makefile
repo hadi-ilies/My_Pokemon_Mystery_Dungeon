@@ -106,6 +106,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(AD_DIR)adventure_intro_create.c\
 			$(AD_DIR)naration.c\
 			$(AD_DIR)illustration.c\
+			$(AD_DIR)adventure_end.c\
 
 OBJ		=	$(SRC:.c=.o)
 
