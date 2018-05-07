@@ -12,6 +12,9 @@
 #include <stddef.h>
 #include "error.h"
 
+#define READ_FILE read(fd, video->texture_name[i], sizeof(char) * len) != \
+		(int)(sizeof(char) * len)
+
 typedef struct {
 	size_t nb_texture;
 	char **texture_name;
