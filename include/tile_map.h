@@ -8,6 +8,7 @@
 #ifndef TILE_MAP_H_
 #define TILE_MAP_H_
 
+#include <stdbool.h>
 #include <SFML/Graphics.h>
 #include <stddef.h>
 #include "error.h"
@@ -47,5 +48,5 @@ tile_map_t tile_map_create_from_fd(int fd);
 void tile_map_destroy(tile_map_t *tile_map);
 void tile_map_aff(sfRenderWindow *window, tile_map_t *tile_map,
 		  tva_t tva, sfFloatRect rect);
-
+bool error_map5(tile_map_t *tile_map, int fd, size_t i);
 #endif

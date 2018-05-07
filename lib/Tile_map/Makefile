@@ -12,6 +12,7 @@ SRC	=	tile_map_create.c \
 		tile_map_create_from_fd.c \
 		tile_map_destroy.c \
 		tile_map_aff.c \
+		tile_map_create_from_fd2.c \
 
 OBJ	=	$(SRC:.c=.o)
 

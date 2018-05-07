@@ -10,10 +10,11 @@
 
 bool video_create_texture(video_t *video)
 {
-	char *str = video->texture_name[video->num];
+	char *str;
 
 	if (video->num >= video->nb_texture)
 		return (true);
+	str = video->texture_name[video->num];
 	video->texture = sfTexture_createFromFile(str, NULL);
 	if (video->texture == NULL) {
 		video->error = ERR_TEXTURE_CREATE;

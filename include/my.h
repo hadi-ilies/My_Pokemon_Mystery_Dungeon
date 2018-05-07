@@ -16,6 +16,7 @@
 #define CREAT(file_name, mode) open(file_name,				\
 				    O_WRONLY | O_TRUNC | O_CREAT,	\
 				    mode)
+#define READ(value, size) read(fd, value, size) != size
 
 char *my_strncpy(char *dest, char *src, int n);
 char **add_line(char **map, char *line);
