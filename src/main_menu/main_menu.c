@@ -46,6 +46,7 @@ void enter(sfRenderWindow *window, menu_t *menu, sfEvent *event)
 		if (menu->button == 0) {
 			adventure_intro(window, menu);
 			game_menu(window);
+			adventure_end(window, menu);
 		} if (menu->button == 1)
 			menu_map_editor_menu(window, menu->sound.sound_effect);
 		if (menu->button == 2)

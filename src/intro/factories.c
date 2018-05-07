@@ -28,8 +28,7 @@ void press_key_cond(sfMusic *music[3], sfRectangleShape *rect,
 	sfMusic_setVolume(music[0], 30);
 	*cond = false;
 }
-/*a free*/
-/*remove music for the mouli*/
+
 void get_start(anime_tab_t *animation, sfMusic *music[3],
 	       sfRenderWindow *window, video_t *video, sfEvent *event)
 {
@@ -53,15 +52,3 @@ void get_start(anime_tab_t *animation, sfMusic *music[3],
 		cond == false ? COND_WIDTH : 0;
 	}
 }
-/*
-loading_t loading_create(sfRenderWindow *window)
-{
-	loading_t optional;
-
-	optional.sprite = sfSprite_create();
-	optional.texture = sfTexture_createFromFile(LOAD, NULL);
-	sfSprite_setTexture(optional.sprite, optional.texture, sfTrue);
-	sfRenderWindow_drawSprite(window, optional.sprite, NULL);
-	sfRenderWindow_display(window);
-	return (optional);
-}*/

@@ -5,9 +5,9 @@
 ** save
 */
 
-#include <stdlib.h> //tmp
-#include <unistd.h> //tmp
-#include <fcntl.h> //tmp
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include "macro.h"
 #include "prototype.h"
 #include "anime_tab.h"
