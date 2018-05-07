@@ -34,7 +34,7 @@ static bool anime_tab2(anime_tab_t *anime_tab, int fd)
 			return (anime_tab->error = ERR_READ, false);
 		if (len <= 0)
 			return (anime_tab->error = ERR_INVALID_NUMBER, false);
-		anime_tab->texname[i].file_name = malloc(sizeof(char) * (len + 1));
+		anime_tab->texname[i].file_name = MALLOC_NAME;
 		if (anime_tab->texname[i].file_name == NULL)
 			return (anime_tab->error = ERR_MALLOC, false);
 		if (READ(anime_tab->texname[i].file_name, (int) (sizeof(char)

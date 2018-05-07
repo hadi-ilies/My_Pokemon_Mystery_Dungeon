@@ -7,6 +7,24 @@
 
 #include "anime_tab.h"
 
+void s_texture( anime_tab_t *anime_tab, sfSprite *sprite)
+{
+	sfSprite_setTexture(sprite, anime_tab->texname[anime_tab->\
+	anime[anime_tab->num].rectex[anime_tab->anime[anime_tab->num].num].\
+	texture_num].texture, sfTrue);
+	sfSprite_setTextureRect(sprite, anime_tab->anime[anime_tab->num]\
+	.rectex[anime_tab->anime[anime_tab->num].num].rect);
+}
+
+void coor(sfFloatRect *bounds, sfVector2f *scale,
+	sfFloatRect *rect, sfVector2f *origin)
+{
+	scale->x = rect->width / bounds->width;
+	scale->y = rect->height / bounds->height;
+	origin->x = bounds->width / 2;
+	origin->y = bounds->height / 2;
+}
+
 void anime_tab_aff(sfRenderWindow *window, anime_tab_t *anime_tab,
 		   sfFloatRect rect)
 {
@@ -17,21 +35,17 @@ void anime_tab_aff(sfRenderWindow *window, anime_tab_t *anime_tab,
 	sfTime struct_time = sfClock_getElapsedTime(anime_tab->clock);
 	size_t time = struct_time.microseconds;
 
-	sfSprite_setTexture(sprite, anime_tab->texname[anime_tab->anime[anime_tab->num].rectex[anime_tab->anime[anime_tab->num].num].texture_num].texture, sfTrue);
-	sfSprite_setTextureRect(sprite, anime_tab->anime[anime_tab->num].rectex[anime_tab->anime[anime_tab->num].num].rect);
+	s_texture(anime_tab, sprite);
 	bounds = sfSprite_getLocalBounds(sprite);
-	scale.x = rect.width / bounds.width;
-	scale.y = rect.height / bounds.height;
-	origin.x = bounds.width / 2;
-	origin.y = bounds.height / 2;
+	coor(&bounds, &scale, &rect, &origin);
 	sfSprite_setScale(sprite, scale);
 	sfSprite_setOrigin(sprite, origin);
 	sfSprite_setPosition(sprite, (sfVector2f){rect.left, rect.top});
 	sfRenderWindow_drawSprite(window, sprite, NULL);
-	if (time > anime_tab->anime[anime_tab->num].time / anime_tab->anime[anime_tab->num].nb_rectex) {
+	if (TIME_RECTEX) {
 		sfClock_restart(anime_tab->clock);
 		anime_tab->anime[anime_tab->num].num++;
-		if (anime_tab->anime[anime_tab->num].num >= anime_tab->anime[anime_tab->num].nb_rectex)
+		if (ANIME_RECTEX)
 			anime_tab->anime[anime_tab->num].num = 0;
 	}
 }
