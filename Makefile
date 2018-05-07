@@ -19,6 +19,7 @@ ANICDIR		=	$(SRCDIR)anime_editor/
 MAPDIR		=	$(SRCDIR)map/
 ENTDIR		=	$(SRCDIR)entity/
 GAROUDIR	=	$(SRCDIR)game_resource/
+DUNGEONDIR	=	$(SRCDIR)dungeon/
 INTRODIR	=	$(SRCDIR)intro/
 STGSDIR		=	$(SRCDIR)settings/
 AD_DIR		=	$(SRCDIR)adventure_intro/
@@ -99,6 +100,8 @@ SRC		=	$(SRCDIR)main.c \
 			$(GAROUDIR)garou_create.c \
 			$(GAROUDIR)garou_destroy.c \
 			$(GAROUDIR)capacity_aff.c \
+			$(DUNGEONDIR)dungeon_create.c \
+			$(DUNGEONDIR)dungeon_destroy.c \
 			$(STGSDIR)settings_defaut.c \
 			$(STGSDIR)settings_load.c \
 			$(STGSDIR)settings_save.c \

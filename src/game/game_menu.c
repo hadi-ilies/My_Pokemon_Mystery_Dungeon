@@ -43,13 +43,11 @@ map_t generate_map(size_t size, char *tile_map_file_name)
 
 	if (map.error != ERR_OK)
 		return (map);
-	map_random(&map);
-	put_item(&map);
-	map.size = (sfVector2f) {GAME_ZOOM};
+	map.size = (sfVector2f) {20, 20};
 	return (map);
 }
 
-entity_t *generate_entitys(size_t nb_entity, size_t level, map_t *map)
+entity_t *generate_entitys(size_t nb_entity)
 {
 	entity_t *entity = malloc(sizeof(entity_t) * nb_entity);
 
@@ -59,52 +57,59 @@ entity_t *generate_entitys(size_t nb_entity, size_t level, map_t *map)
 		entity[i] = entity_create_from_file("nomy");
 		if (entity[i].error != ERR_OK)
 			return (NULL);
-		entity[i].level = level;
-		entity[i].life = STAT(entity[i], life);
-		entity[i].ia = 1;
-		entity[i].dir = (sfVector2i){0, 0};
-		entity[i].pos = rand_pos_ground(map);
 	}
 	return (entity);
 }
 
-int run_stage(sfRenderWindow *window, entity_t *player,
-	      size_t level, char *tile_map_file_name)
+int run_dungeon(sfRenderWindow *window, garou_t *garou, size_t level)
 {
-	garou_t garou = garou_create("resources/config");
-	const size_t size = 60;
-	int result;
-
-	garou.nb_entity = size / 3;
-	garou.map = generate_map(size, tile_map_file_name);
-	garou.entity = generate_entitys(garou.nb_entity, level, &garou.map);
-	if (garou.map.error != ERR_OK || garou.entity == NULL)
-		return (84);
-	// -------------player--------------------------------
-	player->ia = 0;
-	player->dir = (sfVector2i){0, 0};
-	player->pos = rand_pos_ground(&garou.map);
-	garou.entity[0] = *player;
-	// ---------------------------------------------------
-	result = game_loop(window, &garou);
-	if (result == 1)
-		*player = garou.entity[0];
-	garou_destroy(&garou);
-	return (result);
+	for (; garou->dungeon.stage_num < garou->dungeon.nb_stage; garou->dungeon.stage_num++) {
+		map_random(&garou->dungeon.map);
+		put_item(&garou->dungeon.map);
+		for (size_t i = 1; i < garou->dungeon.nb_entity; i++) {
+			garou->dungeon.entity[i].level = level;
+			garou->dungeon.entity[i].life = STAT(garou->dungeon.entity[i], life);
+			garou->dungeon.entity[i].ia = 1;
+			garou->dungeon.entity[i].dir = (sfVector2i){0, 0};
+			garou->dungeon.entity[i].pos = rand_pos_ground(&garou->dungeon.map);
+		}
+		// -------------player--------------------------------
+		garou->dungeon.entity[0].dir = (sfVector2i){0, 0};
+		garou->dungeon.entity[0].pos = rand_pos_ground(&garou->dungeon.map);
+		// ---------------------------------------------------
+		printf("%d %d\n", garou->player.pos.x, garou->player.pos.y);
+		if (game_loop(window, garou) == 0)
+			return (0);
+	}
+	return (1);
 }
 
 int game_menu(sfRenderWindow *window)
 {
-	int result = 1;
-	entity_t player = entity_create_from_file("my");
+	garou_t garou = garou_create("resources/config");
 
-	if (player.error != ERR_OK)
+	garou.player = entity_create_from_file("my");
+	garou.player.ia = 0;
+	if (garou.player.error != ERR_OK)
 		return (84);
-	while (result) {
-		result = run_stage(window, &player, player.level - 1, "resources/tile_map/Forest config");
-		if (result == 84)
-			return (84);
-	}
-	entity_destroy(&player);
+
+
+
+	garou.dungeon = dungeon_create();
+	garou.dungeon.nb_stage = 3;
+	garou.dungeon.nb_entity = 20;
+	garou.dungeon.map = map_create(50, 50, my_strdup("resources/tile_map/Forest config"));
+	garou.dungeon.map.size = (sfVector2f) {GAME_ZOOM};
+	garou.dungeon.entity = generate_entitys(garou.dungeon.nb_entity);
+	if (garou.dungeon.map.error != ERR_OK || garou.dungeon.entity == NULL)
+		return (84);
+	garou.dungeon.entity[0] = garou.player;
+	if (run_dungeon(window, &garou, 10) == 84)
+		return (84);
+	dungeon_destroy(&garou.dungeon);
+
+
+
+	garou_destroy(&garou);
 	return (0);
 }

@@ -45,9 +45,10 @@ sfRenderWindow *window_create(void)
 	window = sfRenderWindow_create(mode, "my_rpg", WINDOW_PARAMS, NULL);
 	if (window == NULL)
 		return (NULL);
-	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
 	loading_t load = loading_create(window);
 
+	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
+	sfRenderWindow_setMouseCursorVisible(window, sfFalse);
 	set_icon(window, ICON);
 	sfSprite_destroy(load.sprite);
 	sfTexture_destroy(load.texture);

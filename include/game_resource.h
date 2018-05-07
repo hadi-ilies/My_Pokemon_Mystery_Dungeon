@@ -10,6 +10,7 @@
 
 #include <SFML/Graphics.h>
 #include "settings.h"
+#include "dungeon.h"
 #include "map.h"
 #include "entity.h"
 
@@ -23,9 +24,8 @@
 #define STAT_SHADOW "resources/texture/n5.png"
 
 typedef struct {
-	map_t map;
-	size_t nb_entity;
-	entity_t *entity;
+	entity_t player;
+	dungeon_t dungeon;
 	settings_t settings;
 } garou_t;
 

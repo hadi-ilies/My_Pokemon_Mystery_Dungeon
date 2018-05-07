@@ -10,8 +10,6 @@
 
 void garou_destroy(garou_t *garou)
 {
-	map_destroy(&garou->map);
-	for (size_t i = 1; i < garou->nb_entity; i++) // 1 -> 0
-		entity_destroy(&garou->entity[i]);
-	free(garou->entity);
+	entity_destroy(&garou->player);
+	//dungeon_destroy(&garou->dungeon);
 }

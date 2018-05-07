@@ -20,7 +20,7 @@ typedef struct {
 	entity_t *entity;
 } dungeon_t;
 
-//dungeon_t dungeon_create(void);
-//void dungeon_destroy(dungeon_t *dungeon);
+dungeon_t dungeon_create(void);
+void dungeon_destroy(dungeon_t *dungeon);
 
 #endif

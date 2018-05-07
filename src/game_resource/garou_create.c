@@ -11,8 +11,7 @@ garou_t garou_create(char *settings_file_name)
 {
 	garou_t garou;
 
-	garou.nb_entity = 0;
-	garou.entity = NULL;
+	garou.dungeon = dungeon_create();
 	garou.settings = settings_load(settings_file_name);
 	return (garou);
 }

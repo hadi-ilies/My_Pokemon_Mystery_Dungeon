@@ -263,7 +263,7 @@ size_t ia(entity_t *entity, map_t *map,
 }
 
 bool entity_set_dir(entity_t *entity, garou_t *garou,
-		    entity_t *info[garou->map.nb_case_x][garou->map.nb_case_y],
+		    entity_t *info[garou->dungeon.map.nb_case_x][garou->dungeon.map.nb_case_y],
 		    sfEvent *event)
 {
 	size_t input = 0;
@@ -293,22 +293,22 @@ bool entity_set_dir(entity_t *entity, garou_t *garou,
 			input |= WAIT;
 	}
 	else
-		input = ia(entity, &garou->map, info);
-	return (manage_input(entity, &garou->map, info, input));
+		input = ia(entity, &garou->dungeon.map, info);
+	return (manage_input(entity, &garou->dungeon.map, info, input));
 }
 
 void info_update(garou_t *garou,
-		 entity_t *info[garou->map.nb_case_x][garou->map.nb_case_y])
+		 entity_t *info[garou->dungeon.map.nb_case_x][garou->dungeon.map.nb_case_y])
 {
-	for (size_t i = 0; i < garou->map.nb_case_x; i++)
-		for (size_t j = 0; j < garou->map.nb_case_y; j++)
+	for (size_t i = 0; i < garou->dungeon.map.nb_case_x; i++)
+		for (size_t j = 0; j < garou->dungeon.map.nb_case_y; j++)
 			info[i][j] = NULL;
-	for (size_t i = 0; i < garou->nb_entity; i++)
-		if (garou->entity[i].life > 0) {
-			size_t x = garou->entity[i].pos.x;
-			size_t y = garou->entity[i].pos.y;
+	for (size_t i = 0; i < garou->dungeon.nb_entity; i++)
+		if (garou->dungeon.entity[i].life > 0) {
+			size_t x = garou->dungeon.entity[i].pos.x;
+			size_t y = garou->dungeon.entity[i].pos.y;
 
-			info[x][y] = &garou->entity[i];
+			info[x][y] = &garou->dungeon.entity[i];
 		}
 }
 
@@ -363,42 +363,42 @@ void inventory_aff(sfRenderWindow *window, garou_t *garou)
 
 	sfText_setPosition(text, (sfVector2f){250 + size.x / 5, 250 + size.y / (6 * 2) - 30 / 2});
 	sfText_setFont(text, font);
-	sprintf(str, "HP : %ld/%ld\n", garou->entity[0].life, STAT(garou->entity[0], life));
+	sprintf(str, "HP : %ld/%ld\n", garou->dungeon.entity[0].life, STAT(garou->dungeon.entity[0], life));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
 
 	sfText_move(text, (sfVector2f){0, size.y / 6});
 	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
-	sprintf(str, "atk : %ld\n", STAT(garou->entity[0], atk));
+	sprintf(str, "atk : %ld\n", STAT(garou->dungeon.entity[0], atk));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
 
 	sfText_move(text, (sfVector2f){0, size.y / 6});
 	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
-	sprintf(str, "def : %ld\n", STAT(garou->entity[0], def));
+	sprintf(str, "def : %ld\n", STAT(garou->dungeon.entity[0], def));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
 
 	sfText_move(text, (sfVector2f){0, size.y / 6});
 	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
-	sprintf(str, "spa : %ld\n", STAT(garou->entity[0], spa));
+	sprintf(str, "spa : %ld\n", STAT(garou->dungeon.entity[0], spa));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
 
 	sfText_move(text, (sfVector2f){0, size.y / 6});
 	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
-	sprintf(str, "spd : %ld\n", STAT(garou->entity[0], spd));
+	sprintf(str, "spd : %ld\n", STAT(garou->dungeon.entity[0], spd));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
 
 	sfText_move(text, (sfVector2f){0, size.y / 6});
 	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
-	sprintf(str, "speed : %ld\n", STAT(garou->entity[0], speed));
+	sprintf(str, "speed : %ld\n", STAT(garou->dungeon.entity[0], speed));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
@@ -414,19 +414,19 @@ void inventory_aff(sfRenderWindow *window, garou_t *garou)
 
 void game_aff(sfRenderWindow *window, garou_t *garou)
 {
-	sfVector2f pos = entity_get_move_pos(&garou->entity[0]);
+	sfVector2f pos = entity_get_move_pos(&garou->dungeon.entity[0]);
 	bool tmp = true;
 
 	sfRenderWindow_clear(window, sfBlack);
-	garou->map.pos = pos;
-	map_aff(window, &garou->map);
-	for (size_t i = 0; i < garou->nb_entity; i++)
-		if (garou->entity[i].life > 0) {
-			entity_aff(window, &garou->entity[i], &garou->map, pos);
-			if (sfClock_getElapsedTime(garou->entity[i].clock).microseconds < TIME_MOVE)
+	garou->dungeon.map.pos = pos;
+	map_aff(window, &garou->dungeon.map);
+	for (size_t i = 0; i < garou->dungeon.nb_entity; i++)
+		if (garou->dungeon.entity[i].life > 0) {
+			entity_aff(window, &garou->dungeon.entity[i], &garou->dungeon.map, pos);
+			if (sfClock_getElapsedTime(garou->dungeon.entity[i].clock).microseconds < TIME_MOVE)
 				tmp = false;
 		}
-	entity_life_aff(window, &garou->entity[0], (sfFloatRect){LIFE_RECT});
+	entity_life_aff(window, &garou->dungeon.entity[0], (sfFloatRect){LIFE_RECT});
 	if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_INVENTORY]))
 		inventory_aff(window, garou);
 	else if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_ATTACK]) && tmp)
@@ -437,30 +437,30 @@ void game_aff(sfRenderWindow *window, garou_t *garou)
 int game_loop(sfRenderWindow *window, garou_t *garou)
 {
 	sfEvent event;
-	entity_t *info[garou->map.nb_case_x][garou->map.nb_case_y];
+	entity_t *info[garou->dungeon.map.nb_case_x][garou->dungeon.map.nb_case_y];
 	size_t entity_turn = 0;
 
 	while (sfRenderWindow_isOpen(window)) {
-		bool next = garou->entity[entity_turn].life ? false : true;
+		bool next = garou->dungeon.entity[entity_turn].life ? false : true;
 
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
-			if (!next && !garou->entity[entity_turn].ia) {
+			if (!next && !garou->dungeon.entity[entity_turn].ia) {
 				info_update(garou, info);
-				if (entity_set_dir(&garou->entity[entity_turn], garou, info, &event))
+				if (entity_set_dir(&garou->dungeon.entity[entity_turn], garou, info, &event))
 					next = true;
 			}
 		}
 		if (!next) {
 			info_update(garou, info);
-			if (entity_set_dir(&garou->entity[entity_turn], garou, info, NULL))
+			if (entity_set_dir(&garou->dungeon.entity[entity_turn], garou, info, NULL))
 				next = true;
 		}
 		if (next == false)
 			game_aff(window, garou);
-		else if (++entity_turn >= garou->nb_entity)
+		else if (++entity_turn >= garou->dungeon.nb_entity)
 			entity_turn = 0;
-		if (garou->map.item[garou->entity[0].pos.x][garou->entity[0].pos.y] == STAIRCASE && sfClock_getElapsedTime(garou->entity[0].clock).microseconds >= TIME_MOVE)
+		if (garou->dungeon.map.item[garou->dungeon.entity[0].pos.x][garou->dungeon.entity[0].pos.y] == STAIRCASE && sfClock_getElapsedTime(garou->dungeon.entity[0].clock).microseconds >= TIME_MOVE)
 			return (1);
 	}
 	return (0);
