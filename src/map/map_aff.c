@@ -9,25 +9,25 @@
 #include "item.h"
 
 const char *item_file_name[] = {
-	"resources/texture/staircase.png",
+	"resources/texture/Staircase.png",
 	"resources/texture/Oran Berry.png",
 	"resources/texture/Max Elixir.png",
 	NULL
 };
 
-void item_aff(sfRenderWindow *window, size_t item, sfFloatRect rect)
+void item_aff(sfRenderWindow *window, enum item_e item, sfFloatRect rect)
 {
 	sfRectangleShape *rectangle;
 	sfTexture *texture;
 	sfVector2f pos = {rect.left, rect.top};
 	sfVector2f size = {rect.width, rect.height};
 
-	if (item == 0)
+	if (item == NONE)
 		return;
 	pos.x -= rect.width / 2;
 	pos.y -= rect.height / 2;
 	rectangle = sfRectangleShape_create();
-	texture = sfTexture_createFromFile(item_file_name[item - 1], NULL);
+	texture = sfTexture_createFromFile(item_file_name[item], NULL);
 	sfRectangleShape_setTexture(rectangle, texture, sfTrue);
 	sfRectangleShape_setPosition(rectangle, pos);
 	sfRectangleShape_setSize(rectangle, size);

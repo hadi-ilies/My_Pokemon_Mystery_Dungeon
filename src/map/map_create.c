@@ -15,7 +15,7 @@ static void map_param_set_to_0(map_t *map)
 	for (size_t i = 0; i < map->nb_case_x; i++)
 		for (size_t j = 0; j < map->nb_case_y; j++) {
 			map->tab[i][j] = (tva_t){0, 0, 0};
-			map->item[i][j] = 0;
+			map->item[i][j] = NONE;
 		}
 }
 
@@ -29,14 +29,14 @@ map_t map_create(size_t nb_case_x, size_t nb_case_y, char *tile_map_file_name)
 		return (map);
 	}
 	map.tab = malloc(sizeof(tva_t *) * map.nb_case_x);
-	map.item = malloc(sizeof(size_t *) * map.nb_case_x);
+	map.item = malloc(sizeof(enum item_e *) * map.nb_case_x);
 	if (map.tab == NULL || map.item == NULL) {
 		map.error = ERR_MALLOC;
 		return (map);
 	}
 	for (size_t i = 0; i < map.nb_case_x; i++) {
 		map.tab[i] = malloc(sizeof(tva_t) * map.nb_case_y);
-		map.item[i] = malloc(sizeof(size_t) * map.nb_case_y);
+		map.item[i] = malloc(sizeof(enum item_e) * map.nb_case_y);
 		if (map.tab[i] == NULL || map.item[i] == NULL) {
 			map.error = ERR_MALLOC;
 			return (map);

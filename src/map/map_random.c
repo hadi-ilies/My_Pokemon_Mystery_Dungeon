@@ -8,16 +8,10 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "map.h"
-#include "prototype.h"
 #include "tile_name.h"
-#include "map_editor_function.h"
+#include "my.h"
 
-int rand_min_max(int min, int max)
-{
-	return (rand() % (max - min + 1) + min);
-}
-
-sfVector2i take_origin(map_t *map, sfVector2i *size)
+static sfVector2i take_origin(map_t *map, sfVector2i *size)
 {
 	sfVector2i origin;
 	bool test = true;
@@ -34,7 +28,7 @@ sfVector2i take_origin(map_t *map, sfVector2i *size)
 	return (origin);
 }
 
-bool insert_water(map_t *map, size_t x, size_t y)
+static bool insert_water(map_t *map, size_t x, size_t y)
 {
 	bool tmp = false;
 

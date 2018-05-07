@@ -16,6 +16,7 @@
 #define CREAT(file_name, mode) open(file_name,				\
 				    O_WRONLY | O_TRUNC | O_CREAT,	\
 				    mode)
+
 char *my_strncpy(char *dest, char *src, int n);
 char **add_line(char **map, char *line);
 size_t my_fprintf(int fd, const char *str, ...);
@@ -30,5 +31,6 @@ char *inttostr(int nb);
 bool my_atoi(char *str);
 size_t get_uint(char *str);
 float get_float(char *str);
+int rand_min_max(int min, int max);
 
 #endif

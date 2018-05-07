@@ -12,6 +12,7 @@
 #include <stddef.h>
 #include "error.h"
 #include "tile_map.h"
+#include "item.h"
 
 // game_macros
 #define GAME_ZOOM 200, 200
@@ -32,7 +33,7 @@ typedef struct {
 	size_t nb_case_x;
 	size_t nb_case_y;
 	tva_t **tab;
-	size_t **item;
+	enum item_e **item;
 	sfVector2f size;
 	sfVector2f pos;
 	char *tile_map_file_name;
@@ -50,5 +51,6 @@ void map_smooth_all(map_t *map);
 void map_save(map_t *map, char *file_name);
 map_t map_load(char *file_name);
 void map_random(map_t *map);
+void linking_rooms(map_t *map);
 
 #endif
