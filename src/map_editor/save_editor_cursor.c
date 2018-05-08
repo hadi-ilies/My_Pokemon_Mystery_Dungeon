@@ -21,9 +21,9 @@ void choice_cursor_save(save_editor_t *save, sfRenderWindow *window)
 	sfText_setString(save->text[1], "OK");
 	for (int i = 0; i < 2; i++) {
 		sfText_setPosition(save->text[i],
-			(sfVector2f) {WINDOW_SIZE.x / 2 - 300, pos_y});
-		sfText_setColor(save->text[i], (sfColor){250, 250, 0,
-					save->choice_curs == i ? 255 : 180});
+		V2F(WINDOW_SIZE.x / 2 - 300, pos_y));
+		sfText_setColor(save->text[i],
+		COL(250, 250, 0, save->choice_curs == i ? 255 : 180));
 		sfRenderWindow_drawText(window, save->text[i], NULL);
 		pos_y += 100;
 	}

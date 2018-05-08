@@ -17,13 +17,13 @@ void back_create_icon(loading_t *optional)
 	optional->icon_back = sfRectangleShape_create();
 	optional->texture_icon =  sfTexture_createFromFile(ITEM, NULL);
 	sfRectangleShape_setSize(optional->icon_back,
-				(sfVector2f) {800, 358});
+				V2F(800, 358));
 	sfRectangleShape_setOrigin(optional->icon_back,
-				(sfVector2f) {400, 358 / 2});
+				V2F(400, 358 / 2));
 	sfRectangleShape_setPosition(optional->icon_back,
-				(sfVector2f) {1920 / 2, 1080 / 2 - 358 / 2});
+				V2F(1920 / 2, 1080 / 2 - 358 / 2));
 	sfRectangleShape_setFillColor(optional->icon_back,
-				(sfColor) {255, 255, 255, 120});
+				COL(255, 255, 255, 120));
 }
 
 loading_t back_create(void)

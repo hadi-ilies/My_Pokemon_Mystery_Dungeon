@@ -24,9 +24,9 @@ void load_choice_cursor(load_editor_t *load, sfRenderWindow *window)
 
 	for (size_t i = 0; i < 2; i++) {
 		sfText_setPosition(load->choice[i],
-				(sfVector2f) {WINDOW_SIZE.x / 2 - 300, pos_y});
-		sfText_setColor(load->choice[i], (sfColor){250, 250, 0,
-					load->choice_curs == i ? 255 : 180});
+		V2F(WINDOW_SIZE.x / 2 - 300, pos_y));
+		sfText_setColor(load->choice[i],
+		COL(250, 250, 0, load->choice_curs == i ? 255 : 180));
 		sfRenderWindow_drawText(window, load->choice[i], NULL);
 		pos_y += 100;
 	}
@@ -59,9 +59,9 @@ void load_list_choice_cursor(load_editor_t *load, sfRenderWindow *window)
 		load->text_curs = 0;
 	} for (size_t j = i - 5; j < i; j++) {
 		sfText_setPosition(load->text[j],
-			(sfVector2f) {WINDOW_SIZE.x / 2 + 500, pos_y});
+		V2F(WINDOW_SIZE.x / 2 + 500, pos_y));
 		sfText_setColor(load->text[j],
-		(sfColor){250, 250, 0, load->text_curs == j ? 255 : 180});
+		COL(250, 250, 0, load->text_curs == j ? 255 : 180));
 		sfRenderWindow_drawText(window, load->text[j], NULL);
 		pos_y += 100;
 	}
@@ -75,8 +75,8 @@ void load_list_choice_min(load_editor_t *load, sfRenderWindow *window)
 	for (size_t i = 0; i < nb_file; i++) {
 		sfText_setPosition(load->text[i],
 				(sfVector2f) {WINDOW_SIZE.x / 2 + 500, pos_y});
-		sfText_setColor(load->text[i], (sfColor){250, 250, 0,
-				load->text_curs == i ? 255 : 180});
+		sfText_setColor(load->text[i],
+		COL(250, 250, 0, load->text_curs == i ? 255 : 180));
 		sfRenderWindow_drawText(window, load->text[i], NULL);
 		pos_y += 100;
 	}

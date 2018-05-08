@@ -15,20 +15,20 @@ void pages(menu_t *menu)
 	for (int i = 0; i < 3; i++) {
 		menu->rect[i] = sfRectangleShape_create();
 		sfRectangleShape_setFillColor(menu->rect[i],
-					(sfColor) {0, 0, 0, 150});
+					      COL(0, 0, 0, 150));
 		sfRectangleShape_setOutlineThickness(menu->rect[i], 10);
 		sfRectangleShape_setOutlineColor(menu->rect[i], sfRed);
 	}
-	sfRectangleShape_setSize(menu->rect[0], (sfVector2f) {400, 620});
-	sfRectangleShape_setPosition(menu->rect[0], (sfVector2f) {10, 10});
-	sfRectangleShape_setSize(menu->rect[1], (sfVector2f) {400, 400});
+	sfRectangleShape_setSize(menu->rect[0], V2F(400, 620));
+	sfRectangleShape_setPosition(menu->rect[0], V2F(10, 10));
+	sfRectangleShape_setSize(menu->rect[1], V2F(400, 400));
 	sfRectangleShape_setPosition(menu->rect[1],
-				(sfVector2f) {1920 - 410, 10});
-	sfRectangleShape_setSize(menu->rect[2], (sfVector2f) {1100, 200});
-	sfRectangleShape_setPosition(menu->rect[2], (sfVector2f) {400, 750});
+				V2F(1920 - 410, 10));
+	sfRectangleShape_setSize(menu->rect[2], V2F(1100, 200));
+	sfRectangleShape_setPosition(menu->rect[2], V2F(400, 750));
 	menu->rect[3] = sfRectangleShape_create();
-	sfRectangleShape_setSize(menu->rect[3], (sfVector2f) {400, 100});
-	sfRectangleShape_setFillColor(menu->rect[3], (sfColor) {0, 0, 0, 150});
+	sfRectangleShape_setSize(menu->rect[3], V2F(400, 100));
+	sfRectangleShape_setFillColor(menu->rect[3], COL(0, 0, 0, 150));
 	sfRectangleShape_setOutlineThickness(menu->rect[3], 3);
 	sfRectangleShape_setOutlineColor(menu->rect[3], sfYellow);
 }

@@ -27,7 +27,7 @@ sfSprite *create_screen_param(sfRenderWindow *window)
 	sprite = sfSprite_create();
 	texture = sfTexture_createFromImage(screen, NULL);
 	sfSprite_setTexture(sprite, texture, sfTrue);
-	sfSprite_setColor(sprite, (sfColor) {100, 100, 100, 255});
+	sfSprite_setColor(sprite, COL(100, 100, 100, 255));
 	return (sprite);
 }
 
@@ -36,11 +36,11 @@ sfRectangleShape *create_back_param(sfRenderWindow *window)
 	sfRectangleShape *back;
 
 	back = sfRectangleShape_create();
-	sfRectangleShape_setSize(back, (sfVector2f) {600, 600});
-	sfRectangleShape_setOrigin(back, (sfVector2f) {300, 300});
+	sfRectangleShape_setSize(back, V2F(600, 600));
+	sfRectangleShape_setOrigin(back, V2F(300, 300));
 	sfRectangleShape_setPosition(back,
-		(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2});
-	sfRectangleShape_setFillColor(back, (sfColor) {30, 30, 30, 120});
+	V2F(WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2));
+	sfRectangleShape_setFillColor(back, COL(30, 30, 30, 120));
 	sfRectangleShape_setOutlineThickness(back, 10);
 	sfRectangleShape_setOutlineColor(back, sfCyan);
 	return (back);

@@ -35,7 +35,7 @@ void change_tile_map(sfRenderWindow *window,
 			option->nb_tile--;
 	}
 	sfText_setPosition(option->text[option->nb_tile],
-	(sfVector2f) {WINDOW_SIZE.x / 2 - 150, WINDOW_SIZE.y / 2 - 300});
+	V2F(WINDOW_SIZE.x / 2 - 150, WINDOW_SIZE.y / 2 - 300));
 }
 
 void size_tile_map_y(sfEvent *event,
@@ -55,7 +55,7 @@ void size_tile_map_y(sfEvent *event,
 	str = inttostr(option->size_y);
 	sfText_setString(option->size_map_y, str);
 	sfText_setPosition(option->size_map_y,
-	(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 200});
+	V2F(WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 200));
 	free(str);
 }
 
@@ -76,6 +76,6 @@ void size_tile_map_x(sfEvent *event,
 	str = inttostr(option->size_x);
 	sfText_setString(option->size_map_x, str);
 	sfText_setPosition(option->size_map_x,
-	(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 100});
+	V2F(WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 100));
 	free(str);
 }

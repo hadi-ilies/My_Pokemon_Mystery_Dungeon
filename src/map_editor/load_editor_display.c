@@ -23,7 +23,7 @@ void display_load_list(load_editor_t *load, sfRenderWindow *window,
 {
 	sfRectangleShape_setOutlineColor(back, sfGreen);
 	sfRectangleShape_setPosition(back,
-		(sfVector2f) {WINDOW_SIZE.x / 2 + 600, WINDOW_SIZE.y / 2});
+	V2F(WINDOW_SIZE.x / 2 + 600, WINDOW_SIZE.y / 2));
 	sfRenderWindow_drawSprite(window, screen, NULL);
 	sfRenderWindow_drawRectangleShape(window, back, NULL);
 	count_file(MAPS) > 5  ?

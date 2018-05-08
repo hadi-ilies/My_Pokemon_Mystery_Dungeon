@@ -78,6 +78,6 @@ loading_t back_editor_create(sfRenderWindow *window)
 	sfFloatRect size = sfSprite_getLocalBounds(optional.sprite);
 
 	sfSprite_setScale(optional.sprite,
-	(sfVector2f) {WINDOW_SIZE.x / size.width, WINDOW_SIZE.y / size.height});
+	V2F(WINDOW_SIZE.x / size.width, WINDOW_SIZE.y / size.height));
 	return (optional);
 }
