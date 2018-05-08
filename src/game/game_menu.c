@@ -87,6 +87,17 @@ int run_dungeon(sfRenderWindow *window, garou_t *garou, size_t level)
 	return (1);
 }
 
+dungeon_t generate_dungeon(size_t nb_stage, char *file_name)
+{
+	dungeon_t dungeon = dungeon_create();
+
+	dungeon.nb_stage = nb_stage;
+	dungeon.nb_entity = 20;
+	dungeon.map = generate_map(50, file_name);
+	dungeon.entity = generate_entitys(dungeon.nb_entity);
+	return (dungeon);
+}
+
 int game_menu(sfRenderWindow *window)
 {
 	garou_t garou = garou_create("resources/config");
@@ -98,15 +109,11 @@ int game_menu(sfRenderWindow *window)
 
 
 
-	garou.dungeon = dungeon_create();
-	garou.dungeon.nb_stage = 3;
-	garou.dungeon.nb_entity = 20;
-	garou.dungeon.map = generate_map(50, "resources/tile_map/Forest config");
-	garou.dungeon.entity = generate_entitys(garou.dungeon.nb_entity);
+	garou.dungeon = generate_dungeon(3, "resources/tile_map/Forest config");
 	if (garou.dungeon.map.error != ERR_OK || garou.dungeon.entity == NULL)
 		return (84);
 	garou.dungeon.entity[0] = garou.player;
-	if (run_dungeon(window, &garou, 10) == 84)
+	if (run_dungeon(window, &garou, 8) == 84)
 		return (84);
 	dungeon_destroy(&garou.dungeon);
 
