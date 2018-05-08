@@ -24,11 +24,11 @@ void pages_editor(menu_t *menu)
 				(sfColor) {0, 0, 0, 150});
 	sfRectangleShape_setOutlineThickness(menu->rect[0], 10);
 	sfRectangleShape_setOutlineColor(menu->rect[0], sfRed);
-	sfRectangleShape_setSize(menu->rect[0], (sfVector2f) {400, 620});
-	sfRectangleShape_setPosition(menu->rect[0], (sfVector2f) {10, 10});
+	sfRectangleShape_setSize(menu->rect[0], V2F(400, 620));
+	sfRectangleShape_setPosition(menu->rect[0], V2F(10, 10));
 	menu->rect[1] = sfRectangleShape_create();
 	texture = sfTexture_createFromFile(CURSOR_EDITOR, NULL);
-	sfRectangleShape_setSize(menu->rect[1], (sfVector2f) {44, 34});
+	sfRectangleShape_setSize(menu->rect[1], V2F(44, 34));
 	sfRectangleShape_setTexture(menu->rect[1], texture, sfTrue);
 }
 
