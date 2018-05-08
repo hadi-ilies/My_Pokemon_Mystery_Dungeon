@@ -57,5 +57,6 @@
 #define RECTEX_T sizeof(rectex_t)
 #define TRANS_RECT_COND i < 255 ? sfRectangleShape_setFillColor(ad_intro->rect,\
 					(sfColor) {255, 255, 255, i++}) : 0
+#define CHECKMAP (size_t) cor->y + size_y < map->nb_case_y
 
 #endif
