@@ -30,7 +30,7 @@ void press_key_cond(sfMusic *music[3], sfRectangleShape *rect,
 }
 
 void get_start(anime_tab_t *animation, sfMusic *music[3],
-	       sfRenderWindow *window, video_t *video, sfEvent *event)
+	       sfRenderWindow *window, video_t *video)
 {
 	static bool cond = true;
 	static sfRectangleShape *rect;
@@ -39,7 +39,6 @@ void get_start(anime_tab_t *animation, sfMusic *music[3],
 	static int size_w = 800;
 	static int size_h = 150;
 
-	event->key.code == sfKeySpace ? video->num = video->nb_texture : 0;
 	if (video->num >= video->nb_texture - 1) {
 		anime_tab_aff(window, animation, WIN_REC);
 		if (cond == true) {

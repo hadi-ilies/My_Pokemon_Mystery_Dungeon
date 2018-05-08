@@ -47,21 +47,22 @@ int main_intro(sfRenderWindow *window, sfEvent *event)
 {
 	sfMusic *music[3];
 	anime_tab_t animation = anime_tab_create_from_file(ANIME_START_FILE);
-	video_t video = video_create_from_file(ANIME_INTRO_FILE);
+	video_t vdo = video_create_from_file(ANIME_INTRO_FILE);
 	bool exit = false;
 
-	if (destroy_and_check_error_anime(&animation, &video) == 1)
+	if (destroy_and_check_error_anime(&animation, &vdo) == 1)
 		return (0);
 	music_create(music);
 	while (sfRenderWindow_isOpen(window)) {
-		loop_event(video, &exit, window, event);
-		exit == false ? sfRenderWindow_clear(window, sfBlack) : 0;
-		exit == false ? video_aff(window, &video, WIN_REC) : 0;
-		!exit ? get_start(&animation, music, window, &video, event) : 0;
-		if ((exit && transition(window)) || video.error != ERR_OK)
+		loop_event(vdo, &exit, window, event);
+		!exit ? sfRenderWindow_clear(window, sfBlack) : 0;
+		!exit ? video_aff(window, &vdo, WIN_REC) : 0;
+		event->key.code == sfKeySpace ? vdo.num = vdo.nb_texture : 0;
+		!exit ? get_start(&animation, music, window, &vdo) : 0;
+		if ((exit && transition(window)) || vdo.error != ERR_OK)
 			break;
 		sfRenderWindow_display(window);
 	}
-	destroy_factories(&animation, music, &video);
+	destroy_factories(&animation, music, &vdo);
 	return (0);
 }

@@ -17,15 +17,15 @@ char *text_button(menu_t *menu)
 	if (menu->button == 0)
 		str = "Start a new adventure in the PokeWorld !\n";
 	if (menu->button == 1)
-		str = "Create Your own map";
+		str = "Create or custom your own map!";
 	if (menu->button == 2)
-		str = "Create your own animation";
+		str = "Create or custom your own animation!";
 	if (menu->button == 3)
-		str ="Settings";
+		str = "Go custom the game!";
 	if (menu->button == 4)
-		str = "guess who is the best programmer !";
+		str = "Learn how to use the game and improve your skills !";
 	if (menu->button == 5)
-		str = "are You Sure you wanna Go ?";
+		str = "Are you sure you wanna Go ?";
 	return (str);
 }
 

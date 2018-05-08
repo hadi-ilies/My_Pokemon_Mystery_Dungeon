@@ -17,7 +17,7 @@ void display_text(sfRenderWindow *window, menu_t *menu)
 	sfText_setString(menu->text[1], "MAP EDITOR");
 	sfText_setString(menu->text[2], "ANIMATION EDITOR");
 	sfText_setString(menu->text[3], "OPTIONS");
-	sfText_setString(menu->text[4], "CREDIT");
+	sfText_setString(menu->text[4], "HOW TO PLAY");
 	sfText_setString(menu->text[5], "EXIT");
 	for (size_t i = 0; i < NB_BUTTON; i++) {
 		sfText_setPosition(menu->text[i], V2F(60, pos_y));
