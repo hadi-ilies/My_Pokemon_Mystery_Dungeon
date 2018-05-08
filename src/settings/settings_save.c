@@ -9,7 +9,7 @@
 #include "settings.h"
 #include "my.h"
 
-void insert_in_file(settings_t *settings, int fd)
+static void insert_in_file(settings_t *settings, int fd)
 {
 	my_fprintf(fd, "%s %d %d\n", "WindowSize:", settings->window_size.x,
 		settings->window_size.y);

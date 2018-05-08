@@ -6,12 +6,13 @@
 */
 
 #include "settings.h"
+#include "macro.h"
 
 settings_t settings_defaut(void)
 {
 	settings_t settings;
 
-	settings.window_size = (sfVector2u){1920, 1080};
+	settings.window_size = V2U(1920, 1080);
 	settings.music_volume = 100.0;
 	settings.sound_volume = 100.0;
 	settings.key[KEY_UP] = sfKeyUp;
