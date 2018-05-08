@@ -17,6 +17,7 @@
 				    O_WRONLY | O_TRUNC | O_CREAT,	\
 				    mode)
 #define READ(value, size) read(fd, value, size) != size
+#define RAND_MIN_MAX(min, max) (rand() % (max - min + 1) + min)
 
 char *my_strncpy(char *dest, char *src, int n);
 char **add_line(char **map, char *line);

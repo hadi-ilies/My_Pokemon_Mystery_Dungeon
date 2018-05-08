@@ -18,8 +18,8 @@ static sfVector2i take_origin(map_t *map, sfVector2i *size)
 
 	while (test) {
 		test = false;
-		origin.x = rand_min_max(5, map->nb_case_x - size->x - 5);
-		origin.y = rand_min_max(3, map->nb_case_y - size->y - 3);
+		origin.x = RAND_MIN_MAX(5, map->nb_case_x - size->x - 5);
+		origin.y = RAND_MIN_MAX(3, map->nb_case_y - size->y - 3);
 		for (int x = origin.x; x < origin.x + size->x; x++)
 			for (int y = origin.y; y < origin.y + size->y; y++)
 				if (map->tab[x][y].type != WALL)
@@ -62,7 +62,7 @@ void map_random(map_t *map)
 	size_t area = map->nb_case_x * map->nb_case_y;
 	size_t min = (area / 49) * 0.2;
 	size_t max = (area / 49) * 0.3;
-	size_t nb_room = rand_min_max(min, max);
+	size_t nb_room = RAND_MIN_MAX(min, max);
 
 	for (size_t i = 0; i < map->nb_case_x; i++)
 		for (size_t j = 0; j < map->nb_case_y; j++)
