@@ -436,8 +436,15 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 			game_aff(window, garou);
 		else if (++entity_turn >= garou->dungeon.nb_entity)
 			entity_turn = 0;
-		if (garou->dungeon.map.item[garou->dungeon.entity[0].pos.x][garou->dungeon.entity[0].pos.y] == STAIRCASE && sfClock_getElapsedTime(garou->dungeon.entity[0].clock).microseconds >= TIME_MOVE)
+		if (ITEM == STAIRCASE && sfClock_getElapsedTime(garou->dungeon.entity[0].clock).microseconds >= TIME_MOVE)
 			return (1);
+		if (ITEM != NONE && ITEM != STAIRCASE)
+			for (size_t i = 0; i < INVENTORY_SIZE; i++)
+				if (garou->inventory[i] == NONE) {
+					garou->inventory[i] = ITEM;
+					ITEM = NONE;
+					break;
+				}
 	}
 	return (0);
 }

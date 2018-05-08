@@ -13,6 +13,7 @@
 #include "dungeon.h"
 #include "map.h"
 #include "entity.h"
+#include "item.h"
 
 // game_macros
 #define INVENTORY_SIZE 5
@@ -28,11 +29,12 @@
 
 // code_macros
 #define GET_INFO(map) info[(map).nb_case_x][(map).nb_case_y]
+#define ITEM garou->dungeon.map.item[garou->dungeon.entity[0].pos.x][garou->dungeon.entity[0].pos.y]
 
 typedef struct {
 	entity_t player;
 	dungeon_t dungeon;
-	size_t inventory[INVENTORY_SIZE];
+	enum item_e inventory[INVENTORY_SIZE];
 	settings_t settings;
 } garou_t;
 
