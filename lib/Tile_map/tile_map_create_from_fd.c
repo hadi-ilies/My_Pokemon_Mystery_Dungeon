@@ -64,7 +64,7 @@ static bool error_map3(tile_map_t *tile_map, int fd)
 	tile_map->nb_alt = malloc(sizeof(size_t *) * tile_map->nb_type);
 	tile_map->rectex = malloc(sizeof(rectex_t **) * tile_map->nb_type);
 	if (tile_map->nb_var == NULL || tile_map->nb_alt == NULL
-	    || tile_map->rectex == NULL)
+	|| tile_map->rectex == NULL)
 		return (tile_map->error = ERR_MALLOC, false);
 	return (true);
 }
@@ -87,11 +87,11 @@ tile_map_t tile_map_create_from_fd(int fd)
 	tile_map_t tile_map = tile_map_create();
 
 	if (!error_map(&tile_map, fd) || !error_map2(&tile_map, fd)
-	    || !error_map3(&tile_map, fd))
+	|| !error_map3(&tile_map, fd))
 		return (tile_map);
 	for (size_t i = 0; i < tile_map.nb_type; i++) {
 		if (!error_map4(&tile_map, fd, i)
-		    || !error_map5(&tile_map, fd, i))
+		|| !error_map5(&tile_map, fd, i))
 			return (tile_map);
 	}
 	return (tile_map);
