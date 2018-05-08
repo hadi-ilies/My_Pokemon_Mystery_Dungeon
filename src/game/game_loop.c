@@ -101,18 +101,15 @@ void entity_attack(entity_t *entity, const capacity_t *capacity, map_t *map,
 
 		damage /= defense * 50 + 2;
 		damage *= (rand() % (100 - 85 + 1) + 85) / 100.0;
-		printf("%s : %ld - %ld = ", capacity->name, INFO(*entity)->life, damage);
 		if (INFO(*entity)->life > damage)
 			INFO(*entity)->life -= damage;
 		else {
+			size_t exp = rand() % INFO(*entity)->level;
+
 			INFO(*entity)->life = 0;
-			entity_gain_exp(entity, INFO(*entity)->level + rand() % INFO(*entity)->level);
+			entity_gain_exp(entity, INFO(*entity)->level * exp);
 		}
-		printf("%ld\n", INFO(*entity)->life);
 		set_anime_hurt(INFO(*entity));
-		//INFO(*entity)->dir.x = 0;
-		//INFO(*entity)->dir.y = 0;
-		//sfClock_restart(INFO(*entity)->clock);
 	}
 }
 

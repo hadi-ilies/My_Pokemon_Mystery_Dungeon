@@ -96,7 +96,6 @@ dungeon_t generate_dungeon(size_t nb_stage, char *file_name)
 	dungeon.map = generate_map(50, file_name);
 	dungeon.entity = generate_entitys(dungeon.nb_entity);
 	return (dungeon);
-	resources/anime_tab/insolourdo_config
 }
 
 int game_menu(sfRenderWindow *window)
@@ -107,18 +106,13 @@ int game_menu(sfRenderWindow *window)
 	garou.player.ia = 0;
 	if (garou.player.error != ERR_OK)
 		return (84);
-
-
-
-	garou.dungeon = generate_dungeon(3, "resources/tile_map/Forest config");
+	garou.dungeon = generate_dungeon(9, "resources/tile_map/Forest config");
 	if (garou.dungeon.map.error != ERR_OK || garou.dungeon.entity == NULL)
 		return (84);
 	garou.dungeon.entity[0] = garou.player;
 	if (run_dungeon(window, &garou, 8) == 84)
 		return (84);
-
-
-
+	dungeon_destroy(&garou.dungeon);
 	garou_destroy(&garou);
 	return (0);
 }
