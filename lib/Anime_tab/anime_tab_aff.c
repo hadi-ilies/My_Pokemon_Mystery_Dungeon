@@ -6,6 +6,7 @@
 */
 
 #include "anime_tab.h"
+#include "macro.h"
 
 void s_texture( anime_tab_t *anime_tab, sfSprite *sprite)
 {
@@ -40,7 +41,7 @@ void anime_tab_aff(sfRenderWindow *window, anime_tab_t *anime_tab,
 	coor(&bounds, &scale, &rect, &origin);
 	sfSprite_setScale(sprite, scale);
 	sfSprite_setOrigin(sprite, origin);
-	sfSprite_setPosition(sprite, (sfVector2f){rect.left, rect.top});
+	sfSprite_setPosition(sprite, V2F(rect.left, rect.top));
 	sfRenderWindow_drawSprite(window, sprite, NULL);
 	if (TIME_RECTEX) {
 		sfClock_restart(anime_tab->clock);

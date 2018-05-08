@@ -7,6 +7,7 @@
 
 #include <stdbool.h>
 #include "tile_map.h"
+#include "macro.h"
 
 static bool manage_error(sfRenderWindow *window, tile_map_t *tile_map,
 			 tva_t tva)
@@ -40,9 +41,9 @@ void tile_map_aff(sfRenderWindow *window, tile_map_t *tile_map,
 	bounds = sfSprite_getLocalBounds(sprite);
 	scale.x = rect.width / bounds.width;
 	scale.y = rect.height / bounds.height;
-	origin = (sfVector2f){bounds.width / 2, bounds.height / 2};
+	origin = V2F(bounds.width / 2, bounds.height / 2);
 	sfSprite_setScale(sprite, scale);
 	sfSprite_setOrigin(sprite, origin);
-	sfSprite_setPosition(sprite, (sfVector2f){rect.left, rect.top});
+	sfSprite_setPosition(sprite, V2F(rect.left, rect.top));
 	sfRenderWindow_drawSprite(window, sprite, NULL);
 }

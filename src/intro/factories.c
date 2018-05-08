@@ -20,9 +20,9 @@
 void press_key_cond(sfMusic *music[3], sfRectangleShape *rect,
 		sfTexture *texture, bool *cond)
 {
-	sfRectangleShape_setSize(rect, (sfVector2f) {800, 150});
-	sfRectangleShape_setOrigin(rect, (sfVector2f) {400, 75});
-	sfRectangleShape_setPosition(rect, (sfVector2f) {1920 / 2 + 150, 800});
+	sfRectangleShape_setSize(rect, V2F(800, 150));
+	sfRectangleShape_setOrigin(rect, V2F(400, 75));
+	sfRectangleShape_setPosition(rect, V2F(1920 / 2 + 150, 800));
 	sfRectangleShape_setTexture(rect, texture, sfTrue);
 	sfMusic_play(music[1]);
 	sfMusic_setVolume(music[0], 30);

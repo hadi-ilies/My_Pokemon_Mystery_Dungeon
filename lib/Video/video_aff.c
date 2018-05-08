@@ -6,6 +6,7 @@
 */
 
 #include <stdbool.h>
+#include "macro.h"
 #include "video.h"
 
 bool video_create_texture(video_t *video)
@@ -46,10 +47,10 @@ void video_aff(sfRenderWindow *window, video_t *video, sfFloatRect rect)
 	bounds = sfSprite_getLocalBounds(sprite);
 	scale.x = rect.width / bounds.width;
 	scale.y = rect.height / bounds.height;
-	origin = (sfVector2f){bounds.width / 2, bounds.height / 2};
+	origin = V2F(bounds.width / 2, bounds.height / 2);
 	sfSprite_setScale(sprite, scale);
 	sfSprite_setOrigin(sprite, origin);
-	sfSprite_setPosition(sprite, (sfVector2f){rect.left, rect.top});
+	sfSprite_setPosition(sprite, V2F(rect.left, rect.top));
 	sfRenderWindow_drawSprite(window, sprite, NULL);
 	time_video(video, time);
 	sfTexture_destroy(video->texture);
