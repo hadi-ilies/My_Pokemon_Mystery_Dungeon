@@ -41,7 +41,8 @@ void adventure_end(sfRenderWindow *window, menu_t *menu)
 		sfRenderWindow_clear(window, sfBlack);
 		illustration_end(button, &ad_intro);
 		sfRenderWindow_drawRectangleShape(window, ad_intro.rect, NULL);
-		button < 6 ? display_history(window, &ad_intro, button, menu):0;
+		if (button < 5)
+			display_history(window, &ad_intro, button, menu);
 		sfRenderWindow_display(window);
 	}
 }
