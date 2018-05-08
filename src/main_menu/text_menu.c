@@ -8,6 +8,7 @@
 #include "prototype.h"
 #include "my.h"
 #include "main_menu/menu.h"
+#include "macro.h"
 
 char *text_button(menu_t *menu)
 {
@@ -30,8 +31,8 @@ char *text_button(menu_t *menu)
 
 void load_text(sfRenderWindow *window, sfText *text, sfFont *font)
 {
-	sfText_setPosition(text, (sfVector2f) {420, 760});
-	sfText_setColor(text, (sfColor){250, 250, 0, 200});
+	sfText_setPosition(text, V2F(420, 760));
+	sfText_setColor(text, COL(250, 250, 0, 200));
 	sfRenderWindow_drawText(window, text, NULL);
 	sfText_destroy(text);
 	sfFont_destroy(font);

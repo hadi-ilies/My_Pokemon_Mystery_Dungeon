@@ -7,6 +7,7 @@
 
 #include "game_resource.h"
 #include "capacity_tab.h"
+#include "macro.h"
 
 char *get_pp(entity_t *entity, size_t num)
 {
@@ -72,7 +73,7 @@ void capacity_aff_pp(sfRenderWindow *window, garou_t *garou,
 	sfText_setCharacterSize(text, text_size);
 	pos.x += size.x / 4;
 	pos.y += size.y / 3 - text_size / 2;
-	pos = (sfVector2f){pos.x + size.x / 3, pos.y + text_size * 2};
+	pos = V2F(pos.x + size.x / 3, pos.y + text_size * 2);
 	sfText_setPosition(text, pos);
 	sfText_setString(text, str_pp);
 	sfRenderWindow_drawText(window, text, NULL);

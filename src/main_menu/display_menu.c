@@ -7,6 +7,7 @@
 
 #include "prototype.h"
 #include "main_menu/menu.h"
+#include "macro.h"
 
 void display_text(sfRenderWindow *window, menu_t *menu)
 {
@@ -19,9 +20,9 @@ void display_text(sfRenderWindow *window, menu_t *menu)
 	sfText_setString(menu->text[4], "CREDIT");
 	sfText_setString(menu->text[5], "EXIT");
 	for (size_t i = 0; i < NB_BUTTON; i++) {
-		sfText_setPosition(menu->text[i], (sfVector2f) {60, pos_y});
-		sfText_setColor(menu->text[i], (sfColor){250, 250, 0,
-					menu->button == i ? 255 : 180});
+		sfText_setPosition(menu->text[i], V2F(60, pos_y));
+		sfText_setColor(menu->text[i],
+		COL(250, 250, 0, menu->button == i ? 255 : 180));
 		sfRenderWindow_drawText(window, menu->text[i], NULL);
 		pos_y += 100;
 	}

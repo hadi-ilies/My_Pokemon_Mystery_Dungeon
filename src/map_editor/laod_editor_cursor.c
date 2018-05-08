@@ -74,7 +74,7 @@ void load_list_choice_min(load_editor_t *load, sfRenderWindow *window)
 
 	for (size_t i = 0; i < nb_file; i++) {
 		sfText_setPosition(load->text[i],
-				(sfVector2f) {WINDOW_SIZE.x / 2 + 500, pos_y});
+				V2F(WINDOW_SIZE.x / 2 + 500, pos_y));
 		sfText_setColor(load->text[i],
 		COL(250, 250, 0, load->text_curs == i ? 255 : 180));
 		sfRenderWindow_drawText(window, load->text[i], NULL);

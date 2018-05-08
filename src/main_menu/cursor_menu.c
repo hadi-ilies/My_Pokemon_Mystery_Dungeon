@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include "prototype.h"
 #include "main_menu/menu.h"
+#include "macro.h"
 
 size_t move_curseur(menu_t *menu, sfEvent *event)
 {
@@ -27,7 +28,7 @@ size_t move_curseur(menu_t *menu, sfEvent *event)
 		}
 	}
 	sfRectangleShape_setPosition(menu->rect[3],
-				(sfVector2f) {10, y * 100 + r + 20});
+	V2F(10, y * 100 + r + 20));
 	r > 0 ? r -= 10 : 0;
 	r < 0 ? r += 10 : 0;
 	return (y);

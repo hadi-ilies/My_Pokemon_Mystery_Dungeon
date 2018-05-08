@@ -35,7 +35,7 @@ void load_history_text(sfRenderWindow *window, intro_adventure_t *ad_intro,
 		size_t len)
 {
 	sfText_setPosition(ad_intro->text,
-	(sfVector2f) {WINDOW_SIZE.x / len, 20});
+	V2F(WINDOW_SIZE.x / len, 20));
 	sfRenderWindow_drawText(window, ad_intro->text, NULL);
 }
 
