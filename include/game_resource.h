@@ -14,6 +14,9 @@
 #include "map.h"
 #include "entity.h"
 
+// game_macros
+#define INVENTORY_SIZE 5
+
 // file_macros
 #define GAME_FONT "resources/font/Minecraftia.ttf"
 #define CAPACITY_UP "resources/texture/Bup.png"
@@ -26,6 +29,7 @@
 typedef struct {
 	entity_t player;
 	dungeon_t dungeon;
+	size_t inventory[INVENTORY_SIZE];
 	settings_t settings;
 } garou_t;
 

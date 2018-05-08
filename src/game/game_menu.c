@@ -28,8 +28,11 @@ void put_item(map_t *map)
 {
 	sfVector2i pos;
 	size_t size = map->nb_case_x * map->nb_case_y;
-	size_t nb_item = rand() % (size / 100) + 1;
+	size_t nb_item = rand() % (size / 500) + 1;
 
+	for (size_t i = 0; i < map->nb_case_x; i++)
+		for (size_t j = 0; j < map->nb_case_y; j++)
+			map->item[i][j] = NONE;
 	for (size_t i = 0; i < nb_item; i++) {
 		pos = rand_pos_ground(map);
 		map->item[pos.x][pos.y] = rand() % (NB_ITEM - 1) + 1;
@@ -44,7 +47,7 @@ map_t generate_map(size_t size, char *tile_map_file_name)
 
 	if (map.error != ERR_OK)
 		return (map);
-	map.size = (sfVector2f) {20, 20};
+	map.size = V2F(GAME_ZOOM, GAME_ZOOM);
 	return (map);
 }
 
@@ -98,8 +101,7 @@ int game_menu(sfRenderWindow *window)
 	garou.dungeon = dungeon_create();
 	garou.dungeon.nb_stage = 3;
 	garou.dungeon.nb_entity = 20;
-	garou.dungeon.map = map_create(50, 50, my_strdup("resources/tile_map/Forest config"));
-	garou.dungeon.map.size = V2F(GAME_ZOOM, GAME_ZOOM);
+	garou.dungeon.map = generate_map(50, "resources/tile_map/Forest config");
 	garou.dungeon.entity = generate_entitys(garou.dungeon.nb_entity);
 	if (garou.dungeon.map.error != ERR_OK || garou.dungeon.entity == NULL)
 		return (84);
