@@ -28,6 +28,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)create_window.c\
 			$(SRCDIR)evt_close.c \
 			$(MENUDIR)main_menu.c \
+			$(MENUDIR)game_over.c \
 			$(MENUDIR)tuto_create.c \
 			$(MENUDIR)menu_create.c \
 			$(MENUDIR)display_menu.c \

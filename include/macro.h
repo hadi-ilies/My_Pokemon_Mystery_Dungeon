@@ -58,5 +58,8 @@
 #define TRANS_RECT_COND i < 255 ? sfRectangleShape_setFillColor(ad_intro->rect,\
 					(sfColor) {255, 255, 255, i++}) : 0
 #define CHECKMAP (size_t) cor->y + size_y < map->nb_case_y
+#define RIP "resources/texture/rip.png"
+#define GAME_COND game_menu(window) == 0 ? game_over(window, menu)\
+		: adventure_end(window, menu)
 
 #endif

@@ -15,7 +15,7 @@ void pages(menu_t *menu)
 	for (int i = 0; i < 3; i++) {
 		menu->rect[i] = sfRectangleShape_create();
 		sfRectangleShape_setFillColor(menu->rect[i],
-					      COL(0, 0, 0, 150));
+					COL(0, 0, 0, 150));
 		sfRectangleShape_setOutlineThickness(menu->rect[i], 10);
 		sfRectangleShape_setOutlineColor(menu->rect[i], sfRed);
 	}
@@ -66,6 +66,7 @@ sfMusic **music_effect_create(void)
 		return (NULL);
 	music_effect[0] = sfMusic_createFromFile(HOW_TO_PLAY_SONG);
 	music_effect[1] = sfMusic_createFromFile(INTRO_AD);
+	music_effect[2] = sfMusic_createFromFile(RIP_MUSIC);
 	return (music_effect);
 }
 

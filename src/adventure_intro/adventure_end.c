@@ -14,7 +14,7 @@
 
 bool event_end(sfEvent *event, size_t *button, menu_t *menu)
 {
-	if (sfKeyboard_isKeyPressed(sfKeyEscape) || *button > 5) {
+	if (*button > 5) {
 		sfMusic_pause(menu->sound.music[1]);
 		return (true);
 	} if (event->type == sfEvtKeyPressed
