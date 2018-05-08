@@ -77,7 +77,6 @@ int run_dungeon(sfRenderWindow *window, garou_t *garou, size_t level)
 		garou->dungeon.entity[0].dir = (sfVector2i){0, 0};
 		garou->dungeon.entity[0].pos = rand_pos_ground(&garou->dungeon.map);
 		// ---------------------------------------------------
-		printf("%d %d\n", garou->player.pos.x, garou->player.pos.y);
 		if (game_loop(window, garou) == 0)
 			return (0);
 	}
