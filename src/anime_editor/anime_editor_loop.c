@@ -163,14 +163,14 @@ int anime_editor_loop(sfRenderWindow *window, anime_tab_t *anime_tab)
 			}
 		}
 		sfRectangleShape_setOutlineThickness(rect, sprite_rect.width);
-		sfRectangleShape_setPosition(rect, (sfVector2f){rectex->rect.left * sprite_rect.width + sprite_rect.left, rectex->rect.top * sprite_rect.height + sprite_rect.top});
-		sfRectangleShape_setSize(rect, (sfVector2f){rectex->rect.width * sprite_rect.width, rectex->rect.height * sprite_rect.height});
-		sfSprite_setPosition(sprite, (sfVector2f){sprite_rect.left, sprite_rect.top});
-		sfSprite_setScale(sprite, (sfVector2f){sprite_rect.width, sprite_rect.height});
-		sfRenderWindow_clear(window, (sfColor){50, 50, 50, 255});
+		sfRectangleShape_setPosition(rect, V2F(rectex->rect.left * sprite_rect.width + sprite_rect.left, rectex->rect.top * sprite_rect.height + sprite_rect.top));
+		sfRectangleShape_setSize(rect, V2F(rectex->rect.width * sprite_rect.width, rectex->rect.height * sprite_rect.height));
+		sfSprite_setPosition(sprite, V2F(sprite_rect.left, sprite_rect.top));
+		sfSprite_setScale(sprite, V2F(sprite_rect.width, sprite_rect.height));
+		sfRenderWindow_clear(window, COL(50, 50, 50, 255));
 		sfRenderWindow_drawSprite(window, sprite, NULL);
 		sfRenderWindow_drawRectangleShape(window, rect, NULL);
-		anime_tab_aff(window, anime_tab, (sfFloatRect){1500, 400, 500, 500});
+		anime_tab_aff(window, anime_tab, FR(1500, 400, 500, 500));
 		sfRenderWindow_display(window);
 	}
 	sfRectangleShape_destroy(rect);
