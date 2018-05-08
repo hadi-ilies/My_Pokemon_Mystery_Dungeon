@@ -20,7 +20,7 @@ void play_your_map(sfRenderWindow *window, map_t *map)
 		garou.map = map_copy(map);
 		if (garou.map.error != ERR_OK)
 			return;
-garou->map.size = (sfVector2f){GAME_ZOOM};
+garou->map.size = V2F(GAME_ZOOM, GAME_ZOOM);
 	garou->nb_entity = (map->nb_case_x * map->nb_case_y) / 100;
 	garou->entity = malloc(sizeof(entity_t) * garou->nb_entity);
 	if (garou->entity == NULL)
@@ -34,7 +34,7 @@ garou->map.size = (sfVector2f){GAME_ZOOM};
 			pos.y = rand() % garou->map.nb_case_y;
 		}
 		while (garou->map.tab[pos.x][pos.y].type != GROUND);
-		garou->entity[i].dir = (sfVector2i){0, 0};
+		garou->entity[i].dir = V2I(0, 0);
 		garou->entity[i].pos = pos;
 	}
 	game_loop(window, garou);*/

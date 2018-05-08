@@ -122,7 +122,7 @@ bool manage_input(entity_t *entity, map_t *map,
 	if (sfClock_getElapsedTime(entity->clock).microseconds < TIME_MOVE)
 		return (false);
 	if (input & (LEFT | RIGHT | UP | DOWN)) {
-		entity->dir = (sfVector2i){0, 0};
+		entity->dir = V2I(0, 0);
 		input & LEFT ? entity->dir.x = -1 : 0;
 		input & RIGHT ? entity->dir.x = 1 : 0;
 		input & UP ? entity->dir.y = -1 : 0;

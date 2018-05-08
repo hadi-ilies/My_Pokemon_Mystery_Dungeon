@@ -23,8 +23,8 @@ static void set_null(entity_t *entity)
 	entity->boost = (stats_t){0, 0, 0, 0, 0, 0};
 	entity->item = 0; // !!!
 	entity->ia = 0; // !!!
-	entity->dir = (sfVector2i){0, 0};
-	entity->pos = (sfVector2i){0, 0};
+	entity->dir = V2I(0, 0);
+	entity->pos = V2I(0, 0);
 }
 
 entity_t entity_create(void)

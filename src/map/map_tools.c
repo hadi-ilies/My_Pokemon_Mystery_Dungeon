@@ -24,15 +24,15 @@ sfVector2i path_map(map_t *map, size_t x, size_t y, ssize_t nx, ssize_t ny)
 			if (PATH_MAP_COND == WALL && tmp == false)
 				tmp = true;
 			if (PATH_MAP_COND == GROUND && tmp == true)
-				return ((sfVector2i){0, 0});
+				return (V2I(0, 0));
 			if (PATH_MAP_COND == WATER && tmp == true)
-				return ((sfVector2i){size_x, size_y});
+				return (V2I(size_x, size_y));
 			if (ny == 0)
 				break;
 		} if (nx == 0)
 			break;
 	}
-	return ((sfVector2i){0, 0});
+	return (V2I(0, 0));
 }
 
 void set_origin(map_t *map)

@@ -15,7 +15,7 @@
 #include "item.h"
 
 // game_macros
-#define GAME_ZOOM 200, 200
+#define GAME_ZOOM 200
 
 // code_macros
 #define X_MIN (map->pos.x - center.x / map->size.x > 0 ? \

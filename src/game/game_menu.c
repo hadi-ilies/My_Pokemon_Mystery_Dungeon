@@ -10,6 +10,7 @@
 #include "type.h"
 #include "tile_name.h"
 #include "item.h"
+#include "macro.h"
 
 static sfVector2i rand_pos_ground(map_t *map)
 {
@@ -70,11 +71,11 @@ int run_dungeon(sfRenderWindow *window, garou_t *garou, size_t level)
 			garou->dungeon.entity[i].level = level;
 			garou->dungeon.entity[i].life = STAT(garou->dungeon.entity[i], life);
 			garou->dungeon.entity[i].ia = 1;
-			garou->dungeon.entity[i].dir = (sfVector2i){0, 0};
+			garou->dungeon.entity[i].dir = V2I(0, 0);
 			garou->dungeon.entity[i].pos = rand_pos_ground(&garou->dungeon.map);
 		}
 		// -------------player--------------------------------
-		garou->dungeon.entity[0].dir = (sfVector2i){0, 0};
+		garou->dungeon.entity[0].dir = V2I(0, 0);
 		garou->dungeon.entity[0].pos = rand_pos_ground(&garou->dungeon.map);
 		// ---------------------------------------------------
 		if (game_loop(window, garou) == 0)
@@ -98,7 +99,7 @@ int game_menu(sfRenderWindow *window)
 	garou.dungeon.nb_stage = 3;
 	garou.dungeon.nb_entity = 20;
 	garou.dungeon.map = map_create(50, 50, my_strdup("resources/tile_map/Forest config"));
-	garou.dungeon.map.size = (sfVector2f) {GAME_ZOOM};
+	garou.dungeon.map.size = V2F(GAME_ZOOM, GAME_ZOOM);
 	garou.dungeon.entity = generate_entitys(garou.dungeon.nb_entity);
 	if (garou.dungeon.map.error != ERR_OK || garou.dungeon.entity == NULL)
 		return (84);
