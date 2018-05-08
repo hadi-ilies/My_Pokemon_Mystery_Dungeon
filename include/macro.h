@@ -8,6 +8,11 @@
 #ifndef MACRO_H_
 #define MACRO_H_
 
+#define V2F(x, y) (sfVector2f){x, y}
+#define V2I(x, y) (sfVector2i){x, y}
+#define V2U(x, y) (sfVector2u){x, y}
+#define COL(r, g, b, a) (sfColor){r, g, b, a}
+#define FR(left, top, width, height) (sfFloatRect){left, top, width, height}
 #define ICON "resources/texture/icon.png"
 #define TOOL_SIZE 100
 #define TOOL_DIST 200
