@@ -13,6 +13,7 @@
 #include "anime_name.h"
 #include "capacity_tab.h"
 #include "item.h"
+#include "macro.h"
 
 enum input {
 	     DOWN = 0b00000000001,

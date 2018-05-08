@@ -7,6 +7,7 @@
 
 #include "entity.h"
 #include "type.h"
+#include "macro.h"
 
 static void set_null(entity_t *entity)
 {
