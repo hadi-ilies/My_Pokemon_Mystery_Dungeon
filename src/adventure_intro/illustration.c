@@ -23,14 +23,9 @@ void illustration_end(size_t button, intro_adventure_t *ad_intro)
 		i = 0;
 		tmp = button;
 		set_one = true;
-	} if (set_one == true) {
-		END_PAGE1;
-		END_PAGE2;
-		END_PAGE3;
-		END_PAGE4;
-		END_PAGE5;
-		END_PAGE6;
-	}
+	} if (set_one == true)
+		sfRectangleShape_setTexture(ad_intro->rect,
+					ad_intro->texture[tmp], sfTrue);
 	set_one = false;
 }
 
@@ -46,14 +41,9 @@ void illustration(sfRenderWindow *window, size_t button,
 		i = 0;
 		tmp = button;
 		set_one = true;
-	} if (set_one == true) {
-		PAGE1;
-		PAGE2;
-		PAGE3;
-		PAGE4;
-		PAGE5;
-		PAGE6;
-	}
+	} if (set_one == true)
+	sfRectangleShape_setTexture(ad_intro->rect,
+				ad_intro->texture[tmp], sfTrue);
 	set_one = false;
 	sfRenderWindow_drawRectangleShape(window, ad_intro->rect, NULL);
 }

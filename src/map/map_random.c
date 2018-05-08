@@ -22,8 +22,7 @@ static sfVector2i take_origin(map_t *map, sfVector2i *size)
 		origin.y = RAND_MIN_MAX(3, map->nb_case_y - size->y - 3);
 		for (int x = origin.x; x < origin.x + size->x; x++)
 			for (int y = origin.y; y < origin.y + size->y; y++)
-				if (map->tab[x][y].type != WALL)
-					test = true;
+				map->tab[x][y].type != WALL ? test = true : 0;
 	}
 	return (origin);
 }
@@ -45,11 +44,11 @@ bool insert_water_loop(map_t *map)
 {
 	for (size_t i = 0; i < map->nb_case_x; i++)
 		for (size_t j = 0; j < map->nb_case_y; j++)
-			if (map->tab[i][j].type == WATER)
-				if (insert_water(map, i, j)) {
+			if (map->tab[i][j].type == WATER
+			&& insert_water(map, i, j)) {
 					i--;
 					j--;
-				}
+			}
 	for (size_t i = 0; i < map->nb_case_x; i++)
 		for (size_t j = 0; j < map->nb_case_y; j++)
 			if (map->tab[i][j].type == GROUND)

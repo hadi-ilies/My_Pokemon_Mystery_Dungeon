@@ -40,7 +40,7 @@ void capacity_aff_rect(sfRenderWindow *window, sfVector2f pos, char *file_name)
 }
 
 void capacity_aff_name(sfRenderWindow *window, garou_t *garou,
-		       sfVector2f pos, size_t num)
+		sfVector2f pos, size_t num)
 {
 	sfFont *font = sfFont_createFromFile(GAME_FONT);
 	sfText *text = sfText_create();
@@ -60,7 +60,7 @@ void capacity_aff_name(sfRenderWindow *window, garou_t *garou,
 }
 
 void capacity_aff_pp(sfRenderWindow *window, garou_t *garou,
-		     sfVector2f pos, size_t num)
+		sfVector2f pos, size_t num)
 {
 	sfFont *font = sfFont_createFromFile(GAME_FONT);
 	sfText *text = sfText_create();

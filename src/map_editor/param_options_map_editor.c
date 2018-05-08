@@ -39,16 +39,16 @@ void change_tile_map(sfRenderWindow *window,
 }
 
 void size_tile_map_y(sfEvent *event,
-		   sfRenderWindow *window, option_editor_t *option)
+		sfRenderWindow *window, option_editor_t *option)
 {
 	char *str;
 
 	if (option->choice_curs == 1) {
 		if (option->size_y < 999 && event->type == sfEvtKeyPressed
-		    && event->key.code == sfKeyRight) {
+		&& event->key.code == sfKeyRight) {
 			option->size_y++;
 		} if (option->size_y > 30 && event->type == sfEvtKeyPressed
-		      && event->key.code == sfKeyLeft) {
+		&& event->key.code == sfKeyLeft) {
 		option->size_y--;
 		}
 	}
@@ -60,7 +60,7 @@ void size_tile_map_y(sfEvent *event,
 }
 
 void size_tile_map_x(sfEvent *event,
-		   sfRenderWindow *window, option_editor_t *option)
+		sfRenderWindow *window, option_editor_t *option)
 {
 	char *str;
 

@@ -16,7 +16,7 @@
 void back_create_icon(loading_t *optional)
 {
 	optional->icon_back = sfRectangleShape_create();
-	optional->texture_icon =  sfTexture_createFromFile(ITEM, NULL);
+	optional->texture_icon = sfTexture_createFromFile(TITLE, NULL);
 	sfRectangleShape_setSize(optional->icon_back,
 				V2F(800, 358));
 	sfRectangleShape_setOrigin(optional->icon_back,

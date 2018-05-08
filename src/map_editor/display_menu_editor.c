@@ -13,7 +13,7 @@
 
 void display_text_editor(sfRenderWindow *window, menu_t *menu)
 {
-	 int pos_y = 50;
+	int pos_y = 50;
 
 	sfText_setString(menu->text[0], "LAUNCH EDITOR");
 	sfText_setString(menu->text[1], "SAVE MAP");

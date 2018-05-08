@@ -28,7 +28,12 @@ intro_adventure_t ad_intro_create(void)
 	sfRectangleShape_setSize(ad_intro.rect, V2F(1920, 1080));
 	sfRectangleShape_setPosition(ad_intro.rect, V2F(0, 0));
 	ad_intro.texture[0] = sfTexture_createFromFile(PICTURE1, NULL);
-	ad_intro.texture[1] = sfTexture_createFromFile(END, NULL);
+	ad_intro.texture[1] = sfTexture_createFromFile(PICTURE2, NULL);
+	ad_intro.texture[2] = sfTexture_createFromFile(PICTURE3, NULL);
+	ad_intro.texture[3] = sfTexture_createFromFile(PICTURE4, NULL);
+	ad_intro.texture[4] = sfTexture_createFromFile(PICTURE3, NULL);
+	ad_intro.texture[5] = sfTexture_createFromFile(PICTURE2, NULL);
+	ad_intro.texture[6] = sfTexture_createFromFile(END, NULL);
 	sfText_setFont(ad_intro.text, ad_intro.font);
 	return (ad_intro);
 }

@@ -79,7 +79,7 @@ void load_editor_loop(map_t *map, sfRenderWindow *window)
 				load_editor_destroy(&load);
 				return;
 			}
-				move_curseur_load_editor(&load, &event);
+			move_curseur_load_editor(&load, &event);
 		}
 		sfRenderWindow_clear(window, sfBlack);
 		display_load_editor(&load, window);

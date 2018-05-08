@@ -11,38 +11,14 @@
 #include "prototype.h"
 #include <SFML/Graphics.h>
 
-/*start game need pictures*/
-#define PAGE1 button == 0 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-#define PAGE2 button == 1 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-#define PAGE3 button == 2 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-#define PAGE4 button == 3 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-#define PAGE5 button == 4 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-#define PAGE6 button == 5 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-/*end game need pictures*/
-#define END_PAGE1 button == 0 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-#define END_PAGE2 button == 1 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-#define END_PAGE3 button == 2 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-#define END_PAGE4 button == 3 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-#define END_PAGE5 button == 4 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-#define END_PAGE6 button == 5 ? sfRectangleShape_setTexture(ad_intro->rect, \
-				ad_intro->texture[0], sfTrue) : 0
-#define END_PAGE sfRectangleShape_setTexture(ad_intro.rect, \
-				ad_intro.texture[1], sfTrue)
 #define RETURN_TO_MENU_WITH_ENTER button >= 6 && event.type == sfEvtKeyPressed \
 			&& event.key.code == sfKeyReturn
+#define END_PAGE sfRectangleShape_setTexture(ad_intro.rect, ad_intro.texture[4], sfTrue)
 #define NB_TEXTURE 10
 #define PICTURE1 "resources/texture/tmp.png"
+#define PICTURE2 "resources/texture/tmp2.png"
+#define PICTURE3 "resources/texture/tmp3.png"
+#define PICTURE4 "resources/texture/tmp4.png"
 #define END "resources/texture/end.jpg"
 
 typedef struct {

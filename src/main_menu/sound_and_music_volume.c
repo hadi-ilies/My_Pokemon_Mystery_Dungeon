@@ -15,7 +15,7 @@
 #include "main_menu/sound.h"
 
 void music_volume(sfEvent *event,
-		  sfRenderWindow *window, option_t *option, menu_t *menu)
+		sfRenderWindow *window, option_t *option, menu_t *menu)
 {
 	char *str;
 
@@ -40,7 +40,7 @@ void music_volume(sfEvent *event,
 }
 
 void sound_volume(sfEvent *event,
-		  sfRenderWindow *window, option_t *option, menu_t *menu)
+		sfRenderWindow *window, option_t *option, menu_t *menu)
 {
 	char *str;
 
@@ -61,5 +61,5 @@ void sound_volume(sfEvent *event,
 	free(str);
 	for (size_t i = 0; i < NB_SOUND_EFFECT; i++)
 		sfMusic_setVolume(menu->sound.sound_effect[i],
-				  (float)menu->settings.sound_volume);
+				(float)menu->settings.sound_volume);
 }

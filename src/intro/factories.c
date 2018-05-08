@@ -30,7 +30,7 @@ void press_key_cond(sfMusic *music[3], sfRectangleShape *rect,
 }
 
 void get_start(anime_tab_t *animation, sfMusic *music[3],
-	       sfRenderWindow *window, video_t *video)
+	sfRenderWindow *window, video_t *video)
 {
 	static bool cond = true;
 	static sfRectangleShape *rect;

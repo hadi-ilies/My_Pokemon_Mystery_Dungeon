@@ -44,8 +44,8 @@ void credit_menu(sfRenderWindow *window, sfEvent *event)
 
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, event)) {
-			if (sfKeyboard_isKeyPressed(sfKeyEscape)
-			|| !turn_page(&tuto.page, event))
+			evt_close(event, window);
+			if (!turn_page(&tuto.page, event))
 				return;
 		}
 		display_page(&tuto);
