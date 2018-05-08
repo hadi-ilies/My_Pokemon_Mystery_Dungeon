@@ -15,7 +15,7 @@ INCDIR		=	include/
 MENUDIR		=	$(SRCDIR)main_menu/
 GAMEDIR		=	$(SRCDIR)game/
 MAPEDIR		=	$(SRCDIR)map_editor/
-ANICDIR		=	$(SRCDIR)anime_editor/
+ANIEDIR		=	$(SRCDIR)anime_editor/
 MAPDIR		=	$(SRCDIR)map/
 ENTDIR		=	$(SRCDIR)entity/
 GAROUDIR	=	$(SRCDIR)game_resource/
@@ -62,7 +62,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPEDIR)map_editor_loop.c \
 			$(MAPEDIR)option_editor_create.c \
 			$(MAPEDIR)create_back_and_screen.c \
-			$(MAPEDIR)param_options_map_editor.c\
+			$(MAPEDIR)param_options_map_editor.c \
 			$(MAPEDIR)menu_map_editor_menu.c \
 			$(MAPEDIR)display_menu_editor.c \
 			$(MAPEDIR)menu_editor_create.c \
@@ -75,9 +75,13 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPEDIR)hit_functions.c \
 			$(MAPEDIR)new_map.c \
 			$(MAPEDIR)map_editor_save.c \
-			$(ANICDIR)anime_editor_menu.c \
-			$(ANICDIR)anime_editor_loop.c \
-			$(ANICDIR)save_anime.c\
+			$(ANIEDIR)anime_editor_menu.c \
+			$(ANIEDIR)anime_editor_loop.c \
+			$(ANIEDIR)save_anime.c \
+			$(ANIEDIR)set_rectex_pos.c \
+			$(ANIEDIR)get_sprite_rect.c \
+			$(ANIEDIR)manage_keys.c \
+			$(ANIEDIR)add_rectex.c \
 			$(MAPDIR)map_create.c \
 			$(MAPDIR)map_copy.c \
 			$(MAPDIR)map_resize.c \

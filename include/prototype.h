@@ -29,7 +29,7 @@ void destroy_factories(anime_tab_t *animation, sfMusic *music[3],
 int destroy_and_check_error_anime(anime_tab_t *animation, video_t *video);
 void music_create(sfMusic *music[3]);
 void get_start(anime_tab_t *animation, sfMusic *music[3],
-	       sfRenderWindow *window, video_t *video, sfEvent *event);
+	       sfRenderWindow *window, video_t *video);
 loading_t loading_create(sfRenderWindow *window);
 void destroy_music(sfMusic *music[3]);
 int game_menu(sfRenderWindow *window);
@@ -50,5 +50,11 @@ void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva);
 void refresh_map(sfEvent *event, map_t *map);
 bool dont_touch_borders(map_t *map, size_t x, size_t y);
 bool insert_water_loop(map_t *map);
+void set_rectex_pos(sfEvent *event, sfRenderWindow *window,
+		    rectex_t *rectex, sfSprite *sprite);
+sfFloatRect get_sprite_rect(sfSprite *sprite);
+void add_rectex(anime_t *anime);
+void manage_keys(rectex_t *rectex, anime_tab_t *anime_tab,
+		 size_t *anime_num, size_t *rectex_num);
 
 #endif

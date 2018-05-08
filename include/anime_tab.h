@@ -14,6 +14,7 @@
 
 // code_macros
 #define RECTEX anime_tab->anime[anime_num].rectex[rectex_num]
+#define nums &anime_num, &rectex_num
 #define TIME_RECTEX time > anime_tab->anime[anime_tab->num].time / anime_tab->\
 	anime[anime_tab->num].nb_rectex
 #define ANIME_RECTEX anime_tab->anime[anime_tab->num].num >= anime_tab->\
