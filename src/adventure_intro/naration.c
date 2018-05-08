@@ -15,11 +15,19 @@
 const char *text_intro_g[] =
 {
 	"once upon a time in the world of Pokepitech",
-	"a young pokemon named absolourdo decided to revenge\n his childhood made of violence and discrimination",
-	"full of anger the little guy went to Gobu the one who bullied\n him for years and told him that one day he would be able to win\n a fight against the bully.",
-	"Gobu twice Absolouro's size looked at his victim\n and laugh then turn back leaving Absolourdo in his mediocrity",
-	"Absolourdo, decided to find a way to increase his power\nin a little amount of time. He remembered a very old legend he heared when he was a kid.\nAn artifact could make him evolve and become very powerfull.",
-	"He went to his grandma, eated a lot and was told\n he could find the LEGENDARY ULTIMATE ARTIFACT OF THE POWERFULLNESS OF THE GOD\n in dark and unsafe mystery dungeons...",
+	"a young pokemon named absolourdo decided to revenge\n his childhood\
+	made of violence and discrimination",
+	"full of anger the little guy went to Gobu the one who bullied\n him\
+	for years and told him that one day he would be able to win\n a fight\
+	against the bully.",
+	"Gobu twice Absolouro's size looked at his victim\n and laugh then turn\
+	back leaving Absolourdo in his mediocrity",
+	"Absolourdo, decided to find a way to increase his power\nin a little\
+	amount of time. He remembered a very old legend he heared when he was\
+	a kid.\nAn artifact could make him evolve and become very powerfull.",
+	"He went to his grandma, eated a lot and was told\n he could find the\
+	LEGENDARY ULTIMATE ARTIFACT OF THE POWERFULLNESS OF THE GOD\n in dark\
+	and unsafe mystery dungeons...",
 	NULL
 };
 
