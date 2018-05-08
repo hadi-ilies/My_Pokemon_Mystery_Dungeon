@@ -15,16 +15,17 @@
 
 void play_your_map(sfRenderWindow *window, map_t *map)
 {
-	(void)window, (void) map;
+	(void)window;
+	(void)map;
 	/*garou_t garou = garou_create(CONFIG);
 
-		garou.map = map_copy(map);
-		if (garou.map.error != ERR_OK)
-			return;
-garou->map.size = V2F(GAME_ZOOM, GAME_ZOOM);
-	garou->nb_entity = (map->nb_case_x * map->nb_case_y) / 100;
-	garou->entity = malloc(sizeof(entity_t) * garou->nb_entity);
-	if (garou->entity == NULL)
+	garou.dungeon.map = map_copy(map);
+	if (garou.dungeon.map.error != ERR_OK)
+		return;
+	garou.dungeon.map.size = V2F(GAME_ZOOM, GAME_ZOOM);
+	garou.dungeon.nb_entity = 20;
+	garou.entity = malloc(sizeof(entity_t) * garou->nb_entity);
+	if (garou.dungeon.entity == NULL)
 		return;
 	for (size_t i = 0; i < garou->nb_entity; i++) {
 		sfVector2i pos;
@@ -38,5 +39,6 @@ garou->map.size = V2F(GAME_ZOOM, GAME_ZOOM);
 		garou->entity[i].dir = V2I(0, 0);
 		garou->entity[i].pos = pos;
 	}
-	game_loop(window, garou);*/
+	game_loop(window, garou);
+	garou_destroy(&garou);*/
 }

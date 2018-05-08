@@ -58,7 +58,7 @@ entity_t *generate_entitys(size_t nb_entity)
 	if (entity == NULL)
 		return (NULL);
 	for (size_t i = 1; i < nb_entity; i++) {
-		entity[i] = entity_create_from_file("nomy");
+		entity[i] = entity_create_from_file("resources/entity/nomy");
 		if (entity[i].error != ERR_OK)
 			return (NULL);
 	}
@@ -96,13 +96,14 @@ dungeon_t generate_dungeon(size_t nb_stage, char *file_name)
 	dungeon.map = generate_map(50, file_name);
 	dungeon.entity = generate_entitys(dungeon.nb_entity);
 	return (dungeon);
+	resources/anime_tab/insolourdo_config
 }
 
 int game_menu(sfRenderWindow *window)
 {
 	garou_t garou = garou_create("resources/config");
 
-	garou.player = entity_create_from_file("my");
+	garou.player = entity_create_from_file("resources/entity/my");
 	garou.player.ia = 0;
 	if (garou.player.error != ERR_OK)
 		return (84);
@@ -115,7 +116,6 @@ int game_menu(sfRenderWindow *window)
 	garou.dungeon.entity[0] = garou.player;
 	if (run_dungeon(window, &garou, 8) == 84)
 		return (84);
-	dungeon_destroy(&garou.dungeon);
 
 
 

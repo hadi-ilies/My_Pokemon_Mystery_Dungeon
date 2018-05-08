@@ -10,7 +10,8 @@
 #include "prototype.h"
 #include "macro.h"
 
-static void rectex_set_size(rectex_t *rectex, sfRenderWindow *window, sfSprite *sprite)
+static void rectex_set_size(rectex_t *rectex, sfRenderWindow *window,
+			    sfSprite *sprite)
 {
 	sfFloatRect sprite_rect = get_sprite_rect(sprite);
 
@@ -25,7 +26,7 @@ static void rectex_set_size(rectex_t *rectex, sfRenderWindow *window, sfSprite *
 }
 
 static void aff(sfRenderWindow *window, sfSprite *sprite,
-	 sfRectangleShape *rect, anime_tab_t *anime_tab)
+		sfRectangleShape *rect, anime_tab_t *anime_tab)
 {
 	sfRenderWindow_clear(window, COL(50, 50, 50, 255));
 	sfRenderWindow_drawSprite(window, sprite, NULL);
@@ -35,7 +36,7 @@ static void aff(sfRenderWindow *window, sfSprite *sprite,
 }
 
 static void set_up(sfRectangleShape *rect, sfSprite *sprite,
-	    anime_tab_t *anime_tab, rectex_t *rectex)
+		   anime_tab_t *anime_tab, rectex_t *rectex)
 {
 	sfIntRect sprite_rect = {0, 0, 10, 10};
 	size_t num = rectex->texture_num;
@@ -47,7 +48,8 @@ static void set_up(sfRectangleShape *rect, sfSprite *sprite,
 	sfSprite_setScale(sprite, V2F(sprite_rect.width, sprite_rect.height));
 }
 
-static void rect_update(sfRectangleShape *rect, rectex_t *rectex, sfSprite *sprite)
+static void rect_update(sfRectangleShape *rect, rectex_t *rectex,
+			sfSprite *sprite)
 {
 	sfFloatRect sprite_rect = get_sprite_rect(sprite);
 	sfVector2f pos = {rectex->rect.left, rectex->rect.top};

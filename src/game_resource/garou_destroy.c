@@ -11,5 +11,5 @@
 void garou_destroy(garou_t *garou)
 {
 	entity_destroy(&garou->player);
-	//dungeon_destroy(&garou->dungeon);
+	dungeon_destroy(&garou->dungeon);
 }
