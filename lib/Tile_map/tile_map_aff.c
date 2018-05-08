@@ -10,7 +10,7 @@
 #include "macro.h"
 
 static bool manage_error(sfRenderWindow *window, tile_map_t *tile_map,
-			 tva_t tva)
+			tva_t tva)
 {
 	if (window == NULL || tile_map == NULL)
 		return (true);
@@ -24,7 +24,7 @@ static bool manage_error(sfRenderWindow *window, tile_map_t *tile_map,
 }
 
 void tile_map_aff(sfRenderWindow *window, tile_map_t *tile_map,
-		  tva_t tva, sfFloatRect rect)
+		tva_t tva, sfFloatRect rect)
 {
 	sfSprite *sprite;
 	rectex_t rectex;

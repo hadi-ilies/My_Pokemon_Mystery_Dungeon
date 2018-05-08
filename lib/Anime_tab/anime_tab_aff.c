@@ -8,7 +8,7 @@
 #include "anime_tab.h"
 #include "macro.h"
 
-void s_texture( anime_tab_t *anime_tab, sfSprite *sprite)
+void s_texture(anime_tab_t *anime_tab, sfSprite *sprite)
 {
 	sfSprite_setTexture(sprite, anime_tab->texname[anime_tab->\
 	anime[anime_tab->num].rectex[anime_tab->anime[anime_tab->num].num].\
@@ -27,7 +27,7 @@ void coor(sfFloatRect *bounds, sfVector2f *scale,
 }
 
 void anime_tab_aff(sfRenderWindow *window, anime_tab_t *anime_tab,
-		   sfFloatRect rect)
+		sfFloatRect rect)
 {
 	sfSprite *sprite = anime_tab->sprite;
 	sfFloatRect bounds;
