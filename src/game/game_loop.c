@@ -328,17 +328,17 @@ void entity_life_aff(sfRenderWindow *window, entity_t *entity, sfFloatRect rect)
 
 	sfRectangleShape_setPosition(rectangle, pos);
 	sfRectangleShape_setSize(rectangle, size);
-	sfRectangleShape_setFillColor(rectangle, (sfColor){250, 250, 250, 250});
+	sfRectangleShape_setFillColor(rectangle, COL(250, 250, 250, 250));
 	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
 	pos.y += rect.width;
 	size.y -= rect.width * 2;
 	sfRectangleShape_setPosition(rectangle, pos);
 	sfRectangleShape_setSize(rectangle, size);
-	sfRectangleShape_setFillColor(rectangle, (sfColor){0, 0, 0, 250});
+	sfRectangleShape_setFillColor(rectangle, COL(0, 0, 0, 250));
 	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
 	size.x = rect.width * entity->life;
 	sfRectangleShape_setSize(rectangle, size);
-	sfRectangleShape_setFillColor(rectangle, (sfColor){0, 220, 0, 250});
+	sfRectangleShape_setFillColor(rectangle, COL(0, 220, 0, 250));
 	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
 	sfRectangleShape_destroy(rectangle);
 }
@@ -354,51 +354,51 @@ void inventory_aff(sfRenderWindow *window, garou_t *garou)
 	char *str = malloc(sizeof(char) * 20);
 	sfVector2f size = {600, 600};
 
-	sfRectangleShape_setPosition(rectangle, (sfVector2f){250, 250});
-	sfRectangleShape_setPosition(rectangle_ombre, (sfVector2f){250 + size.x / 20, 250 + size.y / (6 * 2) - (30 * 2.666) / 2});
+	sfRectangleShape_setPosition(rectangle, V2F(250, 250));
+	sfRectangleShape_setPosition(rectangle_ombre, V2F(250 + size.x / 20, 250 + size.y / (6 * 2) - (30 * 2.666) / 2));
 	sfRectangleShape_setSize(rectangle, size);
-	sfRectangleShape_setSize(rectangle_ombre, (sfVector2f){500, 30 * 2.666});
+	sfRectangleShape_setSize(rectangle_ombre, V2F(500, 30 * 2.666));
 	sfRectangleShape_setTexture(rectangle, texture, sfTrue);
 	sfRectangleShape_setTexture(rectangle_ombre, texture_ombre, sfTrue);
 	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
 
-	sfText_setPosition(text, (sfVector2f){250 + size.x / 5, 250 + size.y / (6 * 2) - 30 / 2});
+	sfText_setPosition(text, V2F(250 + size.x / 5, 250 + size.y / (6 * 2) - 30 / 2));
 	sfText_setFont(text, font);
 	sprintf(str, "HP : %ld/%ld\n", garou->dungeon.entity[0].life, STAT(garou->dungeon.entity[0], life));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
 
-	sfText_move(text, (sfVector2f){0, size.y / 6});
-	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
+	sfText_move(text, V2F(0, size.y / 6));
+	sfRectangleShape_move(rectangle_ombre, V2F(0, size.y / 6));
 	sprintf(str, "atk : %ld\n", STAT(garou->dungeon.entity[0], atk));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
 
-	sfText_move(text, (sfVector2f){0, size.y / 6});
-	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
+	sfText_move(text, V2F(0, size.y / 6));
+	sfRectangleShape_move(rectangle_ombre, V2F(0, size.y / 6));
 	sprintf(str, "def : %ld\n", STAT(garou->dungeon.entity[0], def));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
 
-	sfText_move(text, (sfVector2f){0, size.y / 6});
-	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
+	sfText_move(text, V2F(0, size.y / 6));
+	sfRectangleShape_move(rectangle_ombre, V2F(0, size.y / 6));
 	sprintf(str, "spa : %ld\n", STAT(garou->dungeon.entity[0], spa));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
 
-	sfText_move(text, (sfVector2f){0, size.y / 6});
-	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
+	sfText_move(text, V2F(0, size.y / 6));
+	sfRectangleShape_move(rectangle_ombre, V2F(0, size.y / 6));
 	sprintf(str, "spd : %ld\n", STAT(garou->dungeon.entity[0], spd));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
 
-	sfText_move(text, (sfVector2f){0, size.y / 6});
-	sfRectangleShape_move(rectangle_ombre, (sfVector2f){0, size.y / 6});
+	sfText_move(text, V2F(0, size.y / 6));
+	sfRectangleShape_move(rectangle_ombre, V2F(0, size.y / 6));
 	sprintf(str, "speed : %ld\n", STAT(garou->dungeon.entity[0], speed));
 	sfText_setString(text, str);
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
