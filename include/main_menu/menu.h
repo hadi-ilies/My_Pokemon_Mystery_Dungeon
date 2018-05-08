@@ -37,7 +37,7 @@ void display_menu(sfRenderWindow *window, menu_t *menu, loading_t *back);
 void display_texte_button(sfRenderWindow *window, menu_t *menu);
 void menu_map_editor_menu(sfRenderWindow *window, sfMusic **sound_effect);
 void destroy_all(loading_t *back, sfRenderWindow *window, menu_t *menu);
-option_editor_t param_map(menu_t *menu, map_t *map, sfRenderWindow *window);
+option_editor_t param_map(map_t *map, sfRenderWindow *window);
 sfSprite *create_screen_param(sfRenderWindow *window);
 sfRectangleShape *create_back_param(sfRenderWindow *window);
 void adventure_intro(sfRenderWindow *window, menu_t *menu);

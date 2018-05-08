@@ -58,7 +58,7 @@ void event_param(map_t *map, option_editor_t *option,
 	}
 }
 
-option_editor_t param_map(menu_t *menu, map_t *map, sfRenderWindow *window)
+option_editor_t param_map(map_t *map, sfRenderWindow *window)
 {
 	sfEvent event;
 	option_editor_t option = option_editor_create(window, map);

@@ -17,7 +17,7 @@ typedef struct {
 	sfMusic *music;
 } back_and_music_t;
 
-void load_editor_loop(menu_t *menu, map_t *map, sfRenderWindow *window);
+void load_editor_loop(map_t *map, sfRenderWindow *window);
 void screen_and_back_destroy(sfRectangleShape *back, sfSprite *screen);
 void move_map(sfVector2f *pos);
 void zoom_map(sfEvent *event, map_t *map);
@@ -37,7 +37,7 @@ size_t move_curseur_editor(menu_t *menu, sfEvent *event);
 void display_menu_editor(sfRenderWindow *window, menu_t *menu, loading_t *back);
 size_t count_file(char *path);
 char **take_filename(char *path);
-void new_map(menu_t *menu, map_t *map, sfRenderWindow *window);
+void new_map(map_t *map, sfRenderWindow *window);
 int load_the_map(map_t *map, tile_map_t *tile_map);
 void menu_save_map(map_t *map, sfRenderWindow *window);
 void manage_map(sfEvent *event, sfRenderWindow *window,

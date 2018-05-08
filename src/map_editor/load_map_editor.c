@@ -67,9 +67,9 @@ bool load_entry(map_t *map, sfRenderWindow *window,
 	return (false);
 }
 
-void load_editor_loop(menu_t *menu, map_t *map, sfRenderWindow *window)
+void load_editor_loop(map_t *map, sfRenderWindow *window)
 {
-	 sfEvent event;
+	sfEvent event;
 	load_editor_t load = load_editor_create(window);
 
 	while (sfRenderWindow_isOpen(window)) {

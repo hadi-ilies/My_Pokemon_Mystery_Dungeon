@@ -26,9 +26,9 @@ void destroy_option_editor(option_editor_t *option)
 		sfText_destroy(option->choice[i]);
 }
 
-void new_map(menu_t *menu, map_t *map, sfRenderWindow *window)
+void new_map(map_t *map, sfRenderWindow *window)
 {
-	 option_editor_t option = param_map(menu, NULL, window);
+	 option_editor_t option = param_map(NULL, window);
 	 char *str = (char *) sfText_getString(option.text[option.nb_tile]);
 
 	 *map = map_create(option.size_x, option.size_y,

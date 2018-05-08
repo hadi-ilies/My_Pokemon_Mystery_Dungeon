@@ -24,11 +24,11 @@ bool enter_editor(sfRenderWindow *window, menu_t *menu,
 		} if (menu->button == 1 && map->error != 84)
 			menu_save_map(map, window);
 		if (menu->button == 2)
-			new_map(menu, map, window);
+			new_map(map, window);
 		if (menu->button == 3)
-			load_editor_loop(menu, map, window);
+			load_editor_loop(map, window);
 		if (menu->button == 4 && map->error != 84)
-			param_map(menu, map, window);
+			param_map(map, window);
 		if (menu->button == 5) {
 			sfMusic_play(menu->sound.sound_effect[1]);
 			return (false);

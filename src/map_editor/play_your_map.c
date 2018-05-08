@@ -15,6 +15,7 @@
 
 void play_your_map(sfRenderWindow *window, map_t *map)
 {
+	(void)window, (void) map;
 	/*garou_t garou = garou_create(CONFIG);
 
 		garou.map = map_copy(map);

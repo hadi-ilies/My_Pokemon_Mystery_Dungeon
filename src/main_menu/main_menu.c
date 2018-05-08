@@ -11,6 +11,7 @@
 #include "macro.h"
 #include "main_menu/menu.h"
 #include "settings.h"
+#include "adventure_intro.h"
 
 void back_create_icon(loading_t *optional)
 {

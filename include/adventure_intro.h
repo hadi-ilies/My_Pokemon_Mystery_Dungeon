@@ -60,3 +60,4 @@ void illustration(sfRenderWindow *window, size_t button,
 		intro_adventure_t *ad_intro);
 void ad_intro_destroy(intro_adventure_t *ad_intro);
 void illustration_end(size_t button, intro_adventure_t *ad_intro);
+void adventure_end(sfRenderWindow *window, menu_t *menu);
