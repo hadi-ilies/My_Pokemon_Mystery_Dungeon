@@ -442,11 +442,22 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 		else if (ITEM != NONE)
 			for (size_t i = 0; i < INVENTORY_SIZE; i++)
 				if (garou->inventory[i] == NONE) {
-					garou->inventory[i] = ITEM;
+					//garou->inventory[i] = ITEM;
+					if (ITEM == ORAN_BERRY) {
+						garou->dungeon.entity[0].life += 10;
+						if (garou->dungeon.entity[0].life > STAT(garou->dungeon.entity[0], life))
+							garou->dungeon.entity[0].life = STAT(garou->dungeon.entity[0], life);
+					}
+					if (ITEM == MAX_ELIXIR) {
+						size_t npa = rand() % 4;
+						garou->dungeon.entity[0].pp[npa] = CAPACITY(garou->dungeon.entity[0], npa).pp;
+					}
 					ITEM = NONE;
 					break;
 				}
 		}
+		if (garou->dungeon.entity[0].life == 0)
+			return (0);
 	}
 	return (0);
 }
