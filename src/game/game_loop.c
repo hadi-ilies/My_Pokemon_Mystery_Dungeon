@@ -16,17 +16,17 @@
 #include "macro.h"
 
 enum input {
-	     DOWN = 0b00000000001,
-	       UP = 0b00000000010,
-	    RIGHT = 0b00000000100,
-	     LEFT = 0b00000001000,
-	     MOVE = 0b00000010000,
+	DOWN = 0b00000000001,
+	UP = 0b00000000010,
+	RIGHT = 0b00000000100,
+	LEFT = 0b00000001000,
+	MOVE = 0b00000010000,
 	CAPACITY1 = 0b00000100000,
 	CAPACITY2 = 0b00001000000,
 	CAPACITY3 = 0b00010000000,
 	CAPACITY4 = 0b00100000000,
-	   ATTACK = 0b01000000000,
-	     WAIT = 0b10000000000,
+	ATTACK = 0b01000000000,
+	WAIT = 0b10000000000,
 };
 
 static void set_anime_idle(entity_t *entity)
@@ -201,17 +201,6 @@ void ia2(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y], size_t x, size_
 				tab[x + i][y + j] = tab[x][y] + 1;
 }
 
-sfVector2i new_pos(entity_t *entity, size_t input)
-{
-	sfVector2i pos = entity->pos;
-
-	input & LEFT ? pos.x += -1 : 0;
-	input & RIGHT ? pos.x += 1 : 0;
-	input & UP ? pos.y += -1 : 0;
-	input & DOWN ? pos.y += 1 : 0;
-	return (pos);
-}
-
 size_t ia(entity_t *entity, map_t *map,
 	  entity_t *info[map->nb_case_x][map->nb_case_y])
 {
@@ -247,24 +236,13 @@ size_t ia(entity_t *entity, map_t *map,
 						input |= WAIT;
 					}
 	}
-	else {
-		/*map->tab[entity->pos.x - entity->dir.x][entity->pos.y - entity->dir.y].type = WATER;
-		while (1) {
-			sfVector2i pos;
-		*/
-			input = (0b001 << (rand() % 4));
-			/*	pos = new_pos(entity, input);
-			if (map->tab[pos.x][pos.y].type == GROUND)
-				break;
-		}
-		map->tab[entity->pos.x - entity->dir.x][entity->pos.y - entity->dir.y].type = GROUND;*/
-		input |= MOVE | WAIT;
-	}
+	else
+		input = (0b001 << (rand() % 4)) | MOVE | WAIT;
 	return (input);
 }
 
 bool entity_set_dir(entity_t *entity, garou_t *garou,
-		    entity_t *info[garou->dungeon.map.nb_case_x][garou->dungeon.map.nb_case_y],
+		    entity_t *GET_INFO(garou->dungeon.map),
 		    sfEvent *event)
 {
 	size_t input = 0;
@@ -438,7 +416,7 @@ void game_aff(sfRenderWindow *window, garou_t *garou)
 int game_loop(sfRenderWindow *window, garou_t *garou)
 {
 	sfEvent event;
-	entity_t *info[garou->dungeon.map.nb_case_x][garou->dungeon.map.nb_case_y];
+	entity_t *GET_INFO(garou->dungeon.map);
 	size_t entity_turn = 0;
 
 	while (sfRenderWindow_isOpen(window)) {

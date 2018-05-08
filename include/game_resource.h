@@ -26,6 +26,9 @@
 #define STAT_RECT "resources/texture/n1.png"
 #define STAT_SHADOW "resources/texture/n5.png"
 
+// code_macros
+#define GET_INFO(map) info[(map).nb_case_x][(map).nb_case_y]
+
 typedef struct {
 	entity_t player;
 	dungeon_t dungeon;

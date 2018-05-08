@@ -12,12 +12,15 @@
 #include <stddef.h>
 #include "error.h"
 
+// code_macros
+#define RECTEX anime_tab->anime[anime_num].rectex[rectex_num]
 #define TIME_RECTEX time > anime_tab->anime[anime_tab->num].time / anime_tab->\
 	anime[anime_tab->num].nb_rectex
 #define ANIME_RECTEX anime_tab->anime[anime_tab->num].num >= anime_tab->\
 		anime[anime_tab->num].nb_rectex
 #define MALLOC_NAME anime_tab->texname[i].file_name \
 	= malloc(sizeof(char) * (len + 1))
+
 #ifndef RECTEX_T_
 #define RECTEX_T_
 

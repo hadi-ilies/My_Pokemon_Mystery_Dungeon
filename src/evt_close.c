@@ -7,8 +7,11 @@
 
 #include "prototype.h"
 
-void evt_close(sfEvent *event, sfRenderWindow *window)
+bool evt_close(sfEvent *event, sfRenderWindow *window)
 {
 	if (event->type == sfEvtClosed)
 		sfRenderWindow_close(window);
+	if (event->type == sfEvtKeyPressed && event->key.code == sfKeyEscape)
+		return (true);
+	return (false);
 }
