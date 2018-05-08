@@ -53,7 +53,7 @@ void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva)
 
 		rect.left = origin.x + i * TOOL_DIST;
 		rect.top = origin.y;
-		sfRectangleShape_setPosition(reck, (sfVector2f){PIX, PIY});
+		sfRectangleShape_setPosition(reck, V2F(PIX, PIY));
 		sfRenderWindow_drawRectangleShape(window, reck, NULL);
 		tile_map_aff(window, &map->tile_map, tva, rect);
 		pick_tile(window, rect, tva, mouse_tva);

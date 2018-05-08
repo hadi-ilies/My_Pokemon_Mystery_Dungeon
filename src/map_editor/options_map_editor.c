@@ -26,7 +26,7 @@ void choice_cursor(option_editor_t *option, sfRenderWindow *window)
 	sfText_setString(option->choice[2], "MAP WIDTH");
 	for (size_t i = 0; i < 3; i++) {
 		sfText_setPosition(option->choice[i],
-				(sfVector2f) {WINDOW_SIZE.x / 2 - 300, pos_y});
+				V2F(WINDOW_SIZE.x / 2 - 300, pos_y);
 		sfText_setColor(option->choice[i], (sfColor){250, 250, 0,
 					option->choice_curs == i ? 255 : 180});
 		sfRenderWindow_drawText(window, option->choice[i], NULL);
