@@ -19,8 +19,6 @@ OBJ	=	$(SRC:.c=.o)
 CFLAGS	+=	-I../../include
 CFLAGS	+=	-W -Wall -Wextra
 
-LDFLAGS	+=	-l c_graph_prog
-
 all	:	$(NAME)
 
 $(NAME)	:	$(OBJ)

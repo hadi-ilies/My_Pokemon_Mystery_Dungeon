@@ -24,7 +24,7 @@ bool error_map5(tile_map_t *tile_map, int fd, size_t i)
 			return (tile_map->error = ERR_MALLOC, false);
 		for (size_t k = 0; k < tile_map->nb_alt[i][j]; k++) {
 			if (read(fd, &tile_map->rectex[i][j][k],
-				 sizeof(rectex_t)) != sizeof(rectex_t))
+				sizeof(rectex_t)) != sizeof(rectex_t))
 				return (tile_map->error = ERR_READ, false);
 			if (tile_map->rectex[i][j][k].texture_num >=
 			tile_map->nb_texture)
