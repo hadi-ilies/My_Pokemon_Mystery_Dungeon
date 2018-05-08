@@ -6,6 +6,7 @@
 */
 
 #include "entity.h"
+#include "macro.h"
 
 sfVector2f entity_get_move_pos(entity_t *entity)
 {
@@ -19,5 +20,5 @@ sfVector2f entity_get_move_pos(entity_t *entity)
 		move_pos.y += (float)entity->dir.y * time / TIME_MOVE;
 		return (move_pos);
 	}
-	return ((sfVector2f){entity->pos.x, entity->pos.y});
+	return (V2F(entity->pos.x, entity->pos.y));
 }

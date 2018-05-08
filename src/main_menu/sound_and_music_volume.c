@@ -32,7 +32,7 @@ void music_volume(sfEvent *event,
 	str = inttostr((int)menu->settings.music_volume);
 	sfText_setString(option->sound_value[0], str);
 	sfText_setPosition(option->sound_value[0],
-		(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 200});
+	V2F(WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 200));
 	for (size_t i = 0; i < NB_MUSIC_EFFECT; i++)
 		sfMusic_setVolume(menu->sound.music[i],
 				(float)menu->settings.music_volume);
@@ -57,7 +57,7 @@ void sound_volume(sfEvent *event,
 	str = inttostr((int)menu->settings.sound_volume);
 	sfText_setString(option->sound_value[1], str);
 	sfText_setPosition(option->sound_value[1],
-		(sfVector2f) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 100});
+			V2F(WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2 - 100));
 	free(str);
 	for (size_t i = 0; i < NB_SOUND_EFFECT; i++)
 		sfMusic_setVolume(menu->sound.sound_effect[i],

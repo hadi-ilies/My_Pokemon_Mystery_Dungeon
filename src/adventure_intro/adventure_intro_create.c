@@ -8,6 +8,7 @@
 #include "my.h"
 #include <prototype.h>
 #include "adventure_intro.h"
+#include "macro.h"
 
 void ad_intro_destroy(intro_adventure_t *ad_intro)
 {
@@ -24,8 +25,8 @@ intro_adventure_t ad_intro_create(void)
 	ad_intro.font = sfFont_createFromFile(FONT);
 	ad_intro.text = sfText_create();
 	ad_intro.rect = sfRectangleShape_create();
-	sfRectangleShape_setSize(ad_intro.rect, (sfVector2f) {1920, 1080});
-	sfRectangleShape_setPosition(ad_intro.rect, (sfVector2f) {0, 0});
+	sfRectangleShape_setSize(ad_intro.rect, V2F(1920, 1080));
+	sfRectangleShape_setPosition(ad_intro.rect, V2F(0, 0));
 	ad_intro.texture[0] = sfTexture_createFromFile(PICTURE1, NULL);
 	ad_intro.texture[1] = sfTexture_createFromFile(END, NULL);
 	sfText_setFont(ad_intro.text, ad_intro.font);
