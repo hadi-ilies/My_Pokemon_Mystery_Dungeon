@@ -18,13 +18,14 @@
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
 #define WINDOW_BITS_PER_PIXEL 32
-#define WINDOW_PARAMS sfClose
+#define WINDOW_PARAMS sfFullscreen
 #define FRAMERATE_LIMIT 30
+#define WINDOW_NAME "my_rpg"
 
 int main_menu(sfRenderWindow *window);
 sfRenderWindow *window_create(void);
 void destroy_factories(anime_tab_t *animation, sfMusic *music[3],
-		video_t *video);
+		       video_t *video);
 int destroy_and_check_error_anime(anime_tab_t *animation, video_t *video);
 void music_create(sfMusic *music[3]);
 void get_start(anime_tab_t *animation, sfMusic *music[3],
@@ -44,9 +45,10 @@ void credit_menu(sfRenderWindow *window, sfEvent *event);
 void option_menu(sfRenderWindow *window, sfEvent *event, menu_t *menu);
 void swap_alt(tile_map_t *tile_map, tva_t *tva);
 void pick_tile(sfRenderWindow *window, sfFloatRect rect,
-	tva_t tva, tva_t *mouse_tva);
+	       tva_t tva, tva_t *mouse_tva);
 void display_tools(sfRenderWindow *window, map_t *map, tva_t *mouse_tva);
 void refresh_map(sfEvent *event, map_t *map);
 bool dont_touch_borders(map_t *map, size_t x, size_t y);
 bool insert_water_loop(map_t *map);
+
 #endif

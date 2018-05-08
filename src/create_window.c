@@ -42,13 +42,12 @@ sfRenderWindow *window_create(void)
 	sfVideoMode mode = {WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_BITS_PER_PIXEL};
 	sfRenderWindow *window;
 
-	window = sfRenderWindow_create(mode, "my_rpg", WINDOW_PARAMS, NULL);
+	window = sfRenderWindow_create(mode, WINDOW_NAME, WINDOW_PARAMS, NULL);
 	if (window == NULL)
 		return (NULL);
 	loading_t load = loading_create(window);
 
 	sfRenderWindow_setFramerateLimit(window, FRAMERATE_LIMIT);
-	sfRenderWindow_setMouseCursorVisible(window, sfFalse);
 	set_icon(window, ICON);
 	sfSprite_destroy(load.sprite);
 	sfTexture_destroy(load.texture);
