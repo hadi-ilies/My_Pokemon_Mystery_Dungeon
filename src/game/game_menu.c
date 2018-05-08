@@ -110,7 +110,7 @@ int game_menu(sfRenderWindow *window)
 	if (garou.dungeon.map.error != ERR_OK || garou.dungeon.entity == NULL)
 		return (84);
 	garou.dungeon.entity[0] = garou.player;
-	if (run_dungeon(window, &garou, 8) == 84)
+	if (run_dungeon(window, &garou, garou.player.level - 2) == 84)
 		return (84);
 	dungeon_destroy(&garou.dungeon);
 	garou_destroy(&garou);

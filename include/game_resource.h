@@ -16,7 +16,7 @@
 #include "item.h"
 
 // game_macros
-#define INVENTORY_SIZE 5
+#define INVENTORY_SIZE 1
 
 // file_macros
 #define GAME_FONT "resources/font/Minecraftia.ttf"
