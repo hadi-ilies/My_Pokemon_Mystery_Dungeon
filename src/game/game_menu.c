@@ -101,6 +101,7 @@ dungeon_t generate_dungeon(size_t nb_stage, char *file_name)
 int game_menu(sfRenderWindow *window)
 {
 	garou_t garou = garou_create("resources/config");
+	int result;
 
 	garou.player = entity_create_from_file("resources/entity/my");
 	garou.player.ia = 0;
@@ -110,9 +111,10 @@ int game_menu(sfRenderWindow *window)
 	if (garou.dungeon.map.error != ERR_OK || garou.dungeon.entity == NULL)
 		return (84);
 	garou.dungeon.entity[0] = garou.player;
-	if (run_dungeon(window, &garou, garou.player.level - 2) == 84)
+	result = run_dungeon(window, &garou, garou.player.level - 2);
+	if (result == 84)
 		return (84);
 	dungeon_destroy(&garou.dungeon);
 	garou_destroy(&garou);
-	return (0);
+	return (result);
 }
