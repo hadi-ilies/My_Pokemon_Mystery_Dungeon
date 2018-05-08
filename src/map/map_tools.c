@@ -18,8 +18,8 @@ sfVector2i path_map(map_t *map, sfVector2i *cor, ssize_t nx, ssize_t ny)
 	ssize_t size_x = 0;
 	ssize_t size_y = 0;
 
-	for (; cor->x+ size_x > 0 && cor->x+ size_x < map->nb_case_x;
-	size_x += nx) {
+	for (; (size_t) cor->x + size_x > 0
+	&& (size_t) cor->x + size_x < map->nb_case_x; size_x += nx) {
 		for (; cor->y+ size_y > 0 && cor->y+ size_y < map->nb_case_y;
 		size_y += ny) {
 			if (PATH_MAP_COND == WALL && tmp == false)
