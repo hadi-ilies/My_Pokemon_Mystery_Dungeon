@@ -38,8 +38,9 @@ void resize_win(sfRenderWindow *window, option_t *option)
 {
 	if (option->choice_curs == 0) {
 		char *str = (char *) GET_STRING_SIZE;
-		char **size = my_str_to_tab(str, "X");
+		char **size = my_str_to_tab(str, "X ");
+		printf("%s\n", size[0]);
 		sfRenderWindow_setSize(window,
-		(sfVector2u) {atoi(size[0]), atoi(size[1])});
+		(sfVector2u) {(unsigned) my_atoi(size[0]), (unsigned) my_atoi(size[1])});
 	}
 }
