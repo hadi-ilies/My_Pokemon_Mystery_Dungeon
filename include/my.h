@@ -30,7 +30,7 @@ char *my_strncat(char *s1, char *s2, size_t n);
 char **my_str_to_tab(char *command, char *sep);
 char *concat(char *s1, char *s2);
 char *inttostr(int nb);
-bool my_atoi(char *str);
+int my_atoi(char *str);
 size_t get_uint(char *str);
 float get_float(char *str);
 int rand_min_max(int min, int max);
