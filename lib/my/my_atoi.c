@@ -15,6 +15,6 @@ int my_atoi(char *str)
 	if (str == NULL)
 		return (-1);
 	for (size_t i = 0; str[i] >= '0' && str[i] <= '9'; i++)
-		nb = nb * 10 + str[0] - '0';
+		nb = nb * 10 + str[i] - '0';
 	return (nb);
 }
