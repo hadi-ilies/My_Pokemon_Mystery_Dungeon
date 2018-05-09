@@ -29,7 +29,7 @@
 
 // code_macros
 #define GET_INFO(map) info[(map).nb_case_x][(map).nb_case_y]
-#define ITEM garou->dungeon.map.item[garou->dungeon.entity[0].pos.x][garou->dungeon.entity[0].pos.y]
+#define ITEM(map, entity) (map).item[(entity).pos.x][(entity).pos.y]
 
 typedef struct {
 	entity_t player;

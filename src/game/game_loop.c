@@ -267,6 +267,25 @@ bool entity_set_dir(entity_t *entity, garou_t *garou,
 		}
 		if (event && event->type == sfEvtKeyPressed && event->key.code == garou->settings.key[KEY_WAIT])
 			input |= WAIT;
+		if (event && event->type == sfEvtKeyPressed && event->key.code == sfKeyM && garou->inventory[0] != NONE) {
+			if (garou->inventory[0] == ORAN_BERRY) {
+				entity->life += 20;
+				if (entity->life > STAT(*entity, life))
+					entity->life = STAT(*entity, life);
+			}
+			if (garou->inventory[0] == MAX_ELIXIR) {
+				size_t max = 0;
+
+				for (size_t i = 1; i < 4; i++)
+					if (CAPACITY(*entity, i).pp - entity->pp[i] > CAPACITY(*entity, max).pp - entity->pp[max])
+						max = i;
+				entity->pp[max] += 10;
+				if (entity->pp[max] > CAPACITY(*entity, max).pp)
+					entity->pp[max] = CAPACITY(*entity, max).pp;
+			}
+			garou->inventory[0] = NONE;
+			input = WAIT;
+		}
 	}
 	else
 		input = ia(entity, &garou->dungeon.map, info);
@@ -403,8 +422,9 @@ void game_aff(sfRenderWindow *window, garou_t *garou)
 				tmp = false;
 		}
 	entity_life_aff(window, &garou->dungeon.entity[0], (sfFloatRect){LIFE_RECT});
-	if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_INVENTORY]))
+	if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_INVENTORY])) {
 		inventory_aff(window, garou);
+	}
 	else if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_ATTACK]) && tmp)
 		capacity_aff(window, garou);
 	sfRenderWindow_display(window);
@@ -437,24 +457,15 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 		else if (++entity_turn >= garou->dungeon.nb_entity)
 			entity_turn = 0;
 		if (sfClock_getElapsedTime(garou->dungeon.entity[0].clock).microseconds >= TIME_MOVE) {
-		if (ITEM == STAIRCASE)
-			return (1);
-		else if (ITEM != NONE)
-			for (size_t i = 0; i < INVENTORY_SIZE; i++)
-				if (garou->inventory[i] == NONE) {
-					//garou->inventory[i] = ITEM;
-					if (ITEM == ORAN_BERRY) {
-						garou->dungeon.entity[0].life += 10;
-						if (garou->dungeon.entity[0].life > STAT(garou->dungeon.entity[0], life))
-							garou->dungeon.entity[0].life = STAT(garou->dungeon.entity[0], life);
+			if (ITEM(garou->dungeon.map, garou->dungeon.entity[0]) == STAIRCASE)
+				return (1);
+			else if (ITEM(garou->dungeon.map, garou->dungeon.entity[0]) != NONE)
+				for (size_t i = 0; i < INVENTORY_SIZE; i++)
+					if (garou->inventory[i] == NONE) {
+						garou->inventory[i] = ITEM(garou->dungeon.map, garou->dungeon.entity[0]);
+						ITEM(garou->dungeon.map, garou->dungeon.entity[0]) = NONE;
+						break;
 					}
-					if (ITEM == MAX_ELIXIR) {
-						size_t npa = rand() % 4;
-						garou->dungeon.entity[0].pp[npa] = CAPACITY(garou->dungeon.entity[0], npa).pp;
-					}
-					ITEM = NONE;
-					break;
-				}
 		}
 		if (garou->dungeon.entity[0].life == 0)
 			return (0);
