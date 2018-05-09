@@ -29,6 +29,7 @@ static bool map_read(map_t *map, int fd, size_t *nb_case_x, size_t *nb_case_y)
 		return (map->error = ERR_READ, true);
 	tile_map_file_name[len] = '\0';
 	*map = map_create(*nb_case_x, *nb_case_y, tile_map_file_name);
+	free(tile_map_file_name);
 	return (false);
 }
 

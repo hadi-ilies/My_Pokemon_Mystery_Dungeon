@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "map.h"
+#include "my.h"
 #include "macro.h"
 
 static void map_param_set_to_0(map_t *map)
