@@ -6,14 +6,7 @@
 */
 
 #include "map.h"
-#include "item.h"
-
-const char *item_file_name[] = {
-	"resources/texture/Staircase.png",
-	"resources/texture/Oran Berry.png",
-	"resources/texture/Max Elixir.png",
-	NULL
-};
+#include "item_tab.h"
 
 void item_aff(sfRenderWindow *window, enum item_e item, sfFloatRect rect)
 {

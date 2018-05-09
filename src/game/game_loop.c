@@ -12,7 +12,7 @@
 #include "tile_name.h"
 #include "anime_name.h"
 #include "capacity_tab.h"
-#include "item.h"
+#include "item_tab.h"
 #include "macro.h"
 
 enum input {
@@ -337,6 +337,42 @@ void entity_life_aff(sfRenderWindow *window, entity_t *entity, sfFloatRect rect)
 	sfRectangleShape_destroy(rectangle);
 }
 
+static void item_aff2(sfRenderWindow *window, enum item_e inventory[INVENTORY_SIZE])
+{
+	sfRectangleShape *rectangle = sfRectangleShape_create();
+	sfTexture *texture = sfTexture_createFromFile(item_file_name[inventory[0]], NULL);
+	sfVector2f size = {300, 300};
+	sfVector2f pos = {WINDOW_SIZE.x * 0.6, WINDOW_SIZE.y / 2 - size.y / 2};
+
+	if (texture == NULL)
+		return;
+	sfRectangleShape_setPosition(rectangle, pos);
+	sfRectangleShape_setSize(rectangle, size);
+	sfRectangleShape_setTexture(rectangle, texture, sfTrue);
+	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
+	sfTexture_destroy(texture);
+	sfRectangleShape_destroy(rectangle);
+}
+
+static void item_aff(sfRenderWindow *window, garou_t *garou)
+{
+	sfRectangleShape *rectangle = sfRectangleShape_create();
+	sfTexture *texture = sfTexture_createFromFile(STAT_RECT, NULL);
+	sfVector2f size = {300, 300};
+	sfVector2f pos = {WINDOW_SIZE.x * 0.6, WINDOW_SIZE.y / 2 - size.y / 2};
+	sfColor color = {0, 250, 0, 255};
+
+	sfRectangleShape_setPosition(rectangle, pos);
+	sfRectangleShape_setSize(rectangle, size);
+	sfRectangleShape_setTexture(rectangle, texture, sfTrue);
+	sfRectangleShape_setFillColor(rectangle, color);
+	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
+	if (garou->inventory[0] != NONE)
+		item_aff2(window, garou->inventory);
+	sfTexture_destroy(texture);
+	sfRectangleShape_destroy(rectangle);
+}
+
 void inventory_aff(sfRenderWindow *window, garou_t *garou)
 {
 	sfRectangleShape *rectangle = sfRectangleShape_create();
@@ -347,16 +383,17 @@ void inventory_aff(sfRenderWindow *window, garou_t *garou)
 	sfText *text = sfText_create();
 	char *str = malloc(sizeof(char) * 20);
 	sfVector2f size = {600, 600};
+	sfVector2f pos = {WINDOW_SIZE.x / 8, WINDOW_SIZE.y / 2 - size.y / 2};
 
-	sfRectangleShape_setPosition(rectangle, V2F(250, 250));
-	sfRectangleShape_setPosition(rectangle_ombre, V2F(250 + size.x / 20, 250 + size.y / (6 * 2) - (30 * 2.666) / 2));
+	sfRectangleShape_setPosition(rectangle, pos);
+	sfRectangleShape_setPosition(rectangle_ombre, V2F(pos.x + size.x / 20, pos.y + size.y / (6 * 2) - (30 * 2.666) / 2));
 	sfRectangleShape_setSize(rectangle, size);
 	sfRectangleShape_setSize(rectangle_ombre, V2F(500, 30 * 2.666));
 	sfRectangleShape_setTexture(rectangle, texture, sfTrue);
 	sfRectangleShape_setTexture(rectangle_ombre, texture_ombre, sfTrue);
 	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
 
-	sfText_setPosition(text, V2F(250 + size.x / 5, 250 + size.y / (6 * 2) - 30 / 2));
+	sfText_setPosition(text, V2F(pos.x + size.x / 5, pos.y + size.y / (6 * 2) - 30 / 2));
 	sfText_setFont(text, font);
 	sprintf(str, "HP : %ld/%ld\n", garou->dungeon.entity[0].life, STAT(garou->dungeon.entity[0], life));
 	sfText_setString(text, str);
@@ -398,6 +435,8 @@ void inventory_aff(sfRenderWindow *window, garou_t *garou)
 	sfRenderWindow_drawRectangleShape(window, rectangle_ombre, NULL);
 	sfRenderWindow_drawText(window, text, NULL);
 
+	item_aff(window, garou);
+
 	free(str);
 	sfFont_destroy(font);
 	sfText_destroy(text);
@@ -422,9 +461,8 @@ void game_aff(sfRenderWindow *window, garou_t *garou)
 				tmp = false;
 		}
 	entity_life_aff(window, &garou->dungeon.entity[0], (sfFloatRect){LIFE_RECT});
-	if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_INVENTORY])) {
+	if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_INVENTORY]))
 		inventory_aff(window, garou);
-	}
 	else if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_ATTACK]) && tmp)
 		capacity_aff(window, garou);
 	sfRenderWindow_display(window);
