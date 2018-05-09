@@ -22,12 +22,14 @@ void item_aff(sfRenderWindow *window, enum item_e item, sfFloatRect rect)
 	sfVector2f pos = {rect.left, rect.top};
 	sfVector2f size = {rect.width, rect.height};
 
-	if (item == NONE)
+	if (item <= NONE || item >= NB_ITEM)
 		return;
 	pos.x -= rect.width / 2;
 	pos.y -= rect.height / 2;
 	rectangle = sfRectangleShape_create();
 	texture = sfTexture_createFromFile(item_file_name[item], NULL);
+	if (texture == NULL)
+		return;
 	sfRectangleShape_setTexture(rectangle, texture, sfTrue);
 	sfRectangleShape_setPosition(rectangle, pos);
 	sfRectangleShape_setSize(rectangle, size);

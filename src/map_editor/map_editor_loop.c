@@ -46,7 +46,8 @@ void window_open_func(sfRenderWindow *window, map_t *map,
 	move_map(&map->pos);
 	sfRenderWindow_clear(window, sfBlack);
 	sfRenderWindow_drawSprite(window, optional->sprite, NULL);
-	map_aff(window, map);
+	if (map->error == ERR_OK)
+		map_aff(window, map);
 	display_tools(window, map, mouse_tva);
 	tile_map_aff(window, &map->tile_map, *mouse_tva, RECT_MOUSE);
 	sfRenderWindow_display(window);

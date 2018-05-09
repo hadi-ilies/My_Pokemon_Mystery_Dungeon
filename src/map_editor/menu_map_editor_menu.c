@@ -12,6 +12,23 @@
 #include "main_menu/menu.h"
 #include "map_editor_function.h"
 
+bool second_enter_editor(sfRenderWindow *window, menu_t *menu, map_t *map)
+{
+	if (menu->button == 1 && map->error != 84)
+		menu_save_map(map, window);
+	if (menu->button == 2)
+		new_map(map, window);
+	if (menu->button == 3)
+		load_editor_loop(map, window);
+	if (menu->button == 4 && map->error != 84)
+		param_map(map, window);
+	if (menu->button == 5) {
+		sfMusic_play(menu->sound.sound_effect[1]);
+		return (false);
+	}
+	return (true);
+}
+
 bool enter_editor(sfRenderWindow *window, menu_t *menu,
 		sfEvent *event,	map_t *map)
 {
@@ -21,18 +38,9 @@ bool enter_editor(sfRenderWindow *window, menu_t *menu,
 			sfMusic_pause(menu->sound.sound_effect[6]);
 			map_editor_loop(window, map);
 			sfMusic_play(menu->sound.sound_effect[6]);
-		} if (menu->button == 1 && map->error != 84)
-			menu_save_map(map, window);
-		if (menu->button == 2)
-			new_map(map, window);
-		if (menu->button == 3)
-			load_editor_loop(map, window);
-		if (menu->button == 4 && map->error != 84)
-			param_map(map, window);
-		if (menu->button == 5) {
-			sfMusic_play(menu->sound.sound_effect[1]);
-			return (false);
 		}
+		if (!second_enter_editor(window, menu, map))
+			return (false);
 	}
 	return (true);
 }
