@@ -15,5 +15,4 @@ void dungeon_destroy(dungeon_t *dungeon)
 	for (size_t i = 1; i < dungeon->nb_entity; i++)
 		entity_destroy(&dungeon->entity[i]);
 	free(dungeon->entity);
-
 }

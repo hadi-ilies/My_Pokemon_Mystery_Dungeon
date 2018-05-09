@@ -51,7 +51,7 @@ map_t generate_map(size_t size, char *tile_map_file_name)
 	return (map);
 }
 
-entity_t *generate_entitys(size_t nb_entity)
+static entity_t *generate_entitys(size_t nb_entity)
 {
 	entity_t *entity = malloc(sizeof(entity_t) * nb_entity);
 
@@ -87,7 +87,7 @@ int run_dungeon(sfRenderWindow *window, garou_t *garou, size_t level)
 	return (1);
 }
 
-dungeon_t generate_dungeon(size_t nb_stage, char *file_name)
+static dungeon_t generate_dungeon(size_t nb_stage, char *file_name)
 {
 	dungeon_t dungeon = dungeon_create();
 

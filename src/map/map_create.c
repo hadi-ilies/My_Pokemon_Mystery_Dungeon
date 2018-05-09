@@ -45,7 +45,7 @@ map_t map_create(size_t nb_case_x, size_t nb_case_y, char *tile_map_file_name)
 	if (map_malloc(&map))
 		return (map);
 	map_param_set_to_0(&map);
-	map.tile_map_file_name = tile_map_file_name;
+	map.tile_map_file_name = my_strdup(tile_map_file_name);
 	map.tile_map = tile_map_create_from_file(map.tile_map_file_name);
 	if (map.tile_map.error != ERR_OK)
 		return (map.error = map.tile_map.error, map);

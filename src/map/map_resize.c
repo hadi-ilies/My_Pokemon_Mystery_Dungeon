@@ -14,9 +14,6 @@ static void swap_map(map_t *map, tva_t **tab,
 	for (size_t i = 0; i < map->nb_case_x; i++)
 		for (size_t j = 0; j < map->nb_case_y; j++)
 			tab[i][j] = map->tab[i][j];
-	for (size_t i = map->nb_case_x; i < nb_case_x; i++)
-		for (size_t j = map->nb_case_y; j < nb_case_y; j++)
-			map->item[i][j] = NONE;
 	for (size_t i = 0; i < map->nb_case_x; i++)
 		free(map->tab[i]);
 	free(map->tab);
