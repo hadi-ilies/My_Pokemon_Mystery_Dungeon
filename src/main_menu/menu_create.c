@@ -53,6 +53,9 @@ sfMusic **sound_effect_create(void)
 	sound_effect[4] = sfMusic_createFromFile(TEXT_SOUND);
 	sound_effect[5] = sfMusic_createFromFile(MOVE_SOUND);
 	sound_effect[6] = sfMusic_createFromFile(MAIN_SOUND);
+	for (size_t i = 0; i < 7; i++)
+		if (sound_effect[i] == NULL)
+			return (NULL);
 	sfMusic_play(sound_effect[2]);
 	sfMusic_pause(sound_effect[2]);
 	return (sound_effect);
@@ -67,6 +70,9 @@ sfMusic **music_effect_create(void)
 	music_effect[0] = sfMusic_createFromFile(HOW_TO_PLAY_SONG);
 	music_effect[1] = sfMusic_createFromFile(INTRO_AD);
 	music_effect[2] = sfMusic_createFromFile(RIP_MUSIC);
+	for (size_t i = 0; i < 3; i++)
+		if (music_effect[i] == NULL)
+			return (NULL);
 	return (music_effect);
 }
 

@@ -74,6 +74,8 @@ loading_t back_editor_create(sfRenderWindow *window)
 
 	optional.sprite = sfSprite_create();
 	optional.texture = sfTexture_createFromFile(BACK_MENU_EDITOR, NULL);
+	if (optional.texture == NULL)
+		return (optional);
 	sfSprite_setTexture(optional.sprite, optional.texture, sfTrue);
 	sfFloatRect size = sfSprite_getLocalBounds(optional.sprite);
 

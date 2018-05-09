@@ -76,11 +76,12 @@ int main_menu(sfRenderWindow *window)
 	menu_t menu = menu_create();
 	sfEvent event = {.type = sfEvtJoystickButtonPressed};
 
+	if (!menu.sound.sound_effect || !menu.sound.music || !back.texture)
+		return (84);
 	main_intro(window, &event);
 	for (int i = 0; i < NB_BUTTON; i++)
 		sfText_setFont(menu.text[i], menu.font);
-	sfMusic_play(menu.sound.sound_effect[6]);
-	sfMusic_setLoop(menu.sound.sound_effect[6], sfTrue);
+	music_play(menu.sound.sound_effect[6]);
 	while (sfRenderWindow_isOpen(window)) {
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);

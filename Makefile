@@ -31,6 +31,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(MENUDIR)game_over.c \
 			$(MENUDIR)tuto_create.c \
 			$(MENUDIR)menu_create.c \
+			$(MENUDIR)music_play.c \
 			$(MENUDIR)display_menu.c \
 			$(MENUDIR)cursor_menu.c \
 			$(MENUDIR)menu_destroy.c \
