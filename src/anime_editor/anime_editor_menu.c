@@ -5,13 +5,7 @@
 ** anime_editor_menu.c
 */
 
-#include <stdlib.h> //tmp
-#include <unistd.h> //tmp
-#include <fcntl.h> //tmp
-#include "macro.h"
 #include "prototype.h"
-#include "anime_tab.h"
-#include "anime_name.h"
 
 void anime_tab_add_texture(anime_tab_t *anime_tab, char *file_name)
 {
@@ -45,7 +39,7 @@ int anime_editor_menu(sfRenderWindow *window)
 	if (anime_tab.error != ERR_OK)
 		return (84);
 	anime_editor_loop(window, &anime_tab);
-	save(&anime_tab, conf);
+	anime_tab_save(&anime_tab, conf);
 	anime_tab_destroy(&anime_tab);
 	return (0);
 }
