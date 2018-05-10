@@ -21,8 +21,9 @@ how_to_play_t create_tuto(sfRenderWindow *window)
 	tuto.page = 0;
 	tuto.tex = true;
 	tuto.img = sfSprite_create();
-	tuto.textu[0] = sfTexture_createFromFile(PICTURE1, NULL);
-	tuto.textu[1] = sfTexture_createFromFile(END, NULL);
-	tuto.textu[2] = sfTexture_createFromFile(PICTURE1, NULL);
+	tuto.textu[0] = sfTexture_createFromFile(TUTO1, NULL);
+	tuto.textu[1] = sfTexture_createFromFile(TUTO2, NULL);
+	tuto.textu[2] = sfTexture_createFromFile(TUTO3, NULL);
+	tuto.textu[3] = sfTexture_createFromFile(TUTO4, NULL);
 	return (tuto);
 }

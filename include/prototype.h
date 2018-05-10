@@ -20,7 +20,7 @@
 #define WINDOW_BITS_PER_PIXEL 32
 #define WINDOW_PARAMS sfClose
 #define FRAMERATE_LIMIT 30
-#define WINDOW_NAME "my_rpg"
+#define WINDOW_NAME "My_pokemon_mystery_dungeons (Pokemon fan game)"
 
 int main_menu(sfRenderWindow *window);
 sfRenderWindow *window_create(void);

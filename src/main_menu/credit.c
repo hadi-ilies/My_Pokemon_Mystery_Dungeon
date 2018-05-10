@@ -29,7 +29,7 @@ bool turn_page(size_t *page, sfEvent *event)
 	if (event->type == sfEvtKeyPressed
 	&& event->key.code == sfKeyReturn)
 		return (false);
-	if (*page < NB_PAGE && event->type == sfEvtKeyPressed
+	if (*page < NB_PAGE - 1 && event->type == sfEvtKeyPressed
 	&& event->key.code == sfKeyRight)
 		(*page)++;
 	if (*page > 0 && event->type == sfEvtKeyPressed
