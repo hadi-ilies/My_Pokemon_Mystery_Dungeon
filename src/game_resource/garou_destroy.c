@@ -11,4 +11,5 @@
 void garou_destroy(garou_t *garou)
 {
 	entity_destroy(&garou->player);
+	sfMusic_destroy(garou->music);
 }

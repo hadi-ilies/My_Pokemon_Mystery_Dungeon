@@ -160,55 +160,62 @@ bool manage_input(entity_t *entity, map_t *map,
 	return (false);
 }
 
+size_t player(entity_t *entity, garou_t *garou, sfEvent *event)
+{
+	size_t input = 0;
+
+	if (!sfKeyboard_isKeyPressed(garou->settings.key[KEY_MOVE]))
+		input |= MOVE;
+	if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_ATTACK])) {
+		if (event && event->type == sfEvtKeyPressed) {
+			if (event->key.code == garou->settings.key[KEY_UP])
+				input |= ATTACK | CAPACITY1;
+			if (event->key.code == garou->settings.key[KEY_LEFT])
+				input |= ATTACK | CAPACITY2;
+			if (event->key.code == garou->settings.key[KEY_RIGHT])
+				input |= ATTACK | CAPACITY3;
+			if (event->key.code == garou->settings.key[KEY_DOWN])
+				input |= ATTACK | CAPACITY4;
+		}
+	}
+	else {
+		sfKeyboard_isKeyPressed(garou->settings.key[KEY_LEFT]) ? input |= LEFT : 0;
+		sfKeyboard_isKeyPressed(garou->settings.key[KEY_RIGHT]) ? input |= RIGHT : 0;
+		sfKeyboard_isKeyPressed(garou->settings.key[KEY_UP]) ? input |= UP : 0;
+		sfKeyboard_isKeyPressed(garou->settings.key[KEY_DOWN])? input |= DOWN : 0;
+	}
+	if (event && event->type == sfEvtKeyPressed && event->key.code == garou->settings.key[KEY_WAIT])
+		input |= WAIT;
+	if (event && event->type == sfEvtKeyPressed && event->key.code == sfKeyM && garou->inventory[0] != NONE) {
+		if (garou->inventory[0] == ORAN_BERRY) {
+			entity->life += 20;
+			if (entity->life > STAT(*entity, life))
+				entity->life = STAT(*entity, life);
+		}
+		if (garou->inventory[0] == MAX_ELIXIR) {
+			size_t max = 0;
+
+			for (size_t i = 1; i < 4; i++)
+				if (CAPACITY(*entity, i).pp - entity->pp[i] > CAPACITY(*entity, max).pp - entity->pp[max])
+					max = i;
+			entity->pp[max] += 10;
+			if (entity->pp[max] > CAPACITY(*entity, max).pp)
+				entity->pp[max] = CAPACITY(*entity, max).pp;
+		}
+		garou->inventory[0] = NONE;
+		input = WAIT;
+	}
+	return (input);
+}
+
 bool entity_set_dir(entity_t *entity, garou_t *garou,
 		    entity_t *GET_INFO(garou->dungeon.map),
 		    sfEvent *event)
 {
 	size_t input = 0;
 
-	if (entity->ia == 0) {
-		if (!sfKeyboard_isKeyPressed(garou->settings.key[KEY_MOVE]))
-			input |= MOVE;
-		if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_ATTACK])) {
-			if (event && event->type == sfEvtKeyPressed) {
-				if (event->key.code == garou->settings.key[KEY_UP])
-					input |= ATTACK | CAPACITY1;
-				if (event->key.code == garou->settings.key[KEY_LEFT])
-					input |= ATTACK | CAPACITY2;
-				if (event->key.code == garou->settings.key[KEY_RIGHT])
-					input |= ATTACK | CAPACITY3;
-				if (event->key.code == garou->settings.key[KEY_DOWN])
-					input |= ATTACK | CAPACITY4;
-			}
-		}
-		else {
-			sfKeyboard_isKeyPressed(garou->settings.key[KEY_LEFT]) ? input |= LEFT : 0;
-			sfKeyboard_isKeyPressed(garou->settings.key[KEY_RIGHT]) ? input |= RIGHT : 0;
-			sfKeyboard_isKeyPressed(garou->settings.key[KEY_UP]) ? input |= UP : 0;
-			sfKeyboard_isKeyPressed(garou->settings.key[KEY_DOWN])? input |= DOWN : 0;
-		}
-		if (event && event->type == sfEvtKeyPressed && event->key.code == garou->settings.key[KEY_WAIT])
-			input |= WAIT;
-		if (event && event->type == sfEvtKeyPressed && event->key.code == sfKeyM && garou->inventory[0] != NONE) {
-			if (garou->inventory[0] == ORAN_BERRY) {
-				entity->life += 20;
-				if (entity->life > STAT(*entity, life))
-					entity->life = STAT(*entity, life);
-			}
-			if (garou->inventory[0] == MAX_ELIXIR) {
-				size_t max = 0;
-
-				for (size_t i = 1; i < 4; i++)
-					if (CAPACITY(*entity, i).pp - entity->pp[i] > CAPACITY(*entity, max).pp - entity->pp[max])
-						max = i;
-				entity->pp[max] += 10;
-				if (entity->pp[max] > CAPACITY(*entity, max).pp)
-					entity->pp[max] = CAPACITY(*entity, max).pp;
-			}
-			garou->inventory[0] = NONE;
-			input = WAIT;
-		}
-	}
+	if (entity->ia == 0)
+		input = player(entity, garou, event);
 	else
 		input = ia(entity, &garou->dungeon.map, info);
 	return (manage_input(entity, &garou->dungeon.map, info, input));

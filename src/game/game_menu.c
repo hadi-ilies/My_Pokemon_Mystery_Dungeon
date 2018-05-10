@@ -77,10 +77,8 @@ int run_dungeon(sfRenderWindow *window, garou_t *garou, ssize_t level_diff)
 			garou->dungeon.entity[i].dir = V2I(0, 0);
 			garou->dungeon.entity[i].pos = rand_pos_ground(&garou->dungeon.map);
 		}
-		// -------------player--------------------------------
 		garou->dungeon.entity[0].dir = V2I(0, 0);
 		garou->dungeon.entity[0].pos = rand_pos_ground(&garou->dungeon.map);
-		// ---------------------------------------------------
 		if (game_loop(window, garou) == 0)
 			return (0);
 	}
@@ -111,7 +109,9 @@ int game_menu(sfRenderWindow *window)
 	if (garou.dungeon.map.error != ERR_OK || garou.dungeon.entity == NULL)
 		return (84);
 	garou.dungeon.entity[0] = garou.player;
+	sfMusic_play(garou.music);
 	result = run_dungeon(window, &garou, -3);
+	sfMusic_stop(garou.music);
 	if (result == 84)
 		return (84);
 	dungeon_destroy(&garou.dungeon);
