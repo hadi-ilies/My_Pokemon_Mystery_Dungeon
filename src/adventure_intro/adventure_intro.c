@@ -30,6 +30,7 @@ void adventure_intro(sfRenderWindow *window, menu_t *menu)
 	intro_adventure_t ad_intro = ad_intro_create();
 	sfEvent event;
 	size_t button = 0;
+	bool set_one = true;
 
 	sfMusic_pause(menu->sound.sound_effect[6]);
 	sfMusic_play(menu->sound.music[1]);
@@ -39,7 +40,7 @@ void adventure_intro(sfRenderWindow *window, menu_t *menu)
 				return;
 		}
 		sfRenderWindow_clear(window, sfBlack);
-		illustration(window, button, &ad_intro);
+		illustration(window, button, &ad_intro, &set_one);
 		display_history(window, &ad_intro, button, menu);
 		sfRenderWindow_display(window);
 	}

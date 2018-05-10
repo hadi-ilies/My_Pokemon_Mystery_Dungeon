@@ -18,8 +18,6 @@ void create_option_choice(sfText *choice[3], sfFont *font)
 	}
 }
 
-/*setting | setting call from there*/
-
 option_t option_create(sfRenderWindow *window)
 {
 	option_t option;
@@ -34,6 +32,6 @@ option_t option_create(sfRenderWindow *window)
 	option.size_x = 1920;
 	option.size_y = 1080;
 	option.choice_curs = 0;
-	option.nb_tile = 0;
+	option.nb_tile = 2;
 	return (option);
 }

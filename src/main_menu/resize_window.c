@@ -41,10 +41,10 @@ void resize_win(sfRenderWindow *window, option_t *option)
 		char **size = my_str_to_tab(str, "X ");
 		unsigned int size_x = (unsigned int) my_atoi(size[0]);
 		unsigned int size_y = (unsigned int) my_atoi(size[1]);
-		sfView *view = sfView_createFromRect(FR(0, 0, size_x, size_y));
 
 		sfRenderWindow_setSize(window, V2U(size_x, size_y));
-		sfRenderWindow_setView(window, view);
-
 	}
 }
+
+/*sfView *view = sfView_createFromRect(FR(0, 0, size_x, size_y));
+sfRenderWindow_setView(window, view);*/

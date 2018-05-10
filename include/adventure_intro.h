@@ -34,7 +34,7 @@ void adventure_intro(sfRenderWindow *window, menu_t *menu);
 void display_history(sfRenderWindow *window, intro_adventure_t *ad_intro,
 		size_t button, menu_t *menu);
 void illustration(sfRenderWindow *window, size_t button,
-		intro_adventure_t *ad_intro);
+		  intro_adventure_t *ad_intro, bool *set_one);
 void ad_intro_destroy(intro_adventure_t *ad_intro);
 void illustration_end(size_t button, intro_adventure_t *ad_intro);
 void adventure_end(sfRenderWindow *window, menu_t *menu);
