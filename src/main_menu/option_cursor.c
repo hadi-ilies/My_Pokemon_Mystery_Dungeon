@@ -16,7 +16,7 @@ void option_choice_cursor(option_t *option, sfRenderWindow *window)
 	int pos_y = WINDOW_SIZE.y / 2 - 300;
 
 	sfText_setString(option->choice[0], "WINDOW RESOLUTION");
-	sfText_setString(option->choice[1], "GAME VOLUME");
+	sfText_setString(option->choice[1], "MUSIC VOLUME");
 	sfText_setString(option->choice[2], "SOUND VOLUME");
 	for (size_t i = 0; i < 3; i++) {
 		sfText_setPosition(option->choice[i],
