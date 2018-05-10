@@ -9,6 +9,7 @@
 #define GAME_RESOURCE_H_
 
 #include <SFML/Graphics.h>
+#include <SFML/Audio.h>
 #include "settings.h"
 #include "dungeon.h"
 #include "map.h"
@@ -20,6 +21,7 @@
 
 // file_macros
 #define GAME_FONT "resources/font/Minecraftia.ttf"
+#define GAME_MUSIC "resources/music/adventure.ogg"
 #define CAPACITY_UP "resources/texture/Bup.png"
 #define CAPACITY_LEFT "resources/texture/Bleft.png"
 #define CAPACITY_RIGHT "resources/texture/Bright.png"
@@ -35,6 +37,7 @@ typedef struct {
 	entity_t player;
 	dungeon_t dungeon;
 	enum item_e inventory[INVENTORY_SIZE];
+	sfMusic *music;
 	settings_t settings;
 } garou_t;
 
@@ -42,6 +45,7 @@ garou_t garou_create(char *settings_file_name);
 void garou_destroy(garou_t *garou);
 void capacity_aff(sfRenderWindow *window, garou_t *garou);
 void inventory_aff(sfRenderWindow *window, garou_t *garou);
+// la !
 size_t ia(entity_t *entity, map_t *map,
 	  entity_t *info[map->nb_case_x][map->nb_case_y]);
 void spread(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y],
