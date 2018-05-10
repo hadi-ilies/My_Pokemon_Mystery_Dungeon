@@ -29,7 +29,7 @@
 #define COND_WIDTH sfRectangleShape_setSize(rect, (sfVector2f) {size_w == 800 \
 				? size_w = 400 : (size_w++), size_h})
 #define PIX rect.left - rect.width / 2 - 10
-#define PIY  rect.top - rect.height / 2 - 10
+#define PIY rect.top - rect.height / 2 - 10
 #define WINDOW_SIZE sfRenderWindow_getSize(window)
 #define WIN_REC (sfFloatRect) {WINDOW_SIZE.x / 2, WINDOW_SIZE.y / 2, \
 			WINDOW_SIZE.x, WINDOW_SIZE.y}
@@ -62,5 +62,9 @@
 #define RIP "resources/texture/rip.png"
 #define GAME_COND game_menu(window) == 0 ? game_over(window, menu)\
 		: adventure_end(window, menu)
-
+#define LEVEL garou->dungeon.entity[0].level + level_diff + garou->\
+	dungeon.stage_num / 2
+#define LIFE STAT(garou->dungeon.entity[i], life)
+#define POSITION rand_pos_ground(&garou->dungeon.map)
+#define STEPS garou->dungeon.stage_num < garou->dungeon.nb_stage
 #endif

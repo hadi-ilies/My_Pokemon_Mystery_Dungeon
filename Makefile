@@ -48,6 +48,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(INTRODIR)destroy_intro.c \
 			$(INTRODIR)factories.c \
 			$(GAMEDIR)game_menu.c \
+			$(GAMEDIR)dungeon.c \
 			$(GAMEDIR)game_loop.c \
 			$(IADIR)ia.c \
 			$(IADIR)spread.c \

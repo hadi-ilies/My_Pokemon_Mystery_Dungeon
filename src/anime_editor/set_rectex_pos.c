@@ -43,7 +43,7 @@ static void sprite_move(sfEvent *event, sfRenderWindow *window,
 }
 
 void set_rectex_pos(sfEvent *event, sfRenderWindow *window,
-		    rectex_t *rectex, sfSprite *sprite)
+		rectex_t *rectex, sfSprite *sprite)
 {
 	sfFloatRect sprite_rect = get_sprite_rect(sprite);
 

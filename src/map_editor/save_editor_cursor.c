@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2018
+1;4804;0c** EPITECH PROJECT, 2018
 ** cursor map editor
 ** File description:
 ** cursor map editor
@@ -36,7 +36,7 @@ void move_curseur_save_editor(save_editor_t *save, sfEvent *event)
 		&& save->choice_curs > 0)
 			save->choice_curs--;
 		if (sfKeyboard_isKeyPressed(sfKeyDown)
-		&& save->choice_curs <  1)
+		&& save->choice_curs < 1)
 			save->choice_curs++;
 	}
 }

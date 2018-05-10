@@ -11,7 +11,7 @@
 #include "macro.h"
 
 static void rectex_set_size(rectex_t *rectex, sfRenderWindow *window,
-			    sfSprite *sprite)
+			sfSprite *sprite)
 {
 	sfFloatRect sprite_rect = get_sprite_rect(sprite);
 
@@ -36,7 +36,7 @@ static void aff(sfRenderWindow *window, sfSprite *sprite,
 }
 
 static void set_up(sfRectangleShape *rect, sfSprite *sprite,
-		   anime_tab_t *anime_tab, rectex_t *rectex)
+		anime_tab_t *anime_tab, rectex_t *rectex)
 {
 	sfIntRect sprite_rect = {0, 0, 10, 10};
 	size_t num = rectex->texture_num;

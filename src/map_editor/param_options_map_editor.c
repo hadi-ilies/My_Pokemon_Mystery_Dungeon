@@ -20,7 +20,7 @@
 void change_tile_map(sfRenderWindow *window,
 		option_editor_t *option, sfEvent *event)
 {
-	size_t nb_filename =  count_file(TILE_MAP);
+	size_t nb_filename = count_file(TILE_MAP);
 	char **filename = take_filename(TILE_MAP);
 
 	for (size_t i = 0; i < nb_filename; i++)

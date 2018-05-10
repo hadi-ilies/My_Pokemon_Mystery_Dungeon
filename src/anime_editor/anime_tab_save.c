@@ -48,11 +48,11 @@ static void save_anime_part3(anime_tab_t *anime_tab, int fd, size_t i)
 		anime_tab->error = ERR_WRITE;
 		return;
 	} for (size_t j = 0; j < anime_tab->anime[i].nb_rectex; j++)
-		  if (write(fd, &anime_tab->anime[i].rectex[j],
+		if (write(fd, &anime_tab->anime[i].rectex[j],
 			RECTEX_T) != RECTEX_T) {
 			anime_tab->error = ERR_WRITE;
-			  return;
-		  }
+			return;
+		}
 	if (write(fd, &anime_tab->anime[i].time, SIZE_T) != SIZE_T) {
 		anime_tab->error = ERR_WRITE;
 		return;

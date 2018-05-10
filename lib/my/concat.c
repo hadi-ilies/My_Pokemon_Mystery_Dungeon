@@ -20,7 +20,7 @@ char *inttostr(int nb)
 	for (int i = 0; i <= size; i++)
 		str[i] = '\0';
 	for (int j = 1; nb > 0 ; j++) {
-		str[size - j] =  nb % 10 + '0';
+		str[size - j] = nb % 10 + '0';
 		nb /= 10;
 	}
 	return (str);

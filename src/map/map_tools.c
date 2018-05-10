@@ -75,9 +75,9 @@ void linking_rooms(map_t *map)
 		size = path_map(map, &V2I(x, y), 0, rand() % 2 ? 1 : -1);
 		size.x || size.y ? dig_path(map, size, x, y) : n++;
 	} for (size_t i = 0; i < map->nb_case_x; i++)
-		  for (size_t j = 0; j < map->nb_case_y; j++) {
+		for (size_t j = 0; j < map->nb_case_y; j++) {
 			map->tab[i][j].type == WATER
 				? map->tab[i][j].type = GROUND : 0;
 			map_smooth(map, i, j);
-		  }
+		}
 }

@@ -61,6 +61,6 @@ anime_tab_t anime_tab_create_from_file(char *file_name);
 anime_tab_t anime_tab_copy(anime_tab_t *anime_tab);
 void anime_tab_destroy(anime_tab_t *anime_tab);
 void anime_tab_aff(sfRenderWindow *window, anime_tab_t *anime_tab,
-		   sfFloatRect rect);
+		sfFloatRect rect);
 
 #endif

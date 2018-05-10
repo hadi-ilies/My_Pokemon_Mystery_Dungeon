@@ -14,8 +14,8 @@
 
 #define my_printf(str, ...) my_fprintf(STDOUT_FILENO, str, __VA_ARGS__)
 #define CREAT(file_name, mode) open(file_name,				\
-				    O_WRONLY | O_TRUNC | O_CREAT,	\
-				    mode)
+				O_WRONLY | O_TRUNC | O_CREAT,	\
+				mode)
 #define READ(value, size) read(fd, value, size) != size
 #define RAND_MIN_MAX(min, max) (rand() % (max - min + 1) + min)
 

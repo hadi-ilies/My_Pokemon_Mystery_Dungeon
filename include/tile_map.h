@@ -47,6 +47,6 @@ tile_map_t tile_map_create_from_file(char *file_name);
 tile_map_t tile_map_create_from_fd(int fd);
 void tile_map_destroy(tile_map_t *tile_map);
 void tile_map_aff(sfRenderWindow *window, tile_map_t *tile_map,
-		  tva_t tva, sfFloatRect rect);
+		tva_t tva, sfFloatRect rect);
 bool error_map5(tile_map_t *tile_map, int fd, size_t i);
 #endif

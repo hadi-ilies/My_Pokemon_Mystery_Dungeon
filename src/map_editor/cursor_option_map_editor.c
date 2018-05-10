@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2018
+1;4804;0c** EPITECH PROJECT, 2018
 ** curs
 ** File description:
 ** curs
@@ -24,7 +24,7 @@ void move_curseur_option_editor(option_editor_t *option, sfEvent *event)
 		&& option->choice_curs > 0) {
 			option->choice_curs--;
 		} if (sfKeyboard_isKeyPressed(sfKeyDown)
-		&& option->choice_curs <  2) {
+		&& option->choice_curs < 2) {
 			option->choice_curs++;
 		}
 	}

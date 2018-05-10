@@ -22,7 +22,7 @@ size_t move_curseur_editor(menu_t *menu, sfEvent *event)
 			sfMusic_play(menu->sound.sound_effect[5]);
 			y--;
 		} if (sfKeyboard_isKeyPressed(sfKeyDown)
-		&& y <  NB_BUTTON_EDITOR - 1) {
+		&& y < NB_BUTTON_EDITOR - 1) {
 			sfMusic_play(menu->sound.sound_effect[5]);
 			y++;
 		}

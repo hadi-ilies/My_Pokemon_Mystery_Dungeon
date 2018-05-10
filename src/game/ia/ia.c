@@ -10,7 +10,7 @@
 #include "input.h"
 
 static entity_t *get_cible(entity_t *entity, map_t *map,
-			   entity_t *info[map->nb_case_x][map->nb_case_y])
+			entity_t *info[map->nb_case_x][map->nb_case_y])
 {
 	const size_t dist = 5;
 	size_t i_min;
@@ -32,7 +32,7 @@ static entity_t *get_cible(entity_t *entity, map_t *map,
 }
 
 size_t ia(entity_t *entity, map_t *map,
-	  entity_t *info[map->nb_case_x][map->nb_case_y])
+	entity_t *info[map->nb_case_x][map->nb_case_y])
 {
 	entity_t *cible = get_cible(entity, map, info);
 	size_t tab[map->nb_case_x][map->nb_case_y];

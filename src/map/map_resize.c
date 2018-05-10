@@ -9,7 +9,7 @@
 #include "map.h"
 
 static void swap_map(map_t *map, tva_t **tab,
-		     size_t nb_case_x, size_t nb_case_y)
+		size_t nb_case_x, size_t nb_case_y)
 {
 	for (size_t i = 0; i < map->nb_case_x; i++)
 		for (size_t j = 0; j < map->nb_case_y; j++)

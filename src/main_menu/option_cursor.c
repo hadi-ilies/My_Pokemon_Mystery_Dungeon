@@ -35,7 +35,7 @@ void option_move_cursor(option_t *option, sfEvent *event)
 		&& option->choice_curs > 0) {
 			option->choice_curs--;
 		} if (sfKeyboard_isKeyPressed(sfKeyDown)
-		&& option->choice_curs <  2) {
+		&& option->choice_curs < 2) {
 			option->choice_curs++;
 		}
 	}

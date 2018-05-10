@@ -9,7 +9,7 @@
 #include "tile_name.h"
 
 static void one_spread(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y],
-		       size_t x, size_t y)
+		size_t x, size_t y)
 {
 	for (char i = -1; i <= 1; i++)
 		for (char j = -1; j <= 1; j++) {
@@ -21,7 +21,7 @@ static void one_spread(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y],
 }
 
 static void spread_cycle(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y],
-			 size_t n)
+			size_t n)
 {
 	for (size_t i = 1; i < map->nb_case_x - 1; i++)
 		for (size_t j = 1; j < map->nb_case_y - 1; j++)
@@ -29,7 +29,7 @@ static void spread_cycle(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y],
 }
 
 void spread(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y],
-	    entity_t *cible)
+	entity_t *cible)
 {
 	const size_t spread_dist = 20;
 

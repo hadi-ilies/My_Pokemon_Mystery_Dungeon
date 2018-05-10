@@ -75,7 +75,7 @@ static void set_anime_hurt(entity_t *entity)
 }
 
 void entity_attack(entity_t *entity, const capacity_t *capacity, map_t *map,
-		   entity_t *info[map->nb_case_x][map->nb_case_y])
+		entity_t *info[map->nb_case_x][map->nb_case_y])
 {
 	set_anime_atk(entity);
 	if (INFO(*entity)) {
@@ -99,8 +99,8 @@ void entity_attack(entity_t *entity, const capacity_t *capacity, map_t *map,
 }
 
 bool manage_input(entity_t *entity, map_t *map,
-		  entity_t *info[map->nb_case_x][map->nb_case_y],
-		  size_t input)
+		entity_t *info[map->nb_case_x][map->nb_case_y],
+		size_t input)
 {
 	if (sfClock_getElapsedTime(entity->clock).microseconds < TIME_MOVE)
 		return (false);
@@ -209,8 +209,8 @@ size_t player(entity_t *entity, garou_t *garou, sfEvent *event)
 }
 
 bool entity_set_dir(entity_t *entity, garou_t *garou,
-		    entity_t *GET_INFO(garou->dungeon.map),
-		    sfEvent *event)
+		entity_t *GET_INFO(garou->dungeon.map),
+		sfEvent *event)
 {
 	size_t input = 0;
 
@@ -237,13 +237,13 @@ void info_update(garou_t *garou,
 }
 
 /*---life_aff---------
-  rect.left -> pos.x
-  rect.top -> pos.y
-  rect.width -> size.x of 1 HP and height of white rods
-  rect.height -> size.y
-  -----------------*/
+rect.left -> pos.x
+rect.top -> pos.y
+rect.width -> size.x of 1 HP and height of white rods
+rect.height -> size.y
+-----------------*/
 void entity_life_aff(sfRenderWindow *window, entity_t *entity,
-		     sfFloatRect rect)
+		sfFloatRect rect)
 {
 	sfRectangleShape *rectangle = sfRectangleShape_create();
 	size_t life_max = STAT(*entity, life);

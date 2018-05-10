@@ -21,7 +21,7 @@ size_t move_curseur(menu_t *menu, sfEvent *event)
 			sfMusic_play(menu->sound.sound_effect[5]);
 			r = 100;
 		} if (r == 0 && sfKeyboard_isKeyPressed(sfKeyDown)
-		&& y <  NB_BUTTON - 1) {
+		&& y < NB_BUTTON - 1) {
 			y += 1;
 			sfMusic_play(menu->sound.sound_effect[5]);
 			r = -100;

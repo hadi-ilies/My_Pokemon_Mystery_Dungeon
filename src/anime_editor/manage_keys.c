@@ -67,7 +67,7 @@ static void manage_rectex(rectex_t *rectex)
 }
 
 static void manage_rectex2(anime_tab_t *anime_tab, rectex_t *rectex,
-			   size_t *anime_num, size_t *rectex_num)
+			size_t *anime_num, size_t *rectex_num)
 {
 	if (sfKeyboard_isKeyPressed(sfKeyEqual)) {
 		if (*rectex_num > 0) {

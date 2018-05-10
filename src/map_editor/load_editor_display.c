@@ -26,7 +26,7 @@ void display_load_list(load_editor_t *load, sfRenderWindow *window,
 	V2F(WINDOW_SIZE.x / 2 + 600, WINDOW_SIZE.y / 2));
 	sfRenderWindow_drawSprite(window, screen, NULL);
 	sfRenderWindow_drawRectangleShape(window, back, NULL);
-	count_file(MAPS) > 5  ?
+	count_file(MAPS) > 5 ?
 		load_list_choice_cursor(load, window) :
 		load_list_choice_min(load, window);
 }

@@ -26,9 +26,9 @@
 #define NEW_Y(entity) (entity).pos.y + (entity).dir.y
 #define INFO(entity) info[NEW_X(entity)][NEW_Y(entity)]
 #define STAT(entity, stat) (size_t)(((entity).base_stat.stat		\
-				     + (entity).ev.stat + (entity).iv.stat) \
-				    * ((entity).level / 100.0) *	\
-				    ((entity).boost.stat * 0.5 + 1.0))
+				+ (entity).ev.stat + (entity).iv.stat) \
+				* ((entity).level / 100.0) *	\
+				((entity).boost.stat * 0.5 + 1.0))
 #define STATATK(entity, capacity) (capacity).category == PHYSICAL ?	\
 		STAT(entity, atk) : STAT(entity, spa)
 #define STATDEF(entity, capacity) (capacity).category == PHYSICAL ?	\
@@ -36,11 +36,11 @@
 #define CAPACITY(entity, num) capacity_tab[(entity).capacity_num[num]]
 #define CAN_MOVE(entity) !INFO(entity)					\
 	&& (map->tab[NEW_X(entity)][NEW_Y(entity)].type == GROUND	\
-	    || (map->tab[NEW_X(entity)][NEW_Y(entity)].type == WATER	\
+	|| (map->tab[NEW_X(entity)][NEW_Y(entity)].type == WATER	\
 		&& ((entity).type == TYPE_WATER				\
-		    || (entity).type == TYPE_FLYING			\
-		    || (entity).type2 == TYPE_WATER			\
-		    || (entity).type2 == TYPE_FLYING)))
+		|| (entity).type == TYPE_FLYING			\
+		|| (entity).type2 == TYPE_WATER			\
+		|| (entity).type2 == TYPE_FLYING)))
 
 typedef struct {
 	ssize_t life;

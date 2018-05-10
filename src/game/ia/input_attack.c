@@ -32,8 +32,8 @@ static size_t get_input(map_t *map,
 }
 
 size_t input_attack(entity_t *entity, map_t *map,
-		    size_t tab[map->nb_case_x][map->nb_case_y],
-		    entity_t *info[map->nb_case_x][map->nb_case_y])
+		size_t tab[map->nb_case_x][map->nb_case_y],
+		entity_t *info[map->nb_case_x][map->nb_case_y])
 {
 	size_t input = 0;
 
