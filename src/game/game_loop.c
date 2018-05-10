@@ -113,7 +113,6 @@ bool manage_input(entity_t *entity, map_t *map,
 		input & UP ? entity->dir.y = -1 : 0;
 		input & DOWN ? entity->dir.y = 1 : 0;
 	}
-	set_anime_idle(entity);
 	if (input & MOVE && input & (LEFT | RIGHT | UP | DOWN))
 		if (entity_move(entity, map, info))
 			return (true);
@@ -153,10 +152,13 @@ bool manage_input(entity_t *entity, map_t *map,
 		}
 	}
 	if (input & WAIT) {
+		entity->anime_tab.num = ANIME_SLEEP;
 		if (entity->life < STAT(*entity, life))
 			entity->life++;
 		return (true);
 	}
+	if (entity->anime_tab.num != ANIME_SLEEP)
+		set_anime_idle(entity);
 	return (false);
 }
 
@@ -215,7 +217,7 @@ bool entity_set_dir(entity_t *entity, garou_t *garou,
 }
 
 void info_update(garou_t *garou,
-		 entity_t *info[garou->dungeon.map.nb_case_x][garou->dungeon.map.nb_case_y])
+		 entity_t *GET_INFO(garou->dungeon.map))
 {
 	for (size_t i = 0; i < garou->dungeon.map.nb_case_x; i++)
 		for (size_t j = 0; j < garou->dungeon.map.nb_case_y; j++)
@@ -235,7 +237,8 @@ void info_update(garou_t *garou,
   rect.width -> size.x of 1 HP and height of white rods
   rect.height -> size.y
   -----------------*/
-void entity_life_aff(sfRenderWindow *window, entity_t *entity, sfFloatRect rect)
+void entity_life_aff(sfRenderWindow *window, entity_t *entity,
+		     sfFloatRect rect)
 {
 	sfRectangleShape *rectangle = sfRectangleShape_create();
 	size_t life_max = STAT(*entity, life);

@@ -39,7 +39,7 @@ void anime_tab_add_texture(anime_tab_t *anime_tab, char *file_name)
 int anime_editor_menu(sfRenderWindow *window)
 {
 	anime_tab_t anime_tab;
-	char *conf = "resources/anime_tab/gobou_config";
+	char *conf = "resources/anime_tab/insolourdo_config";
 
 	anime_tab = anime_tab_create_from_file(conf);
 	if (anime_tab.error != ERR_OK)
