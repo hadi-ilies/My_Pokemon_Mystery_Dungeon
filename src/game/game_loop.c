@@ -14,20 +14,7 @@
 #include "capacity_tab.h"
 #include "item_tab.h"
 #include "macro.h"
-
-enum input {
-	DOWN = 0b00000000001,
-	UP = 0b00000000010,
-	RIGHT = 0b00000000100,
-	LEFT = 0b00000001000,
-	MOVE = 0b00000010000,
-	CAPACITY1 = 0b00000100000,
-	CAPACITY2 = 0b00001000000,
-	CAPACITY3 = 0b00010000000,
-	CAPACITY4 = 0b00100000000,
-	ATTACK = 0b01000000000,
-	WAIT = 0b10000000000,
-};
+#include "input.h"
 
 static void set_anime_idle(entity_t *entity)
 {
@@ -171,71 +158,6 @@ bool manage_input(entity_t *entity, map_t *map,
 		return (true);
 	}
 	return (false);
-}
-
-entity_t *get_cible(entity_t *entity, map_t *map,
-		    entity_t *info[map->nb_case_x][map->nb_case_y])
-{
-	size_t dist = 5;
-	size_t i_min = (entity->pos.x - (ssize_t)dist >= 0 ? entity->pos.x - dist : 0);
-	size_t j_min = (entity->pos.y - (ssize_t)dist >= 0 ? entity->pos.y - dist : 0);
-	size_t i_max = (entity->pos.x + dist <= map->nb_case_x - 1 ? entity->pos.x + dist : map->nb_case_x - 1);
-	size_t j_max = (entity->pos.y + dist <= map->nb_case_y - 1 ? entity->pos.y + dist : map->nb_case_y - 1);
-
-	for (size_t i = i_min; i < i_max; i++)
-		for (size_t j = j_min; j < j_max; j++)
-			if (info[i][j] && info[i][j]->ia == 0)
-			return (info[i][j]);
-
-	return (NULL);
-}
-
-void ia2(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y], size_t x, size_t y)
-{
-	for (char i = -1; i <= 1; i++)
-		for (char j = -1; j <= 1; j++)
-			if (map->tab[x + i][y + j].type == GROUND && tab[x + i][y + j] == 0) //
-				tab[x + i][y + j] = tab[x][y] + 1;
-}
-
-size_t ia(entity_t *entity, map_t *map,
-	  entity_t *info[map->nb_case_x][map->nb_case_y])
-{
-	size_t input = 0;
-	entity_t *cible = get_cible(entity, map, info);
-
-	if (cible) {
-		size_t tab[map->nb_case_x][map->nb_case_y];
-
-		for (size_t i = 0; i < map->nb_case_x; i++)
-			for (size_t j = 0; j < map->nb_case_y; j++)
-				tab[i][j] = 0;
-		tab[cible->pos.x][cible->pos.y] = 1;
-		for (size_t n = 1; n <= 20; n++)
-			for (size_t i = 1; i < map->nb_case_x - 1; i++)
-				for (size_t j = 1; j < map->nb_case_y - 1; j++)
-					if (tab[i][j] == n)
-						ia2(map, tab, i, j);
-		if (tab[entity->pos.x][entity->pos.y] == 0)
-			input = (rand() % 0b1111 + 1) | MOVE | WAIT;
-		else
-			for (char i = -1; i <= 1; i++)
-				for (char j = -1; j <= 1; j++)
-					if (tab[entity->pos.x + i][entity->pos.y + j] < tab[entity->pos.x][entity->pos.y] && tab[entity->pos.x + i][entity->pos.y + j] != 0) {
-						i == -1 ? input |= LEFT : 0;
-						i == 1 ? input |= RIGHT : 0;
-						j == -1 ? input |= UP : 0;
-						j == 1 ? input |= DOWN : 0;
-						if (info[entity->pos.x + i][entity->pos.y + j] && info[entity->pos.x + i][entity->pos.y + j]->ia == 0)
-							input |= ATTACK;
-						else
-							input |= MOVE;
-						input |= WAIT;
-					}
-	}
-	else
-		input = (0b001 << (rand() % 4)) | MOVE | WAIT;
-	return (input);
 }
 
 bool entity_set_dir(entity_t *entity, garou_t *garou,
@@ -478,7 +400,8 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 		bool next = garou->dungeon.entity[entity_turn].life ? false : true;
 
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			evt_close(&event, window);
+			if (evt_close(&event, window))
+				return (0);
 			if (!next && !garou->dungeon.entity[entity_turn].ia) {
 				info_update(garou, info);
 				if (entity_set_dir(&garou->dungeon.entity[entity_turn], garou, info, &event))

@@ -48,6 +48,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(INTRODIR)factories.c \
 			$(GAMEDIR)game_menu.c \
 			$(GAMEDIR)game_loop.c \
+			$(GAMEDIR)ia.c \
 			$(MAPEDIR)load_map_editor.c \
 			$(MAPEDIR)save_map_editor_create.c \
 			$(MAPEDIR)factories_editor.c \
