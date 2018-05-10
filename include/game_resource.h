@@ -45,19 +45,28 @@ garou_t garou_create(char *settings_file_name);
 void garou_destroy(garou_t *garou);
 void capacity_aff(sfRenderWindow *window, garou_t *garou);
 void inventory_aff(sfRenderWindow *window, garou_t *garou);
-// la !
+void atk_stat(garou_t *garou, sfRenderWindow *window,
+	sfText *text, sfRectangleShape *rectangle_ombre);
+void def_stat(garou_t *garou, sfRenderWindow *window,
+	sfText *text, sfRectangleShape *rectangle_ombre);
+void spa_stat(garou_t *garou, sfRenderWindow *window,
+	sfText *text, sfRectangleShape *rectangle_ombre);
+void spd_stat(garou_t *garou, sfRenderWindow *window,
+	sfText *text, sfRectangleShape *rectangle_ombre);
+void hp_stat(garou_t *garou, sfRenderWindow *window,
+	sfText *text, sfFont *font);
 size_t ia(entity_t *entity, map_t *map,
-	  entity_t *info[map->nb_case_x][map->nb_case_y]);
+	entity_t *info[map->nb_case_x][map->nb_case_y]);
 void spread(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y],
-	    entity_t *cible);
+	entity_t *cible);
 size_t input_attack(entity_t *entity, map_t *map,
-		    size_t tab[map->nb_case_x][map->nb_case_y],
-		    entity_t *info[map->nb_case_x][map->nb_case_y]);
+		size_t tab[map->nb_case_x][map->nb_case_y],
+		entity_t *info[map->nb_case_x][map->nb_case_y]);
 size_t input_move_short(entity_t *entity, map_t *map,
 			size_t tab[map->nb_case_x][map->nb_case_y],
 			entity_t *info[map->nb_case_x][map->nb_case_y]);
 size_t input_move_long(entity_t *entity, map_t *map,
-		       size_t tab[map->nb_case_x][map->nb_case_y],
-		       entity_t *info[map->nb_case_x][map->nb_case_y]);
+		size_t tab[map->nb_case_x][map->nb_case_y],
+		entity_t *info[map->nb_case_x][map->nb_case_y]);
 
 #endif
