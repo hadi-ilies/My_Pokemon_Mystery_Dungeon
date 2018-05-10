@@ -112,6 +112,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(GAROUDIR)garou_create.c \
 			$(GAROUDIR)garou_destroy.c \
 			$(GAROUDIR)capacity_aff.c \
+			$(GAROUDIR)inventory_aff.c \
 			$(DUNGEONDIR)dungeon_create.c \
 			$(DUNGEONDIR)dungeon_destroy.c \
 			$(STGSDIR)settings_defaut.c \

@@ -18,7 +18,7 @@
 #define WINDOW_WIDTH 1920
 #define WINDOW_HEIGHT 1080
 #define WINDOW_BITS_PER_PIXEL 32
-#define WINDOW_PARAMS sfClose
+#define WINDOW_PARAMS sfFullscreen
 #define FRAMERATE_LIMIT 30
 #define WINDOW_NAME "My_pokemon_mystery_dungeons (Pokemon fan game)"
 
@@ -35,6 +35,7 @@ void destroy_music(sfMusic *music[3]);
 int game_menu(sfRenderWindow *window);
 int map_editor_menu(sfRenderWindow *window);
 int anime_editor_menu(sfRenderWindow *window);
+void anime_tab_save(anime_tab_t *anime_tab, char *file_name);
 int game_loop(sfRenderWindow *window, garou_t *garou);
 int map_editor_loop(sfRenderWindow *window, map_t *map);
 void anime_editor_loop(sfRenderWindow *window, anime_tab_t *anime_tab);

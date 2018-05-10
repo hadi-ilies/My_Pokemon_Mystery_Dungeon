@@ -53,6 +53,4 @@ enum anime_name {
 	ANIME_NB
 };
 
-void save(anime_tab_t *anime_tab, char *file_name);
-
 #endif
