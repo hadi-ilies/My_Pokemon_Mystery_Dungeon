@@ -85,7 +85,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(MAPEDIR)map_editor_save.c \
 			$(ANIEDIR)anime_editor_menu.c \
 			$(ANIEDIR)anime_editor_loop.c \
-			$(ANIEDIR)save_anime.c \
+			$(ANIEDIR)anime_tab_save.c \
 			$(ANIEDIR)set_rectex_pos.c \
 			$(ANIEDIR)get_sprite_rect.c \
 			$(ANIEDIR)manage_keys.c \

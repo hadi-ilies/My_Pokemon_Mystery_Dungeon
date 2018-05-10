@@ -13,7 +13,7 @@
 #include "anime_tab.h"
 #include "anime_name.h"
 
-void save_anime_part1(anime_tab_t *anime_tab, int fd)
+static void save_anime_part1(anime_tab_t *anime_tab, int fd)
 {
 	if (fd == -1) {
 		anime_tab->error = ERR_OPEN;
@@ -25,7 +25,7 @@ void save_anime_part1(anime_tab_t *anime_tab, int fd)
 	}
 }
 
-void save_anime_part2(anime_tab_t *anime_tab, int fd)
+static void save_anime_part2(anime_tab_t *anime_tab, int fd)
 {
 	for (size_t i = 0; i < anime_tab->nb_texname; i++) {
 		size_t len = 0;
@@ -42,7 +42,7 @@ void save_anime_part2(anime_tab_t *anime_tab, int fd)
 	}
 }
 
-void save_anime_part3(anime_tab_t *anime_tab, int fd, size_t i)
+static void save_anime_part3(anime_tab_t *anime_tab, int fd, size_t i)
 {
 	if (write(fd, &anime_tab->anime[i].nb_rectex, SIZE_T) != SIZE_T) {
 		anime_tab->error = ERR_WRITE;
@@ -59,7 +59,7 @@ void save_anime_part3(anime_tab_t *anime_tab, int fd, size_t i)
 	}
 }
 
-void save(anime_tab_t *anime_tab, char *file_name)
+void anime_tab_save(anime_tab_t *anime_tab, char *file_name)
 {
 	int fd = CREAT(file_name, S_IRUSR | S_IWUSR | S_IRGRP);
 
