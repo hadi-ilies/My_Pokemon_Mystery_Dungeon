@@ -11,7 +11,6 @@
 #include "tile_name.h"
 #include "anime_name.h"
 #include "capacity_tab.h"
-#include "item_tab.h"
 #include "macro.h"
 #include "input.h"
 
