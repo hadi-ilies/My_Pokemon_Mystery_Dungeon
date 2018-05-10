@@ -65,13 +65,13 @@ static entity_t *generate_entitys(size_t nb_entity)
 	return (entity);
 }
 
-int run_dungeon(sfRenderWindow *window, garou_t *garou, size_t level)
+int run_dungeon(sfRenderWindow *window, garou_t *garou, ssize_t level_diff)
 {
 	for (; garou->dungeon.stage_num < garou->dungeon.nb_stage; garou->dungeon.stage_num++) {
 		map_random(&garou->dungeon.map);
 		put_item(&garou->dungeon.map);
 		for (size_t i = 1; i < garou->dungeon.nb_entity; i++) {
-			garou->dungeon.entity[i].level = level;
+			garou->dungeon.entity[i].level = garou->dungeon.entity[0].level + level_diff + garou->dungeon.stage_num / 2;
 			garou->dungeon.entity[i].life = STAT(garou->dungeon.entity[i], life);
 			garou->dungeon.entity[i].ia = 1;
 			garou->dungeon.entity[i].dir = V2I(0, 0);
@@ -111,7 +111,7 @@ int game_menu(sfRenderWindow *window)
 	if (garou.dungeon.map.error != ERR_OK || garou.dungeon.entity == NULL)
 		return (84);
 	garou.dungeon.entity[0] = garou.player;
-	result = run_dungeon(window, &garou, garou.player.level - 2);
+	result = run_dungeon(window, &garou, -3);
 	if (result == 84)
 		return (84);
 	dungeon_destroy(&garou.dungeon);

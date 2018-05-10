@@ -14,6 +14,7 @@ LIBDIR		=	lib/
 INCDIR		=	include/
 MENUDIR		=	$(SRCDIR)main_menu/
 GAMEDIR		=	$(SRCDIR)game/
+IADIR		=	$(GAMEDIR)ia/
 MAPEDIR		=	$(SRCDIR)map_editor/
 ANIEDIR		=	$(SRCDIR)anime_editor/
 MAPDIR		=	$(SRCDIR)map/
@@ -48,7 +49,11 @@ SRC		=	$(SRCDIR)main.c \
 			$(INTRODIR)factories.c \
 			$(GAMEDIR)game_menu.c \
 			$(GAMEDIR)game_loop.c \
-			$(GAMEDIR)ia.c \
+			$(IADIR)ia.c \
+			$(IADIR)spread.c \
+			$(IADIR)input_attack.c \
+			$(IADIR)input_move_short.c \
+			$(IADIR)input_move_long.c \
 			$(MAPEDIR)load_map_editor.c \
 			$(MAPEDIR)save_map_editor_create.c \
 			$(MAPEDIR)factories_editor.c \
