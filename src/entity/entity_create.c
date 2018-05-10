@@ -16,14 +16,14 @@ static void set_null(entity_t *entity)
 	entity->life = 0;
 	entity->type = TYPE_NULL;
 	entity->type2 = TYPE_NULL;
-	entity->ability = 0; // !!!
-	entity->nature = 0; // !!!
+	entity->ability = 0;
+	entity->nature = 0;
 	entity->base_stat = (stats_t){0, 0, 0, 0, 0, 0};
 	entity->ev = (stats_t){0, 0, 0, 0, 0, 0};
 	entity->iv = (stats_t){0, 0, 0, 0, 0, 0};
 	entity->boost = (stats_t){0, 0, 0, 0, 0, 0};
-	entity->item = 0; // !!!
-	entity->ia = 0; // !!!
+	entity->item = 0;
+	entity->ia = 0;
 	entity->dir = V2I(0, 0);
 	entity->pos = V2I(0, 0);
 }
