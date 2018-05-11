@@ -31,7 +31,7 @@ static void set_anime_move(entity_t *entity)
 }
 
 bool entity_move(entity_t *entity, map_t *map,
-		 entity_t *info[map->nb_case_x][map->nb_case_y])
+		entity_t *info[map->nb_case_x][map->nb_case_y])
 {
 	if (CAN_MOVE(*entity)) {
 		entity->pos.x += entity->dir.x;

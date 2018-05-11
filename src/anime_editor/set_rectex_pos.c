@@ -25,7 +25,7 @@ static void zoom(sfEvent *event, sfSprite *sprite)
 }
 
 static void sprite_move(sfEvent *event, sfRenderWindow *window,
-		 sfSprite *sprite)
+		sfSprite *sprite)
 {
 	sfFloatRect sprite_rect = get_sprite_rect(sprite);
 

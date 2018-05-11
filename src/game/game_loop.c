@@ -8,7 +8,7 @@
 #include "prototype.h"
 
 static void info_update(garou_t *garou,
-		 entity_t *GET_INFO(garou->dungeon.map))
+		entity_t *GET_INFO(garou->dungeon.map))
 {
 	for (size_t i = 0; i < garou->dungeon.map.nb_case_x; i++)
 		for (size_t j = 0; j < garou->dungeon.map.nb_case_y; j++)

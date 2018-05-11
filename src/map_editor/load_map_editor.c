@@ -29,9 +29,9 @@ void insert_maps_text(load_editor_t *load)
 
 char *maps_list(sfRenderWindow *window, load_editor_t *load)
 {
-	sfEvent event;
 	sfRectangleShape *back = create_back_param(window);
 	sfSprite *screen = create_screen_param(window);
+	sfEvent event;
 
 	insert_maps_text(load);
 	while (sfRenderWindow_isOpen(window)) {
@@ -39,7 +39,8 @@ char *maps_list(sfRenderWindow *window, load_editor_t *load)
 			if (EXIT) {
 				screen_and_back_destroy(back, screen);
 				return (NULL);
-			} if (ENTER_COND)
+			}
+			if (ENTER_COND)
 				return ((char *) GET_STRING);
 			move_curseur_load_list(load, &event);
 		}

@@ -57,12 +57,11 @@ void write_func(sfEvent *event, save_editor_t *save)
 
 void write_name(sfEvent *event, save_editor_t *save)
 {
-	if (event->type == sfEvtKeyPressed) {
-		if (my_strlen(save->name_file) < 20)
-			write_func(event, save);
-		if (event->key.code == sfKeyBack)
-			if (save->name_file != NULL
-			&& save->name_file[0] != '\0')
+	if (event->type != sfEvtKeyPressed)
+		return;
+	if (my_strlen(save->name_file) < 20)
+		write_func(event, save);
+	if (event->key.code == sfKeyBack)
+		if (save->name_file != NULL && save->name_file[0] != '\0')
 			save->name_file = supr_last_letter(save->name_file);
-	}
 }

@@ -28,11 +28,11 @@ void destroy_option_editor(option_editor_t *option)
 
 void new_map(map_t *map, sfRenderWindow *window)
 {
-	 option_editor_t option = param_map(NULL, window);
-	 char *str = (char *) sfText_getString(option.text[option.nb_tile]);
+	option_editor_t option = param_map(NULL, window);
+	char *str = (char *) sfText_getString(option.text[option.nb_tile]);
 
-	 *map = map_create(option.size_x, option.size_y,
+	*map = map_create(option.size_x, option.size_y,
 			concat("resources/tile_map/", str));
-	 destroy_option_editor(&option);
-	 map_smooth_all(map);
+	destroy_option_editor(&option);
+	map_smooth_all(map);
 }

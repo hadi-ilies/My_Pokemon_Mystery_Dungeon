@@ -48,12 +48,12 @@ char **take_filename(char *path)
 	if (dir == NULL)
 		return (0);
 	while ((d = readdir(dir))) {
-		if (d->d_name[0] != '.') {
-			for (j = 0; d->d_name[j] != '\0'; j++)
-				filename[i][j] = d->d_name[j];
-			filename[i][j] = '\0';
-			i++;
-		}
+		if (d->d_name[0] == '.')
+			continue;
+		for (j = 0; d->d_name[j] != '\0'; j++)
+			filename[i][j] = d->d_name[j];
+		filename[i][j] = '\0';
+		i++;
 	}
 	closedir(dir);
 	return (filename);

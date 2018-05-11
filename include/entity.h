@@ -85,7 +85,7 @@ entity_t entity_create_from_fd(int fd);
 void entity_destroy(entity_t *entity);
 void entity_save(entity_t *entity, char *file_name);
 bool entity_move(entity_t *entity, map_t *map,
-		 entity_t *info[map->nb_case_x][map->nb_case_y]);
+		entity_t *info[map->nb_case_x][map->nb_case_y]);
 void entity_attack(entity_t *entity, const capacity_t *capacity, map_t *map,
 		entity_t *info[map->nb_case_x][map->nb_case_y]);
 sfVector2f entity_get_move_pos(entity_t *entity);

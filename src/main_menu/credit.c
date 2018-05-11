@@ -41,12 +41,12 @@ bool turn_page(size_t *page, sfEvent *event)
 void credit_menu(sfRenderWindow *window, sfEvent *event)
 {
 	how_to_play_t tuto = create_tuto(window);
+	bool exit = false;
 
-	while (sfRenderWindow_isOpen(window)) {
+	while (sfRenderWindow_isOpen(window) && exit == false) {
 		while (sfRenderWindow_pollEvent(window, event)) {
 			evt_close(event, window);
-			if (!turn_page(&tuto.page, event))
-				return;
+			!turn_page(&tuto.page, event) ? exit = true : 0;
 		}
 		display_page(&tuto);
 		sfRenderWindow_clear(window, sfBlack);

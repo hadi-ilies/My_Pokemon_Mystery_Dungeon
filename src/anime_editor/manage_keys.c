@@ -8,7 +8,7 @@
 #include "prototype.h"
 
 static void manage_num_r(anime_tab_t *anime_tab,
-			 size_t *anime_num, size_t *rectex_num)
+			size_t *anime_num, size_t *rectex_num)
 {
 	if (sfKeyboard_isKeyPressed(sfKeyP))
 		if (*rectex_num > 0) {
@@ -26,7 +26,7 @@ static void manage_num_r(anime_tab_t *anime_tab,
 }
 
 static void manage_num_a(anime_tab_t *anime_tab,
-			 size_t *anime_num, size_t *rectex_num)
+			size_t *anime_num, size_t *rectex_num)
 {
 	if (sfKeyboard_isKeyPressed(sfKeyBack))
 		if (*anime_num > 0) {
