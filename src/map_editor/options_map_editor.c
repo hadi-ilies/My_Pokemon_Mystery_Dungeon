@@ -1,5 +1,5 @@
 /*
-1;4804;0c** EPITECH PROJECT, 2018
+** EPITECH PROJECT, 2018
 ** map_options
 ** File description:
 ** map_optios
