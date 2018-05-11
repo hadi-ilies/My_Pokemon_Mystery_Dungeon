@@ -11,15 +11,14 @@
 #include "prototype.h"
 #include <SFML/Graphics.h>
 
-#define RETURN_TO_MENU_WITH_ENTER button >= 6 && event.type == sfEvtKeyPressed \
-			&& event.key.code == sfKeyReturn
-#define END_PAGE sfRectangleShape_setTexture(ad_intro.rect, \
-				ad_intro.texture[6], sfTrue)
+#define RETURN_TO_MENU_WITH_ENTER but > 1 && event.type == sfEvtKeyPressed\
+	&& event.key.code == sfKeyReturn
 #define NB_TEXTURE 10
 #define PICTURE1 "resources/texture/tmp.png"
 #define PICTURE2 "resources/texture/tmp2.png"
 #define PICTURE3 "resources/texture/tmp3.png"
 #define PICTURE4 "resources/texture/tmp4.png"
+#define END_PIC "resources/texture/end.png"
 #define END "resources/texture/end.jpg"
 
 typedef struct {
@@ -27,9 +26,11 @@ typedef struct {
 	sfFont *font;
 	sfRectangleShape *rect;
 	sfTexture *texture[NB_TEXTURE];
+	bool history;
 }intro_adventure_t;
 
 intro_adventure_t ad_intro_create(void);
+intro_adventure_t ad_end_create(void);
 void adventure_intro(sfRenderWindow *window, menu_t *menu);
 void display_history(sfRenderWindow *window, intro_adventure_t *ad_intro,
 		size_t button, menu_t *menu);

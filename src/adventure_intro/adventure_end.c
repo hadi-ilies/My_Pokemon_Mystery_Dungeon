@@ -14,7 +14,7 @@
 
 bool event_end(sfEvent *event, size_t *button, menu_t *menu)
 {
-	if (*button > 5) {
+	if (*button > 1) {
 		sfMusic_pause(menu->sound.music[1]);
 		return (true);
 	} if (event->type == sfEvtKeyPressed
@@ -25,24 +25,24 @@ bool event_end(sfEvent *event, size_t *button, menu_t *menu)
 
 void adventure_end(sfRenderWindow *window, menu_t *menu)
 {
-	intro_adventure_t ad_intro = ad_intro_create();
-	sfEvent event;
-	size_t button = 0;
+	intro_adventure_t ad_intro = ad_end_create();
+	size_t but = 0;
 
 	sfMusic_play(menu->sound.music[1]);
 	while (sfRenderWindow_isOpen(window)) {
+		sfEvent event;
+
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (RETURN_TO_MENU_WITH_ENTER) {
+			if ((event_end(&event, &but, menu))
+			|| (RETURN_TO_MENU_WITH_ENTER)) {
 				ad_intro_destroy(&ad_intro);
 				return;
-			} if (event_end(&event, &button, menu))
-				END_PAGE;
+			}
 		}
 		sfRenderWindow_clear(window, sfBlack);
-		illustration_end(button, &ad_intro);
+		illustration_end(but, &ad_intro);
 		sfRenderWindow_drawRectangleShape(window, ad_intro.rect, NULL);
-		if (button < 5)
-			display_history(window, &ad_intro, button, menu);
+		but == 0 ? display_history(window, &ad_intro, but, menu) : 0;
 		sfRenderWindow_display(window);
 	}
 }

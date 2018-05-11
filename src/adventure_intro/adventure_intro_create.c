@@ -18,6 +18,22 @@ void ad_intro_destroy(intro_adventure_t *ad_intro)
 	sfTexture_destroy(ad_intro->texture[0]);
 }
 
+intro_adventure_t ad_end_create(void)
+{
+	intro_adventure_t ad_end;
+
+	ad_end.font = sfFont_createFromFile(FONT);
+	ad_end.text = sfText_create();
+	ad_end.rect = sfRectangleShape_create();
+	sfRectangleShape_setSize(ad_end.rect, V2F(1920, 1080));
+	sfRectangleShape_setPosition(ad_end.rect, V2F(0, 0));
+	ad_end.texture[0] = sfTexture_createFromFile(END_PIC, NULL);
+	ad_end.texture[1] = sfTexture_createFromFile(END, NULL);
+	sfText_setFont(ad_end.text, ad_end.font);
+	ad_end.history = false;
+	return (ad_end);
+}
+
 intro_adventure_t ad_intro_create(void)
 {
 	intro_adventure_t ad_intro;
@@ -33,7 +49,7 @@ intro_adventure_t ad_intro_create(void)
 	ad_intro.texture[3] = sfTexture_createFromFile(PICTURE4, NULL);
 	ad_intro.texture[4] = sfTexture_createFromFile(PICTURE3, NULL);
 	ad_intro.texture[5] = sfTexture_createFromFile(PICTURE2, NULL);
-	ad_intro.texture[6] = sfTexture_createFromFile(END, NULL);
 	sfText_setFont(ad_intro.text, ad_intro.font);
+	ad_intro.history = true;
 	return (ad_intro);
 }

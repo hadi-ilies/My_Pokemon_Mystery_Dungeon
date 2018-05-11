@@ -15,27 +15,37 @@
 const char *text_intro_g[] =
 {
 	"once upon a time in the world of Pokepitech",
-	"a young pokemon named absolourdo decided to revenge\n his childhood\
+	"a young pokemon named absolourdo decided to revenge\nhis childhood\
 	made of violence and discrimination",
-	"full of anger the little guy went to Gobu the one who bullied\n him\
-	for years and told him that one day he would be able to win\n a fight\
+	"full of anger the little guy went to Gobu the one who bullied\nhim\
+	for years and told him that one day he would be able to win\na fight\
 	against the bully.",
-	"Gobu twice Absolouro's size looked at his victim\n and laugh then turn\
+	"Gobu twice Absolouro's size looked at his victim\nand laugh then turn\
 	back leaving Absolourdo in his mediocrity",
 	"Absolourdo, decided to find a way to increase his power\nin a little\
 	amount of time. He remembered a very old legend he heared when he was\
 	a kid.\nAn artifact could make him evolve and become very powerfull.",
-	"He went to his grandma, eated a lot and was told\n he could find the\
-	LEGENDARY ULTIMATE ARTIFACT OF THE POWERFULLNESS OF THE GOD\n in dark\
+	"He went to his grandma, eated a lot and was told\nhe could find the\
+	LEGENDARY ULTIMATE ARTIFACT OF THE POWERFULLNESS OF THE GOD\nin dark\
 	and unsafe mystery dungeons...",
 	NULL
 };
 
-char *text_history(size_t button)
-{
-	char *str;
+const char *text_end_g = "After a long adventure through unsafe mystery\
+ dungeons.\nOur friend succeeded in finding\
+the LEGENDARY ULTIMATE ARTIFACT OF THE POWERFULLNESS OF THE GOD\n\
+and became the most powerfull pokemon in the world of Pokepitech.\
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
+PS : If you want to know what happen after give to us a good mark ;)";
 
-	str = (char *) text_intro_g[button];
+char *text_history(size_t button, bool history)
+{
+	char *str = NULL;
+
+	if (history)
+		str = (char *) text_intro_g[button];
+	else
+		str = (char *) text_end_g;
 	return (str);
 }
 
@@ -66,7 +76,7 @@ void display_history(sfRenderWindow *window, intro_adventure_t *ad_intro,
 	static int i = 1;
 	static bool test = true;
 	static size_t tmp = 0;
-	char *str = text_history(button);
+	char *str = text_history(button, ad_intro->history);
 
 	(str[i] == '\0') ? test = false : 0;
 	if (tmp != button) {
