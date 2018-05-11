@@ -42,3 +42,4 @@ sfRectangleShape *create_back_param(sfRenderWindow *window);
 void adventure_intro(sfRenderWindow *window, menu_t *menu);
 void game_over(sfRenderWindow *window, menu_t *menu);
 void music_play(sfMusic *sound);
+void back_create_icon(loading_t *optional);

@@ -34,6 +34,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(MENUDIR)menu_create.c \
 			$(MENUDIR)music_play.c \
 			$(MENUDIR)display_menu.c \
+			$(MENUDIR)back_create_icon.c \
 			$(MENUDIR)cursor_menu.c \
 			$(MENUDIR)menu_destroy.c \
 			$(MENUDIR)text_menu.c \
