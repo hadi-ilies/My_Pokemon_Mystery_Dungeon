@@ -34,6 +34,9 @@
 #define ITEM(map, entity) (map).item[(entity).pos.x][(entity).pos.y]
 #define GENT(num) garou->dungeon.entity[num]
 
+// macro_macros
+#define PAUSE game_pause
+
 typedef struct {
 	entity_t player;
 	dungeon_t dungeon;
@@ -44,6 +47,7 @@ typedef struct {
 
 garou_t garou_create(char *settings_file_name);
 void garou_destroy(garou_t *garou);
+bool game_pause(sfRenderWindow *window, garou_t *garou);
 void game_aff(sfRenderWindow *window, garou_t *garou);
 void capacity_aff(sfRenderWindow *window, garou_t *garou);
 void inventory_aff(sfRenderWindow *window, garou_t *garou);

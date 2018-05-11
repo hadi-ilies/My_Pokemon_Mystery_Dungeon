@@ -50,6 +50,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(INTRODIR)factories.c \
 			$(GAMEDIR)game_menu.c \
 			$(GAMEDIR)dungeon.c \
+			$(GAMEDIR)game_pause.c \
 			$(GAMEDIR)game_loop.c \
 			$(GAMEDIR)game_aff.c \
 			$(GAMEDIR)manage_input.c \

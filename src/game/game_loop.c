@@ -65,13 +65,12 @@ static bool manage_item(garou_t *garou)
 
 int game_loop(sfRenderWindow *window, garou_t *garou)
 {
-	size_t turn = 0;
-
-	for (sfEvent event; sfRenderWindow_isOpen(window) && GENT(0).life;) {
+	for (size_t turn = 0; sfRenderWindow_isOpen(window) && GENT(0).life;) {
+		sfEvent event;
 		bool next = GENT(turn).life ? false : true;
 
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (evt_close(&event, window))
+			if (evt_close(&event, window) && PAUSE(window, garou))
 				return (0);
 			if (!next && !garou->dungeon.entity[turn].ia
 			&& entity_play(&GENT(turn), garou, &event))
