@@ -136,9 +136,7 @@ SRC		=	$(SRCDIR)main.c \
 OBJ		=	$(SRC:.c=.o)
 
 CFLAGS		+=	-I $(INCDIR)
-CFLAGS		+=	-W -Wall -Wextra
-CFLAGS		+=	-fdiagnostics-color
-CFLAGS		+=	-g #debug
+CFLAGS		+=	-W -Wall -Wextra -Werror
 
 LDFLAGS		+=	-l c_graph_prog
 LDFLAGS		+=	-L $(LIBDIR) -l Tile_map
