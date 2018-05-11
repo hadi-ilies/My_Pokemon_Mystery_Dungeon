@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+grep -Rn "	 " $@
+grep -Rn "  " $@
