@@ -13,7 +13,7 @@
 #include "adventure_intro.h"
 
 bool event_intro(sfEvent *event, size_t *button,
-		 menu_t *menu, intro_adventure_t *ad_intro)
+		menu_t *menu, intro_adventure_t *ad_intro)
 {
 	if (sfKeyboard_isKeyPressed(sfKeyEscape) || *button > 5) {
 		ad_intro_destroy(ad_intro);

@@ -20,9 +20,22 @@ void destroy_game_over(sfSprite *sprite, sfTexture *texture, menu_t *menu)
 	sfMusic_play(menu->sound.sound_effect[6]);
 }
 
-void game_over(sfRenderWindow *window, menu_t *menu)
+static bool cond_event_gameover(sfSprite *sprit, sfTexture *texture,
+			menu_t *menu, sfRenderWindow *window)
 {
 	sfEvent event;
+
+	while (sfRenderWindow_pollEvent(window, &event)) {
+		if (evt_close(&event, window)) {
+			destroy_game_over(sprit, texture, menu);
+			return (false);
+		}
+	}
+	return(true);
+}
+
+void game_over(sfRenderWindow *window, menu_t *menu)
+{
 	sfSprite *sprit = sfSprite_create();
 	sfTexture *texture = sfTexture_createFromFile(RIP, NULL);
 	size_t i = 0;
@@ -31,12 +44,8 @@ void game_over(sfRenderWindow *window, menu_t *menu)
 	sfSprite_setTexture(sprit, texture, sfTrue);
 	sfSprite_setPosition(sprit, V2F(0, 0));
 	while (sfRenderWindow_isOpen(window)) {
-		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (evt_close(&event, window)) {
-				destroy_game_over(sprit, texture, menu);
-				return;
-			}
-		}
+		if (!cond_event_gameover(sprit, texture, menu, window))
+			return;
 		i < 255 ? sfSprite_setColor(sprit, COL(255, 255, 255, i++)) : 0;
 		sfRenderWindow_clear(window, sfBlack);
 		sfRenderWindow_drawSprite(window, sprit, NULL);

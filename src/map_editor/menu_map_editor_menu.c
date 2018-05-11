@@ -63,13 +63,14 @@ void window_open_menu_editor(sfVector2i *tmp, menu_t *menu,
 void menu_map_editor_menu(sfRenderWindow *window, sfMusic **sound_effect)
 {
 	map_t map = {.error = 84};
-	sfEvent event;
 	loading_t back = back_editor_create(window);
 	menu_t menu = menu_editor_create(sound_effect);
 	sfVector2i tmp = {250, 5};
 
 	load_font_editor(&menu);
 	while (sfRenderWindow_isOpen(window)) {
+		sfEvent event;
+
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
 			menu.button = move_curseur_editor(&menu, &event);
