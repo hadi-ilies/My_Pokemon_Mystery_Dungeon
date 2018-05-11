@@ -67,4 +67,6 @@
 #define LIFE STAT(garou->dungeon.entity[i], life)
 #define POSITION rand_pos_ground(&garou->dungeon.map)
 #define STEPS garou->dungeon.stage_num < garou->dungeon.nb_stage
+#define MANAGE_KEY event.type == sfEvtKeyPressed ? manage_keys(&RECTEX, \
+							anime_tab, NUMS) : 0
 #endif
