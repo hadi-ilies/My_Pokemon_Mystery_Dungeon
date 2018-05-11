@@ -72,8 +72,8 @@ static bool loop_editor_loop(map_t *map, sfRenderWindow *window,
 		sfEvent *event, load_editor_t *load)
 {
 	while (sfRenderWindow_pollEvent(window, event)) {
-		if (event->type == sfEvtKeyPressed && event->key.code ==
-		sfKeyEscape || load_entry(map, window, load, event) == true) {
+		if (evt_close(event, window)
+		|| load_entry(map, window, load, event) == true) {
 			load_editor_destroy(load);
 			return (false);
 		}
