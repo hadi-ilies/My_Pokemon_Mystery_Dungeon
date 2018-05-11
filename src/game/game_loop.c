@@ -5,27 +5,7 @@
 ** game.c
 */
 
-#include <stdlib.h>
-#include <stdbool.h>
 #include "prototype.h"
-#include "tile_name.h"
-#include "anime_name.h"
-#include "capacity_tab.h"
-#include "macro.h"
-#include "input.h"
-
-static bool entity_play(entity_t *entity, garou_t *garou,
-		entity_t *GET_INFO(garou->dungeon.map),
-		sfEvent *event)
-{
-	size_t input = 0;
-
-	if (entity->ia == 0)
-		input = player(entity, garou, event);
-	else
-		input = ia(entity, &garou->dungeon.map, info);
-	return (manage_input(entity, &garou->dungeon.map, info, input));
-}
 
 static void info_update(garou_t *garou,
 		 entity_t *GET_INFO(garou->dungeon.map))
@@ -42,46 +22,67 @@ static void info_update(garou_t *garou,
 		}
 }
 
+static bool entity_play(entity_t *entity, garou_t *garou,
+		sfEvent *event)
+{
+	entity_t *GET_INFO(garou->dungeon.map);
+	size_t input = 0;
+
+	info_update(garou, info);
+	if (entity->ia == 0)
+		input = player(entity, garou, event);
+	else
+		input = ia(entity, &garou->dungeon.map, info);
+	return (manage_input(entity, &garou->dungeon.map, info, input));
+}
+
+static void pick_up_item(garou_t *garou)
+{
+	for (size_t i = 0; i < INVENTORY_SIZE; i++)
+		if (garou->inventory[i] == NONE) {
+			map_t map = garou->dungeon.map;
+			entity_t entity = garou->dungeon.entity[0];
+
+			garou->inventory[i] = ITEM(map, entity);
+			ITEM(map, entity) = NONE;
+			break;
+		}
+}
+
+static bool manage_item(garou_t *garou)
+{
+	if (CLOCK(garou->dungeon.entity[0]) >= TIME_MOVE) {
+		map_t map = garou->dungeon.map;
+		entity_t entity = garou->dungeon.entity[0];
+
+		if (ITEM(map, entity) == STAIRCASE)
+			return (true);
+		else if (ITEM(map, entity) != NONE)
+			pick_up_item(garou);
+	}
+	return (false);
+}
+
 int game_loop(sfRenderWindow *window, garou_t *garou)
 {
-	sfEvent event;
-	entity_t *GET_INFO(garou->dungeon.map);
-	size_t entity_turn = 0;
+	size_t turn = 0;
 
-	while (sfRenderWindow_isOpen(window)) {
-		bool next = garou->dungeon.entity[entity_turn].life ? false : true;
+	for (sfEvent event; sfRenderWindow_isOpen(window) && GENT(0).life;) {
+		bool next = GENT(turn).life ? false : true;
 
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			if (evt_close(&event, window))
 				return (0);
-			if (!next && !garou->dungeon.entity[entity_turn].ia) {
-				info_update(garou, info);
-				if (entity_play(&garou->dungeon.entity[entity_turn], garou, info, &event))
+			if (!next && !garou->dungeon.entity[turn].ia
+			    && entity_play(&GENT(turn), garou, &event))
 					next = true;
-			}
 		}
-		if (!next) {
-			info_update(garou, info);
-			if (entity_play(&garou->dungeon.entity[entity_turn], garou, info, NULL))
-				next = true;
-		}
+		!next && entity_play(&GENT(turn), garou, NULL) ? next = 1 : 0;
 		if (next == false)
 			game_aff(window, garou);
-		else if (++entity_turn >= garou->dungeon.nb_entity)
-			entity_turn = 0;
-		if (sfClock_getElapsedTime(garou->dungeon.entity[0].clock).microseconds >= TIME_MOVE) {
-			if (ITEM(garou->dungeon.map, garou->dungeon.entity[0]) == STAIRCASE)
-				return (1);
-			else if (ITEM(garou->dungeon.map, garou->dungeon.entity[0]) != NONE)
-				for (size_t i = 0; i < INVENTORY_SIZE; i++)
-					if (garou->inventory[i] == NONE) {
-						garou->inventory[i] = ITEM(garou->dungeon.map, garou->dungeon.entity[0]);
-						ITEM(garou->dungeon.map, garou->dungeon.entity[0]) = NONE;
-						break;
-					}
-		}
-		if (garou->dungeon.entity[0].life == 0)
-			return (0);
+		else ++turn >= garou->dungeon.nb_entity ? turn = 0 : 0;
+		if (manage_item(garou))
+			return (1);
 	}
 	return (0);
 }
