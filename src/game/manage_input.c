@@ -35,15 +35,15 @@ static bool manage_capacity(entity_t *entity, map_t *map,
 		entity_t *info[map->nb_case_x][map->nb_case_y],
 		size_t input)
 {
-	size_t num;
+	size_t n;
 
 	for (size_t i = 0; i < 4; i++)
 		if (input & (CAPACITY1 << i))
-			num = i;
-	if (entity->pp[num]) {
-		if ((size_t)rand() % 100 < CAPACITY(*entity, num).accuracy)
-			entity_attack(entity, &CAPACITY(*entity, num), map, info);
-		entity->pp[num]--;
+			n = i;
+	if (entity->pp[n]) {
+		if ((size_t)rand() % 100 < CAPACITY(*entity, n).accuracy)
+			entity_attack(entity, &CAPACITY(*entity, n), map, info);
+		entity->pp[n]--;
 		return (true);
 	}
 	return (false);
