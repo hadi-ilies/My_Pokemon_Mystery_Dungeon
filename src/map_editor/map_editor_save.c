@@ -21,19 +21,27 @@ void display_save_editor(save_editor_t *save, sfRenderWindow *window)
 	sfRenderWindow_drawText(window, save->text[3], NULL);
 }
 
+static bool menu_save_event(map_t *map, sfRenderWindow *window,
+		sfEvent *event, save_editor_t *save)
+{
+	while (sfRenderWindow_pollEvent(window, event)) {
+		if (sfKeyboard_isKeyPressed(sfKeyEscape)
+		|| ok_map(save, event, map) == false)
+			return (false);
+		move_curseur_save_editor(save, event);
+		take_keyboard(save, event, window);
+	}
+	return (true);
+}
+
 void menu_save_map(map_t *map, sfRenderWindow *window)
 {
 	sfEvent event;
 	save_editor_t save = save_editor_create(window);
 
 	while (sfRenderWindow_isOpen(window)) {
-		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (sfKeyboard_isKeyPressed(sfKeyEscape)
-			|| ok_map(&save, &event, map) == false)
-				return;
-			move_curseur_save_editor(&save, &event);
-			take_keyboard(&save, &event, window);
-		}
+		if (!menu_save_event(map, window, &event, &save))
+			return;
 		sfRenderWindow_clear(window, sfBlack);
 		display_save_editor(&save, window);
 		sfRenderWindow_display(window);

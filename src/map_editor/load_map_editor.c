@@ -31,15 +31,15 @@ char *maps_list(sfRenderWindow *window, load_editor_t *load)
 {
 	sfRectangleShape *back = create_back_param(window);
 	sfSprite *screen = create_screen_param(window);
-	sfEvent event;
 
 	insert_maps_text(load);
 	while (sfRenderWindow_isOpen(window)) {
+		sfEvent event;
+
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (EXIT) {
-				screen_and_back_destroy(back, screen);
-				return (NULL);
-			}
+			if (EXIT)
+				return (screen_and_back_destroy(back, screen),
+				NULL);
 			if (ENTER_COND)
 				return ((char *) GET_STRING);
 			move_curseur_load_list(load, &event);
@@ -68,20 +68,28 @@ bool load_entry(map_t *map, sfRenderWindow *window,
 	return (false);
 }
 
+static bool loop_editor_loop(map_t *map, sfRenderWindow *window,
+		sfEvent *event, load_editor_t *load)
+{
+	while (sfRenderWindow_pollEvent(window, event)) {
+		if (event->type == sfEvtKeyPressed && event->key.code ==
+		sfKeyEscape || load_entry(map, window, load, event) == true) {
+			load_editor_destroy(load);
+			return (false);
+		}
+		move_curseur_load_editor(load, event);
+	}
+	return (true);
+}
+
 void load_editor_loop(map_t *map, sfRenderWindow *window)
 {
 	sfEvent event;
 	load_editor_t load = load_editor_create(window);
 
 	while (sfRenderWindow_isOpen(window)) {
-		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (EXIT
-			|| load_entry(map, window, &load, &event) == true) {
-				load_editor_destroy(&load);
-				return;
-			}
-			move_curseur_load_editor(&load, &event);
-		}
+		if (!loop_editor_loop(map, window, &event, &load))
+			return;
 		sfRenderWindow_clear(window, sfBlack);
 		display_load_editor(&load, window);
 		sfRenderWindow_display(window);
