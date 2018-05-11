@@ -42,6 +42,7 @@
 		|| (entity).type == TYPE_FLYING			\
 		|| (entity).type2 == TYPE_WATER			\
 		|| (entity).type2 == TYPE_FLYING)))
+#define CLOCK(entity) sfClock_getElapsedTime((entity).clock).microseconds
 
 typedef struct {
 	ssize_t life;
@@ -90,6 +91,8 @@ void entity_attack(entity_t *entity, const capacity_t *capacity, map_t *map,
 sfVector2f entity_get_move_pos(entity_t *entity);
 void entity_aff(sfRenderWindow *window, entity_t *entity,
 		map_t *map, sfVector2f pos);
+void entity_life_aff(sfRenderWindow *window, entity_t *entity,
+		     sfFloatRect rect);
 size_t entity_gain_exp(entity_t *entity, size_t exp);
 
 #endif

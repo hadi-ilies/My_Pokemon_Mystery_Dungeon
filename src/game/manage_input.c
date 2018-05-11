@@ -31,57 +31,62 @@ static void set_anime_idle(entity_t *entity)
 		entity->anime_tab.num = ANIME_IDLE_NE;
 }
 
+static bool manage_capacity(entity_t *entity, map_t *map,
+		entity_t *info[map->nb_case_x][map->nb_case_y],
+		size_t input)
+{
+	size_t num;
+
+	for (size_t i = 0; i < 4; i++)
+		if (input & (CAPACITY1 << i))
+			num = i;
+	if (entity->pp[num]) {
+		if ((size_t)rand() % 100 < CAPACITY(*entity, num).accuracy)
+			entity_attack(entity, &CAPACITY(*entity, num), map, info);
+		entity->pp[num]--;
+		return (true);
+	}
+	return (false);
+}
+
+static bool manage_attack(entity_t *entity, map_t *map,
+		entity_t *info[map->nb_case_x][map->nb_case_y],
+		size_t input)
+{
+	if (input & (CAPACITY1 | CAPACITY2 | CAPACITY3 | CAPACITY4)) {
+		if (manage_capacity(entity, map, info, input))
+			return (true);
+	}
+	else {
+		entity_attack(entity, &capacity_tab[0], map, info);
+		return (true);
+	}
+	return (false);
+}
+
+static void set_dir(entity_t *entity, size_t input)
+{
+	entity->dir = V2I(0, 0);
+	input & LEFT ? entity->dir.x = -1 : 0;
+	input & RIGHT ? entity->dir.x = 1 : 0;
+	input & UP ? entity->dir.y = -1 : 0;
+	input & DOWN ? entity->dir.y = 1 : 0;
+}
+
 bool manage_input(entity_t *entity, map_t *map,
 		entity_t *info[map->nb_case_x][map->nb_case_y],
 		size_t input)
 {
-	if (sfClock_getElapsedTime(entity->clock).microseconds < TIME_MOVE)
+	if (CLOCK(*entity) < TIME_MOVE)
 		return (false);
-	if (input & (LEFT | RIGHT | UP | DOWN)) {
-		entity->dir = V2I(0, 0);
-		input & LEFT ? entity->dir.x = -1 : 0;
-		input & RIGHT ? entity->dir.x = 1 : 0;
-		input & UP ? entity->dir.y = -1 : 0;
-		input & DOWN ? entity->dir.y = 1 : 0;
-	}
+	if (input & (LEFT | RIGHT | UP | DOWN))
+		set_dir(entity, input);
 	if (input & MOVE && input & (LEFT | RIGHT | UP | DOWN))
 		if (entity_move(entity, map, info))
 			return (true);
-	if (input & ATTACK) {
-		if (input & (CAPACITY1 | CAPACITY2 | CAPACITY3 | CAPACITY4)) {
-			bool tmp = false;
-
-			if (input & CAPACITY1 && entity->pp[0]) {
-				if ((size_t)rand() % 100 < CAPACITY(*entity, 0).accuracy)
-					entity_attack(entity, &CAPACITY(*entity, 0), map, info);
-				entity->pp[0]--;
-				tmp = true;
-			}
-			if (input & CAPACITY2 && entity->pp[1]) {
-				if ((size_t)rand() % 100 < CAPACITY(*entity, 1).accuracy)
-					entity_attack(entity, &CAPACITY(*entity, 1), map, info);
-				entity->pp[1]--;
-				tmp = true;
-			}
-			if (input & CAPACITY3 && entity->pp[2]) {
-				if ((size_t)rand() % 100 < CAPACITY(*entity, 2).accuracy)
-					entity_attack(entity, &CAPACITY(*entity, 2), map, info);
-				entity->pp[2]--;
-				tmp = true;
-			}
-			if (input & CAPACITY4 && entity->pp[3]) {
-				if ((size_t)rand() % 100 < CAPACITY(*entity, 3).accuracy)
-					entity_attack(entity, &CAPACITY(*entity, 3), map, info);
-				entity->pp[3]--;
-				tmp = true;
-			}
-			return (tmp);
-		}
-		else {
-			entity_attack(entity, &capacity_tab[0], map, info);
+	if (input & ATTACK)
+		if (manage_attack(entity, map, info, input))
 			return (true);
-		}
-	}
 	if (input & WAIT) {
 		entity->anime_tab.num = ANIME_SLEEP;
 		if (entity->life < STAT(*entity, life))

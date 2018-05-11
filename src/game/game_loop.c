@@ -14,7 +14,7 @@
 #include "macro.h"
 #include "input.h"
 
-bool entity_set_dir(entity_t *entity, garou_t *garou,
+static bool entity_play(entity_t *entity, garou_t *garou,
 		entity_t *GET_INFO(garou->dungeon.map),
 		sfEvent *event)
 {
@@ -27,7 +27,7 @@ bool entity_set_dir(entity_t *entity, garou_t *garou,
 	return (manage_input(entity, &garou->dungeon.map, info, input));
 }
 
-void info_update(garou_t *garou,
+static void info_update(garou_t *garou,
 		 entity_t *GET_INFO(garou->dungeon.map))
 {
 	for (size_t i = 0; i < garou->dungeon.map.nb_case_x; i++)
@@ -40,59 +40,6 @@ void info_update(garou_t *garou,
 
 			info[x][y] = &garou->dungeon.entity[i];
 		}
-}
-
-/*---life_aff---------
-rect.left -> pos.x
-rect.top -> pos.y
-rect.width -> size.x of 1 HP and height of white rods
-rect.height -> size.y
------------------*/
-void entity_life_aff(sfRenderWindow *window, entity_t *entity,
-		sfFloatRect rect)
-{
-	sfRectangleShape *rectangle = sfRectangleShape_create();
-	size_t life_max = STAT(*entity, life);
-	sfVector2f pos = {rect.left, rect.top};
-	sfVector2f size = {rect.width * life_max, rect.height};
-
-	sfRectangleShape_setPosition(rectangle, pos);
-	sfRectangleShape_setSize(rectangle, size);
-	sfRectangleShape_setFillColor(rectangle, COL(250, 250, 250, 250));
-	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
-	pos.y += rect.width;
-	size.y -= rect.width * 2;
-	sfRectangleShape_setPosition(rectangle, pos);
-	sfRectangleShape_setSize(rectangle, size);
-	sfRectangleShape_setFillColor(rectangle, COL(0, 0, 0, 250));
-	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
-	size.x = rect.width * entity->life;
-	sfRectangleShape_setSize(rectangle, size);
-	sfRectangleShape_setFillColor(rectangle, COL(0, 220, 0, 250));
-	sfRenderWindow_drawRectangleShape(window, rectangle, NULL);
-	sfRectangleShape_destroy(rectangle);
-}
-
-void game_aff(sfRenderWindow *window, garou_t *garou)
-{
-	sfVector2f pos = entity_get_move_pos(&garou->dungeon.entity[0]);
-	bool tmp = true;
-
-	sfRenderWindow_clear(window, sfBlack);
-	garou->dungeon.map.pos = pos;
-	map_aff(window, &garou->dungeon.map);
-	for (size_t i = 0; i < garou->dungeon.nb_entity; i++)
-		if (garou->dungeon.entity[i].life > 0) {
-			entity_aff(window, &garou->dungeon.entity[i], &garou->dungeon.map, pos);
-			if (sfClock_getElapsedTime(garou->dungeon.entity[i].clock).microseconds < TIME_MOVE)
-				tmp = false;
-		}
-	entity_life_aff(window, &garou->dungeon.entity[0], (sfFloatRect){LIFE_RECT});
-	if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_INVENTORY]))
-		inventory_aff(window, garou);
-	else if (sfKeyboard_isKeyPressed(garou->settings.key[KEY_ATTACK]) && tmp)
-		capacity_aff(window, garou);
-	sfRenderWindow_display(window);
 }
 
 int game_loop(sfRenderWindow *window, garou_t *garou)
@@ -109,13 +56,13 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 				return (0);
 			if (!next && !garou->dungeon.entity[entity_turn].ia) {
 				info_update(garou, info);
-				if (entity_set_dir(&garou->dungeon.entity[entity_turn], garou, info, &event))
+				if (entity_play(&garou->dungeon.entity[entity_turn], garou, info, &event))
 					next = true;
 			}
 		}
 		if (!next) {
 			info_update(garou, info);
-			if (entity_set_dir(&garou->dungeon.entity[entity_turn], garou, info, NULL))
+			if (entity_play(&garou->dungeon.entity[entity_turn], garou, info, NULL))
 				next = true;
 		}
 		if (next == false)
