@@ -24,22 +24,30 @@ void display_options(option_t *option, sfRenderWindow *window)
 	sfRenderWindow_drawText(window, option->sound_value[1], NULL);
 }
 
+bool event_loop_option(sfRenderWindow *window, sfEvent *event,
+		menu_t *menu, option_t *option)
+{
+	while (sfRenderWindow_pollEvent(window, event)) {
+		if (evt_close(event, window)) {
+			settings_save(&menu->settings, CONFIG);
+			return (false);
+		}
+		option_move_cursor(option, event);
+		change_win_size(option, event, window);
+		resize_win(window, option);
+		sound_volume(event, window, option, menu);
+		music_volume(event, window, option, menu);
+	}
+	return (true);
+}
+
 void option_menu(sfRenderWindow *window, sfEvent *event, menu_t *menu)
 {
 	option_t option = option_create(window);
 
 	while (sfRenderWindow_isOpen(window)) {
-		while (sfRenderWindow_pollEvent(window, event)) {
-			if (evt_close(event, window)) {
-				settings_save(&menu->settings, CONFIG);
-				return;
-			}
-			option_move_cursor(&option, event);
-			change_win_size(&option, event, window);
-			resize_win(window, &option);
-			sound_volume(event, window, &option, menu);
-			music_volume(event, window, &option, menu);
-		}
+		if (!event_loop_option(window, event, menu, &option))
+			return;
 		sfRenderWindow_clear(window, sfBlack);
 		display_options(&option, window);
 		sfRenderWindow_display(window);

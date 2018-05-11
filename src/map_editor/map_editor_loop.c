@@ -64,16 +64,15 @@ void key_command_editor(sfRenderWindow *window, map_t *map, sfEvent *event)
 int map_editor_loop(sfRenderWindow *window, map_t *map)
 {
 	tva_t mouse_tva = {map->tile_map.nb_type, 4, 0};
-	sfEvent event;
 	back_and_music_t optional = optional_create();
 
 	while (sfRenderWindow_isOpen(window)) {
+		sfEvent event;
+
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			evt_close(&event, window);
-			if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
-				sfMusic_destroy(optional.music);
-				return (0);
-			}
+			if (sfKeyboard_isKeyPressed(sfKeyEscape))
+				return (sfMusic_destroy(optional.music), 0);
 			key_command_editor(window, map, &event);
 			zoom_map(&event, map);
 			refresh_map(&event, map);
@@ -81,6 +80,5 @@ int map_editor_loop(sfRenderWindow *window, map_t *map)
 		}
 		window_open_func(window, map, &mouse_tva, &optional);
 	}
-	sfMusic_destroy(optional.music);
-	return (0);
+	return (sfMusic_destroy(optional.music), 0);
 }

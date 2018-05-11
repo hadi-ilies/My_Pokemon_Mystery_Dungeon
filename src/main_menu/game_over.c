@@ -31,7 +31,7 @@ static bool cond_event_gameover(sfSprite *sprit, sfTexture *texture,
 			return (false);
 		}
 	}
-	return(true);
+	return (true);
 }
 
 void game_over(sfRenderWindow *window, menu_t *menu)

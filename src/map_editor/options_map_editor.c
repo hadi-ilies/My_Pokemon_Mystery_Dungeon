@@ -60,10 +60,11 @@ void event_param(map_t *map, option_editor_t *option,
 
 option_editor_t param_map(map_t *map, sfRenderWindow *window)
 {
-	sfEvent event;
 	option_editor_t option = option_editor_create(window, map);
 
 	while (sfRenderWindow_isOpen(window)) {
+		sfEvent event;
+
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			event_param(map, &option, window, &event);
 		} if (sfKeyboard_isKeyPressed(sfKeyEscape))

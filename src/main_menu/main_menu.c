@@ -70,6 +70,15 @@ void open_window_menu(sfRenderWindow *window, menu_t *menu, loading_t *back)
 		sfRenderWindow_close(window);
 }
 
+void event_loop_menu(sfEvent *event, menu_t *menu, sfRenderWindow *window)
+{
+	while (sfRenderWindow_pollEvent(window, event)) {
+		evt_close(event, window);
+		menu->button = move_curseur(menu, event);
+		enter(window, menu, event);
+	}
+}
+
 int main_menu(sfRenderWindow *window)
 {
 	loading_t back = back_create();
@@ -83,13 +92,8 @@ int main_menu(sfRenderWindow *window)
 		sfText_setFont(menu.text[i], menu.font);
 	music_play(menu.sound.sound_effect[6]);
 	while (sfRenderWindow_isOpen(window)) {
-		while (sfRenderWindow_pollEvent(window, &event)) {
-			evt_close(&event, window);
-			menu.button = move_curseur(&menu, &event);
-			enter(window, &menu, &event);
-		}
+		event_loop_menu(&event, &menu, window);
 		open_window_menu(window, &menu, &back);
 	}
-	destroy_all(&back, window, &menu);
-	return (0);
+	return (destroy_all(&back, window, &menu), 0);
 }

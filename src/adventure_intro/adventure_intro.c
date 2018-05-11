@@ -28,13 +28,14 @@ bool event_intro(sfEvent *event, size_t *button,
 void adventure_intro(sfRenderWindow *window, menu_t *menu)
 {
 	intro_adventure_t ad_intro = ad_intro_create();
-	sfEvent event;
 	size_t button = 0;
 	bool set_one = true;
 
 	sfMusic_pause(menu->sound.sound_effect[6]);
 	sfMusic_play(menu->sound.music[1]);
 	while (sfRenderWindow_isOpen(window)) {
+		sfEvent event;
+
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			if (event_intro(&event, &button, menu, &ad_intro))
 				return;
