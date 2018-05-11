@@ -74,7 +74,7 @@ int game_loop(sfRenderWindow *window, garou_t *garou)
 			if (evt_close(&event, window))
 				return (0);
 			if (!next && !garou->dungeon.entity[turn].ia
-			    && entity_play(&GENT(turn), garou, &event))
+			&& entity_play(&GENT(turn), garou, &event))
 					next = true;
 		}
 		!next && entity_play(&GENT(turn), garou, NULL) ? next = 1 : 0;

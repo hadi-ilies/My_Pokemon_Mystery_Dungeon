@@ -8,7 +8,7 @@
 #include "game_resource.h"
 
 static bool game_entity_aff(sfRenderWindow *window, entity_t *entity,
-			    map_t *map, sfVector2f pos)
+		map_t *map, sfVector2f pos)
 {
 	if (entity->life > 0) {
 		entity_aff(window, entity, map, pos);

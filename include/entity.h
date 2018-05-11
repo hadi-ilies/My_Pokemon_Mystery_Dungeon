@@ -87,12 +87,12 @@ void entity_save(entity_t *entity, char *file_name);
 bool entity_move(entity_t *entity, map_t *map,
 		 entity_t *info[map->nb_case_x][map->nb_case_y]);
 void entity_attack(entity_t *entity, const capacity_t *capacity, map_t *map,
-		   entity_t *info[map->nb_case_x][map->nb_case_y]);
+		entity_t *info[map->nb_case_x][map->nb_case_y]);
 sfVector2f entity_get_move_pos(entity_t *entity);
 void entity_aff(sfRenderWindow *window, entity_t *entity,
 		map_t *map, sfVector2f pos);
 void entity_life_aff(sfRenderWindow *window, entity_t *entity,
-		     sfFloatRect rect);
+		sfFloatRect rect);
 size_t entity_gain_exp(entity_t *entity, size_t exp);
 
 #endif

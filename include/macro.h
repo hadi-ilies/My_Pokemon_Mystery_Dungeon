@@ -17,8 +17,8 @@
 #define TOOL_SIZE 100
 #define TOOL_DIST 200
 #define POS_SIZE_SHAPE (sfVector2f){TOOL_SIZE + 20, TOOL_SIZE + 20}
-#define ANIME_START_FILE "intro_files/anime_start"
-#define ANIME_INTRO_FILE "intro_files/intro_anime"
+#define ANIME_START_FILE "resources/intro_files/anime_start"
+#define ANIME_INTRO_FILE "resources/intro_files/intro_anime"
 #define MUSIC_INTRO "resources/music/pokemon-theme.ogg"
 #define SOUND_START "resources/sound_effect/Sound_intro.ogg"
 #define BACK_MAP "resources/texture/map_editor/background_map_editor.jpg"
