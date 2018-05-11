@@ -8,7 +8,7 @@
 #include "prototype.h"
 #include "macro.h"
 
-void set_icon(sfRenderWindow *window, char *file_name)
+static void set_icon(sfRenderWindow *window, char *file_name)
 {
 	static int i = 0;
 	sfImage *image = sfImage_createFromFile(file_name);
@@ -25,7 +25,7 @@ void set_icon(sfRenderWindow *window, char *file_name)
 		set_icon(window, file_name);
 }
 
-loading_t loading_create(sfRenderWindow *window)
+static loading_t loading_create(sfRenderWindow *window)
 {
 	loading_t optional;
 

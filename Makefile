@@ -50,6 +50,8 @@ SRC		=	$(SRCDIR)main.c \
 			$(GAMEDIR)game_menu.c \
 			$(GAMEDIR)dungeon.c \
 			$(GAMEDIR)game_loop.c \
+			$(GAMEDIR)manage_input.c \
+			$(GAMEDIR)player.c \
 			$(IADIR)ia.c \
 			$(IADIR)spread.c \
 			$(IADIR)input_attack.c \
@@ -107,6 +109,7 @@ SRC		=	$(SRCDIR)main.c \
 			$(ENTDIR)entity_destroy.c \
 			$(ENTDIR)entity_save.c \
 			$(ENTDIR)entity_move.c \
+			$(ENTDIR)entity_attack.c \
 			$(ENTDIR)entity_get_move_pos.c \
 			$(ENTDIR)entity_aff.c \
 			$(ENTDIR)entity_gain_exp.c \

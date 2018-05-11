@@ -32,7 +32,6 @@ typedef struct {
 
 menu_t menu_create(void);
 size_t move_curseur(menu_t *menu, sfEvent *event);
-void set_icon(sfRenderWindow *window, char *file_name);
 void display_menu(sfRenderWindow *window, menu_t *menu, loading_t *back);
 void display_texte_button(sfRenderWindow *window, menu_t *menu);
 void menu_map_editor_menu(sfRenderWindow *window, sfMusic **sound_effect);

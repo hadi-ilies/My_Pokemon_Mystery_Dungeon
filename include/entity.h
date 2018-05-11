@@ -34,6 +34,7 @@
 #define STATDEF(entity, capacity) (capacity).category == PHYSICAL ?	\
 		STAT(entity, def) : STAT(entity, spd)
 #define CAPACITY(entity, num) capacity_tab[(entity).capacity_num[num]]
+#define PP_LOST(entity, num) CAPACITY((entity), num).pp - (entity).pp[num]
 #define CAN_MOVE(entity) !INFO(entity)					\
 	&& (map->tab[NEW_X(entity)][NEW_Y(entity)].type == GROUND	\
 	|| (map->tab[NEW_X(entity)][NEW_Y(entity)].type == WATER	\
@@ -84,6 +85,8 @@ void entity_destroy(entity_t *entity);
 void entity_save(entity_t *entity, char *file_name);
 bool entity_move(entity_t *entity, map_t *map,
 		 entity_t *info[map->nb_case_x][map->nb_case_y]);
+void entity_attack(entity_t *entity, const capacity_t *capacity, map_t *map,
+		   entity_t *info[map->nb_case_x][map->nb_case_y]);
 sfVector2f entity_get_move_pos(entity_t *entity);
 void entity_aff(sfRenderWindow *window, entity_t *entity,
 		map_t *map, sfVector2f pos);

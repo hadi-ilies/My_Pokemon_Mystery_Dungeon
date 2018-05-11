@@ -30,7 +30,6 @@ int destroy_and_check_error_anime(anime_tab_t *animation, video_t *video);
 void music_create(sfMusic *music[3]);
 void get_start(anime_tab_t *animation, sfMusic *music[3],
 	sfRenderWindow *window, video_t *video);
-loading_t loading_create(sfRenderWindow *window);
 void destroy_music(sfMusic *music[3]);
 int game_menu(sfRenderWindow *window);
 int map_editor_menu(sfRenderWindow *window);

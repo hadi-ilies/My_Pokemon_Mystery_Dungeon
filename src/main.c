@@ -13,6 +13,7 @@ int main(void)
 
 	if (window == NULL)
 		return (84);
+	srand((long long)window);
 	sfRenderWindow_display(window);
 	return (main_menu(window));
 }

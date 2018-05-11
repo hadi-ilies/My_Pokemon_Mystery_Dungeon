@@ -78,7 +78,7 @@ void anime_editor_loop(sfRenderWindow *window, anime_tab_t *anime_tab)
 			!exit ? exit = evt_close(&event, window) : 0;
 			set_rectex_pos(&event, window, &RECTEX, sprite);
 			if (event.type == sfEvtKeyPressed)
-				manage_keys(&RECTEX, anime_tab, nums);
+				manage_keys(&RECTEX, anime_tab, NUMS);
 		}
 		rectex_set_size(&RECTEX, window, sprite);
 		rect_update(rect, &RECTEX, sprite);

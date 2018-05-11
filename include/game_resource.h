@@ -55,6 +55,10 @@ void spd_stat(garou_t *garou, sfRenderWindow *window,
 	sfText *text, sfRectangleShape *rectangle_ombre);
 void hp_stat(garou_t *garou, sfRenderWindow *window,
 	sfText *text, sfFont *font);
+bool manage_input(entity_t *entity, map_t *map,
+		entity_t *info[map->nb_case_x][map->nb_case_y],
+		size_t input);
+size_t player(entity_t *entity, garou_t *garou, sfEvent *event);
 size_t ia(entity_t *entity, map_t *map,
 	entity_t *info[map->nb_case_x][map->nb_case_y]);
 void spread(map_t *map, size_t tab[map->nb_case_x][map->nb_case_y],
