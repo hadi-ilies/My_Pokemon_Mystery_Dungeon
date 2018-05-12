@@ -16,7 +16,7 @@ SRC	=	anime_tab_create.c \
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-I ../../include	\
+CFLAGS	=	-I ../../include
 		-W -Wall -Wextra
 
 all	:	$(NAME)
