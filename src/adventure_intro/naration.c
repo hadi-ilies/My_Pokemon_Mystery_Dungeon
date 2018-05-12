@@ -32,11 +32,11 @@ const char *text_intro_g[] =
 };
 
 const char *text_end_g = "After a long adventure through unsafe mystery\
- dungeons.\nOur friend succeeded in finding\
+_dungeons.\nOur friend succeeded in finding\
 the LEGENDARY ULTIMATE ARTIFACT OF THE POWERFULLNESS OF THE GOD\n\
 and became the most powerfull pokemon in the world of Pokepitech.\
 \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
-PS : If you want to know what happen after give to us a good mark ;)";
+PS : If you want to know what happen after give to us a good mark;)";
 
 char *text_history(size_t button, bool history)
 {

@@ -11,8 +11,6 @@
 #include "prototype.h"
 #include <SFML/Graphics.h>
 
-#define RETURN_TO_MENU_WITH_ENTER but > 1 && event.type == sfEvtKeyPressed\
-	&& event.key.code == sfKeyReturn
 #define NB_TEXTURE 10
 #define PICTURE1 "resources/texture/tmp.png"
 #define PICTURE2 "resources/texture/tmp2.png"

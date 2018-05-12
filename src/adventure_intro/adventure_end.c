@@ -33,8 +33,7 @@ void adventure_end(sfRenderWindow *window, menu_t *menu)
 		sfEvent event;
 
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			if ((event_end(&event, &but, menu))
-			|| (RETURN_TO_MENU_WITH_ENTER)) {
+			if (event_end(&event, &but, menu)) {
 				ad_intro_destroy(&ad_intro);
 				return;
 			}
