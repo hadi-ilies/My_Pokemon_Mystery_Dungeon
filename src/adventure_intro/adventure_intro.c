@@ -37,7 +37,8 @@ void adventure_intro(sfRenderWindow *window, menu_t *menu)
 		sfEvent event;
 
 		while (sfRenderWindow_pollEvent(window, &event)) {
-			if (event_intro(&event, &button, menu, &ad_intro))
+			if (evt_close(&event, window) ||
+			event_intro(&event, &button, menu, &ad_intro))
 				return;
 		}
 		sfRenderWindow_clear(window, sfBlack);

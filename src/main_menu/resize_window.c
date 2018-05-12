@@ -45,6 +45,3 @@ void resize_win(sfRenderWindow *window, option_t *option)
 		sfRenderWindow_setSize(window, V2U(size_x, size_y));
 	}
 }
-
-/*sfView *view = sfView_createFromRect(FR(0, 0, size_x, size_y));
-sfRenderWindow_setView(window, view);*/
