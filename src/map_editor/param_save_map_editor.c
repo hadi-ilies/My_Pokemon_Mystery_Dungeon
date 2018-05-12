@@ -29,7 +29,8 @@ bool ok_map(save_editor_t *save, sfEvent *event, map_t *map)
 
 	if (save->choice_curs == 1 && event->type == sfEvtKeyPressed
 	&& event->key.code == sfKeyReturn) {
-		if (save->name_file == NULL || save->name_file[0] == '\0')
+		if (map->error != ERR_OK
+		|| save->name_file == NULL || save->name_file[0] == '\0')
 			return (true);
 		else {
 			str = concat("resources/maps/", save->name_file);

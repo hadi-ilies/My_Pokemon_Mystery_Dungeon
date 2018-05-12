@@ -57,7 +57,8 @@ bool load_entry(map_t *map, sfRenderWindow *window,
 	if (event && event->type == sfEvtKeyPressed) {
 		if (event->key.code == sfKeyReturn && load->choice_curs == 0)
 			load->name_file = maps_list(window, load);
-		if (event->key.code == sfKeyReturn && load->choice_curs == 1) {
+		if (load->name_file != NULL
+		&& event->key.code == sfKeyReturn && load->choice_curs == 1) {
 			char *str = concat("resources/maps/", load->name_file);
 
 			*map = map_load(str);
