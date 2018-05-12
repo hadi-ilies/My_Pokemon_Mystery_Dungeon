@@ -136,8 +136,7 @@ SRC		=	$(SRCDIR)main.c \
 OBJ		=	$(SRC:.c=.o)
 
 CFLAGS		+=	-I $(INCDIR)
-#CFLAGS		+=	-W -Wall -Wextra -Werror
-CFLAGS		+=	-g
+CFLAGS		+=	-W -Wall -Wextra -Werror
 
 LDFLAGS		+=	-l c_graph_prog
 LDFLAGS		+=	-L $(LIBDIR) -l Tile_map

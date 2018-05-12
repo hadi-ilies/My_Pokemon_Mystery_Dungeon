@@ -28,18 +28,19 @@ bool event_intro(sfEvent *event, size_t *button,
 void adventure_intro(sfRenderWindow *window, menu_t *menu)
 {
 	intro_adventure_t ad_intro = ad_intro_create();
-	size_t button = 0;
 	bool set_one = true;
 
 	sfMusic_pause(menu->sound.sound_effect[6]);
 	sfMusic_play(menu->sound.music[1]);
-	while (sfRenderWindow_isOpen(window)) {
+	for (size_t button = 0; sfRenderWindow_isOpen(window);) {
 		sfEvent event;
 
 		while (sfRenderWindow_pollEvent(window, &event)) {
 			if (evt_close(&event, window) ||
-			event_intro(&event, &button, menu, &ad_intro))
+			event_intro(&event, &button, menu, &ad_intro)) {
+				sfMusic_pause(menu->sound.music[1]);
 				return;
+			}
 		}
 		sfRenderWindow_clear(window, sfBlack);
 		illustration(window, button, &ad_intro, &set_one);
