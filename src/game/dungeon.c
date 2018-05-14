@@ -16,7 +16,7 @@ void put_item(map_t *map)
 {
 	sfVector2i pos;
 	size_t size = map->nb_case_x * map->nb_case_y;
-	size_t nb_item = rand() % (size / 500) + 1;
+	size_t nb_item = rand() % (size / 250) + 1;
 
 	for (size_t i = 0; i < map->nb_case_x; i++)
 		for (size_t j = 0; j < map->nb_case_y; j++)
