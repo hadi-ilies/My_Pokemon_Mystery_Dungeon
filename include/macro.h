@@ -22,7 +22,7 @@
 #define MUSIC_INTRO "resources/music/pokemon-theme.ogg"
 #define SOUND_START "resources/sound_effect/Sound_intro.ogg"
 #define BACK_MAP "resources/texture/map_editor/background_map_editor.jpg"
-#define MUSIC_EDITOR "resources/texture/map_editor/OstMapEditor.ogg"
+#define MUSIC_EDITOR "resources/music/OstMapEditor.ogg"
 #define COND_AFF sfRenderWindow_drawRectangleShape(window, rect, NULL)
 #define COND_TRANS sfRectangleShape_setFillColor(rect, (sfColor) {255, 255, \
 		255, trans < 20 ? trans = 255 : (trans--)})
