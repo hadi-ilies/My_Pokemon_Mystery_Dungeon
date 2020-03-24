@@ -4,12 +4,12 @@
 
 > This Program is a Pokemon mystery dungeon fan game written in C using the CSFML library.
 
-### Screenshots
-  ## The adventure mode
+## Screenshots
+  ### The adventure mode
    ![Screenshots](https://i.imgur.com/NhlSNoQ.png)
-  ## Maps editor mode
+  ### Maps editor mode
    ![Screenshots](https://i.imgur.com/Za3hgZT.png)
-  ## Characters animations editor mode
+  ### Characters animations editor mode
    ![Screenshots](https://i.imgur.com/dah1sTa.png)
 
 ## Installation
