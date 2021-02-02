@@ -138,7 +138,7 @@ OBJ		=	$(SRC:.c=.o)
 CFLAGS		+=	-I $(INCDIR)
 CFLAGS		+=	-W -Wall -Wextra -O3
 
-LDFLAGS		+=	-lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
+LDFLAGS		+=	-lcsfml-graphics -lcsfml-audio -lcsfml-window -lcsfml-system -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system
 LDFLAGS		+=	-L $(LIBDIR) -l Tile_map
 LDFLAGS		+=	-L $(LIBDIR) -l Anime_tab
 LDFLAGS		+=	-L $(LIBDIR) -l Video
